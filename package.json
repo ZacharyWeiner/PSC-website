@@ -2,7 +2,9 @@
   "name": "dao",
   "version": "0.1.0",
   "private": true,
-  "node": "<=15.4.0",
+  "engines": {
+    "node": "15.4"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
