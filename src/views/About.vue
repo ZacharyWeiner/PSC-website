@@ -22,7 +22,7 @@
       <div
         class="text-left w-full bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent text-xl p-4 md:text-4xl md:px-8 font-extrabold"
       >
-        Pre Order Confirmation
+        Search For Pre-Orders
       </div>
       <div class="flex w-full">
         <div class="flex w-full mx-4">
@@ -31,7 +31,7 @@
               What is Your Relay Handle or Address?</label
             >
             <br />
-            <input class="mx-4 rounded-xl w-full" v-model="relayhandle" />
+            <input class="mx-4 rounded-xl w-full text-gray-800" v-model="relayhandle" />
             <button
               @click="search"
               type="button"
@@ -41,16 +41,36 @@
             </button>
           </div>
         </div>
-        <div class="flex w-full"></div>
+        <div class="w-full">
+         <div
+            class="w-full bg-gradient-to-r from-green-300 via-green-500 to-green-700 bg-clip-text text-transparent text-xl md:text-4xl md:px-8 font-extrabold"
+          >
+            Pre Order Confirmation
+          </div>
+          <div class='min-h-36' >
+            <div v-if="loading"> Searching ...  </div>
+            <div> There are <span :class="[tokens?.length > 0 ? 'text-green-500' : 'text-red-500 font-bold']"> {{tokens? tokens.length : 0}} </span> pre-orders in for your handle</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import {ref} from "vue"
 import Run from "run-sdk";
 export default {
+  setup(){
+      let tokens = ref([])
+      let decimals = ref(0)
+      let purseBalance = ref(0)
+      let searching = ref(false);
+      return {tokens, decimals, purseBalance, searching}
+    },
   methods: {
+    
     async search() {
+      this.searching = true
       let _run = new Run({
         trust: "*",
         timeout: 1000000,
@@ -59,15 +79,16 @@ export default {
       });
       await _run.inventory.sync();
       let CoinsClass = await _run.load(
-        "1a0efa033fb9552f022e1a2892c60160e18394dfa41a232b409324bd65eb656c_o2"
+        "d0f84d202d91468f9bbdcf6a028e7223abab5a2c935fb347a65bc3ec6d85ddd8_o2"
       );
-      console.log("BAMS decimals:", CoinsClass.decimals);
+      console.log("POO decimals:", CoinsClass.decimals);
       this.decimals = CoinsClass.decimals;
       this.tokens = _run.inventory.jigs.filter(
         (jig) => jig instanceof CoinsClass
       );
       console.log("unsepnt output count:", this.tokens.length);
       this.purseBalance = await _run.purse.balance();
+      this.searching = false
     },
   },
 };
