@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/*
+nav {
+  @apply fixed;
+  @apply w-full;
+  @apply top-0;
+
+  z-index: 20;
+}
+
+
+.avatar {
+  @apply h-8;
+  @apply w-8;
+  @apply rounded-full;
+}
+
+.container-sm {
+  @apply container;
+  @apply max-w-xl;
+}
+
+.message {
+  @apply my-2;
+  @apply w-full;
+}
+
+.message span {
+  @apply ml-11;
+  @apply text-xs;
+  @apply text-gray-500;
+}
+
+.message .text {
+  @apply mx-2;
+  @apply p-2;
+  @apply rounded-full;
+  @apply rounded-tl-none;
+  @apply text-white;
+}
+
+.bottom {
+  @apply bg-white;
+  @apply w-full;
+}
+
+.bottom form {
+  @apply w-full;
+  @apply flex;
+  @apply justify-between;
+}
+
+.bottom form input {
+  @apply flex-grow;
+  @apply m-2;
+  @apply py-2;
+  @apply px-4;
+  @apply mr-1;
+  @apply rounded-lg;
+  @apply shadow-lg;
+  @apply bg-white;
+  @apply text-gray-500;
+}
+
+.icon-send {
+  @apply text-gray-500;
+  @apply w-12;
+  @apply h-12;
+  @apply py-2;
+  @apply mr-2;
+}
+
+.btn {
+  @apply font-bold py-2 px-4 rounded;
+}
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+.btn-blue:hover {
+  @apply bg-blue-700;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-600;
+  @apply shadow-lg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300;
+  @apply rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-200;
+}
+
+.tracking-2xl {
+  letter-spacing: 0.5em;
+}*/
