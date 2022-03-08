@@ -22,7 +22,7 @@
       <div
         class="text-left w-full bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent text-xl p-4 md:text-4xl md:px-8 font-extrabold"
       >
-        Search For Pre-Orders
+        Search For Pre-Orders 
       </div>
       <div class="flex w-full">
         <div class="flex w-full mx-4">
