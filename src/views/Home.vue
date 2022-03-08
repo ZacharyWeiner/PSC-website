@@ -1,151 +1,214 @@
 <template>
- 
-  <div class="pt-20 m-1 rounded-xl">
-    <!-- <div class="w-full rounded-xl cta flex p-2 ">
-      <div class='w-3/4'>
-     <h2 class="text-lg md:text-5xl font-bold text-white sm:text-3xl p-5">
-        <span class=" text-black md:pt-12">Your digital passport<br> to the METAVERSE</span>
-      </h2>
-      <a href="https://relayx.com/market/GOP" class='m-2 p-2 text-xl  lg:px-20 lg:py-6 m-2 bg-purple-600 rounded-full text-white font-bold lg:text-2xl ' > Squat with us </a>
+  <div
+    class="h-full bg-black w-full text-white flex-col items-center overflow-y-scroll"
+  >
+    <div
+      class="h-36 bg-contain bg-center md:h-96"
+      style="
+        background-image: url(https://pewparty.com/wp-content/uploads/2022/01/WideBanner.jpg);
+      "
+    ></div>
+    <div class="text-white text-center pt-4">
+      <div class="w-auto">
+        <span
+          class="text-5xl md:text-7xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
+        >
+          The Pewnicorn
+        </span>
+      </div>
+      <div class="text-xl md:text-4xl pb-1">SOCIAL CLUB</div>
     </div>
-    <div class='w-1/4'><img class="object-scale-down w-full pr-2" src="../assets/gopnik_cta.png" alt="gopnik"></div>
-    </div> -->
-    
-    <img @click="navigateTo('https://gopnikz.info')" class='hidden md:inline md:object-cover md:w-full md:max-h-96 md:rounded-xl ' src="https://pewparty.com/wp-content/uploads/2021/12/GopHead2Thin.png" />
-    <img @click="navigateTo('https://gopnikz.info')" class='object-cover w-full max-h-96 rounded-xl xs:inline md:hidden' src="https://pewparty.com/wp-content/uploads/2021/12/GopHead2.png" />
-  </div>
-
-  <div class="break1 mt-8"></div>
-  <div class='grid grid-cols-1 lg:grid-cols-4  max-h-screen'>
-    <div class='col-span-3 p-2 m-2'>
-      <Proposals />
-        <button 
-          class="p-2 m-2 rounded-full text-xl font-bold tracking-widest " 
-        :class="moreProposalsButtonClass"
-          v-on:click="goToProps"   >  
-        {{moreProposalsButtonText}}
-      </button>
+    <div
+      class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent text-center text-xl p-4 md:text-4xl md:px-8 font-extrabold"
+    >
+      Pre Order Now
     </div>
-
-    <div class='flex-col col-span-1 lg:col-span-1 p-2 m-2'>
-      <div class="">
-          <div class="mb-20 w-full min-w-xl mx-auto xl:mb-0">
-            <div class="w-full justify-center lg:h-auto p-1">
-              <div class="flex items-center justify-center mb-5">
-                <div> <img class='h-5 mx-auto' src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/loudly-crying-face_1f62d.png"/></div>
-                <div class="font-bold text-2xl text-white uppercase tracking-2xl"> Trollbox</div>
+    <div class="h-auto"></div>
+    <div class="w-full items-justify-center px-2">
+      <div
+        class="p-1 w-full bg-gradient-to-r from-yellow-400 via-pink-200 to-pink-400 rounded"
+      >
+        <div class="m-0.5 p-4 bg-black rounded md:flex text-lg">
+          <div class="w-full py-2 lg:py-8">
+            <div class="">
+              <span
+                class="text-2xl md:text-5xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
+              >
+                How it Works
+              </span>
+            </div>
+            <div
+              class="bg-gray-900 rounded-xl text-xl font-bold w-3/4 mx-auto m-8"
+            >
+              <div>Send 3,000 $POO</div>
+              <div>
+                <span class="text-yellow-400 font-extrabold">
+                  preorders@relayx.io
+                </span>
               </div>
-              <div class="rounded-xl ring-2 ring-gray-300" >
-                <div class=" p-2  overflow-y-scroll" style='max-height:600px;'>
-                  <Messages :isTrollbox="true" />
-                  <div ref="bottom"></div>
-                </div>
-                <div v-if='true' class="w-full bg-white rounded-b-lg ">
-                  <form  @submit.prevent="send('Public')" class="w-full text-lg flex ">
-                      <input class='w-full rounded-2xl' rows="2" v-model="message" placeholder="type to chad" :disabled="!canAccess"  required>
-                      <button type="submit" >
-                          <SendIcon></SendIcon>
-                      </button>
-                  </form>
-                </div>        
+            </div>
+            <div class="text-left px-2 md:px-4">
+              <div
+                class="text-center text-xl md:text-left lg:text-4xl bg-gradient-to-b from-green-200 via-green-400 to-green-700 bg-clip-text text-transparent"
+              >
+                400 Spots
+              </div>
+              <div>
+                <span> There are 400 spots to be reserved with $POO.</span>
+                <span class="font extra-bold">
+                  Anyone who sends 3,000 $POO to
+                </span>
+                <span class="text-yellow-400 font-extrabold">
+                  preorders@relayx.io
+                </span>
+                <span>will reserve a 'Corn up to the first 400 orders.</span>
+              </div>
+              <div
+                class="text-center md:text-left pt-2 text-xl lg:text-3xl bg-gradient-to-b from-green-200 via-green-400 to-green-700 bg-clip-text text-transparent"
+              >
+                Can I Get More Than 1?
+              </div>
+              <span> Yeah, the most you can order is 3. </span>
+              <span>
+                On mint day, if less than 400 accounts that have sent a
+                pre-order payment the remaining orders will be filled in the
+                order we received the payment.
+              </span>
+              <div
+                class="text-center md:text-left pt-2 text-xl lg:text-3xl bg-gradient-to-b from-green-200 via-green-400 to-green-700 bg-clip-text text-transparent"
+              >
+                What Happens If I Pay Late?
+              </div>
+              <span>
+                Any $POO payments sent for pre orders #401 and up will be
+                returned to sender on mint day.</span
+              >
+            </div>
+          </div>
+          <div class="w-full">
+            <img
+              class="w-full rounded-t-xl"
+              src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif"
+            />
+            <div class="bg-gray-900 rounded-b-xl text-xl font-bold">
+              <div>Send 3,000 $POO</div>
+              <div>
+                <span class="text-yellow-400 font-extrabold">
+                  preorders@relayx.io
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-1 w-full">
+        <div class="m-1 p-4 bg-gray-900 rounded md:flex">
+          <div class="w-auto">
+            <img
+              class="mx-auto max-h-32 md:max-h-64 md:ml-10 md:mt-16"
+              src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/CartoonPoopToken.png"
+            />
+          </div>
+          <div class="w-1/5"></div>
+          <div class="text-3xl text-center w-full md:text-left">
+            <div class="flex">
+              <div class="text-2xl md:text-left lg:text-4xl">What Is</div>
+              <div
+                class="pl-3 text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
+              >
+                $POO?
+              </div>
+            </div>
+            <div class="pt-3 text-center">
+              <p
+                class="text-lg pb-4 font-semibold md:text-left lg:text-2xl underline"
+              >
+                Pewnicorn Organization &amp; Operational Token
+              </p>
+              <p class="text-lg text-left">
+                Like Horse Shit, But ✨
+                <span class="text-yellow-400 font-extrabold"> Magical </span> ✨
+                <br />
+                <span class="text-yellow-400"> $POO </span> lubes up the
+                Pewconomy, powering everything you can do in the Pewniverse. The
+                more 'Corns you have in your stable, the more
+                <span class="text-yellow-400"> $POO </span> you'll stack. <br />
+                Drop <span class="text-yellow-400"> $POO </span> to vote in the
+                DAO, get early access to merch drops & JPEGs, take a 'Corn from
+                the stable, or just shit in random in a random n0obs wallet.
+                <br />
+                <span class="text-yellow-400"> $POO </span> can ALWAYS be used
+                to add 'Corns to your stable.<br />
+                <br />
+                <a
+                  class="text-2xl"
+                  target="_blank"
+                  href="https://www.relayx.com/market/POO"
+                >
+                  <div
+                    class="bg-gradient-to-r from-blue-400 through-indigo-600 to-purple-600 text-white rounded p-1 m-1 w-1/2 font-bold"
+                  >
+                    BUY <span class="text-yellow-400"> $POO </span> NOW
+                  </div>
+                </a>
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+    <div class="w-full items-justify-center p-2 md:flex">
+      <div
+        class="p-1 w-full bg-gradient-to-r from-yellow-400 via-pink-200 to-pink-400 rounded"
+      >
+        <div class="m-1 p-4 bg-black rounded">
+          <div class="text-2xl pb-2">For Updates, Giveaways & More:</div>
+          <div
+            class="bg-gradient-to-r from-blue-400 via-blue-600 to-indigo-600 text-2xl p-2 rounded"
+          >
+            <a
+              target="_blank"
+              norel
+              noopener
+              href="https://discord.gg/vBwd3dsNhE"
+            >
+              Join The Discord Server</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="text-black">.</div>
+      <div
+        class="p-1 w-full bg-gradient-to-r from-pink-400 via-pink-200 to-yellow-400 rounded"
+      >
+        <div class="m-1 p-4 bg-black rounded">
+          <div class="text-2xl pb-2">PewPaper</div>
+          <div
+            class="text-2xl p-2 rounded bg-gradient-to-b from-yellow-400 via-yellow-400 to-yellow-700 bg-clip-text text-transparent md:text-3xl"
+          >
+            <a target="_blank" norel noopener href="#"> Coming Soon™</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="h-36"></div>
   </div>
-  <div class="break3 pt-10 mb-4"></div>
 </template>
 
-
 <script>
-
-import {ref} from 'vue'
-import SendIcon from './../components/SendIcon.vue'
-import Proposals from '@/components/Proposals.vue'
-import Messages from '@/components/Messages.vue'
-import { useRun } from '../services/wallet' 
-import {useChat} from './../services/firebase'
-import {useStore} from 'vuex'
-
+import { reactive, toRefs } from "vue";
 
 export default {
-  async setup() {
-   
-    const { isLogin, canAccess, setJigs } = useRun()
-    let store = useStore()
-     const {sendMessage } = useChat(store.state.relayx_handle, store.state.user_address)
-    store.commit('setSelectedProposalId', null);
-    const message = ref('')
-    await setJigs();
-    return { isLogin, store, message, canAccess, sendMessage }
-  },
-  name: 'Home',
-  components: { Proposals, Messages , SendIcon,},
-  computed: {
-    moreProposalsButtonClass() {
-      if (this.isLogin) {
-        return  'bg-purple-800 text-white '
-      }
-      return 'bg-gray-400 text-gray-700'
-    },
-    moreProposalsButtonText() {
-      if (this.isLogin) {
+  setup() {
+    const state = reactive({
+      count: 0,
+    });
 
-        return 'See more proposals'
-      }
-      return 'Connect to see more'
-
-    }
+    return {
+      ...toRefs(state),
+    };
   },
-  methods: {
-    goToProps() {
-      this.$router.push('/props')
-    },
-    navigateTo(url){
-       window.location.href = url;
-    },
-    send(propCode) {
-      if(this.$store.state.relayx_handle !== ""){
-          console.log('Sending Started')
-          this.sendMessage(this.message, propCode, this.$store.state.gopnikId)
-          console.log('Sending Complete')
-          this.message= ''
-          //bottom.value?.scrollIntoView({ behavior: 'smooth' })
-      } else{
-          alert('you are not logged in')
-      }
-  }
-}
-}
+};
 </script>
 
-<style>
-
-.break1 {
-  height: 60px;
-  background: url('../assets/break.png') center top no-repeat ;
-  background-size: cover;
-
-}
-
-.break2 {
-  height: 60px;
-  background: url('../assets/break2.png') center top no-repeat ;
-  background-size: cover;
-
-}
-
-.break3 {
-  height: 60px;
-  background: url('../assets/break3.png') center top no-repeat ;
-  background-size: cover;
-
-}
-
-.cta {
-  background-color: #3AFFFD;
-}
-
-</style>
+<style lang="scss" scoped></style>
