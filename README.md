@@ -1,4 +1,4 @@
-# dao
+# The Pewnicorn Social Club Website
 
 ## Project setup
 ```
