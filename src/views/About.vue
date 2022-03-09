@@ -31,7 +31,7 @@
               What is Your Relay Handle or Address?</label
             >
             <br />
-            <input class="mx-4 rounded-xl w-full text-gray-800" v-model="relayhandle" />
+            <input class="mx-4 rounded-xl w-full text-gray-800" v-model="handle" />
             <button
               @click="search"
               type="button"
@@ -48,8 +48,8 @@
             Pre Order Confirmation
           </div>
           <div class='min-h-36' >
-            <div v-if="loading"> Searching ...  </div>
-            <div> There are <span :class="[tokens?.length > 0 ? 'text-green-500' : 'text-red-500 font-bold']"> {{tokens? tokens.length : 0}} </span> pre-orders in for your handle</div>
+            <div v-if="searching"> Searching ...  </div>
+            <div> There are <span :class="[tokens > 0 ? 'text-green-500' : 'text-red-500 font-bold']"> {{tokens? tokens : 0}} </span> pre-orders in for your handle</div>
           </div>
         </div>
       </div>
@@ -57,20 +57,30 @@
   </div>
 </template>
 <script>
+import axios from "axios"
 import {ref} from "vue"
 import Run from "run-sdk";
 export default {
   setup(){
-      let tokens = ref([])
       let decimals = ref(0)
       let purseBalance = ref(0)
       let searching = ref(false);
-      return {tokens, decimals, purseBalance, searching}
+      let utxos = ref([])
+      let handle = ref('');
+      let userRunAddress = ref('')
+
+      return {decimals, purseBalance, searching, utxos, handle, userRunAddress}
     },
   methods: {
     
     async search() {
       this.searching = true
+      console.log("handle:", this.handle)
+       const r = await axios.get('https://api.relayx.io/v1/paymail/run/' + this.handle + "@relayx.io")
+        const res = await r.data
+        console.log('res', res)
+        //let _handle = data.paymail.split('@')[0]
+      this.userRunAddress = res.data
       let _run = new Run({
         trust: "*",
         timeout: 1000000,
@@ -83,13 +93,22 @@ export default {
       );
       console.log("POO decimals:", CoinsClass.decimals);
       this.decimals = CoinsClass.decimals;
-      this.tokens = _run.inventory.jigs.filter(
+      this.utxos = _run.inventory.jigs.filter(
         (jig) => jig instanceof CoinsClass
       );
-      console.log("unsepnt output count:", this.tokens.length);
+      console.log("unsepnt output count:", this.utxos.length, this.utxos[0]);
       this.purseBalance = await _run.purse.balance();
       this.searching = false
     },
   },
+  computed:{
+    tokens(){
+      if (this.utxos?.length > 0 ){
+        return this.utxos.filter(utxo => utxo.sender === this.userRunAddress).length
+      } else {
+        return 0
+      } 
+    }
+  }
 };
 </script>
