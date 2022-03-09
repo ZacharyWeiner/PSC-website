@@ -24,7 +24,7 @@
       >
         Search For Pre-Orders 
       </div>
-      <div class="flex w-full">
+      <div class="flex-1 md:flex w-full">
         <div class="flex w-full mx-4">
           <div>
             <label class="mx-4 text-lg">
@@ -35,7 +35,7 @@
             <button
               @click="search"
               type="button"
-              class="inline-flex items-center px-3.5 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="inline-flex items-center px-3.5 py-2 my-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Find My Orders
             </button>

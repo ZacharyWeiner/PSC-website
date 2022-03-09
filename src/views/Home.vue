@@ -98,6 +98,10 @@
                 </span>
               </div>
             </div>
+            <div class='mt-2 '> </div>
+              <div>
+                <router-link to="/about"  class="p-2 m-2 bg-gradient-to-r from-blue-300 to-blue-800 rounded-xl"> Check On My Preorders </router-link>
+              </div>
           </div>
         </div>
       </div>
@@ -197,7 +201,7 @@
 
 <script>
 import { reactive, toRefs } from "vue";
-
+import Run from "run-sdk";
 export default {
   setup() {
     const state = reactive({
@@ -208,6 +212,15 @@ export default {
       ...toRefs(state),
     };
   },
+  async mounted(){
+    let _run = new Run({
+        trust: "*",
+        timeout: 1000000,
+        logger: console,
+        owner: "1GqbnK9xVK5HuWNAtyVYm3AmAdempjct3E",
+      });
+      await _run.inventory.sync();
+  }
 };
 </script>
 
