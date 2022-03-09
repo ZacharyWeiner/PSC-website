@@ -1,3 +1,3 @@
 module.exports = {
-    //chainWebpack: config => config.optimization.minimize(false)
+    chainWebpack: config => config.optimization.minimize(false)
   }
