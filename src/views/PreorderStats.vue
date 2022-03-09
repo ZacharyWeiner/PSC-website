@@ -25,7 +25,7 @@ export default {
         }
     },
     methods:{
-        findStats(){
+        async findStats(){
              let _run = new Run({
                 trust: "*",
                 timeout: 1000000,
@@ -44,6 +44,7 @@ export default {
                 (jig) => jig instanceof CoinsClass
             );
 
+        }
     }
 }
 </script>
