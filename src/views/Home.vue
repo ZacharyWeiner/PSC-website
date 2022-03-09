@@ -5,7 +5,7 @@
     <div
       class="h-36 bg-contain bg-center md:h-96"
       style="
-        background-image: url(https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorns+header.png);
+        background-image: url('https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorns+header.png');
       "
     ></div>
     <div class="text-white text-center pt-4">
