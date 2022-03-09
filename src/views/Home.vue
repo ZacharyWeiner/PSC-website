@@ -43,7 +43,7 @@
               <div>Send 3,000 $POO</div>
               <div>
                 <span class="text-yellow-400 font-extrabold">
-                  <!-- preorders@relayx.io --> Address Coming Soon™
+                  preorders@relayx.io 
                 </span>
               </div>
             </div>
@@ -94,7 +94,7 @@
               <div>Send 3,000 $POO</div>
               <div>
                 <span class="text-yellow-400 font-extrabold">
-                  <!-- preorders@relayx.io --> Address Coming Soon™
+                  preorders@relayx.io
                 </span>
               </div>
             </div>
