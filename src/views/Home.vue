@@ -68,9 +68,9 @@
               >
                 Can I Get More Than 1?
               </div>
-              <span> Yeah, the most you can order is 3. </span>
+              <span> Yes. </span>
               <span>
-                On mint day, if less than 400 accounts that have sent a
+                On mint day, if less than 400 accounts have sent a
                 pre-order payment the remaining orders will be filled in the
                 order we received the payment.
               </span>
@@ -213,8 +213,8 @@ export default {
     };
   },
   async mounted(){
-    if(!window.location.href.cointains('localhost') && window.location.protocol !== 'https:'){
-      window.location.href = "https://www.pewnicornsocial.club/#/";
+    if(window.location.href.contains('localhost') ){
+      window.location.href = "https://www.pewnicornsocial.club/";
     }
     // let _run = new Run({
     //     trust: "*",
