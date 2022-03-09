@@ -58,7 +58,7 @@
 </template>
 <script>
 import {ref} from "vue"
-// import Run from "run-sdk";
+import Run from "run-sdk";
 export default {
   setup(){
       let tokens = ref([])
@@ -70,24 +70,24 @@ export default {
   methods: {
     
     async search() {
-      // this.searching = true
-      // let _run = new Run({
-      //   trust: "*",
-      //   timeout: 1000000,
-      //   logger: console,
-      //   owner: "1GqbnK9xVK5HuWNAtyVYm3AmAdempjct3E",
-      // });
-      // await _run.inventory.sync();
-      // let CoinsClass = await _run.load(
-      //   "d0f84d202d91468f9bbdcf6a028e7223abab5a2c935fb347a65bc3ec6d85ddd8_o2"
-      // );
-      // console.log("POO decimals:", CoinsClass.decimals);
-      // this.decimals = CoinsClass.decimals;
-      // this.tokens = _run.inventory.jigs.filter(
-      //   (jig) => jig instanceof CoinsClass
-      // );
+      this.searching = true
+      let _run = new Run({
+        trust: "*",
+        timeout: 1000000,
+        logger: console,
+        owner: "1GqbnK9xVK5HuWNAtyVYm3AmAdempjct3E",
+      });
+      await _run.inventory.sync();
+      let CoinsClass = await _run.load(
+        "d0f84d202d91468f9bbdcf6a028e7223abab5a2c935fb347a65bc3ec6d85ddd8_o2"
+      );
+      console.log("POO decimals:", CoinsClass.decimals);
+      this.decimals = CoinsClass.decimals;
+      this.tokens = _run.inventory.jigs.filter(
+        (jig) => jig instanceof CoinsClass
+      );
       console.log("unsepnt output count:", this.tokens.length);
-      //this.purseBalance = await _run.purse.balance();
+      this.purseBalance = await _run.purse.balance();
       this.searching = false
     },
   },
