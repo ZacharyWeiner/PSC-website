@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import PreorderCheck from '../views/PreorderCheck.vue'
+import Check from '../views/Check.vue'
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     name: 'Preorder Check',
     component: PreorderCheck
   }, 
+  {
+    path: '/check',
+    name: 'Check',
+    component: Check
+  }, 
 ]
 
 const router = createRouter({
@@ -21,3 +27,5 @@ const router = createRouter({
 })
 
 export default router
+  
+  
