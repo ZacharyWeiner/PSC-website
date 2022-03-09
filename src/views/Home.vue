@@ -21,7 +21,7 @@
     <div
       class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent text-center text-xl p-4 md:text-4xl md:px-8 font-extrabold"
     >
-      Pre Order Now
+      Pre Order Soon™
     </div>
     <div class="h-auto"></div>
     <div class="w-full items-justify-center px-2">
@@ -43,7 +43,7 @@
               <div>Send 3,000 $POO</div>
               <div>
                 <span class="text-yellow-400 font-extrabold">
-                  preorders@relayx.io
+                  <!-- preorders@relayx.io --> Address Coming Soon™
                 </span>
               </div>
             </div>
@@ -59,7 +59,7 @@
                   Anyone who sends 3,000 $POO to
                 </span>
                 <span class="text-yellow-400 font-extrabold">
-                  preorders@relayx.io
+                  <!-- preorders@relayx.io --> address coming soon
                 </span>
                 <span>will reserve a 'Corn up to the first 400 orders.</span>
               </div>
@@ -94,7 +94,7 @@
               <div>Send 3,000 $POO</div>
               <div>
                 <span class="text-yellow-400 font-extrabold">
-                  preorders@relayx.io
+                  <!-- preorders@relayx.io --> Address Coming Soon™
                 </span>
               </div>
             </div>
