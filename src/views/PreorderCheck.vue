@@ -5,7 +5,7 @@
     <div
       class="h-36 bg-contain bg-center md:h-96"
       style="
-        background-image: url(https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorns+header.png);
+        background-image: url('https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorns+header.png');
       "
     ></div>
     <div class="text-white text-center pt-4">
@@ -122,7 +122,7 @@ export default {
     },
     preorders(){
       if (this.utxos?.length > 0 ){
-        return this.utxos.filter(utxo => utxo.amount === 300000)
+        return this.utxos.filter(utxo => utxo.amount >= 300000)
       } else {
         return {}
       } 
