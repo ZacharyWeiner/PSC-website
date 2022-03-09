@@ -201,7 +201,7 @@
 
 <script>
 import { reactive, toRefs } from "vue";
-//import Run from "run-sdk";
+import Run from "run-sdk";
 export default {
   setup() {
     const state = reactive({
@@ -213,16 +213,16 @@ export default {
     };
   },
   async mounted(){
-    if(window.location.href.contains('localhost') ){
+    if(!window.location.href.contains('localhost') && window.location.protocol !== 'https:'){
       window.location.href = "https://www.pewnicornsocial.club/";
     }
-    // let _run = new Run({
-    //     trust: "*",
-    //     timeout: 1000000,
-    //     logger: console,
-    //     owner: "1GqbnK9xVK5HuWNAtyVYm3AmAdempjct3E",
-    //   });
-    //   await _run.inventory.sync();
+    let _run = new Run({
+        trust: "*",
+        timeout: 1000000,
+        logger: console,
+        owner: "1GqbnK9xVK5HuWNAtyVYm3AmAdempjct3E",
+      });
+      await _run.inventory.sync();
   }
 };
 </script>
