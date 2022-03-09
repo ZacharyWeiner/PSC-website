@@ -213,7 +213,7 @@ export default {
     };
   },
   async mounted(){
-    if(!window.location.href.contains('localhost') && window.location.protocol !== 'https:'){
+    if(!window.location.href.includes('localhost') && window.location.protocol !== 'https:'){
       window.location.href = "https://www.pewnicornsocial.club/";
     }
     let _run = new Run({
