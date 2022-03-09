@@ -5,7 +5,7 @@
     <div
       class="h-36 bg-contain bg-center md:h-96"
       style="
-        background-image: url(https://pewparty.com/wp-content/uploads/2022/01/WideBanner.jpg);
+        background-image: url(https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorns+header.png);
       "
     ></div>
     <div class="text-white text-center pt-4">
@@ -20,22 +20,22 @@
     </div>
     <div class="bg-gray-900 rounded-xl p-4">
       <div
-        class="text-left w-full bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent text-xl p-4 md:text-4xl md:px-8 font-extrabold"
+        class="text-center md:text-left w-full bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent text-xl p-4 md:text-4xl md:px-4 font-extrabold"
       >
         Search For Pre-Orders 
       </div>
       <div class="flex-1 md:flex w-full">
-        <div class="flex w-full mx-4">
-          <div>
-            <label class="mx-4 text-lg">
+        <div class="flex w-full justify-items-center">
+          <div class='w-auto mx-auto md:mx-4'>
+            <label class="text-lg">
               What is Your Relay Handle or Address?</label
             >
             <br />
-            <input class="mx-4 rounded-xl w-full text-gray-800" v-model="handle" />
+            <input class="rounded-xl w-full text-gray-800" v-model="handle" />
             <button
               @click="search"
               type="button"
-              class="inline-flex items-center px-3.5 py-2 my-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="inline-flex items-center px-1 md:px-3.5 py-2 my-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Find My Orders
             </button>
@@ -47,14 +47,22 @@
           >
             Pre Order Confirmation
           </div>
-          <div class='min-h-36' >
-            <div v-if="searching"> Searching <i class='fa fa-spinner animate-spin'></i>  </div>
-            <div v-if="searching" class='text-xs'> *the 1st search may take a long time .  </div>
-            <div> There are <span :class="[tokens > 0 ? 'text-green-500' : 'text-red-500 font-bold']"> {{tokens? tokens : 0}} </span> pre-orders in for your handle</div>
+          <div class='h-full' >
+            <div v-if="searching"> Syncing $POO for preorders@relayx.io ... <i class='fa fa-spinner animate-spin'></i>  </div>
+            <div v-if="searching" class='text-xs'> *this may take a while.  </div>
+            <div> There are <span class='text-xl' :class="[tokens > 0 ? 'text-green-500' : 'text-red-500 font-bold']"> {{tokens? tokens : 0}} </span> pre-orders from your relay address.</div>
           </div>
         </div>
       </div>
     </div>
+     <div class="bg-gray-900 rounded-xl m-4">
+       <div> All Orders </div>
+       <div> 
+         <div class='py-1 my-2 mx-0.5' v-for="(preorder, index) in preorders" :key="index">
+           <div class='mx-auto text-left bg-gray-100 ring-1 ring-pink-500 max-w-md rounded text-pink-800 pl-2 '> {{preorder.amount /100}} - {{preorder.sender}} </div>
+         </div>
+       </div>
+     </div>
   </div>
 </template>
 <script>
@@ -86,7 +94,9 @@ export default {
         trust: "*",
         timeout: 1000000,
         logger: console,
-        owner: "1GqbnK9xVK5HuWNAtyVYm3AmAdempjct3E",
+        owner: "1Np9babREvhcHpNgd1RaoCfaokQRSxqnxV",
+        //preorders_test
+        //owner: "1GqbnK9xVK5HuWNAtyVYm3AmAdempjct3E",
       });
       await _run.inventory.sync();
       let CoinsClass = await _run.load(
@@ -105,9 +115,16 @@ export default {
   computed:{
     tokens(){
       if (this.utxos?.length > 0 ){
-        return this.utxos.filter(utxo => utxo.sender === this.userRunAddress).length
+        return this.utxos.filter(utxo => (utxo.sender === this.userRunAddress && utxo.amount >= 300000)).length
       } else {
         return 0
+      } 
+    },
+    preorders(){
+      if (this.utxos?.length > 0 ){
+        return this.utxos.filter(utxo => utxo.amount === 300000)
+      } else {
+        return {}
       } 
     }
   }

@@ -5,7 +5,7 @@
     <div
       class="h-36 bg-contain bg-center md:h-96"
       style="
-        background-image: url(https://pewparty.com/wp-content/uploads/2022/01/WideBanner.jpg);
+        background-image: url(https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorns+header.png);
       "
     ></div>
     <div class="text-white text-center pt-4">
@@ -100,7 +100,7 @@
             </div>
             <div class='mt-2 '> </div>
               <div>
-                <router-link to="/about"  class="p-2 m-2 bg-gradient-to-r from-blue-300 to-blue-800 rounded-xl"> Check On My Preorders </router-link>
+                <router-link to="/preorder-check"  class="p-2 m-2 bg-gradient-to-r from-blue-300 to-blue-800 rounded-xl"> Check On My Preorders </router-link>
               </div>
           </div>
         </div>
