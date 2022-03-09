@@ -48,7 +48,8 @@
             Pre Order Confirmation
           </div>
           <div class='min-h-36' >
-            <div v-if="searching"> Searching ...  </div>
+            <div v-if="searching"> Searching <i class='fa fa-spinner animate-spin'></i>  </div>
+            <div v-if="searching" class='text-xs'> *the 1st search may take a long time .  </div>
             <div> There are <span :class="[tokens > 0 ? 'text-green-500' : 'text-red-500 font-bold']"> {{tokens? tokens : 0}} </span> pre-orders in for your handle</div>
           </div>
         </div>
