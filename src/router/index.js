@@ -4,6 +4,7 @@ import PreorderCheck from '../views/PreorderCheck.vue'
 import MintManager from '../views/MintManager.vue'
 import Mint from '../views/Mint.vue'
 import Check from '../views/Check.vue'
+import JSONPage from '../views/JSONPage.vue'
 
 
 const routes = [
@@ -31,6 +32,11 @@ const routes = [
     path: '/mint-manager',
     name: 'Mint-Manager',
     component: MintManager
+  }, 
+  {
+    path: '/json-page',
+    name: 'JSON Page',
+    component: JSONPage
   }, 
 ]
 
