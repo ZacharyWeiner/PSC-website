@@ -1,7 +1,14 @@
 <template>
-    <div>
-
+     <div
+      class="h-36 bg-contain bg-center md:h-64"
+      style="
+        background-image: url('https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorns+header.png');
+      "
+    > 
     </div>
+    <div v-for='order in ordered' :key="order.id" class='text-white text-left'>
+        {{new Date(order.createdAt.seconds * 1000).toString()}}: {{order.relayHandle}} - {{order.txid}}
+    </div> 
 </template>
 
 <script>
@@ -9,19 +16,19 @@ import { ref,
 //reactive, toRefs 
 } from 'vue'
 import Run from "run-sdk"
+import {useOrders} from './../services/firebase.js'
 export default {
-    async setup () {
+     setup () {
         let decimals = ref(0)
       let purseBalance = ref(0)
       let searching = ref(false);
       let utxos = ref([])
       let handle = ref('');
       let userRunAddress = ref('')
-
-      
-       
+      const {allOrders, findOrders} = useOrders()
+    
         return {
-            decimals, purseBalance, searching, utxos, handle, userRunAddress
+            decimals, purseBalance, searching, utxos, handle, userRunAddress, allOrders, findOrders
         }
     },
     methods:{
@@ -44,6 +51,13 @@ export default {
                 (jig) => jig instanceof CoinsClass
             );
 
+        }
+    },
+    computed:{
+        ordered(){
+            let response = [...this.allOrders]
+            response.sort(o => o.createdAt.seconds)
+            return response;
         }
     }
 }

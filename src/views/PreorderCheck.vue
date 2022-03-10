@@ -86,7 +86,7 @@ export default {
     async search() {
       this.searching = true
       console.log("handle:", this.handle)
-       const r = await axios.get('https://api.relayx.io/v1/paymail/run/' + this.handle + "@relayx.io")
+       const r = await axios.get('https://api.relayx.io/v1/paymail/run/' + this.handle.toLowerCase() + "@relayx.io")
         const res = await r.data
         console.log('res', res)
         //let _handle = data.paymail.split('@')[0]

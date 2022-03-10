@@ -21,7 +21,7 @@
      
     </div>
     <div class='flex items-center items-justify-center'> 
-        <div class='min-w-sm max-w-sm mx-auto h-96 w-96 bg-gray-900 rounded-xl'> 
+        <div class='min-w-sm max-w-sm mx-auto h-auto w-96 bg-gray-900 rounded-xl'> 
             <div class='h-full'> 
                 <div class='pt-6'> 
                     <img class='h-48 w-48 mx-auto rounded-xl' src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" />
@@ -30,12 +30,14 @@
                     <div v-if="!isLogin" > <button @click="loginClicked" class='bg-blue-500 p-2 m-2 rounded-xl'> LOGIN WITH RELAYX</button> </div>
                     <div  v-if="isLogin">
                     <div> {{relayx_handle}}@relayx.io </div>
-                    <div  v-if="isLogin && paid"> 
+                    <div  v-if="isLogin"> 
                         <button @click="mint" class=' rounded-xl px-6 py-2 m-2 bg-gradient-to-r from-yellow-400 via-yellow-700 to-yellow-300 animate-pulse' >
-                            <div class="text-2xl font-medium  "> MINT </div> 
+                            <div class="text-2xl font-medium  "> {{mintText}} </div> 
                         </button>
                     </div>
+                    <div v-if='!paidForMint' class='items-justify-center'> {{orderCount}}</div>
                      <div class='items-justify-center'> <div ref='payForMint' class='buy-extra mx-32' > </div></div>
+                     
                     </div>
                 </div> 
             </div>
@@ -47,30 +49,35 @@
 <script>
 import { reactive, toRefs } from 'vue'
 import {useRun} from './../services/wallet.js'
-import {mapState} from 'vuex'
+import {mapState, useStore} from 'vuex'
+import {useOrders} from './../services/firebase.js'
 const whitelist = ['pewnicorn', 'skless', 'zackwins', 'psc_test']
 export default {
     setup () {
-        //const _store = useStore();
+        const _store = useStore();
         const {signIn, isLogin, signOut} = useRun()
+        const {allOrders, sendOrder, findOrders} = useOrders()
         //signOut(_store);
-        console.log(isLogin.value)
+        
+        console.log(isLogin.value, _store.state.paidForMint)
         const state = reactive({
             count: 0,
+            txid: 0,
         })
         return {
-            ...toRefs(state), signIn, isLogin, signOut, whitelist
+            ...toRefs(state), signIn, isLogin, signOut, whitelist, allOrders, sendOrder, findOrders
         }
     },
     methods: {
         pay(){
             window.relayone.render(this.$refs['payForMint'], {
                 to: "pewnicorn@relayx.io",
-                amount: 1.00,
+                amount: 0.01,
                 currency: "USD",
-                onPayment: () => {
-                    console.log("Successful Payment"); 
-                    this.store.commit("paidForMint", true)
+                onPayment: (e) => {
+                    console.log("Successful Payment", e.txid); 
+                    this.txid = e.txid
+                    this.$store.commit("setPaidForMint", true)
                 },
                 onError: (err) => {
                     alert(err);
@@ -79,12 +86,20 @@ export default {
             })
         },
         mint() {
-            console.log("Minting")
-
+            if(this.paidForMint){
+                console.log("Your Order has been submitted and your mint is pending.... ")
+                console.log("TXID before save to firebase:", this.txid)
+                let response = this.sendOrder(this.txid, this.$store.state.relayx_handle, "", null, false)
+                console.log(response)
+                this.$store.commit("setPaidForMint", false)
+            }else{
+                this.pay()
+            }
+            
         },
         onMintConfirmed(){
             console.log("Mint Completed"); 
-            this.store.commit("paidForMint", true)
+            this.store.commit("paidForMint", false)
         },
         async loginClicked(){
             await this.signIn();
@@ -95,7 +110,13 @@ export default {
             if(this.isLogin){return "Find NFTs"}
             else{return "Not Logged In"}
         },
-        ...mapState(['relayx_handle'])
+        mintText(){ 
+            return this.paidForMint ? "MINT" : "PAY"
+        },
+        orderCount(){
+            return this.allOrders.length
+        },
+        ...mapState(['relayx_handle', "paidForMint"])
     }
 }
 </script>
