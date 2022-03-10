@@ -16,24 +16,24 @@ firebase.initializeApp({
 
 
 const firestore = firebase.firestore()
-const ordersCollection = firestore.collection('orders').orderBy('createdAt')
-
+const orderedOrdersCollection = firestore.collection('orders').orderBy('createdAt', "desc")
+const ordersCollection = firestore.collection('orders');
 
 export function useOrders() {
     const allOrders = ref([])
-    const unsubscribe =  ordersCollection.onSnapshot(snapshot => {
+    const unsubscribe =  orderedOrdersCollection.onSnapshot(snapshot => {
         allOrders.value = snapshot.docs
             .map(doc => ({ id: doc.id, ...doc.data() }))
     })
     onUnmounted(unsubscribe)
 
-    const sendOrder = (_txid, _paymail, _owner, _edition, _boolean) => {
+    const sendOrder = (_txid, _paymail, _owner, _edition, _isMinted) => {
         ordersCollection.add({
             txid: _txid,
             relayHandle: _paymail,
             runAddress: _owner,
             edition: _edition,
-            isMinted: _boolean,
+            isMinted: _isMinted,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
         console.log('added Order')
@@ -58,5 +58,9 @@ export function useOrders() {
 
     }
 
-    return { allOrders, sendOrder, findOrders, markMinted }
+    const deleteOrder = (order) => {
+        ordersCollection.doc(order.id).delete();
+     }
+
+    return { allOrders, sendOrder, findOrders, deleteOrder, markMinted }
 }

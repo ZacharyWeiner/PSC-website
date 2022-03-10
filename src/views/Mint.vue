@@ -89,7 +89,7 @@ export default {
             if(this.paidForMint){
                 console.log("Your Order has been submitted and your mint is pending.... ")
                 console.log("TXID before save to firebase:", this.txid)
-                let response = this.sendOrder(this.txid, this.$store.state.relayx_handle, "", null, false)
+                let response = this.sendOrder(this.txid, this.$store.state.relayx_handle, this.$store.state.user_address, null, false)
                 console.log(response)
                 this.$store.commit("setPaidForMint", false)
             }else{

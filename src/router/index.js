@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import PreorderCheck from '../views/PreorderCheck.vue'
-import PreorderStats from '../views/PreorderStats.vue'
+import MintManager from '../views/MintManager.vue'
 import Mint from '../views/Mint.vue'
 import Check from '../views/Check.vue'
 
@@ -28,9 +28,9 @@ const routes = [
     component: Check
   }, 
   {
-    path: '/stats',
-    name: 'Stats',
-    component: PreorderStats
+    path: '/mint-manager',
+    name: 'Mint-Manager',
+    component: MintManager
   }, 
 ]
 
