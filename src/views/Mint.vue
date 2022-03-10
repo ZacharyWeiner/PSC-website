@@ -72,7 +72,7 @@ export default {
         pay(){
             window.relayone.render(this.$refs['payForMint'], {
                 to: "pewnicorn@relayx.io",
-                amount: 0.01,
+                amount:0.01,
                 currency: "USD",
                 onPayment: (e) => {
                     console.log("Successful Payment", e.txid); 

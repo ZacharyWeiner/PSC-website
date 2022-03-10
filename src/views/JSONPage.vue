@@ -1,6 +1,8 @@
 <template>
-    <div id="content" class='text-white'>
-        {{allOrders}}
+    <div v-if="allOrders.length > 0">
+        <div id="content" class='text-white'>
+            {{allOrders}}
+        </div>
     </div>
 </template>
 
