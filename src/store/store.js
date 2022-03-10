@@ -24,6 +24,7 @@ export default createStore({
     user_slavettes: [],
     available_moves: 0,
     purchased_moves: 0,
+    paidForMint: false,
 
   },
   mutations: {
@@ -69,6 +70,9 @@ export default createStore({
     },
     setPurchasedMoves(state, count){
       state.purchased_moves = count
+    },
+    setPaidForMint(state, paid){
+      state.paidForMint = paid
     }
   },
   actions: {
