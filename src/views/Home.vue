@@ -29,80 +29,30 @@
         class="p-1 w-full bg-gradient-to-r from-yellow-400 via-pink-200 to-pink-400 rounded"
       >
         <div class="m-0.5 p-4 bg-black rounded md:flex text-lg">
-          <div class="w-full py-2 lg:py-8">
-            <div class="">
-              <span
-                class="text-2xl md:text-5xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
-              >
-                How it Works
-              </span>
-            </div>
-            <div
-              class="bg-gray-900 rounded-xl text-xl font-bold w-3/4 mx-auto m-8"
-            >
-              <div>Send 3,000 $POO</div>
-              <div>
-                <span class="text-yellow-400 font-extrabold">
-                  preorders@relayx.io 
-                </span>
-              </div>
-            </div>
-            <div class="text-left px-2 md:px-4">
-              <div
-                class="text-center text-xl md:text-left lg:text-4xl bg-gradient-to-b from-green-200 via-green-400 to-green-700 bg-clip-text text-transparent"
-              >
-                400 Spots
-              </div>
-              <div>
-                <span> There are 400 spots to be reserved with $POO.</span>
-                <span class="font extra-bold">
-                  Anyone who sends 3,000 $POO to
-                </span>
-                <span class="text-yellow-400 font-extrabold">
-                  <!-- preorders@relayx.io --> address coming soon
-                </span>
-                <span>will reserve a 'Corn up to the first 400 orders.</span>
-              </div>
-              <div
-                class="text-center md:text-left pt-2 text-xl lg:text-3xl bg-gradient-to-b from-green-200 via-green-400 to-green-700 bg-clip-text text-transparent"
-              >
-                Can I Get More Than 1?
-              </div>
-              <span> Yes. </span>
-              <span>
-                On mint day, if less than 400 accounts have sent a
-                pre-order payment the remaining orders will be filled in the
-                order we received the payment.
-              </span>
-              <div
-                class="text-center md:text-left pt-2 text-xl lg:text-3xl bg-gradient-to-b from-green-200 via-green-400 to-green-700 bg-clip-text text-transparent"
-              >
-                What Happens If I Pay Late?
-              </div>
-              <span>
-                Any $POO payments sent for pre orders #401 and up will be
-                returned to sender on mint day.</span
-              >
-            </div>
-          </div>
           <div class="w-full">
             <img
               class="w-full rounded-t-xl"
               src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif"
             />
-            <div class="bg-gray-900 rounded-b-xl text-xl font-bold">
-              <div>Send 3,000 $POO</div>
+            <div class='mt-2 '> </div>
+              
+          </div>
+          <div class="w-full py-2 lg:py-8">
+            <div class="">
+              <span
+                class="text-2xl md:text-5xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
+              >
+                 LIVE MINT
+              </span>
+            </div>
+            <div> Begins @ 1PM EST March 11, 2022 </div>
+            <div class="rounded-b-xl text-xl font-bold pt-24">
               <div>
-                <span class="text-yellow-400 font-extrabold">
-                  preorders@relayx.io
-                </span>
+                <router-link to="/mint"  class="p-2 m-2 px-12  bg-gradient-to-r from-yellow-500 through-yellow-900 to-yellow-700 rounded-xl"> MINT NOW </router-link>
               </div>
             </div>
-            <div class='mt-2 '> </div>
-              <div>
-                <router-link to="/preorder-check"  class="p-2 m-2 bg-gradient-to-r from-blue-300 to-blue-800 rounded-xl"> Check On My Preorders </router-link>
-              </div>
           </div>
+          
         </div>
       </div>
       <div class="p-1 w-full">
