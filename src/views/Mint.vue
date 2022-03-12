@@ -31,8 +31,9 @@
                     <div  v-if="isLogin">
                     <div> {{relayx_handle}}@relayx.io </div>
                     <div  v-if="isLogin"> 
-                        <button @click="mint" :class="mintButtonClasses" class=' rounded-xl px-6 py-2 m-2' >
-                            <div class="text-2xl font-medium  "> {{mintText}} </div> 
+                        <button :class="mintButtonClasses" class=' rounded-xl px-6 py-2 m-2' >
+                            <!-- <div class="text-2xl font-medium  "> {{mintText}} </div>  -->
+                            <div class="text-2xl font-medium  "> MINT PAUSED </div> 
                         </button>
                     </div>
                     <div  class='items-justify-center'> {{orderCount}} / 834 minted </div>
