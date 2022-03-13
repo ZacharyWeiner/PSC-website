@@ -9,11 +9,11 @@
     <button @click='syncRun' class='text-white px-4'> Sync Run </button>
     <button @click='sendNFTs' class='text-white px-4'> Send </button>
     <div v-for='order in ordered' :key="order.id" class='text-white text-left py-1 ring-1'>
-        <div class="flex">
+        <!-- <div class="flex">
             <div class='w-full'> {{new Date(order.createdAt.seconds * 1000).toString()}}</div>
             <div class='items-right'> <button @click='deleteRecord(order)'> Delete </button> </div>
-        </div>
-        <div> {{order.relayHandle}} - {{order.txid}} - {{order.runAddress}} </div>
+        </div> -->
+        <div> {{order.relayHandle}}, {{order.txid}}, {{order.runAddress}} </div>
     </div> 
 </template>
 
@@ -25,6 +25,7 @@ import { ref,
 import {useOrders} from '../services/firebase.js'
 import {config} from './../config.js'
 //let NFTClass = "7d8fccf051949f29ace598e9b6d72d136830006bba936d5a8aaa7312242d70cf_o1"
+
 export default {
      setup () {
       let decimals = ref(0)

@@ -57,7 +57,13 @@
     </div>
      <div class="bg-gray-900 rounded-xl m-4 max-h-screen overflow-y-scroll">
        <div> All Orders </div>
-       <div v-if="unique?.length > 1"> from {{unique ? unique.length : 0}} accounts </div>
+       <div v-if="unique?.length > 1"> 
+         <div> from {{unique ? unique.length : 0}} accounts </div>
+         <!-- <div v-for='(account, index) in unique' :key="index">
+            {{account}}
+        </div> -->
+        <div> {{unique.toString()}} </div>
+      </div>
        <div> 
          <div class='py-1 my-2 mx-0.5' v-for="(preorder, index) in preorders" :key="index">
            <div class='mx-auto text-left bg-gray-100 ring-1 ring-pink-500 max-w-md rounded text-pink-800 pl-2 '> 
@@ -115,6 +121,12 @@ export default {
       this.purseBalance = await _run.purse.balance();
       this.searching = false
     },
+    getRelayHandles(){
+      // let str = "";
+      //  for( let i=0; i < this.unique.length; i++){
+
+      //  }
+    }
   },
   computed:{
     tokens(){

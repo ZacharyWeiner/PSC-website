@@ -5,6 +5,7 @@ import MintManager from '../views/MintManager.vue'
 import Mint from '../views/Mint.vue'
 import Check from '../views/Check.vue'
 import JSONPage from '../views/JSONPage.vue'
+import MintTest from '../views/MintTest.vue'
 
 
 const routes = [
@@ -37,6 +38,11 @@ const routes = [
     path: '/json-page',
     name: 'JSON Page',
     component: JSONPage
+  },
+  {
+    path: '/mint-test',
+    name: 'MINT TEST',
+    component: MintTest
   }, 
 ]
 
