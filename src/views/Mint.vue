@@ -1,5 +1,4 @@
 <template>
-    template>
   <div
     class="min-h-screen h-full bg-black w-full text-white flex-col items-center overflow-y-scroll"
   >
@@ -36,7 +35,7 @@
                             <div class="text-2xl font-medium  "> MINT PAUSED </div> 
                         </button>
                     </div>
-                    <div  class='items-justify-center'> {{orderCount}} / 834 minted </div>
+                    <div  class='items-justify-center'> ??? / 834 minted </div>
                      <div class='items-justify-center'> <div ref='payForMint' class='buy-extra mx-32' > </div></div>
                      
                     </div>

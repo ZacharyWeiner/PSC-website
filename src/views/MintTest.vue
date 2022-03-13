@@ -13,7 +13,7 @@
         <div
           class="text-5xl md:text-7xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
         >
-          Mint A Pewnicorn
+          Mint A TEST Pewnicorn
         </div>
          <div class="text-xl md:text-2xl pb-1">Research Division</div>
       </div>
@@ -34,7 +34,7 @@
                             <!-- <div class="text-2xl font-medium  "> MINT PAUSED </div>  -->
                         </button>
                     </div>
-                    <div  class='items-justify-center'> {{orderCount}} / 30 minted </div>
+                    <div  class='items-justify-center'> {{400 + orderCount}} / 800 minted </div>
                      <div class='items-justify-center'> <div ref='payForMint' class='buy-extra mx-32' > </div></div>
                      
                     </div>
@@ -114,7 +114,7 @@ export default {
         pay(){
             window.relayone.render(this.$refs['payForMint'], {
                 to: "shitcoin@relayx.io",
-                amount: 1.00,
+                amount: 25.00,
                 currency: "USD",
                 onPayment: (e) => {
                     this.open = true
