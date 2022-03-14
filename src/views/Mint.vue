@@ -25,7 +25,7 @@
                 <div class='pt-6'> 
                     <img class='h-48 w-48 mx-auto rounded-xl' src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" />
                 </div>
-                <div v-if="allOrders.length < 832" class='mx-auto pt-5 mt-5'>
+                <div v-if="allOrders.length < 400" class='mx-auto pt-5 mt-5'>
                     <div v-if="!isLogin" > <button @click="loginClicked" class='bg-blue-500 p-2 m-2 rounded-xl'> LOGIN WITH RELAYX</button> </div>
                     <div  v-if="isLogin">
                     <div> {{relayx_handle}}@relayx.io </div>
@@ -42,7 +42,7 @@
                             <div class="text-2xl font-medium  "> MINT PAUSED </div> 
                         </button>
                     </div>
-                    <div  class='items-justify-center'> ??? / 834 minted </div>
+                    <div  class='items-justify-center'> {{allOrders.length}} / 800 minted </div>
                      <div class='items-justify-center'> <div ref='payForMint' class='buy-extra mx-32' > </div></div>
                      
                     </div>
@@ -123,7 +123,6 @@ export default {
         }
     },
     mounted(){
-
        this.timer = setInterval(function() {
          var endDate = new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)").getTime();
          let now = new Date().getTime(); 
@@ -134,17 +133,12 @@ export default {
               this.hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
               this.mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
               this.seconds = Math.floor((t % (1000 * 60)) / 1000);
-
-
               document.getElementById("timer-hours").innerHTML= ("0" + this.hours).slice(-2) +
               "<span class='label'>:</span>";
-
               document.getElementById("timer-mins").innerHTML= ("0" + this.mins).slice(-2) +
               "<span class='label'>:</span>";
-
               document.getElementById("timer-secs").innerHTML= ("0" + this.seconds).slice(-2) +
               "<span class='label'></span>";
-
           }else{
              document.getElementById("timer").innerHTML = "The countdown is over!";
           }
