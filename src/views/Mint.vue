@@ -29,6 +29,13 @@
                     <div v-if="!isLogin" > <button @click="loginClicked" class='bg-blue-500 p-2 m-2 rounded-xl'> LOGIN WITH RELAYX</button> </div>
                     <div  v-if="isLogin">
                     <div> {{relayx_handle}}@relayx.io </div>
+                    <div class="container">
+                        <p id="timer">
+                            <span id="timer-hours"></span>
+                            <span id="timer-mins"></span>
+                            <span id="timer-secs"></span>
+                        </p>
+                    </div>
                     <div  v-if="isLogin"> 
                         <button :class="mintButtonClasses" class=' rounded-xl px-6 py-2 m-2' >
                             <!-- <div class="text-2xl font-medium  "> {{mintText}} </div>  -->
@@ -84,6 +91,7 @@ import {useRun} from './../services/wallet.js'
 import {mapState, useStore} from 'vuex'
 import {useOrders} from './../services/firebase.js'
 const whitelist = ['pewnicorn', 'skless', 'zackwins', 'psc_test']
+var timer;
 // import { CheckIcon } from '@heroicons/vue/outline'
 export default {
     components: {
@@ -105,15 +113,54 @@ export default {
             count: 0,
             txid: 0,
             open:false,
+            days: 0, 
+            hours: 0,
+            minutes: 0,
+            seconds: 0, 
         })
         return {
             ...toRefs(state), signIn, isLogin, signOut, whitelist, allOrders, sendOrder, findOrders
         }
     },
+    mounted(){
+
+       this.timer = setInterval(function() {
+         var endDate = new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)").getTime();
+         let now = new Date().getTime(); 
+         let t = endDate - now; 
+          if (t >= 0) {
+
+              this.days = Math.floor(t / (1000 * 60 * 60 * 24));
+              this.hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              this.mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+              this.seconds = Math.floor((t % (1000 * 60)) / 1000);
+
+
+              document.getElementById("timer-hours").innerHTML= ("0" + this.hours).slice(-2) +
+              "<span class='label'>:</span>";
+
+              document.getElementById("timer-mins").innerHTML= ("0" + this.mins).slice(-2) +
+              "<span class='label'>:</span>";
+
+              document.getElementById("timer-secs").innerHTML= ("0" + this.seconds).slice(-2) +
+              "<span class='label'></span>";
+
+          }else{
+             document.getElementById("timer").innerHTML = "The countdown is over!";
+          }
+
+      }, 1000);
+      if(new Date() < new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)")){
+        timer()
+      }
+    },
+    unmounted(){
+      this.timer = null;
+    },
     methods: {
         pay(){
             window.relayone.render(this.$refs['payForMint'], {
-                to: "psctest@relayx.io",
+                to: "pewnicornsocialclub@relayx.io",
                 amount:25.00,
                 currency: "USD",
                 onPayment: (e) => {
@@ -171,6 +218,24 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style >
+body {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#timer {
+    color: rgb(216, 179, 12);
+    font-size: 2rem;
+}
+.label {
+    font-size: 1.5rem;
+    
+}
 
 </style>
