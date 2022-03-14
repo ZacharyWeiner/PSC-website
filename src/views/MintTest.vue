@@ -115,7 +115,7 @@ export default {
     methods: {
         pay(){
             window.relayone.render(this.$refs['payForMint'], {
-                to: "PewnicornSocialClub@relayx.io",
+                to: "pewnicornsocialclub@relayx.io",
                 amount: 25.00,
                 currency: "USD",
                 onPayment: (e) => {
