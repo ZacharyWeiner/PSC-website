@@ -20,8 +20,8 @@ const routes = [
     component: PreorderCheck
   },
   {
-    path: '/mint',
-    name: 'Mint',
+    path: '/mint-test',
+    name: 'Mint Test',
     component: Mint
   }, 
   {
@@ -40,8 +40,8 @@ const routes = [
     component: JSONPage
   },
   {
-    path: '/mint-test',
-    name: 'MINT TEST',
+    path: '/mint',
+    name: 'MINT',
     component: MintTest
   }, 
 ]

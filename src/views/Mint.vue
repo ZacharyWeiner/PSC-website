@@ -17,7 +17,6 @@
         </div>
          <div class="text-xl md:text-2xl pb-1">Research Division</div>
       </div>
-     
     </div>
     <div class='flex items-center items-justify-center'> 
         <div class='min-w-sm max-w-sm mx-auto h-auto w-96 bg-gray-900 rounded-xl'> 
@@ -25,24 +24,17 @@
                 <div class='pt-6'> 
                     <img class='h-48 w-48 mx-auto rounded-xl' src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" />
                 </div>
-                <div v-if="allOrders.length < 400" class='mx-auto pt-5 mt-5'>
+                <div v-if="(orderCount) < 400" class='mx-auto pt-5 mt-5'>
                     <div v-if="!isLogin" > <button @click="loginClicked" class='bg-blue-500 p-2 m-2 rounded-xl'> LOGIN WITH RELAYX</button> </div>
                     <div  v-if="isLogin">
                     <div> {{relayx_handle}}@relayx.io </div>
-                    <div class="container">
-                        <p id="timer">
-                            <span id="timer-hours"></span>
-                            <span id="timer-mins"></span>
-                            <span id="timer-secs"></span>
-                        </p>
-                    </div>
-                    <div  v-if="isLogin"> 
-                        <button :class="mintButtonClasses" class=' rounded-xl px-6 py-2 m-2' >
-                            <!-- <div class="text-2xl font-medium  "> {{mintText}} </div>  -->
-                            <div class="text-2xl font-medium  "> MINT PAUSED </div> 
+                    <div  v-if="isLogin && orderCount < 400"> 
+                        <button @click="mint" :class="mintButtonClasses" class=' rounded-xl px-6 py-2 m-2' >
+                            <div class="text-2xl font-medium  "> {{mintText}} </div> 
+                            <!-- <div class="text-2xl font-medium  "> MINT PAUSED </div>  -->
                         </button>
                     </div>
-                    <div  class='items-justify-center'> {{allOrders.length + 400}} / 800 minted </div>
+                    <div  class='items-justify-center'> {{400 + orderCount}} / 800 minted </div>
                      <div class='items-justify-center'> <div ref='payForMint' class='buy-extra mx-32' > </div></div>
                      
                     </div>
@@ -52,7 +44,7 @@
     </div>
     <div v-if="isLogin"> <button @click="logout" class='px-4 p-2 m-2 mt-16 bg-red-600 rounded-xl text-white'>LOGOUT</button> </div>
     <TransitionRoot as="template" :show="open">
-    <Dialog as="div" class="fixed z-10 inset-0 overflow-y-auto" @close="open = false">
+    <Dialog as="div" class="fixed z-10 inset-0 overflow-y-auto" @close="mint">
       <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
           <DialogOverlay class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
@@ -74,7 +66,7 @@
               </div>
             </div>
             <div class="mt-5 sm:mt-6">
-              <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r form bg-indigo-600 to-bg-pink-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm" @click="open = false">MINT MORE</button>
+              <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r form bg-indigo-600 to-bg-pink-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm" @click="mint">MINT MORE</button>
             </div>
           </div>
         </TransitionChild>
@@ -87,11 +79,11 @@
 <script>
 import { reactive, toRefs } from 'vue'
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import {useRun} from './../services/wallet.js'
+import {useRun} from '../services/wallet.js'
 import {mapState, useStore} from 'vuex'
-import {useOrders} from './../services/firebase.js'
-const whitelist = ['pewnicorn', 'skless', 'zackwins', 'psc_test']
+import {useOrders, useCounters} from '../services/firebase.js'
 
+const whitelist = ['pewnicorn', 'skless', 'zackwins', 'psc_test']
 // import { CheckIcon } from '@heroicons/vue/outline'
 export default {
     components: {
@@ -105,64 +97,33 @@ export default {
     setup () {
         const _store = useStore();
         const {signIn, isLogin, signOut} = useRun()
-        const {allOrders, sendOrder, findOrders} = useOrders()
+        const {sendOrder, findOrders} = useOrders()
+        const {allCounters, increment} = useCounters();
         //signOut(_store);
         
         console.log(isLogin.value, _store.state.paidForMint)
-        const state = reactive({
+        const state = reactive({ 
             count: 0,
             txid: 0,
             open:false,
-            days: 0, 
-            hours: 0,
-            minutes: 0,
-            seconds: 0, 
+            paying: false
         })
-
-          const timer = () => { setInterval(function() {
-          var endDate = new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)").getTime();
-          let now = new Date().getTime(); 
-          let t = endDate - now; 
-            if (t >= 0) {
-
-                this.days = Math.floor(t / (1000 * 60 * 60 * 24));
-                this.hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                this.mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-                this.seconds = Math.floor((t % (1000 * 60)) / 1000);
-                document.getElementById("timer-hours").innerHTML= ("0" + this.hours).slice(-2) +
-                "<span class='label'>:</span>";
-                document.getElementById("timer-mins").innerHTML= ("0" + this.mins).slice(-2) +
-                "<span class='label'>:</span>";
-                document.getElementById("timer-secs").innerHTML= ("0" + this.seconds).slice(-2) +
-                "<span class='label'></span>";
-            }else{
-              document.getElementById("timer").innerHTML = "The countdown is over!";
-            }
-
-        }, 1000)};
-        if(new Date() < new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)")){
-          timer()
-        }
-
-
-
         return {
-            ...toRefs(state), signIn, isLogin, signOut, whitelist, allOrders, sendOrder, findOrders, timer
+            ...toRefs(state), signIn, isLogin, signOut, whitelist, sendOrder, findOrders, allCounters, increment
         }
-    },
-    unmounted(){
-      this.timer = null;
     },
     methods: {
         pay(){
             window.relayone.render(this.$refs['payForMint'], {
                 to: "pewnicornsocialclub@relayx.io",
-                amount:25.00,
+                amount: 25.00,
                 currency: "USD",
                 onPayment: (e) => {
+                    this.$store.commit("setPaidForMint", true)
+                    this.open = true
                     console.log("Successful Payment", e.txid); 
                     this.txid = e.txid
-                    this.$store.commit("setPaidForMint", true)
+                    this.paying = false;
                 },
                 onError: (err) => {
                     alert(err);
@@ -177,9 +138,11 @@ export default {
                 let response = this.sendOrder(this.txid, this.$store.state.relayx_handle, this.$store.state.user_address, null, false)
                 console.log(response)
                 this.$store.commit("setPaidForMint", false)
-                this.open = true
+                this.open = false
             }else{
                 this.pay()
+                if(this.paying === false){this.increment()}
+                this.paying = true
             }
             
         },
@@ -192,6 +155,9 @@ export default {
         },
         logout(){
             this.signOut(this.$store)
+        },
+        async setUpDB(){
+         
         }
     },
     computed:{
@@ -203,10 +169,14 @@ export default {
             return this.paidForMint ? "MINT" : "BUY"
         },
         orderCount(){
-            return this.allOrders.length
+            if(this.allCounters[0]?.count){return this.allCounters[0].count}
+            return 0
         },
         mintButtonClasses(){
-          if(!this.paidForMint){return "bg-gradient-to-r from-yellow-400 via-yellow-700 to-yellow-300 animate-pulse"}
+          if(!this.paidForMint){
+            if(this.paying){return 'disabled'}
+            return "bg-gradient-to-r from-yellow-400 via-yellow-700 to-yellow-300 animate-pulse"
+          }
           return "bg-gradient-to-r from-green-400 via-green-700 to-green-300 animate-pulse";
         },
         ...mapState(['relayx_handle', "paidForMint"])
@@ -214,24 +184,6 @@ export default {
 }
 </script>
 
-<style >
-body {
-    margin: 0;
-    padding: 0;
-}
-.container {
-    background: #222;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#timer {
-    color: rgb(216, 179, 12);
-    font-size: 2rem;
-}
-.label {
-    font-size: 1.5rem;
-    
-}
+<style lang="scss" scoped>
 
 </style>
