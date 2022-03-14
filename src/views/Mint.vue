@@ -42,7 +42,7 @@
                             <div class="text-2xl font-medium  "> MINT PAUSED </div> 
                         </button>
                     </div>
-                    <div  class='items-justify-center'> {{allOrders.length}} / 800 minted </div>
+                    <div  class='items-justify-center'> {{allOrders.length + 400}} / 800 minted </div>
                      <div class='items-justify-center'> <div ref='payForMint' class='buy-extra mx-32' > </div></div>
                      
                     </div>
