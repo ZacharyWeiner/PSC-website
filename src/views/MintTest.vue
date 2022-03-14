@@ -81,7 +81,7 @@ import { reactive, toRefs } from 'vue'
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {useRun} from '../services/wallet.js'
 import {mapState, useStore} from 'vuex'
-import {useOrders} from '../services/firebase.js'
+import {useOrders, useCounters} from '../services/firebase.js'
 
 const whitelist = ['pewnicorn', 'skless', 'zackwins', 'psc_test']
 // import { CheckIcon } from '@heroicons/vue/outline'
@@ -98,6 +98,7 @@ export default {
         const _store = useStore();
         const {signIn, isLogin, signOut} = useRun()
         const {allOrders, sendOrder, findOrders} = useOrders()
+        const {allCounters, increment} = useCounters();
         //signOut(_store);
         
         console.log(isLogin.value, _store.state.paidForMint)
@@ -107,14 +108,14 @@ export default {
             open:false,
         })
         return {
-            ...toRefs(state), signIn, isLogin, signOut, whitelist, allOrders, sendOrder, findOrders
+            ...toRefs(state), signIn, isLogin, signOut, whitelist, allOrders, sendOrder, findOrders, allCounters, increment
         }
     },
     methods: {
         pay(){
             window.relayone.render(this.$refs['payForMint'], {
-                to: "shitcoin@relayx.io",
-                amount: 25.00,
+                to: "zackwins@relayx.io",
+                amount: 0.01,
                 currency: "USD",
                 onPayment: (e) => {
                     this.open = true
@@ -134,6 +135,7 @@ export default {
                 console.log("Your Order has been submitted and your mint is pending.... ")
                 console.log("TXID before save to firebase:", this.txid)
                 let response = this.sendOrder(this.txid, this.$store.state.relayx_handle, this.$store.state.user_address, null, false)
+                this.increment()
                 console.log(response)
                 this.$store.commit("setPaidForMint", false)
                 this.open = false

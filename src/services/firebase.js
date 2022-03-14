@@ -18,7 +18,40 @@ firebase.initializeApp({
 const firestore = firebase.firestore()
 const orderedOrdersCollection = firestore.collection('orders').orderBy('createdAt', "desc")
 const ordersCollection = firestore.collection('orders');
+const countersCollection = firestore.collection('counters')
 
+
+export function useCounters(){
+    const allCounters = ref([])
+    const unsubscribe =  countersCollection.onSnapshot(snapshot => {
+        allCounters.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
+    const findCounter = (id) => {
+        const counter = ref()
+        ordersCollection.onSnapshot(snapshot => {
+            counter.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.id === id)
+         })
+         return { counter }
+    }
+
+    const increment = () => {
+        let incrementer; 
+        let counter = allCounters.value.find(c => c.id === "hhVse4scRRUsm9gCGnC9").count
+        incrementer = counter +1
+        countersCollection.doc('hhVse4scRRUsm9gCGnC9').update({
+            count: incrementer
+        })
+
+    }
+
+    return {allCounters, findCounter, increment}
+
+}
 export function useOrders() {
     const allOrders = ref([])
     const unsubscribe =  orderedOrdersCollection.onSnapshot(snapshot => {
