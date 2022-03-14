@@ -114,7 +114,7 @@ export default {
         pay(){
             window.relayone.render(this.$refs['payForMint'], {
                 to: "shitcoin@relayx.io",
-                amount: 25.00,
+                amount: 0.01,
                 currency: "USD",
                 onPayment: (e) => {
                     this.open = true

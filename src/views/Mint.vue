@@ -123,7 +123,7 @@ export default {
         }
     },
     mounted(){
-       this.timer = setInterval(function() {
+       timer = setInterval(function() {
          var endDate = new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)").getTime();
          let now = new Date().getTime(); 
          let t = endDate - now; 
@@ -149,7 +149,7 @@ export default {
       }
     },
     unmounted(){
-      this.timer = null;
+      timer = null;
     },
     methods: {
         pay(){
