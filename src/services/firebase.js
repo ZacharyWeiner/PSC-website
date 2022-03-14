@@ -39,17 +39,25 @@ export function useCounters(){
          return { counter }
     }
 
+    const findMintCounter = () => {
+        const counter = ref()
+        ordersCollection.onSnapshot(snapshot => {
+            counter.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.id === "hhVse4scRRUsm9gCGnC9")
+         })
+         return { counter }
+    }
+    
     const increment = () => {
-        let incrementer; 
-        let counter = allCounters.value.find(c => c.id === "hhVse4scRRUsm9gCGnC9").count
-        incrementer = counter +1
+        //let incrementer = 0;
+        let incrementer = allCounters.value[0].count + 1
         countersCollection.doc('hhVse4scRRUsm9gCGnC9').update({
             count: incrementer
         })
-
     }
 
-    return {allCounters, findCounter, increment}
+    return {allCounters, findCounter, findMintCounter, increment}
 
 }
 export function useOrders() {

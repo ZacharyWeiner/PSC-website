@@ -91,7 +91,7 @@ import {useRun} from './../services/wallet.js'
 import {mapState, useStore} from 'vuex'
 import {useOrders} from './../services/firebase.js'
 const whitelist = ['pewnicorn', 'skless', 'zackwins', 'psc_test']
-var timer;
+
 // import { CheckIcon } from '@heroicons/vue/outline'
 export default {
     components: {
@@ -118,35 +118,40 @@ export default {
             minutes: 0,
             seconds: 0, 
         })
+
+          const timer = () => { setInterval(function() {
+          var endDate = new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)").getTime();
+          let now = new Date().getTime(); 
+          let t = endDate - now; 
+            if (t >= 0) {
+
+                this.days = Math.floor(t / (1000 * 60 * 60 * 24));
+                this.hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                this.mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+                this.seconds = Math.floor((t % (1000 * 60)) / 1000);
+                document.getElementById("timer-hours").innerHTML= ("0" + this.hours).slice(-2) +
+                "<span class='label'>:</span>";
+                document.getElementById("timer-mins").innerHTML= ("0" + this.mins).slice(-2) +
+                "<span class='label'>:</span>";
+                document.getElementById("timer-secs").innerHTML= ("0" + this.seconds).slice(-2) +
+                "<span class='label'></span>";
+            }else{
+              document.getElementById("timer").innerHTML = "The countdown is over!";
+            }
+
+        }, 1000)};
+        if(new Date() < new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)")){
+          timer()
+        }
+
+
+
         return {
-            ...toRefs(state), signIn, isLogin, signOut, whitelist, allOrders, sendOrder, findOrders
+            ...toRefs(state), signIn, isLogin, signOut, whitelist, allOrders, sendOrder, findOrders, timer
         }
     },
     mounted(){
-       this.timer = setInterval(function() {
-         var endDate = new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)").getTime();
-         let now = new Date().getTime(); 
-         let t = endDate - now; 
-          if (t >= 0) {
-
-              this.days = Math.floor(t / (1000 * 60 * 60 * 24));
-              this.hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-              this.mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-              this.seconds = Math.floor((t % (1000 * 60)) / 1000);
-              document.getElementById("timer-hours").innerHTML= ("0" + this.hours).slice(-2) +
-              "<span class='label'>:</span>";
-              document.getElementById("timer-mins").innerHTML= ("0" + this.mins).slice(-2) +
-              "<span class='label'>:</span>";
-              document.getElementById("timer-secs").innerHTML= ("0" + this.seconds).slice(-2) +
-              "<span class='label'></span>";
-          }else{
-             document.getElementById("timer").innerHTML = "The countdown is over!";
-          }
-
-      }, 1000);
-      if(new Date() < new Date("Mon Mar 14 2022 18:00:00 GMT-0400 (Eastern Daylight Time)")){
-        timer()
-      }
+       
     },
     unmounted(){
       this.timer = null;
