@@ -9,10 +9,10 @@
     <button @click='syncRun' class='text-white px-4'> Sync Run </button>
     <button @click='sendNFTs' class='text-white px-4'> Send </button>
     <div v-for='order in ordered' :key="order.id" class='text-white text-left py-1 ring-1'>
-        <!-- <div class="flex">
+        <div class="flex">
             <div class='w-full'> {{new Date(order.createdAt.seconds * 1000).toString()}}</div>
             <div class='items-right'> <button @click='deleteRecord(order)'> Delete </button> </div>
-        </div> -->
+        </div>
         <div> {{order.relayHandle}}, {{order.txid}}, {{order.runAddress}} </div>
     </div> 
 </template>

@@ -13,7 +13,7 @@
         <div
           class="text-5xl md:text-7xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
         >
-          Mint A TEST Pewnicorn
+          Mint A Pewnicorn
         </div>
          <div class="text-xl md:text-2xl pb-1">Research Division</div>
       </div>
@@ -24,11 +24,11 @@
                 <div class='pt-6'> 
                     <img class='h-48 w-48 mx-auto rounded-xl' src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" />
                 </div>
-                <div v-if="(allOrders.length) < 50" class='mx-auto pt-5 mt-5'>
+                <div v-if="(orderCount) < 400" class='mx-auto pt-5 mt-5'>
                     <div v-if="!isLogin" > <button @click="loginClicked" class='bg-blue-500 p-2 m-2 rounded-xl'> LOGIN WITH RELAYX</button> </div>
                     <div  v-if="isLogin">
                     <div> {{relayx_handle}}@relayx.io </div>
-                    <div  v-if="isLogin && orderCount < 30"> 
+                    <div  v-if="isLogin && orderCount < 400"> 
                         <button @click="mint" :class="mintButtonClasses" class=' rounded-xl px-6 py-2 m-2' >
                             <div class="text-2xl font-medium  "> {{mintText}} </div> 
                             <!-- <div class="text-2xl font-medium  "> MINT PAUSED </div>  -->
@@ -81,7 +81,7 @@ import { reactive, toRefs } from 'vue'
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {useRun} from '../services/wallet.js'
 import {mapState, useStore} from 'vuex'
-import {useOrders} from '../services/firebase.js'
+import {useOrders, useCounters} from '../services/firebase.js'
 
 const whitelist = ['pewnicorn', 'skless', 'zackwins', 'psc_test']
 // import { CheckIcon } from '@heroicons/vue/outline'
@@ -97,7 +97,8 @@ export default {
     setup () {
         const _store = useStore();
         const {signIn, isLogin, signOut} = useRun()
-        const {allOrders, sendOrder, findOrders} = useOrders()
+        const {sendOrder, findOrders} = useOrders()
+        const {allCounters, increment} = useCounters();
         //signOut(_store);
         
         console.log(isLogin.value, _store.state.paidForMint)
@@ -105,23 +106,24 @@ export default {
             count: 0,
             txid: 0,
             open:false,
+            paying: false
         })
         return {
-            ...toRefs(state), signIn, isLogin, signOut, whitelist, allOrders, sendOrder, findOrders
+            ...toRefs(state), signIn, isLogin, signOut, whitelist, sendOrder, findOrders, allCounters, increment
         }
     },
     methods: {
         pay(){
             window.relayone.render(this.$refs['payForMint'], {
-                to: "shitcoin@relayx.io",
-                amount: 0.01,
+                to: "PewnicornSocialClub@relayx.io",
+                amount: 25.00,
                 currency: "USD",
                 onPayment: (e) => {
+                    this.$store.commit("setPaidForMint", true)
                     this.open = true
                     console.log("Successful Payment", e.txid); 
                     this.txid = e.txid
-                    this.$store.commit("setPaidForMint", true)
-                    
+                    this.paying = false;
                 },
                 onError: (err) => {
                     alert(err);
@@ -139,6 +141,8 @@ export default {
                 this.open = false
             }else{
                 this.pay()
+                if(this.paying === false){this.increment()}
+                this.paying = true
             }
             
         },
@@ -165,10 +169,14 @@ export default {
             return this.paidForMint ? "MINT" : "BUY"
         },
         orderCount(){
-            return this.allOrders.length
+            if(this.allCounters[0]?.count){return this.allCounters[0].count}
+            return 0
         },
         mintButtonClasses(){
-          if(!this.paidForMint){return "bg-gradient-to-r from-yellow-400 via-yellow-700 to-yellow-300 animate-pulse"}
+          if(!this.paidForMint){
+            if(this.paying){return 'disabled'}
+            return "bg-gradient-to-r from-yellow-400 via-yellow-700 to-yellow-300 animate-pulse"
+          }
           return "bg-gradient-to-r from-green-400 via-green-700 to-green-300 animate-pulse";
         },
         ...mapState(['relayx_handle', "paidForMint"])

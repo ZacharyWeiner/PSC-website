@@ -18,7 +18,48 @@ firebase.initializeApp({
 const firestore = firebase.firestore()
 const orderedOrdersCollection = firestore.collection('orders').orderBy('createdAt', "desc")
 const ordersCollection = firestore.collection('orders');
+const countersCollection = firestore.collection('counters')
 
+
+export function useCounters(){
+    const allCounters = ref([])
+    const unsubscribe =  countersCollection.onSnapshot(snapshot => {
+        allCounters.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
+    const findCounter = (id) => {
+        const counter = ref()
+        ordersCollection.onSnapshot(snapshot => {
+            counter.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.id === id)
+         })
+         return { counter }
+    }
+
+    const findMintCounter = () => {
+        const counter = ref()
+        ordersCollection.onSnapshot(snapshot => {
+            counter.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.id === "hhVse4scRRUsm9gCGnC9")
+         })
+         return { counter }
+    }
+    
+    const increment = () => {
+        //let incrementer = 0;
+        let incrementer = allCounters.value[0].count + 1
+        countersCollection.doc('hhVse4scRRUsm9gCGnC9').update({
+            count: incrementer
+        })
+    }
+
+    return {allCounters, findCounter, findMintCounter, increment}
+
+}
 export function useOrders() {
     const allOrders = ref([])
     const unsubscribe =  orderedOrdersCollection.onSnapshot(snapshot => {
