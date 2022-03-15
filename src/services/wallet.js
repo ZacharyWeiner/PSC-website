@@ -47,27 +47,13 @@ export function useRun()  {
         let collectibles = response_data.data['collectibles'];
         let balances = response_data.data['balances'];
         console.log({balances})
-        let selected = collectibles.filter(c => c.origin === '1ba1080086ca6624851e1fbff18d903047f2b75d3a9ffe5cc8bf49ed0fdb36a0_o2')
-        let slavettes = collectibles.filter(c => c.origin === '84769a5ac4cec62270093648c9978016640aeccb62c11b717313d41a4c74640c_o2')
-
-        let rugOptions = [
-            // //Live Rugs //
-            collectibles.filter(c => c.origin === '99658f360f9a5f5ce70f6100b1ffbea1fc385a4f44e156f1c1e4fd5e6d1d6232_o2').length,   //Red            
-            collectibles.filter(c => c.origin === 'a2feebf63bf84ed28945372a4b2ed43ce84dcd0df312bf4c1308b0bca574e11f_o2').length,    //Green
-            collectibles.filter(c => c.origin === '54e23ac33b311538f3b07a3579c83cab1fb5effa6e13f8f14408849515f6f3fc_o2').length,   //Gold
-            //TEST RUGS //
-            // collectibles.filter(c => c.origin === 'da7a276e3a146ff273decc2211b0acd0ca4fce026801c0f5610e259efda84d87_o2').length,   //Red            
-            // collectibles.filter(c => c.origin === '72ee29bac1db5e23ad6a179b0feb427fbfaf7cc101ea43697327a54b1522af73_o2').length,    //Green
-            // collectibles.filter(c => c.origin === 'a074a8ecb0d777b8a753d14366203b8c904283eeadf91f6fb65fafd04c494800_o2').length,   //Gold
-        ]
-        let cigCount = balances['c8c3771f07da180ab76ba2f4a273c3298f1584ad1bcde1e04e0926174e3e432b_o2']
+        let selected = collectibles.filter(c => c.origin === '3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1')
+        let pooCount = balances['d0f84d202d91468f9bbdcf6a028e7223abab5a2c935fb347a65bc3ec6d85ddd8_o2']
         console.log(selected)
-        console.log({cigCount})
+        console.log({pooCount})
         store.commit('setUserJigs', selected)
-        store.commit("setCigs", cigCount);
-        store.commit('setUserRugs', rugOptions)
-        store.commit('setUserSlavettes', slavettes)
-        if(selected[0]){store.commit('setGopnikId', selected[0].props.no);}
+        store.commit("setCoins", pooCount);
+        if(selected[0]){store.commit('setCornId', selected[0].props.no);}
     }
     return {signIn, signOut, isLogin, canAccess, setJigs}
  

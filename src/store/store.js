@@ -14,10 +14,10 @@ export default createStore({
     user_address: '',
     user_jigs: [],
     selected_proposalId: '',
-    gopnikId: '', 
+    cornId: '', 
     last_offers: [],
     last_offers_last_checked: '',
-    cigs: "",
+    coins: "",
     selected_item: {},
     selected_option: '',
     user_rugs: [],
@@ -41,8 +41,8 @@ export default createStore({
     setSelectedProposalId(state, _propId) {
       state.selected_proposalId = _propId
     },
-    setGopnikId(state, id){
-      state.gopnikId = id;
+    setCornId(state, id){
+      state.cornId = id;
     },
     setLastOffers(state, offers){
       state.last_offers = offers
@@ -50,7 +50,7 @@ export default createStore({
     setLastOffersLastChecked(state, time){
       state.last_offers_last_checked = time;
     },
-    setCigs(state, cigs){
+    setCoins(state, cigs){
       state.cigs = cigs
     },
     setSelectedItem(state, _item) {

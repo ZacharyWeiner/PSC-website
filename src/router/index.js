@@ -6,6 +6,7 @@ import Mint from '../views/Mint.vue'
 import Check from '../views/Check.vue'
 import JSONPage from '../views/JSONPage.vue'
 import MintTest from '../views/MintTest.vue'
+import MyBag from '../views/MyBag.vue'
 
 
 const routes = [
@@ -44,6 +45,11 @@ const routes = [
     name: 'MINT',
     component: MintTest
   }, 
+  {
+    path: '/my-bag',
+    name: 'My Bag',
+    component: MyBag
+  },
 ]
 
 const router = createRouter({
