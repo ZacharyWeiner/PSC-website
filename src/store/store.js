@@ -3,7 +3,7 @@ import VuexPersistence from 'vuex-persist'
 
 
 const vuexLocal = new VuexPersistence({
-  key: 'NFTS',
+  key: 'PEWNICORN',
   storage: window.localStorage
 })
 

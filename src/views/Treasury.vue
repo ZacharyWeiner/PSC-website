@@ -1,5 +1,6 @@
 <template>
     <div class='text-white'>
+        <button @click="fetchNFTs"> Load </button>
         <div  class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 ">
             <div v-for="nft in orderedNFTs" :key="nft.location"  class='col-span-1'>
                 <div class="mx-2 my-8 py-4 rounded-b-xl bg-gray-900"> 
@@ -75,17 +76,20 @@ export default {
         }
     },
     async mounted(){
-         let walletJSON  = await fetch('https://staging-backend.relayx.com/api/user/balance2/' + '13gqSLMuaW19vCWWgRXC8iMUdmcneYiUh9')
-        let response_data = await walletJSON.json()
-        console.log(response_data)
-        let collectibles = response_data.data['collectibles'];
-        let balances = response_data.data['balances'];
-        console.log({balances})
-        let selected = collectibles.filter(c => c.origin === '3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1')
-        this.jigs = selected;
-        console.log(selected)
+         
     },
     methods:{
+        async fetchNFTs(){
+            let walletJSON  = await fetch('https://staging-backend.relayx.com/api/user/balance2/' + '13gqSLMuaW19vCWWgRXC8iMUdmcneYiUh9')
+            let response_data = await walletJSON.json()
+            console.log(response_data)
+            let collectibles = response_data.data['collectibles'];
+            let balances = response_data.data['balances'];
+            console.log({balances})
+            let selected = collectibles.filter(c => c.origin === '3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1')
+            this.jigs = selected;
+            console.log(selected)
+        },
             getBerryUrl(nft){
             let suffix = nft.berry.txid
             if(suffix){
