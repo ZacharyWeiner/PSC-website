@@ -1,6 +1,6 @@
 <template>
     <div class='text-white'>
-        <button @click="fetchNFTs"> Load </button>
+        <button class='pt-6 text-xl' @click="fetchNFTs"> Load </button>
         <div  class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 ">
             <div v-for="nft in orderedNFTs" :key="nft.location"  class='col-span-1'>
                 <div class="mx-2 my-8 py-4 rounded-b-xl bg-gray-900"> 
