@@ -7,6 +7,7 @@ import Check from '../views/Check.vue'
 import JSONPage from '../views/JSONPage.vue'
 import MintTest from '../views/MintTest.vue'
 import MyBag from '../views/MyBag.vue'
+import Treasury from '../views/Treasury.vue'
 
 
 const routes = [
@@ -49,6 +50,11 @@ const routes = [
     path: '/my-bag',
     name: 'My Bag',
     component: MyBag
+  },
+  {
+    path: '/treasury',
+    name: 'Treasury',
+    component: Treasury
   },
 ]
 
