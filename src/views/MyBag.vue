@@ -8,7 +8,7 @@
     ></div>
         <div class='justify-end'>
             <div v-if="isLogin" > <button @click='logout' class='p-2 m-2 px-8 bg-red-500 rounded'> Log Out</button> </div>
-            <div v-else > <button @click='login' class='p-2 m-2 px-8 bg-blue-600 font-bold rounded'> LOGIN WITH WITH RELAYX</button></div>
+            <div v-else > <div v-if="loading"> <i class='fa fa-spinner animate-spin'></i> </div> <button @click='login' class='p-2 m-2 px-8 bg-blue-600 font-bold rounded'> LOGIN WITH WITH RELAYX</button></div>
         </div>
         <div  class="grid grid-cols-4 ">
             <div v-for="nft in orderedNFTs" :key="nft.location"  class='col-span-1'>
@@ -18,13 +18,54 @@
                         <div class='w-full'> <div class='mx-auto'> Edition {{nft.props.metadata.no}}</div>  </div>
                         <div class='w-full'> <div class='mx-auto'> Rank # {{rankNFT(nft)}}</div>  </div>
                     </div>
-                    <div class=' rounded-xl mx-12'>
+                    <div class=' rounded-xl mx-4'>
                        <div class='text-4xl pt-2' :class='rankTextClass(nft)'>{{rankText(nft)}} </div>
-                    </div>
+                       <div class='border-b-1'></div>
+                       <div class="grid grid-cols-1"> 
+                           <div class='col-span-1'> 
+                               <div class="grid grid-cols-2"> 
+                                   <div class='col-span-1'> Wings: </div>
+                                   <div class='col-span-1 text-left'> {{nft.props.metadata.wings}}</div>
+                               </div>
+                           </div>
+                           <div class='col-span-1'> 
+                               <div class="grid grid-cols-2"> 
+                                   <div class='col-span-1 '> Head: </div>
+                                   <div class='col-span-1 text-left'> {{nft.props.metadata.head}}</div>
+                               </div>
+                           </div>
+                           <div class='col-span-1'> 
+                               <div class="grid grid-cols-2"> 
+                                   <div class='col-span-1'> Eyes: </div>
+                                   <div class='col-span-1 text-left'> {{nft.props.metadata.eyes}}</div>
+                               </div>
+                           </div>
+                           <div class='col-span-1'> 
+                               <div class="grid grid-cols-2"> 
+                                   <div class='col-span-1'> Clothes: </div>
+                                   <div class='col-span-1 text-left'> {{nft.props.metadata.clothes}}</div>
+                               </div>
+                           </div>
+                           <div class='col-span-1'> 
+                               <div class="grid grid-cols-2"> 
+                                   <div class='col-span-1'> Hair: </div>
+                                   <div class='col-span-1 text-left'> {{nft.props.metadata.hair}}</div>
+                               </div>
+                           </div>
+                           <div class='col-span-1'> 
+                               <div class="grid grid-cols-2"> 
+                                   <div class='col-span-1'> Horn: </div>
+                                   <div class='col-span-1 text-left'> {{nft.props.metadata.horn}}</div>
+                               </div>
+                           </div>
+                      </div>
+                      <div class="grid grid-cols-2"> 
+                           
+                      </div>
                 </div> 
             </div>
         </div>
-       
+    </div>
     </div>
 </template>
 
@@ -41,6 +82,7 @@ export default {
         const state = reactive({
             count: 0,
             inputRank: '',
+            loading: false
             //rankText:'',
         })
         return {
@@ -48,8 +90,10 @@ export default {
         }
     },
     methods:{
-        login(){
-            this.signIn();
+        async login(){
+            this.loading = true
+            await this.signIn();
+            this.loading = false
         },
         logout(){
             this.signOut(this.$store);
@@ -74,7 +118,6 @@ export default {
         },
         rankClass(nft){
              let currentRank = this.rankNFT(nft)
-            console.log(currentRank)
             if(currentRank <= 40) {return "bg-yellow-800 text-yellow-200"}
             if(currentRank <= 120) {return "bg-red-600 text-red-200"}
             if(currentRank <= 240) {return "bg-green-600 text-green-100"}
@@ -83,7 +126,6 @@ export default {
         },
         rankTextClass(nft){
              let currentRank = this.rankNFT(nft)
-            console.log(currentRank)
             if(currentRank <= 40) {return "font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"}
             if(currentRank <= 120) {return "font-extrabold bg-gradient-to-b from-red-200 via-red-400 to-red-700 bg-clip-text text-transparent"}
             if(currentRank <= 240) {return "font-extrabold bg-gradient-to-b from-green-200 via-green-400 to-green-700 bg-clip-text text-transparent"}
@@ -92,7 +134,6 @@ export default {
         },
         rankText(nft){
              let currentRank = this.rankNFT(nft)
-            console.log(currentRank)
             if(currentRank <= 40) {return "Legendary"}
             else if(currentRank <= 120) {return "Epic"}
             else if(currentRank <= 240) {return "Rare"}
