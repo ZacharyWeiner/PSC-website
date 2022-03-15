@@ -10,7 +10,7 @@
             <div v-if="isLogin" > <button @click='logout' class='p-2 m-2 px-8 bg-red-500 rounded'> Log Out</button> </div>
             <div v-else > <div v-if="loading"> <i class='fa fa-spinner animate-spin'></i> </div> <button @click='login' class='p-2 m-2 px-8 bg-blue-600 font-bold rounded'> LOGIN WITH WITH RELAYX</button></div>
         </div>
-        <div  class="grid grid-cols-4 ">
+        <div  class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 ">
             <div v-for="nft in orderedNFTs" :key="nft.location"  class='col-span-1'>
                 <div class="mx-2 my-8 py-4 rounded-b-xl bg-gray-900"> 
                     <div calss='h-64'> <img :src="getBerryUrl(nft)" /></div>
