@@ -25,7 +25,7 @@
       >
         <div class="m-0.5 p-4 bg-black rounded md:flex text-lg">
           <div class="w-full py-2 lg:py-8">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/-Y3QDPJURKY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/R4ECXxyhX5M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <div v-if="isLogin" class='text-center space-y-2'> 
               <div class=' flex text-center pt-2'>
                 <a href="https://relayx.com/market/POO" target="_blank" noopener norel class='flex bg-white rounded-full  text-gray-900 mx-auto'>  
