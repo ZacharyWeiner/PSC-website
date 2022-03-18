@@ -27,8 +27,8 @@
           <div class="w-full py-2 lg:py-8">
             <iframe width="100%" height="315" src="https://www.youtube.com/embed/-Y3QDPJURKY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <div v-if="isLogin" class='text-center space-y-2'> 
-              <div class=' flex text-center'>
-                <div class='flex bg-white rounded-full  text-gray-900 mx-auto'>  
+              <div class=' flex text-center pt-2'>
+                <a href="https://relayx.com/market/POO" target="_blank" noopener norel class='flex bg-white rounded-full  text-gray-900 mx-auto'>  
                   <div class='w-16'>  
                     <img
                       class="mx-auto my-auto max-h-10"
@@ -36,7 +36,7 @@
                     />  
                   </div>
                   <div class="text-gray-900 my-auto px-2"> {{coinCount}}</div>
-                </div>
+                </a>
                
               </div>
               <!-- <div > 
@@ -62,6 +62,7 @@
              <div  class="text-xl md:text-2xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"> 
              FRIDAY MARCH 18th, 6PM EST
              </div>
+             <div class='p-2'> <a target="_blank" norel noopener href="https://relayx.com/market/PSC" class='p-2 m-2 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl'> BUY A PEWNICORN</a> </div>
             <div  class="pt-4 text-xl md:text-2xl font-extrabold bg-gradient-to-b from-pink-200 via-indigo-400 to-purple-700 bg-clip-text text-transparent"> 
             Line Up
              </div>
