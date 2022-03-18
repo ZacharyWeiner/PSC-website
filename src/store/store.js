@@ -50,8 +50,8 @@ export default createStore({
     setLastOffersLastChecked(state, time){
       state.last_offers_last_checked = time;
     },
-    setCoins(state, cigs){
-      state.cigs = cigs
+    setCoins(state, coins){
+      state.coins = coins
     },
     setSelectedItem(state, _item) {
       state.selected_item = _item
