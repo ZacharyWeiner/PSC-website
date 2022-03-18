@@ -39,10 +39,11 @@
                 </a>
                
               </div>
-              <!-- <div > 
+              <div v-if='!userHasAction' > 
                 <div class='text-center'> Claim </div>
-                <div class='text-center'> <button class='ring-gray-100 ring-2 px-1 py-2 rounded bg-gray-900 mx-1'> 100 $POO </button></div>
-              </div> -->
+                <div class='text-center'> <button class='ring-gray-100 ring-2 px-1 py-2 rounded bg-gray-900 mx-1' @click="saveUserAction"> 100 $POO </button></div>
+              </div>
+              <div else> Youve Claimed Your $POO, It Will Be Sent Soon </div>
               <div> 
                 <!-- <button @click='logout' class='text-red-600' > Sign Out </button>  -->
               </div>
@@ -175,10 +176,12 @@
 <script>
 import { reactive, toRefs } from "vue";
 import {useRun} from "./../services/wallet.js"
+import { userProfiles} from "./../services/firebase.js"
 import {useStore} from 'vuex'
 export default {
   setup() {
     let {isLogin, signIn, signOut} = useRun()
+    let {setUserAction, findUserActions} = userProfiles()
     let store = useStore()
     let coins = store.state.coins
     console.log(coins)
@@ -186,28 +189,45 @@ export default {
       coinCount: coins,
     });
 
+    
+
     return {
-      ...toRefs(state),isLogin, signOut, signIn, 
+      ...toRefs(state),isLogin, signOut, signIn, setUserAction, findUserActions
     };
   },
   async mounted(){
     if(!window.location.href.includes('localhost') && window.location.protocol !== 'https:'){
       window.location.href = "https://www.pewnicornsocial.club/";
     }
-    // let _run = new Run({
-    //     trust: "*",
-    //     timeout: 1000000,
-    //     logger: console,
-    //     owner: "1GqbnK9xVK5HuWNAtyVYm3AmAdempjct3E",
-    //   });
-    //   await _run.inventory.sync();
+    
   },
   methods:{
     logout(){
       this.signOut(this.$store)
     },
+    saveUserAction(){
+      if(this.isLogin){
+        if(!this.$store.state.userHasAction){
+          let actions = this.findUserActions(this.$store.state.relay_handle)
+          if(actions > 0){
+            this.$store.commit("setHasAction", true);
+          }else{
+            this.$store.commit("setHasAction", true);
+            this.setUserAction(this.$store.state.relayx_handle, this.$store.state.user_address, "Claim")
+          }
+        }
+      }
+      console.log(this.$store.state.relayx_handle, this.$store.state.user_address, "Claim")
+      
+    }
   },
   computed:{
+    userHasAction(){
+      if(this.$store.state.hasAction){
+        return true;
+      }
+      return false;
+    }
   }
 };
 </script>

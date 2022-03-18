@@ -55,8 +55,19 @@ export function userProfiles() {
         console.log('action-saved')
     }
 
+    const findUserActions = (handle) => {
+        const userActions = ref([])
+        userActionsCollection.onSnapshot(snapshot => {
+            userActions.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.relay_handle === handle)
+                
+         })
+         console.log(userActions)
+         return { userActions }
+    }
 
-    return { findUserProfile, setUserProfile, setUserAction }
+    return { findUserProfile, setUserProfile, setUserAction, findUserActions }
 }
 
 export function useCounters(){

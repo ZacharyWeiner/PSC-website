@@ -25,6 +25,7 @@ export default createStore({
     available_moves: 0,
     purchased_moves: 0,
     paidForMint: false,
+    hasAction: false,
 
   },
   mutations: {
@@ -73,6 +74,9 @@ export default createStore({
     },
     setPaidForMint(state, paid){
       state.paidForMint = paid
+    },
+    setHasAction(state, hasAction){
+      state.hasAction = hasAction
     }
   },
   actions: {
