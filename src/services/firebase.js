@@ -19,7 +19,45 @@ const firestore = firebase.firestore()
 const orderedOrdersCollection = firestore.collection('orders').orderBy('createdAt', "desc")
 const ordersCollection = firestore.collection('orders');
 const countersCollection = firestore.collection('counters')
+const userProfilesCollection = firestore.collection('userProfiles')
+const userActionsCollection = firestore.collection('userActions')
 
+export function userProfiles() {
+
+    const findUserProfile = (_owner) => {
+        const userProfile = ref([])
+        userProfilesCollection.onSnapshot(snapshot => {
+            userProfile.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.ownerAddress === _owner)
+         })
+         console.log(userProfile)
+         return { userProfile }
+    }
+
+    const setUserProfile = (_handle, _address) => {
+        userProfilesCollection.add({
+            relay_handle: _handle,
+            ownerAddress: _address,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        console.log('profile-updated')
+
+    }
+
+    const setUserAction = (_handle, _address, _action) => {
+        userActionsCollection.add({
+            relay_handle: _handle,
+            ownerAddress: _address,
+            userAction: _action,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        console.log('action-saved')
+    }
+
+
+    return { findUserProfile, setUserProfile, setUserAction }
+}
 
 export function useCounters(){
     const allCounters = ref([])
