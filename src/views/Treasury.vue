@@ -1,13 +1,15 @@
 <template>
     <div class='text-white'>
         <button class='pt-6 text-xl' @click="fetchNFTs"> Load </button>
-        <div  class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 ">
+        <div  class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 ">
             <div v-for="nft in orderedNFTs" :key="nft.location"  class='col-span-1'>
                 <div class="mx-2 my-8 py-4 rounded-b-xl bg-gray-900"> 
                     <div calss='h-64'> <img :src="getBerryUrl(nft)" /></div>
-                    <div class='flex'  :class='rankClass(nft)'>
-                        <div class='w-full'> <div class='mx-auto'> Edition {{nft.props.metadata.no}}</div>  </div>
-                        <div class='w-full'> <div class='mx-auto'> Rank # {{rankNFT(nft)}}</div>  </div>
+                    <div class='grid grid-cols-2'  :class='rankClass(nft)'>
+                        <div class='w-full col-span-1'> <div class='mx-auto'> Edition {{nft.props.metadata.no}}</div>  </div>
+                        <div class='w-full col-span-1'> <div class='mx-auto'> Rank # {{rankNFT(nft)}}</div>  </div>
+                        <div class='w-full col-span-1'> <div class='mx-auto'> $POO: {{setPricePoo(nft)}}</div>  </div>
+                        <div class='w-full col-span-1'> <div class='mx-auto'> ₿ {{setPriceBSV(nft)}}</div>  </div>
                     </div>
                     <div class=' rounded-xl mx-4'>
                        <div class='text-4xl pt-2' :class='rankTextClass(nft)'>{{rankText(nft)}} </div>
@@ -49,6 +51,12 @@
                                    <div class='col-span-1 text-left'> {{nft.props.metadata.horn}}</div>
                                </div>
                            </div>
+                            <div class='col-span-1'> 
+                               <div class="grid grid-cols-2"> 
+                                   <div class='col-span-1'> Head/Neck: </div>
+                                   <div class='col-span-1 text-left'> {{nft.props.metadata.accessories_head}} / {{nft.props.metadata.accessories_neck}} </div>
+                               </div>
+                           </div>
                       </div>
                       <div class="grid grid-cols-2"> 
                            
@@ -56,6 +64,10 @@
                 </div> 
             </div>
         </div>
+        </div>
+        <div class="flex">
+            <div class=""><button @click="lastPage" class="p-2 m-2 text-white"> Back </button></div>
+            <div class=""><button @click="nextPage" class="p-2 m-2 text-white"> Next </button></div>
         </div>
     </div>
 </template>
@@ -69,6 +81,9 @@ export default {
         const state = reactive({
             jigs: [],
             count: 0,
+            page: 0,
+            basePricePoo: 5000,
+            basePriceBSV: 0.4
         })
     
         return {
@@ -98,6 +113,16 @@ export default {
             return ''
             
         },
+        resetPage(){
+            this.page = 0
+        },
+        nextPage(){
+            this.page = this.page + 1
+            console.log(this.page)
+        },
+        lastPage(){
+            if(this.page >= 2){this.page = this.page - 1}
+        },
         formatRank(){
             let split = this.inputRank.split('\n')
             console.log(split)
@@ -110,6 +135,7 @@ export default {
         },
         rankClass(nft){
              let currentRank = this.rankNFT(nft)
+             if(currentRank <= 8) {return "bg-teal-200 text-teal-800"}
             if(currentRank <= 40) {return "bg-yellow-800 text-yellow-200"}
             if(currentRank <= 120) {return "bg-red-600 text-red-200"}
             if(currentRank <= 240) {return "bg-green-600 text-green-100"}
@@ -118,6 +144,7 @@ export default {
         },
         rankTextClass(nft){
              let currentRank = this.rankNFT(nft)
+             if(currentRank <= 8) {return "font-extrabold bg-gradient-to-b from-teal-200 via-indigo-400 to-blue-700 bg-clip-text text-transparent"}
             if(currentRank <= 40) {return "font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"}
             if(currentRank <= 120) {return "font-extrabold bg-gradient-to-b from-red-200 via-red-400 to-red-700 bg-clip-text text-transparent"}
             if(currentRank <= 240) {return "font-extrabold bg-gradient-to-b from-green-200 via-green-400 to-green-700 bg-clip-text text-transparent"}
@@ -125,18 +152,72 @@ export default {
             return "font-extrabold bg-gradient-to-b from-gray-200 via-gray-400 to-gray-700 bg-clip-text text-transparent"
         },
         rankText(nft){
+            
              let currentRank = this.rankNFT(nft)
+             if(currentRank <= 8) {return "Exotic"}
             if(currentRank <= 40) {return "Legendary"}
             else if(currentRank <= 120) {return "Epic"}
             else if(currentRank <= 240) {return "Rare"}
             else if(currentRank <= 400) {return "Uncommon"}
             return "Common"
+        },
+        setPricePoo(nft){
+             let currentRank = this.rankNFT(nft)
+             let multiplier  = 1;
+            if(currentRank <= 8) {multiplier = multiplier + 100}
+            if(currentRank <= 40) {multiplier = multiplier + 22}
+            else if(currentRank <= 120) {multiplier = multiplier + 10}
+            else if(currentRank <= 240) {multiplier = multiplier + 6.6}
+            else if(currentRank <= 400) {multiplier = multiplier + 3.3}
+             let cm = this.extraMultiplier(nft)
+            return this.basePricePoo * (multiplier + cm)
+        },
+        setPriceBSV(nft){
+            let multiplier  = 1;
+             let currentRank = this.rankNFT(nft)
+            if(currentRank <= 8) {multiplier = multiplier +100}
+            if(currentRank <= 40) {multiplier = multiplier + 50}
+            else if(currentRank <= 120) {multiplier = multiplier + 10}
+            else if(currentRank <= 240) {multiplier = multiplier + 6.5}
+            else if(currentRank <= 400) {multiplier = multiplier + 3.2}
+            let cm = this.extraMultiplier(nft)
+            return (this.basePriceBSV * (multiplier + cm)).toFixed(3)
+        },
+        extraMultiplier(nft){
+            let multiplier = 0;
+            let metadata = nft.props.metadata;
+            let ppItems = metadata.clothes.split("pp")?.length
+            console.log("PP Items:", ppItems)
+            let svItems = metadata.clothes.split("sv")?.length
+            console.log("SV Items:", svItems)
+            if((ppItems && ppItems >= 3) && (svItems && svItems >= 3)){multiplier = 1}
+            else if((ppItems && ppItems >= 2) && (svItems && svItems >= 2)){multiplier = 0.75}
+            else if(ppItems && (ppItems >= 2)){multiplier =  0.25}
+            else if(svItems && (svItems >= 2)){multiplier = 0.25}
+
+            let duroEyes = metadata.eyes.split("duro")?.length
+            let duroChain = metadata.accessories_neck.split("duro")?.length
+
+            if(duroEyes > 1 || duroChain > 1){
+                if(duroEyes > 1){multiplier = multiplier + 0.5}
+                if(duroChain > 1){multiplier = multiplier + 0.5}
+            } 
+            let pewcciGlasses = metadata.eyes.split("pewcci")?.length
+            if(pewcciGlasses > 1){multiplier = multiplier + 0.5}
+            return multiplier;
         }
     },
      computed:{
         
         orderedNFTs(){
-           return [... this.jigs].sort((a, b) => a.props.metadata.no - b.props.metadata.no > 0 ? a : b);
+           let pageStart = 0;
+           let pageEnd = 9;
+           if(this.page >= 1) {
+               pageStart = (this.page * 9);
+               pageEnd = pageStart + 9;
+           }
+           let ordered =  [... this.jigs].sort((a, b) => a.props.metadata.no - b.props.metadata.no > 0 ? a : b);
+           return ordered.slice(pageStart, pageEnd)
         },
     }
 }
