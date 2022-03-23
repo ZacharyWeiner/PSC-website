@@ -105,7 +105,7 @@ export default {
             this.jigs = selected;
             console.log(selected)
         },
-            getBerryUrl(nft){
+        getBerryUrl(nft){
             let suffix = nft.berry.txid
             if(suffix){
                 return 'https://berry.relayx.com/'+ suffix

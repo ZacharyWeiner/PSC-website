@@ -8,6 +8,7 @@ import JSONPage from '../views/JSONPage.vue'
 import MintTest from '../views/MintTest.vue'
 import MyBag from '../views/MyBag.vue'
 import Treasury from '../views/Treasury.vue'
+import RelayOrders from '../views/RelayOrders.vue'
 
 
 const routes = [
@@ -55,6 +56,11 @@ const routes = [
     path: '/treasury',
     name: 'Treasury',
     component: Treasury
+  },
+  {
+    path: '/relay-orders',
+    name: 'Orders',
+    component: RelayOrders
   },
 ]
 
