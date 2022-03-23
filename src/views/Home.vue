@@ -39,11 +39,11 @@
                 </a>
                
               </div>
-              <div v-if='!userHasAction' > 
+              <!-- <div v-if='!userHasAction' > 
                 <div class='text-center'> Claim </div>
                 <div class='text-center'> <button class='ring-gray-100 ring-2 px-1 py-2 rounded bg-gray-900 mx-1' @click="saveUserAction"> 100 $POO </button></div>
               </div>
-              <div v-else> Youve Claimed Your $POO, It Will Be Sent Soon </div>
+              <div v-else> Youve Claimed Your $POO, It Will Be Sent Soon </div> -->
               <div> 
                 <!-- <button @click='logout' class='text-red-600' > Sign Out </button>  -->
               </div>
