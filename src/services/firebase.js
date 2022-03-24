@@ -21,6 +21,18 @@ const ordersCollection = firestore.collection('orders');
 const countersCollection = firestore.collection('counters')
 const userProfilesCollection = firestore.collection('userProfiles')
 const userActionsCollection = firestore.collection('userActions')
+const bandsCallection = firestore.collection('bands')
+
+
+export function getBands() {
+    const bands = ref([])
+    const unsubscribe =  bandsCallection.onSnapshot(snapshot => {
+        bands.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe) 
+    return { bands }
+}
 
 export function userProfiles() {
 
