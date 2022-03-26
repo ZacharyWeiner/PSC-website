@@ -1,5 +1,5 @@
 {
-  "name": "dao",
+  "name": "PewnicornSocialClub",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.5.0",
+    "@heroicons/vue": "^1.0.6",
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "autoprefixer": "^9",
     "axios": "^0.24.0",

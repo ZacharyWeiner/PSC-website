@@ -53,7 +53,7 @@
               <button @click='signIn'> Login With Relay </button> 
             </div>
           </div>
-          <div class="w-full text-right">
+          <!-- <div class="w-full text-right">
            <div  class="text-2xl md:text-4xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"> 
              Pewnicorn Concert Series 
              </div>
@@ -74,6 +74,27 @@
               <div class='col-span-1 text-indigo-300'> Mandeep The MC </div>
            </div>
             
+          </div> -->
+          <div class="w-full text-right">
+              <div  class="text-2xl md:text-4xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"> 
+              Pewnicorn Social Club 
+              </div>
+              <div  class="text-xl md:text-2xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"> 
+              Vote 1
+              </div>
+              <div  class="text-xl md:text-2xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"> 
+              Open Now
+              </div>
+              <div class='p-2'> <a target="_blank" norel noopener href="https://relayx.com/market/PSC" class='p-2 m-2 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl'> BUY A PEWNICORN</a> </div>
+              <div  class="pt-4 text-xl md:text-2xl font-extrabold bg-gradient-to-b from-pink-200 via-indigo-400 to-purple-700 bg-clip-text text-transparent"> 
+              Line Up
+              </div>
+              <div class='grid grid-cols-2 md:grid-cols-1'> 
+                <div class='col-span-1 text-indigo-300'> Conversing With Oceans </div>
+                <div class='col-span-1 text-indigo-300'> Ill Fella </div>
+                <div class='col-span-1 text-indigo-300'> Lords of the Sun </div>
+                <div class='col-span-1 text-indigo-300'> Mandeep The MC </div>
+              </div>
           </div>
           
           

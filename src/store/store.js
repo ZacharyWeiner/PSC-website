@@ -88,12 +88,7 @@ export default createStore({
     logout({commit}) {
       commit('setRelayxHandle', '')
       commit('setUserAddress', '')
-      commit('setGopnikId', 0)
       commit('setUserJigs', [])
-      commit('setSelectedProposalId', [])
-      commit('setUserSlavettes', [])
-      commit('setUserRugs', [])
-      commit('setMoveCount', 0)
     }
 
     
