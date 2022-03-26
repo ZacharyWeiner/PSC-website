@@ -23,7 +23,7 @@
                 <dl class="-mx-8 flex flex-wrap">
                     <div class="flex flex-col px-8 pt-8">
                     <dt class="order-2 text-base font-medium text-gray-500">option1@relayx.io </dt>
-                    <dd class="order-1 text52xl font-extrabold text-indigo-600 sm:text-3xl">Option 1</dd>
+                    <dd class="order-1 text-5xl font-extrabold text-indigo-600 sm:text-3xl">Option 1</dd>
                     </div>
                     <div class="flex flex-col px-8 pt-8">
                     <dt class="order-2 text-base font-medium text-gray-500">option2@relayx.io </dt>
