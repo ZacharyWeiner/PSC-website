@@ -2,7 +2,7 @@
     <div class="text-white">
          <Menu />
         <announcement-banner />
-       <div class="grid grid-cols-4 ">
+       <div class="grid grid-cols-1 lg:grid-cols-4 ">
            <div v-for="(order, index) in orders" :key="index" class="col-span-1 mb-4 mx-1 bg-gray-900 rounded">
                <img :src="getBerryUrl(order)" class="w-full" />
                <div class='grid grid-cols-4'  :class='rankClass(order)'>

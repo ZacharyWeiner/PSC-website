@@ -57,12 +57,12 @@
 
     <DisclosurePanel class="md:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
+        <router-link v-for="item in navigation" :key="item.name" :to="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</router-link>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5 sm:px-6">
           <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+            <img class="h-10 w-10 rounded-full" :src="firstImage" alt="" />
           </div>
           <div class="ml-3">
             <div class="text-base font-medium text-white">{{ user.name }}</div>
@@ -74,7 +74,7 @@
           </button> -->
         </div>
         <div class="mt-3 px-2 space-y-1 sm:px-3">
-          <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" :href="item.href" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">{{ item.name }}</DisclosureButton>
+          <router-link v-for="item in userNavigation" :key="item.name" :to="item.href" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">{{ item.name }}</router-link>
         </div>
       </div>
     </DisclosurePanel>
@@ -99,9 +99,8 @@ const navigation = [
   { name: 'Marketplace', href: 'relay-orders', current: false },
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Your Profile', href: '/my-bag' },
+  { name: 'Sign out', href: '/logout' },
 ]
 
 export default {
