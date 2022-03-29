@@ -7,9 +7,9 @@ import Mint from '../views/Mint.vue'
 import Check from '../views/Check.vue'
 import JSONPage from '../views/JSONPage.vue'
 import MintTest from '../views/MintTest.vue'
-// import MyBag from '../views/MyBag.vue'
-// import Treasury from '../views/Treasury.vue'
-// import RelayOrders from '../views/RelayOrders.vue'
+import MyBag from '../views/MyBag.vue'
+import Treasury from '../views/Treasury.vue'
+import RelayOrders from '../views/RelayOrders.vue'
 import Votes from '../views/Votes.vue'
 
 
@@ -54,21 +54,21 @@ const routes = [
     name: 'MINT',
     component: MintTest
   }, 
-  // {
-  //   path: '/my-bag',
-  //   name: 'My Bag',
-  //   component: MyBag
-  // },
-  // {
-  //   path: '/treasury',
-  //   name: 'Treasury',
-  //   component: Treasury
-  // },
-  // {
-  //   path: '/relay-orders',
-  //   name: 'Orders',
-  //   component: RelayOrders
-  // },
+  {
+    path: '/my-bag',
+    name: 'My Bag',
+    component: MyBag
+  },
+  {
+    path: '/treasury',
+    name: 'Treasury',
+    component: Treasury
+  },
+  {
+    path: '/relay-orders',
+    name: 'Orders',
+    component: RelayOrders
+  },
   {
     path: '/votes',
     name: 'Votes',

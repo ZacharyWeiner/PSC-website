@@ -94,9 +94,9 @@ import {useRun} from "./../services/wallet.js"
 const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'Votes', href: '/votes', current: false },
-//   { name: 'Team', href: '#', current: false },
-//   { name: 'Projects', href: '#', current: false },
-//   { name: 'Calendar', href: '#', current: false },
+  { name: 'Treasury', href: '/treasury', current: false },
+  { name: 'My Bag', href: '/my-bag', current: false },
+  { name: 'Marketplace', href: 'relay-orders', current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },

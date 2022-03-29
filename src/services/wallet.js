@@ -48,10 +48,11 @@ export function useRun()  {
         let balances = response_data.data['balances'];
         console.log({balances})
         let selected = collectibles.filter(c => c.origin === '3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1')
+        let only800 = selected.filter(s => s.props.metadata.no <= 800)
         let pooCount = balances['d0f84d202d91468f9bbdcf6a028e7223abab5a2c935fb347a65bc3ec6d85ddd8_o2']
         console.log(selected)
         console.log({pooCount})
-        store.commit('setUserJigs', selected)
+        store.commit('setUserJigs', only800)
         store.commit("setCoins", pooCount);
         if(selected[0]){store.commit('setCornId', selected[0].props.no);}
     }
