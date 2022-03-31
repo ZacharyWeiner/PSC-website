@@ -111,7 +111,11 @@ export default {
             console.log({balances})
             let selected = collectibles.filter(c => c.origin === '3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1')
             let only800 = selected.filter(s => s.props.metadata.no <= 800)
-            this.jigs = only800;
+            this.jigs = only800.sort((a, b) =>{
+                 let a1 =  this.rankNFT(a)
+                 let b1 =  this.rankNFT(b)
+                 return a1 - b1
+            })
             console.log(only800)
         },
         getBerryUrl(nft){
