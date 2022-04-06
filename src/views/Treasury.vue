@@ -224,10 +224,10 @@ export default {
         
         orderedNFTs(){
            let pageStart = 0;
-           let pageEnd = 9;
+           let pageEnd = 12;
            if(this.page >= 1) {
-               pageStart = (this.page * 9);
-               pageEnd = pageStart + 9;
+               pageStart = (this.page * 12);
+               pageEnd = pageStart + 12;
            }
            let ordered =  [... this.jigs].sort((a, b) => a.props.metadata.no - b.props.metadata.no > 0 ? a : b);
            return ordered.slice(pageStart, pageEnd)

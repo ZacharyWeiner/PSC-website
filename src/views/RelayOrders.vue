@@ -14,6 +14,7 @@
                 <div class="">
                          <div class='text-4xl pt-2' :class='rankTextClass(order)'>{{rankText(order)}} </div>
                     </div>
+                    <div class="m-4"> {{order.seller}} </div>
                 <div class="m-4"> 
                     <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/PSC/${order.location}`"> BUY ON RELAY </a>
                 </div>
@@ -35,6 +36,11 @@ export default {
      async setup () {
         let { data } = await axios.get("https://staging-backend.relayx.com/api/market/3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1/orders");
         let orders = data.data.orders;
+         orders.sort((a, b) =>{ 
+            let a1 =  parseInt(a.satoshis, 10)
+            let b1 =  parseInt(b.satoshis, 10)
+            return a1- b1
+           });
         const state = reactive({
             count: 0,
         })

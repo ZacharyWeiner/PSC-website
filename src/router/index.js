@@ -11,6 +11,10 @@ import MyBag from '../views/MyBag.vue'
 import Treasury from '../views/Treasury.vue'
 import RelayOrders from '../views/RelayOrders.vue'
 import Votes from '../views/Votes.vue'
+import Gopniks from '../views/friends/Gopniks.vue'
+import Popsicle from '../views/friends/Popsicle.vue'
+import Tools from '../views/Tools.vue'
+import Friends from '../views/FriendsOfPew.vue'
 
 
 const routes = [
@@ -73,6 +77,26 @@ const routes = [
     path: '/votes',
     name: 'Votes',
     component: Votes
+  },
+  {
+    path: '/friends',
+    name: 'Friends',
+    component: Friends
+  },
+  {
+    path: '/friends/gopniks',
+    name: 'Gopniks Orders',
+    component: Gopniks
+  },
+  {
+    path: '/friends/popsicle-sticks',
+    name: 'Popsicle Orders',
+    component: Popsicle
+  },
+  {
+    path: '/tools',
+    name: 'Tools',
+    component: Tools
   },
 ]
 
