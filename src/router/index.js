@@ -12,9 +12,11 @@ import Treasury from '../views/Treasury.vue'
 import RelayOrders from '../views/RelayOrders.vue'
 import Votes from '../views/Votes.vue'
 import Gopniks from '../views/friends/Gopniks.vue'
+import Quokkas from '../views/friends/Quokkas.vue'
 import Popsicle from '../views/friends/Popsicle.vue'
 import Tools from '../views/Tools.vue'
 import Friends from '../views/FriendsOfPew.vue'
+import Snipers from '../views/secret/Sniper.vue'
 
 
 const routes = [
@@ -94,9 +96,19 @@ const routes = [
     component: Popsicle
   },
   {
+    path: '/friends/wokka-quokkas',
+    name: 'Quokka Orders',
+    component: Quokkas
+  },
+  {
     path: '/tools',
     name: 'Tools',
     component: Tools
+  },
+  {
+    path: '/secret/snipers',
+    name: 'Snipers',
+    component: Snipers
   },
 ]
 

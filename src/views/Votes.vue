@@ -1,39 +1,30 @@
 <template>
     <div>
         <Menu />
-        <div class="relative bg-white">
-            <div class="h-56 bg-indigo-600 sm:h-72 lg:absolute lg:left-0 lg:h-full lg:w-1/2">
-            <img class="w-full h-full object-cover" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" alt="Support team" />
-            </div>
-            <div class="relative max-w-7xl mx-auto px-4 py-8 sm:py-12 sm:px-6 lg:py-16">
-            <div class="max-w-2xl mx-auto lg:max-w-none lg:mr-0 lg:ml-auto lg:w-1/2 lg:pl-10">
-                <h1 class="text-left mt-6 text-5xl font-extrabold text-gray-900 sm:text-4xl">Its Time To Vote</h1>
-                <h4 class="text-left mt-6 text-xl font-extrabold text-gray-900 sm:text-xl">We have 3 New Pages:</h4>
-                <div class="text-left text-md text-gray-100 ring-1 rounded-xl bg-indigo-600 p-1 m-1"> <span class='font-bold'> 1 - My-Bag: </span> <br/> showing the PRD #NFTs you have, their rank and value. </div>
-                <div class="text-left text-md text-gray-100 ring-1 rounded-xl bg-indigo-600 p-1 m-1"> <span class='font-bold'> 2 - Treasury: </span> <br/> showing all the PRD #NFTs the Treasury holds, their rank, value, and how to buy with $POO. </div>
-                <div class="text-left text-md text-gray-100 ring-1 rounded-xl bg-indigo-600 p-1 m-1"> <span class='font-bold'> 3 - Orders: </span> <br/> showing the rank and price of all PRD orders on RelayX.com </div>
-                <h2 class="text-left mt-6 text-3xl font-extrabold text-gray-900 sm:text-3xl">How Should We Release Them?</h2>
-                <p class="text-left mt-6 text-lg text-gray-500"><span class='text-indigo-600 font-bold' >Option 1: </span> Publish All New Pages Friday, April 1.</p>
-                <p class="text-left text-lg text-gray-500"><span class='text-indigo-600 font-bold' >Option 2: </span> Publish 1 Page Every Friday, Starting April 1.</p>
-                <p class="text-left text-lg text-green-700"><span class='text-green-700 font-bold' >Option 3: </span> Publish Them All Now!</p>
-                <div class="mt-8 overflow-hidden">
-                <h4 class="text-left mt-6 text-3xl font-extrabold text-gray-900 sm:text-4xl">How To Vote:</h4>
-                <div class="text-left text-md text-gray-700">Send $POO To The Address listed below the option you would like to choose before 12PM EST Tuesday MARCH 29th, 2022</div>
-                <div class="text-left text-xs text-gray-700">* you may vote for more than one option. </div>
-                <dl class="-mx-8 flex flex-wrap">
-                    <div class="flex flex-col px-8 pt-8">
-                    <dt class="order-2 text-base font-medium text-gray-500">700 Votes</dt>
-                    <dd class="order-1 text-5xl font-extrabold text-indigo-600 sm:text-3xl">Option 1</dd>
+          <div class="relative bg-white py-16 sm:py-24 lg:py-32">
+            <div class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
+            <h2 class="text-base font-semibold uppercase tracking-wider text-indigo-600">What Do We Do With</h2>
+            <p class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl"> The Magical Pewnicorns</p>
+            <p class="mx-auto mt-5 max-w-prose text-xl text-gray-500">On mint day, there should have been 1234 Pewnicorns for sale. <br/> For a few weeks we were only able to see the first 800. </p>
+            <p class="mx-auto mt-5 max-w-prose text-xl text-gray-500"> <b>We will burn all editions over 1234, but  <br /> <span class='text-red-400 text-3xl'>  What Do We Do With #800 - #1234? </span> </b>  </p>
+            <p class="mx-auto mt-5 max-w-prose text-md text-gray-900">Voting Closes 12pm EDT Thursday April 14.</p>
+            <div class="mt-12">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div v-for="feature in features" :key="feature.name" class="pt-6">
+                    <div class="flow-root rounded-lg bg-gray-50 px-6 pb-8">
+                    <div class="-mt-6">
+                        <div>
+                        <span class="inline-flex items-center justify-center rounded-md bg-indigo-500 p-3 shadow-lg">
+                            <span class="h-6 w-6 text-white" aria-hidden="true" > {{feature.number}} </span>
+                        </span>
+                        </div>
+                        <h3 class="mt-8 text-lg font-medium tracking-tight text-gray-900">{{ feature.name }}</h3>
+                        <p class="mt-5 text-base text-gray-500 h-24">{{ feature.description }}</p>
+                        <p class="mt-5 text-base text-blue-500">To Vote for <span class="text-blue-900 font-bold" > Option {{feature.number}} </span> send $POO to: </p>
+                        <p class='m-1 p-1 ring-1 rounded'><span class='text-blue-700'>option_{{feature.number}}@relayx.io</span> </p>
                     </div>
-                    <div class="flex flex-col px-8 pt-8">
-                    <dt class="order-2 text-base font-medium text-gray-500">608 Votes </dt>
-                    <dd class="order-1 text-5xl font-extrabold text-indigo-600 sm:text-3xl">Option 2</dd>
                     </div>
-                    <div class="flex flex-col px-8 pt-8">
-                    <dt class="order-2 text-base font-medium text-gray-500">6387 Votes</dt>
-                    <dd class="order-1 text-5xl font-extrabold text-indigo-600 sm:text-3xl">Option 3</dd>
-                    </div>
-                </dl>
+                </div>
                 </div>
             </div>
             </div>
@@ -43,10 +34,26 @@
 </template>
 
 <script>
-// import { UsersIcon } from '@heroicons/vue/outline'
 import { reactive, toRefs } from 'vue'
-import Menu from "./../components/Menu.vue"
-import Footer from "./../components/Footer.vue"
+import Menu from "../components/Menu.vue"
+import Footer from "../components/Footer.vue"
+const features = [
+  {
+    name: 'Burn Them All',
+    description: 'Destroy #NFTs with an edition number over 800. \n',
+    number: 1
+  },
+  {
+    name: 'Airdrop & Burn',
+    description: 'Airdrop 1 Pewnicorn to holders who completed a pre-order & Burn all the remaining editions.',
+    number: 2
+  },
+  {
+    name: 'Airdrop & Treasury',
+    description: 'Airdrop 1 Pewnicorn to holders who completed a pre-order & put all the remaining editions in treasury.',
+    number: 3
+  },
+]
 export default {
     components:{Menu, Footer},
     setup () {
@@ -56,6 +63,7 @@ export default {
     
         return {
             ...toRefs(state),
+            features
         }
     }
 }

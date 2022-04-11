@@ -16,7 +16,13 @@
             <div>  Gopniks</div>
              </router-link>
             </div> 
+        <div class="col-span-1 flex-1 p-2 m-2 bg-gray-900 rounded"> 
+            <router-link to="/friends/wokka-quokkas" class='text-3xl'>
+            <div> <img class="max-w-sm mx-auto rounded-full" src="https://berry.relayx.com/84fdb5121bcb556682e872c98f5bad0f7109807d9395b4c2b087ab401c63ee5d_o1"> </div> 
+            <div>   Wokka Quokkas </div>
             
+            </router-link>
+        </div>
         <div class="col-span-1 flex-1 p-2 m-2 bg-gray-900 rounded"> 
             <router-link to="/friends/popsicle-sticks" class='text-3xl'>
             <div> <img class="max-w-sm mx-auto rounded-full" src="https://berry.relayx.com/fd0ffe5908cf88293ecd4dd781e9af1aac8bab9e0ba53867fbcbde07b80a309a_o1"> </div> 
@@ -24,9 +30,8 @@
             
             </router-link>
         </div>
-    </div>
-        <router-link to="/quokka-orders"> Quokkas (coming soon) </router-link>
         
+    </div>
     </div>
 </template>
 
