@@ -21,7 +21,7 @@
                         <h3 class="mt-8 text-lg font-medium tracking-tight text-gray-900">{{ feature.name }}</h3>
                         <p class="mt-5 text-base text-gray-500 h-24">{{ feature.description }}</p>
                         <p class="mt-5 text-base text-blue-500">To Vote for <span class="text-blue-900 font-bold" > Option {{feature.number}} </span> send $POO to: </p>
-                        <p class='m-1 p-1 ring-1 rounded'><span class='text-blue-700'>option_{{feature.number}}@relayx.io</span> </p>
+                        <p class='m-1 p-1 ring-1 rounded'><span class='text-blue-700'>option{{feature.number}}@relayx.io</span> </p>
                     </div>
                     </div>
                 </div>
