@@ -20,8 +20,10 @@
                         </div>
                         <h3 class="mt-8 text-lg font-medium tracking-tight text-gray-900">{{ feature.name }}</h3>
                         <p class="mt-5 text-base text-gray-500 h-24">{{ feature.description }}</p>
-                        <p class="mt-5 text-base text-blue-500">To Vote for <span class="text-blue-900 font-bold" > Option {{feature.number}} </span> send $POO to: </p>
-                        <p class='m-1 p-1 ring-1 rounded'><span class='text-blue-700'>option{{feature.number}}@relayx.io</span> </p>
+                        <!-- <p class="mt-5 text-base text-blue-500">To Vote for <span class="text-blue-900 font-bold" > Option {{feature.number}} </span> send $POO to: </p>
+                        <p class='m-1 p-1 ring-1 rounded'><span class='text-blue-700'>{{feature.number}}</span> </p> -->
+                        <p class="mt-5 text-base text-blue-500"><span :class="feature.color" > Option {{feature.number}} </span> </p>
+                        <p class='m-1 p-1 ring-1 rounded'><span :class='feature.color'>{{feature.votes}} VOTES</span> </p>
                     </div>
                     </div>
                 </div>
@@ -41,17 +43,23 @@ const features = [
   {
     name: 'Burn Them All',
     description: 'Destroy #NFTs with an edition number over 800. \n',
-    number: 1
+    number: 1, 
+    votes: 2152,
+    color: "text-red-500"
   },
   {
     name: 'Airdrop & Burn',
     description: 'Airdrop 1 Pewnicorn to holders who completed a pre-order & Burn all the remaining editions.',
-    number: 2
+    number: 2, 
+    votes: 1259,
+    color: "text-red-500"
   },
   {
     name: 'Airdrop & Treasury',
     description: 'Airdrop 1 Pewnicorn to holders who completed a pre-order & put all the remaining editions in treasury.',
-    number: 3
+    number: 3,
+    votes: 30011,
+    color: "text-green-500"
   },
 ]
 export default {
