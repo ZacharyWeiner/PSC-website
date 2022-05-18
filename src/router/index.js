@@ -11,6 +11,7 @@ import MyBag from '../views/MyBag.vue'
 import Treasury from '../views/Treasury.vue'
 import RelayOrders from '../views/RelayOrders.vue'
 import Votes from '../views/Votes.vue'
+import BingoAdmin from '../views/BingoAdmin.vue'
 
 
 const routes = [
@@ -74,6 +75,11 @@ const routes = [
     name: 'Votes',
     component: Votes
   },
+  {
+    path: '/bingoAdmin',
+    name: 'BingoAdmin',
+    component: BingoAdmin
+  }
 ]
 
 const router = createRouter({

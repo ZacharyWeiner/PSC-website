@@ -14,16 +14,11 @@ firebase.initializeApp({
     appId: config.appId
 })
 
-
 const firestore = firebase.firestore()
-const orderedOrdersCollection = firestore.collection('orders').orderBy('createdAt', "desc")
-const ordersCollection = firestore.collection('orders');
-const countersCollection = firestore.collection('counters')
-const userProfilesCollection = firestore.collection('userProfiles')
-const userActionsCollection = firestore.collection('userActions')
+
 
 export function userProfiles() {
-
+    const userProfilesCollection = firestore.collection('userProfiles')
     const findUserProfile = (_owner) => {
         const userProfile = ref([])
         userProfilesCollection.onSnapshot(snapshot => {
@@ -45,6 +40,7 @@ export function userProfiles() {
 
     }
 
+    const userActionsCollection = firestore.collection('userActions')
     const setUserAction = (_handle, _address, _action) => {
         userActionsCollection.add({
             relay_handle: _handle,
@@ -71,6 +67,8 @@ export function userProfiles() {
 }
 
 export function useCounters(){
+    const countersCollection = firestore.collection('counters')
+
     const allCounters = ref([])
     const unsubscribe =  countersCollection.onSnapshot(snapshot => {
         allCounters.value = snapshot.docs
@@ -80,7 +78,7 @@ export function useCounters(){
 
     const findCounter = (id) => {
         const counter = ref()
-        ordersCollection.onSnapshot(snapshot => {
+        countersCollection.onSnapshot(snapshot => {
             counter.value = snapshot.docs
                 .map(doc => ({ id: doc.id, ...doc.data() }))
                 .filter(o => o.id === id)
@@ -90,7 +88,7 @@ export function useCounters(){
 
     const findMintCounter = () => {
         const counter = ref()
-        ordersCollection.onSnapshot(snapshot => {
+        countersCollection.onSnapshot(snapshot => {
             counter.value = snapshot.docs
                 .map(doc => ({ id: doc.id, ...doc.data() }))
                 .filter(o => o.id === "hhVse4scRRUsm9gCGnC9")
@@ -110,6 +108,8 @@ export function useCounters(){
 
 }
 export function useOrders() {
+    const orderedOrdersCollection = firestore.collection('orders').orderBy('createdAt', "desc")
+    const ordersCollection = firestore.collection('orders');
     const allOrders = ref([])
     const unsubscribe =  orderedOrdersCollection.onSnapshot(snapshot => {
         allOrders.value = snapshot.docs
@@ -153,4 +153,78 @@ export function useOrders() {
      }
 
     return { allOrders, sendOrder, findOrders, deleteOrder, markMinted }
+}
+
+export function useBingo() {
+    const bingoGamesCollection = firestore.collection('bingoGames')
+    const activeBingoGame = bingoGamesCollection.orderBy('gameStart').limitToLast(1)
+    const usersBingoCollection = firestore.collection('callBingo')
+
+
+    const currentGame = ref()
+    const getCurrentGame =  activeBingoGame.onSnapshot(snapshot => {
+        currentGame.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    
+    const usersBingo = ref()
+    const getUserBingo = usersBingoCollection.onSnapshot(snapshot => {
+        usersBingo.value = snapshot.docs    
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(getCurrentGame, getUserBingo)
+
+    const newGame = () => {
+        bingoGamesCollection.add({
+            gameStart: firebase.firestore.FieldValue.serverTimestamp(),
+            gameEnd: '',
+            gameComplete: false,
+            winningNumbers: [],
+            calledBingo: [],
+            winners: []
+
+        })
+        console.log('new game started')
+    }
+
+    const endGame = (id) => {
+        bingoGamesCollection.doc(id).update({
+            gameEnd: firebase.firestore.FieldValue.serverTimestamp(),
+            gameComplete: true
+        })
+    }
+
+    const setWinningNumbers = (id, number) => {
+        bingoGamesCollection.doc(id).update({
+            winningNumbers: firebase.firestore.FieldValue.arrayUnion(number)
+        })
+
+    }
+
+    const setWinner = (id, _handle, _owner, _loc) => {
+        const newWinner = {
+            relayHandle: _handle,
+            ownerAddress: _owner,
+            cardLocation: _loc
+        }
+        console.log(newWinner)
+        bingoGamesCollection.doc(id).update({
+            winners: firebase.firestore.FieldValue.arrayUnion(newWinner)
+        })
+    }
+
+    const userCallBingo = (bingo) => {
+        usersBingoCollection.add({
+            created: firebase.firestore.FieldValue.serverTimestamp(),
+                relayHandle: bingo.relayHandle,
+                ownerAddress: bingo.ownerAddress,
+                cardLocation: bingo.cardLocation
+        })
+    }
+
+    const deleteBingoList = () => {
+        usersBingoCollection.delete()
+    }
+
+    return { currentGame , newGame, endGame, setWinner, setWinningNumbers, usersBingo, userCallBingo, deleteBingoList}
 }
