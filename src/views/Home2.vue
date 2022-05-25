@@ -1,7 +1,7 @@
 <template>
     <div>
         <Menu />
-        <announcement-banner />
+        <!-- <announcement-banner /> -->
         <home-hero />
          <div class="bg-black">
             <div class="mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
@@ -18,6 +18,7 @@
                 </div>
             </div>
         </div>
+        <!-- <Claimable></Claimable> -->
         <Poo />
         <Footer />
     </div>
@@ -27,11 +28,15 @@
 import { reactive, toRefs } from 'vue'
 import Menu from "./../components/Menu.vue"
 import HomeHero from "./../components/HomeHero.vue";
-import AnnouncementBanner from "./../components/AnnouncementBanner.vue";
+//import AnnouncementBanner from "./../components/AnnouncementBanner.vue";
 import Poo from "./../components/Poo.vue"
 import Footer from "./../components/Footer.vue"
+//import Claimable from "./../components/Claimable.vue"
 export default {
-    components:{Menu, HomeHero, AnnouncementBanner, Poo, Footer},
+    components:{Menu, HomeHero, 
+    //Claimable,
+    //AnnouncementBanner, 
+    Poo, Footer},
     setup () {
         const state = reactive({
             count: 0,

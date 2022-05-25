@@ -14,6 +14,7 @@ import Votes from '../views/Votes.vue'
 import Gopniks from '../views/friends/Gopniks.vue'
 import Quokkas from '../views/friends/Quokkas.vue'
 import Popsicle from '../views/friends/Popsicle.vue'
+import Savages from '../views/friends/Savages.vue'
 import Tools from '../views/Tools.vue'
 import Friends from '../views/FriendsOfPew.vue'
 import Snipers from '../views/secret/Sniper.vue'
@@ -99,6 +100,11 @@ const routes = [
     path: '/friends/wokka-quokkas',
     name: 'Quokka Orders',
     component: Quokkas
+  },
+  {
+    path: '/friends/savages',
+    name: 'Sabertooth Savages Bag',
+    component: Savages
   },
   {
     path: '/tools',

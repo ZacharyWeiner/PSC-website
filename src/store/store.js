@@ -89,6 +89,7 @@ export default createStore({
       commit('setRelayxHandle', '')
       commit('setUserAddress', '')
       commit('setUserJigs', [])
+      commit('setHasAction', false)
     }
 
     
