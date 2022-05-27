@@ -18,8 +18,8 @@
                 </div>
             </div>
         </div>
-        <!-- <Claimable></Claimable> -->
         <Poo />
+        <Claimable></Claimable>
         <Footer />
     </div>
 </template>
@@ -31,10 +31,10 @@ import HomeHero from "./../components/HomeHero.vue";
 //import AnnouncementBanner from "./../components/AnnouncementBanner.vue";
 import Poo from "./../components/Poo.vue"
 import Footer from "./../components/Footer.vue"
-//import Claimable from "./../components/Claimable.vue"
+import Claimable from "./../components/Claimable.vue"
 export default {
     components:{Menu, HomeHero, 
-    //Claimable,
+    Claimable,
     //AnnouncementBanner, 
     Poo, Footer},
     setup () {

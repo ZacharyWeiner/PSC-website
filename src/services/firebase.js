@@ -56,6 +56,7 @@ export function userProfiles() {
     }
 
     const findUserActions = (handle) => {
+        console.log(handle)
         const userActions = ref([])
         userActionsCollection.onSnapshot(snapshot => {
             userActions.value = snapshot.docs
@@ -64,7 +65,7 @@ export function userProfiles() {
                 
          })
          console.log(userActions)
-         return { userActions }
+         return {userActions}
     }
 
     return { findUserProfile, setUserProfile, setUserAction, findUserActions }

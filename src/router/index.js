@@ -16,6 +16,7 @@ import Quokkas from '../views/friends/Quokkas.vue'
 import Popsicle from '../views/friends/Popsicle.vue'
 import Savages from '../views/friends/Savages.vue'
 import Tools from '../views/Tools.vue'
+import Claims from '../views/Claims.vue'
 import Friends from '../views/FriendsOfPew.vue'
 import Snipers from '../views/secret/Sniper.vue'
 
@@ -85,6 +86,11 @@ const routes = [
     path: '/friends',
     name: 'Friends',
     component: Friends
+  },
+  {
+    path: '/claims',
+    name: 'Claims',
+    component: Claims
   },
   {
     path: '/friends/gopniks',

@@ -96,8 +96,9 @@ const navigation = [
   { name: 'Votes', href: '/votes', current: false },
   { name: 'Treasury', href: '/treasury', current: false },
   { name: 'My Bag', href: '/my-bag', current: false },
-  { name: 'Marketplace', href: 'relay-orders', current: false },
-  { name: 'Friends', href: 'friends', current: false },
+  { name: 'Marketplace', href: '/relay-orders', current: false },
+  { name: 'Claim', href: '/claims', current: false },
+  { name: 'Friends', href: '/friends', current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '/my-bag' },

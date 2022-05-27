@@ -1,41 +1,49 @@
 <template>
     <div v-if="isLogin">
-        <div v-if='!userHasAction' > 
-        <div class='text-center'> Claim </div>
-        <div class='text-center'> <button class='ring-gray-100 ring-2 px-1 py-2 rounded bg-gray-900 mx-1' @click="saveUserAction"> 100 $POO </button></div>
+        <div v-if='userHasAction' > 
+            <!-- <div class='text-center'> Claim </div> -->
+            <div class='text-center'> 
+                <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                    <button @click="saveUserAction" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"> CLAIM </button>
+                </div>
+            </div>
         </div>
-        <div v-else> Youve Claimed Your $POO, It Will Be Sent Soon </div>
+        <div v-else> {{successMessage}} </div>
     </div>
-    <div v-else>Not Logged In</div>
+    <div v-else>You be logged in & own a Pewnicorn PRD NFT to Claim </div>
 </template>
 
 <script>
 import { reactive, toRefs } from 'vue'
-import { userProfiles} from "./../services/firebase.js"
-import {useRun} from "./../services/wallet.js"
+import {useStore} from "vuex"
+;import { userProfiles} from "./../services/firebase.js"
+import { useRun } from "./../services/wallet.js"
 
 export default {
     setup () {
         let {setUserAction, findUserActions} = userProfiles()
         let {isLogin} = useRun()
+        let store = useStore();
         const state = reactive({
             count: 0,
+            successMessage: "Your $POO has been claimed and will be sent SOON"
         })
-        let response = findUserActions();
-        console.log(response);
+        console.log(store.state.relayx_handle);
+        let userActions = findUserActions(store.state.relayx_handle);
         return {
-            ...toRefs(state), setUserAction, findUserActions, isLogin
+            ...toRefs(state), setUserAction, findUserActions, isLogin, userActions
         }
     },
     methods:{
         saveUserAction(){
             if(this.isLogin){
                 if(!this.$store.state.userHasAction){
-                let actions = this.findUserActions(this.$store.state.relay_handle)
+                let actions = this.findUserActions(this.$store.state.relayx_handle)
                 if(actions > 0){
                     this.$store.commit("setHasAction", true);
                 }else{
                     this.$store.commit("setHasAction", true);
+                    console.log(this.$store.state.relayx_handle)
                     this.setUserAction(this.$store.state.relayx_handle, this.$store.state.user_address, "Claim")
                 }
                 }
@@ -45,9 +53,17 @@ export default {
     },
     computed:{
         userHasAction(){
-            if(this.$store.state.hasAction){
+            console.log(this.userActions)
+            if(this.userActions.length >  0){
                 return true;
             }
+            return false;
+        },
+        canClaim() {
+            console.log(this.isLogin,  this.userHasAction,  this.$store.state.user_jigs.length > 0)
+            if(this.isLogin  && !this.userHasAction && this.$store.state.user_jigs){
+                return true;
+            } 
             return false;
         }
     }
