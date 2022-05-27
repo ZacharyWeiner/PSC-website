@@ -1,6 +1,6 @@
 <template>
     <div v-if="isLogin">
-        <div v-if='userHasAction' > 
+        <div v-if='canClaim' > 
             <!-- <div class='text-center'> Claim </div> -->
             <div class='text-center'> 
                 <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
@@ -8,9 +8,10 @@
                 </div>
             </div>
         </div>
-        <div v-else> {{successMessage}} </div>
+        <div v-else-if="userJigs.length > 0"> {{successMessage}} </div>
+        <div v-else>You must own a Pewnicorn PRD NFT to Claim </div>
     </div>
-    <div v-else>You be logged in & own a Pewnicorn PRD NFT to Claim </div>
+    <div v-else>You must be logged in & own a Pewnicorn PRD NFT to Claim </div>
 </template>
 
 <script>
@@ -49,23 +50,29 @@ export default {
                 }
             }
             console.log(this.$store.state.relayx_handle, this.$store.state.user_address, "Claim")
+        },
+        getUserActions(){
+            return this.userActions
         }
     },
     computed:{
         userHasAction(){
-            console.log(this.userActions)
-            if(this.userActions.length >  0){
+            console.log(this.userActions['userActions'].value.length)
+            if(this.userActions['userActions'].value.length >  0){
                 return true;
             }
             return false;
         },
         canClaim() {
-            console.log(this.isLogin,  this.userHasAction,  this.$store.state.user_jigs.length > 0)
+            console.log(this.isLogin,  this.userActions['userActions'].value.length >  0,  this.$store.state.user_jigs.length > 0)
             if(this.isLogin  && !this.userHasAction && this.$store.state.user_jigs){
                 return true;
             } 
             return false;
-        }
+        },
+         userJigs(){
+            return this.$store.state.user_jigs;
+        },
     }
 }
 </script>
