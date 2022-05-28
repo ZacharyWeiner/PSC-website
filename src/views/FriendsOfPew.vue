@@ -38,7 +38,7 @@
             </router-link>
         </div>
         <div class="col-span-1 flex-1 p-2 m-2 bg-gray-900 rounded"> 
-            <router-link to="/friends/popsicle-sticks" class='text-3xl'>
+            <router-link to="/friends/savages" class='text-3xl'>
             <div> <img class="max-w-sm mx-auto rounded-full" src="https://berry2.relayx.com/6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o1"> </div> 
             <div>Sabertooth Savages </div>
             </router-link>
