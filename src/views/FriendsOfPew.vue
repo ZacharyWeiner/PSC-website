@@ -24,12 +24,12 @@
             
             </router-link>
         </div>
-          <!-- <div class="col-span-1 flex-1 p-2 m-2 bg-gray-900 rounded"> 
+          <div class="col-span-1 flex-1 p-2 m-2 bg-gray-900 rounded"> 
             <router-link to="/friends/stick-doodz" class='text-3xl'>
             <div> <img class="max-w-sm mx-auto rounded-full" src="https://berry2.relayx.com/f181e9e9883bc2dfb233b10e75a378f06715e25da5163d423d8f6d07a843bcdd_o1"> </div> 
             <div>Stick Doodz </div>
             </router-link>
-        </div> -->
+        </div>
         <div class="col-span-1 flex-1 p-2 m-2 bg-gray-900 rounded"> 
             <router-link to="/friends/popsicle-sticks" class='text-3xl'>
             <div> <img class="max-w-sm mx-auto rounded-full" src="https://berry.relayx.com/fd0ffe5908cf88293ecd4dd781e9af1aac8bab9e0ba53867fbcbde07b80a309a_o1"> </div> 
@@ -38,10 +38,21 @@
             </router-link>
         </div>
         <div class="col-span-1 flex-1 p-2 m-2 bg-gray-900 rounded"> 
-            <router-link to="/friends/savages" class='text-3xl'>
+            
             <div> <img class="max-w-sm mx-auto rounded-full" src="https://berry2.relayx.com/6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o1"> </div> 
-            <div>Sabertooth Savages </div>
-            </router-link>
+            <div class='text-3xl'>Sabertooth Savages </div>
+            <div class="flex pt-6">
+                <div class='w-1/2'> 
+                    <router-link to="/friends/savages" class=" text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Market 
+                    </router-link>
+                </div>
+                <div class='w-1/2'> 
+                    <router-link to="/bags/savages" class=" text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        My Bag 
+                    </router-link>
+                </div>
+            </div>
         </div>
         
     </div>
