@@ -15,6 +15,8 @@ import Gopniks from '../views/friends/Gopniks.vue'
 import Quokkas from '../views/friends/Quokkas.vue'
 import Popsicle from '../views/friends/Popsicle.vue'
 import Savages from '../views/friends/Savages.vue'
+import SavagesBag from '../views/bags/Savages.vue'
+import StickDoodz from '../views/friends/StickDoodz.vue'
 import Tools from '../views/Tools.vue'
 import Claims from '../views/Claims.vue'
 import Friends from '../views/FriendsOfPew.vue'
@@ -109,8 +111,18 @@ const routes = [
   },
   {
     path: '/friends/savages',
-    name: 'Sabertooth Savages Bag',
+    name: 'Sabertooth Savages',
     component: Savages
+  },
+  {
+    path: '/friends/stick-doodz',
+    name: 'Stick Doodz',
+    component: StickDoodz
+  },
+  {
+    path: '/bags/savages',
+    name: 'Sabertooth Savages Bag',
+    component: SavagesBag
   },
   {
     path: '/tools',
