@@ -26,7 +26,7 @@
                     </div>
                 <div class="m-4"> 
                      <div v-if="order.satoshis < 10000000">
-                        <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">{{buyText}}</button>
+                        <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">{{buyButtonText(order)}}</button>
                     </div> 
                     <div v-else> 
                     <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/84fdb5121bcb556682e872c98f5bad0f7109807d9395b4c2b087ab401c63ee5d_o2/${order.location}`"> BUY ON RELAY </a>
@@ -61,7 +61,8 @@ export default {
         const state = reactive({
             count: 0,
             page: 0,
-            buyText: "Buy Now"
+            selectedOrderTxid:"",
+            error: ""
         })
     
         return {
@@ -72,7 +73,7 @@ export default {
     methods:{
         async buy(order){
             try{
-            this.buyText= "Buying ..."
+            this.selectedOrderTxid = order.txid
              let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
                     address: this.$store.state.user_address,
                     location: "84fdb5121bcb556682e872c98f5bad0f7109807d9395b4c2b087ab401c63ee5d_o2",
@@ -84,7 +85,7 @@ export default {
                 this.buyText =  "BUY NOW"
                 window.location.reload();
                 }catch(err){
-                    this.buyText = "Error";
+                    this.error = err;
                     alert(err);
                 }
         },
@@ -139,6 +140,15 @@ export default {
         lastPage(){
             if(this.page >= 2){this.page = this.page - 1}
         },
+        buyButtonText(order){
+            if(this.error !== ""){
+                return this.error
+            }
+            if(order.txid  === this.selectedOrderTxid){
+                return "Buying... "
+            }
+            return "BUY NOW"
+        }
     },
     computed:{
         orderedNFTs(){

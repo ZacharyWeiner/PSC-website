@@ -15,7 +15,7 @@
                     </div>
                 <div class="m-4"> 
                     <div v-if="order.satoshis < 10000000">
-                        <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">BUY NOW </button>
+                        <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">{{buyButtonText(order)}} </button>
                     </div> 
                     <div v-else> 
                         <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o2/${order.location}`"> BUY ON RELAY </a>
@@ -54,6 +54,8 @@ export default {
         const state = reactive({
             count: 0,
             page: 0,
+            selectedOrderTxid: "",
+            error: ""
         })
     
         return {
@@ -63,7 +65,9 @@ export default {
     },
     methods: {
         async buy(order){
-             let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
+            try{
+                this.selectedOrderTxid = order.txid;
+                let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
                     address: this.$store.state.user_address,
                     location: "6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o2",
                     txid: order.txid,
@@ -71,6 +75,7 @@ export default {
                 console.log(response)
                 let sendResponse = await window.relayone.send(response.data.data.rawtx)
                 console.log(sendResponse)
+            }catch(err){this.error = err; alert(err);}
         },
         getRank(nft){
             console.log(nft.props.no)
@@ -129,6 +134,15 @@ export default {
         lastPage(){
             if(this.page >= 2){this.page = this.page - 1}
         },
+        buyButtonText(order){
+            if(this.error !== ""){
+                return this.error
+            }
+            if(order.txid  === this.selectedOrderTxid){
+                return "Buying... "
+            }
+            return "BUY NOW"
+        }
     }
 }
 </script>
