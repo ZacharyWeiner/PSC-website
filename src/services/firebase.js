@@ -44,6 +44,13 @@ export function userProfiles() {
         console.log('profile-updated')
 
     }
+    const allActions = ref([])
+    const unsubscribe =  userActionsCollection.onSnapshot(snapshot => {
+        allActions.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
 
     const setUserAction = (_handle, _address, _action) => {
         userActionsCollection.add({
@@ -54,7 +61,7 @@ export function userProfiles() {
         })
         console.log('action-saved')
     }
-
+    
     const findUserActions = (handle) => {
         console.log(handle)
         const userActions = ref([])
@@ -68,7 +75,7 @@ export function userProfiles() {
          return {userActions}
     }
 
-    return { findUserProfile, setUserProfile, setUserAction, findUserActions }
+    return { findUserProfile, setUserProfile, allActions, setUserAction, findUserActions }
 }
 
 export function useCounters(){

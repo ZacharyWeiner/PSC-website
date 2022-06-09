@@ -1,13 +1,3 @@
-//Mint Chocolate
-// const config = {
-//     apiKey: "AIzaSyDrWjKrSlO_Ze1iYWqUWda641AHy9TKo-8",
-//     authDomain: "mint-choclate.firebaseapp.com",
-//     projectId: "chat-af0ae",
-//     storageBucket: "mint-choclate.appspot.com",
-//     messagingSenderId: "407689808989",
-//     appId: "1:407689808989:web:2a3057cce42ef4fff191b4",
-// }
-
 const config = {
   apiKey: "AIzaSyBFhv9vBqa6rnzxVBXQn2nVcSW3r14q-IY",
   authDomain: "chat-af0ae.firebaseapp.com",

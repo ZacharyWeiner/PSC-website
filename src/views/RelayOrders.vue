@@ -16,6 +16,7 @@
                     </div>
                     <div class="m-4"> {{order.seller}} </div>
                 <div class="m-4"> 
+                    <button @click="buy(order)" > Buy Now </button>
                     <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/PSC/${order.location}`"> BUY ON RELAY </a>
                 </div>
            </div>
@@ -51,6 +52,16 @@ export default {
         }
     },
     methods:{
+        async buy(order){
+             let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
+                    address: this.$store.state.user_address,
+                    location: "PSC",
+                    txid: order.txid,
+                })
+                console.log(response)
+                let sendResponse = await window.relayone.send(response.data.data.rawtx)
+                console.log(sendResponse)
+        },
         getBerryUrl(order){
             let suffix = order.berry.txid
             if(suffix){

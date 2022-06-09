@@ -14,7 +14,12 @@
                          <div class='text-4xl pt-2' :class='rankTextClass(order)'>{{getRank(order)}} </div>
                     </div>
                 <div class="m-4"> 
-                    <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o2/${order.location}`"> BUY ON RELAY </a>
+                    <div v-if="order.satoshis < 10000000">
+                        <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">BUY NOW </button>
+                    </div> 
+                    <div v-else> 
+                        <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o2/${order.location}`"> BUY ON RELAY </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,6 +62,16 @@ export default {
         }
     },
     methods: {
+        async buy(order){
+             let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
+                    address: this.$store.state.user_address,
+                    location: "6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o2",
+                    txid: order.txid,
+                })
+                console.log(response)
+                let sendResponse = await window.relayone.send(response.data.data.rawtx)
+                console.log(sendResponse)
+        },
         getRank(nft){
             console.log(nft.props.no)
             let r = rank[nft.props.no]

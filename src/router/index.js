@@ -18,6 +18,7 @@ import Savages from '../views/friends/Savages.vue'
 import SavagesBag from '../views/bags/Savages.vue'
 import StickDoodz from '../views/friends/StickDoodz.vue'
 import Tools from '../views/Tools.vue'
+import Spend from '../views/Spend.vue'
 import Claims from '../views/Claims.vue'
 import Friends from '../views/FriendsOfPew.vue'
 import Snipers from '../views/secret/Sniper.vue'
@@ -93,6 +94,11 @@ const routes = [
     path: '/claims',
     name: 'Claims',
     component: Claims
+  },
+  {
+    path: '/spend',
+    name: 'Spend',
+    component: Spend
   },
   {
     path: '/friends/gopniks',

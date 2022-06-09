@@ -25,7 +25,12 @@
                          <div class='text-4xl pt-2' :class='rankTextClass(order)'>{{rankText(order)}} </div>
                     </div>
                 <div class="m-4"> 
+                     <div v-if="order.satoshis < 10000000">
+                        <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">{{buyText}}</button>
+                    </div> 
+                    <div v-else> 
                     <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/84fdb5121bcb556682e872c98f5bad0f7109807d9395b4c2b087ab401c63ee5d_o2/${order.location}`"> BUY ON RELAY </a>
+                    </div>
                 </div>
            </div>
        </div>
@@ -56,6 +61,7 @@ export default {
         const state = reactive({
             count: 0,
             page: 0,
+            buyText: "Buy Now"
         })
     
         return {
@@ -64,6 +70,24 @@ export default {
         }
     },
     methods:{
+        async buy(order){
+            try{
+            this.buyText= "Buying ..."
+             let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
+                    address: this.$store.state.user_address,
+                    location: "84fdb5121bcb556682e872c98f5bad0f7109807d9395b4c2b087ab401c63ee5d_o2",
+                    txid: order.txid,
+                })
+                console.log(response)
+                let sendResponse = await window.relayone.send(response.data.data.rawtx)
+                console.log(sendResponse)
+                this.buyText =  "BUY NOW"
+                window.location.reload();
+                }catch(err){
+                    this.buyText = "Error";
+                    alert(err);
+                }
+        },
          getBerryUrl(order){
             let suffix = order.berry.txid
             if(suffix){
