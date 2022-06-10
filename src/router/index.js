@@ -17,6 +17,7 @@ import Popsicle from '../views/friends/Popsicle.vue'
 import Savages from '../views/friends/Savages.vue'
 import SavagesBag from '../views/bags/Savages.vue'
 import StickDoodz from '../views/friends/StickDoodz.vue'
+import Moose from '../views/friends/Moose.vue'
 import Tools from '../views/Tools.vue'
 import Spend from '../views/Spend.vue'
 import Claims from '../views/Claims.vue'
@@ -109,6 +110,11 @@ const routes = [
     path: '/friends/popsicle-sticks',
     name: 'Popsicle Orders',
     component: Popsicle
+  },
+  {
+    path: '/friends/moose',
+    name: 'Generative Moose',
+    component: Moose
   },
   {
     path: '/friends/wokka-quokkas',
