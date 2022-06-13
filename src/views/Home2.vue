@@ -3,6 +3,7 @@
         <Menu />
         <!-- <announcement-banner /> -->
         <home-hero />
+         <Poo />
          <div class="bg-black">
             <div class="mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
                 <div class="text-left">
@@ -18,7 +19,26 @@
                 </div>
             </div>
         </div>
-        <Poo />
+          <div class="bg-white">
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="bg-indigo-700 rounded-lg shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4">
+                <div class="pt-10 pb-12 px-6 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
+                <div class="lg:self-center">
+                    <h2 class=" md:text-left text-3xl font-extrabold text-white sm:text-4xl">
+                    <span class="block">Friends Of <span class='text-pink-600'> $POO</span></span>
+                    <span class="block">With Ranks &amp; Rarity</span>
+                    </h2>
+                    <p class="mt-4 text-lg leading-6 text-indigo-200 md:text-left">Search our favorite collections by rank &amp; rarity. </p>
+                    <router-link to="/friends" class="mt-8 bg-white border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center text-base font-medium text-indigo-600 hover:bg-indigo-50">Check Out Our Friends</router-link>
+                </div>
+                </div>
+                <div class="-mt-6 aspect-w-5 aspect-h-3 md:aspect-w-2 md:aspect-h-1">
+                <img class="transform translate-x-6 translate-y-6 rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20" src="https://tailwindui.com/img/component-images/full-width-with-sidebar.jpg" alt="App screenshot" />
+                </div>
+            </div>
+            </div>
+        </div>
+       
         <Claimable></Claimable>
         <Footer />
     </div>

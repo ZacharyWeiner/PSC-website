@@ -26,6 +26,7 @@ export default createStore({
     purchased_moves: 0,
     paidForMint: false,
     hasAction: false,
+    selectedFriendCollection:""
 
   },
   mutations: {
@@ -77,6 +78,9 @@ export default createStore({
     },
     setHasAction(state, hasAction){
       state.hasAction = hasAction
+    },
+    setSelectedFriendCollection(state, collectionName){
+      state.selectedFriendCollection = collectionName;
     }
   },
   actions: {

@@ -17,6 +17,7 @@ import Popsicle from '../views/friends/Popsicle.vue'
 import Savages from '../views/friends/Savages.vue'
 import SavagesBag from '../views/bags/Savages.vue'
 import StickDoodz from '../views/friends/StickDoodz.vue'
+import FriendsBag from '../views/bags/FriendBag.vue'
 import Moose from '../views/friends/Moose.vue'
 import Tools from '../views/Tools.vue'
 import Spend from '../views/Spend.vue'
@@ -90,6 +91,11 @@ const routes = [
     path: '/friends',
     name: 'Friends',
     component: Friends
+  },
+  {
+    path: '/friends/bag',
+    name: 'FriendsBag',
+    component: FriendsBag
   },
   {
     path: '/claims',
