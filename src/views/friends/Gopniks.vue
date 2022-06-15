@@ -25,7 +25,9 @@
                          <div class='text-4xl pt-2' :class='rankTextClass(order)'>{{rankText(order)}} </div>
                     </div>
                 <div class="m-4"> 
-                    <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/GOP/${order.location}`"> BUY ON RELAY </a>
+                   <div class="m-4"> 
+                     <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">{{buyButtonText(order)}}</button>
+                </div>
                 </div>
            </div>
        </div>
@@ -64,6 +66,23 @@ export default {
         }
     },
     methods:{
+        async buy(order){
+            try{
+            this.selectedOrderTxid = order.txid
+             let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
+                    address: this.$store.state.user_address,
+                    location: "1ba1080086ca6624851e1fbff18d903047f2b75d3a9ffe5cc8bf49ed0fdb36a0_o2",
+                    txid: order.txid,
+                })
+                console.log(response)
+                let sendResponse = await window.relayone.send(response.data.data.rawtx)
+                console.log(sendResponse)
+                window.location.reload();
+                }catch(err){
+                    this.error = err
+                    alert(err);
+                }
+        },
          getBerryUrl(order){
             let suffix = order.berry.txid
             if(suffix){
@@ -115,6 +134,15 @@ export default {
         lastPage(){
             if(this.page >= 2){this.page = this.page - 1}
         },
+        buyButtonText(order){
+            if(this.error !== ""){
+                return this.error
+            }
+            if(order.txid  === this.selectedOrderTxid){
+                return "Buying... "
+            }
+            return "BUY NOW"
+        }
     },
     computed:{
         orderedNFTs(){

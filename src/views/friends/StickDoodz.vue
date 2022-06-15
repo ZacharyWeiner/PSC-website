@@ -25,12 +25,7 @@
                          <div class='text-4xl pt-2' :class='rankTextClass(order)'>{{rankText(order)}} </div>
                     </div>
                 <div class="m-4"> 
-                     <div v-if="order.satoshis < 10000000">
-                        <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">{{buyButtonText(order)}}</button>
-                    </div> 
-                    <div v-else> 
-                    <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/f181e9e9883bc2dfb233b10e75a378f06715e25da5163d423d8f6d07a843bcdd_o2/${order.location}`"> BUY ON RELAY </a>
-                    </div>
+                     <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">{{buyButtonText(order)}}</button>
                 </div>
            </div>
        </div>

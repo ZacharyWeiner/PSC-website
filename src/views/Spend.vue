@@ -62,12 +62,12 @@ export default {
                     "owner": "1BBuB7Lz3g5ceH11j3bK3U5twrwZPu3HHn",
                     "to": "1CedJmG5WCCKVieFT9tjuHDUvEqvAnCTUJ",
                 })
-            console.log(response.data)
+            console.log("Gets a raw transaction:", response.data)
             let sendResponse = window.relayone.send(response.data.data.rawtx)
-            console.log(sendResponse)
+            console.log("recieves response from send:",  sendResponse)
         },
         async buy(){
-             let { data } = await axios.get("https://staging-backend.relayx.com/api/market/84fdb5121bcb556682e872c98f5bad0f7109807d9395b4c2b087ab401c63ee5d_o2/orders");
+             let { data } = await axios.get("https://staging-backend.relayx.com/api/market/6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o2/orders");
              let orders = data.data.orders;
              console.log(orders[0])
               orders.sort((a, b) =>{ 
@@ -79,7 +79,7 @@ export default {
              console.log(orders[0].txid, orders[0].location, this.$store.state.user_address, orders[0])
              let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
                     address: this.$store.state.user_address,
-                    location: "84fdb5121bcb556682e872c98f5bad0f7109807d9395b4c2b087ab401c63ee5d_o2",
+                    location: "6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o2",
                     txid: orders[0].txid,
                 })
                 console.log(response)
