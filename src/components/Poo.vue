@@ -50,14 +50,18 @@
             <br />
             
             </p>
+            <div> 
             <a
-                class="block w-full py-3 px-5 text-center font-medium"
+                class="block w-full py-3 px-5 text-center bg-indigo-700 border border-transparent rounded-md shadow-md text-base font-medium text-white hover:bg-gray-50 sm:inline-block sm:w-auto"
                 target="_blank"
-                href="https://www.relayx.com/market/POO"
+                href="https://swap.relayx.com/swap"
             >
-               
+               Swap For $POO
             </a>
-            <a class="block w-full py-3 px-5 text-center bg-white border border-transparent rounded-md shadow-md text-base font-medium text-indigo-700 hover:bg-gray-50 sm:inline-block sm:w-auto" href="#">Buy $POO Now</a>
+            </div>
+            <div>
+            <a class="block w-full py-3 px-5 text-center bg-white border border-transparent rounded-md shadow-md text-base font-medium text-indigo-700 hover:bg-gray-50 sm:inline-block sm:w-auto" href="https://www.relayx.com/market/POO">Buy $POO Now</a>
+            </div>
           </div>
         </div>
       </div>

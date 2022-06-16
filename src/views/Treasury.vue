@@ -62,9 +62,10 @@
                       <div class="grid grid-cols-2"> 
                            
                       </div>
-                </div> 
+                    </div> 
+                    <!-- <button @click="buyWithPoo(nft)" > Buy With $POO </button> -->
+                </div>
             </div>
-        </div>
         </div>
         <div class="flex">
             <div class="w-full"></div>
@@ -78,6 +79,7 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
+import axios from "axios";
 import Menu from "./../components/Menu.vue"
 import AnnouncementBanner from "./../components/AnnouncementBanner.vue"
 import Footer from "./../components/Footer.vue";
@@ -114,7 +116,7 @@ export default {
             this.jigs = only800.sort((a, b) =>{
                  let a1 =  this.rankNFT(a)
                  let b1 =  this.rankNFT(b)
-                 return a1 - b1
+                 return b1 - a1
             })
             console.log(only800)
         },
@@ -218,6 +220,28 @@ export default {
             let pewcciGlasses = metadata.eyes.split("pewcci")?.length
             if(pewcciGlasses > 1){multiplier = multiplier + 0.5}
             return multiplier;
+        },
+        async buyWithPoo(nft){
+            let price = (this.setPricePoo(nft) * 100)
+            console.log("SENDING POO:", price);
+            let response = await this.sendPoo(price)
+            console.log(response);
+        },
+        async sendPoo(amount){
+            let response = false
+            try{
+                let response = await axios.post('https://staging-backend.relayx.com/api/run/send', {
+                    "amount": amount,
+                    "location": "d0f84d202d91468f9bbdcf6a028e7223abab5a2c935fb347a65bc3ec6d85ddd8_o2",
+                    "owner": this.$store.state.user_address,
+                    "to": "1KL2dwxpeETh4QuHHchkk536d3YchGHX92",
+                })
+                console.log("Gets a raw transaction:", response.data)
+                let sendResponse = window.relayone.send(response.data.data.rawtx)
+                console.log("recieves response from send:",  sendResponse)
+                response =  true;
+            }catch(err){alert(err);}
+            return response;
         }
     },
      computed:{
