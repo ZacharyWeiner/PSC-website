@@ -59,6 +59,7 @@ export default {
             count: 0,
             page: 0,
             selectedOrderTxid: "",
+            error: "",
         })
     
         return {
@@ -136,6 +137,7 @@ export default {
             if(this.page >= 2){this.page = this.page - 1}
         },
         buyButtonText(order){
+            console.log(order, this.selectedOrderTxid)
             if(this.error !== ""){
                 return this.error
             }
