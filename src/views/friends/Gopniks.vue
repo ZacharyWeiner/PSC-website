@@ -58,6 +58,7 @@ export default {
         const state = reactive({
             count: 0,
             page: 0,
+            selectedOrderTxid: "",
         })
     
         return {
