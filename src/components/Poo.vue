@@ -4,10 +4,10 @@
     <div class="max-w-7xl mx-auto bg-indigo-600 lg:bg-transparent lg:px-8">
       <div class="lg:grid lg:grid-cols-12">
         <div class="relative z-10 lg:col-start-1 lg:row-start-1 lg:col-span-4 lg:py-16 lg:bg-transparent">
-          <div class="absolute inset-x-0 h-1/2 bg-gray-50 lg:hidden" aria-hidden="true" />
+          <div class="inset-x-0 h-1/2 bg-gray-50 lg:hidden" aria-hidden="true" />
           <div class="max-w-md mx-auto px-4 sm:max-w-3xl sm:px-6 lg:max-w-none lg:p-0">
             <div class="aspect-w-10 aspect-h-6 sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1">
-              <img class="object-cover object-center rounded-3xl shadow-2xl" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" alt="" />
+              <img class="p-1 object-cover object-center rounded-3xl shadow-2xl" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" alt="" />
             </div>
           </div>
         </div>
