@@ -3,10 +3,10 @@
     <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
       <div class="pr-16 sm:text-center sm:px-16">
         <p class="font-medium text-white">
-          <span class="md:hidden"> New Vote is Now Live! </span>
-          <span class="hidden md:inline"> Big news! Every Pewnicorn recieved 200 $POO to vote. </span>
+          <span class="md:hidden"> New Claimable is Now Live! </span>
+          <span class="hidden md:inline"> New Claimable is Now Live! </span>
           <span class="block sm:ml-2 sm:inline-block">
-            <router-link to="/votes" class="text-white font-bold underline"> Vote Now <span aria-hidden="true">&rarr;</span></router-link>
+            <router-link to="/claims" class="text-white font-bold underline"> Claim Now <span aria-hidden="true">&rarr;</span></router-link>
           </span>
         </p>
       </div>

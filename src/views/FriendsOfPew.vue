@@ -9,20 +9,19 @@
         background-image: url('https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorns+header.png');
       "
     ></div>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full">
         <div class="col-span-1 flex-1 p-2 m-2 bg-gray-900 rounded"> 
-            
             <div> <img class="max-w-24 mx-auto rounded-full" :src="`https://berry2.relayx.com/${getImage('Gopniks')}`"> </div> 
             <div class='text-3xl'>Gopniks </div>
-            <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class='col-span-1 p-1'> 
-                    <router-link to="/friends/gopniks" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Market 
+            <div class="grid grid-cols-1 md:grid-cols-2 text-center">
+                <div class='col-span-1 p-1 text-center'> 
+                    <router-link to="/friends/gopniks" class=" w-full text-lg xl:text-2xl inline-flex px-6 py-3 text-center text-base font-normal rounded-lg shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> <span class='mx-auto'> Market </span> </span>
                     </router-link>
                 </div>
-                <div class='col-span-1 p-1'> 
-                    <button @click="navigateTo('Gopniks')" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        My Bag 
+                <div class='col-span-1 p-1 '> 
+                    <button @click="navigateTo('Gopniks')" class="w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3 text-center text-base font-normal rounded-lg shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> <span class='mx-auto'> My Bag </span></span>
                     </button>
                 </div>
             </div>
@@ -33,13 +32,13 @@
             <div class='text-3xl'>Wokka Quokkas </div>
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class='col-span-1 p-1'> 
-                    <router-link to="/friends/wokka-quokkas" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Market 
+                    <router-link to="/friends/wokka-quokkas" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> Market </span> 
                     </router-link>
                 </div>
                 <div class='col-span-1 p-1'> 
-                    <button @click="navigateTo('Quokkas')" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        My Bag 
+                    <button @click="navigateTo('Quokkas')" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> My Bag </span>
                     </button>
                 </div>
             </div>
@@ -50,13 +49,13 @@
             <div class='text-3xl'>Stick Doodz </div>
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class='col-span-1 p-1'> 
-                    <router-link to="/friends/stick-doodz" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Market 
+                    <router-link to="/friends/stick-doodz" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> Market </span> 
                     </router-link>
                 </div>
                 <div class='col-span-1 p-1'> 
-                    <button @click="navigateTo('Stick Doodz')" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        My Bag 
+                    <button @click="navigateTo('Stick Doodz')" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> My Bag </span>
                     </button>
                 </div>
             </div>
@@ -67,13 +66,13 @@
             <div class='text-3xl'>Popsicle Sticks </div>
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class='col-span-1 p-1'> 
-                    <router-link to="/friends/popsicle-sticks" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Market 
+                    <router-link to="/friends/popsicle-sticks" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> Market </span> 
                     </router-link>
                 </div>
                 <div class='col-span-1 p-1'> 
-                    <button @click="navigateTo('Popsicle Sticks')" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        My Bag 
+                    <button @click="navigateTo('Popsicle Sticks')" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> My Bag </span>
                     </button>
                 </div>
             </div>
@@ -84,13 +83,13 @@
             <div class='text-3xl'>Generative Moose </div>
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class='col-span-1 p-1'> 
-                    <router-link to="/friends/moose" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Market 
+                    <router-link to="/friends/moose" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> Market </span> 
                     </router-link>
                 </div>
                 <div class='col-span-1 p-1'> 
-                    <button @click="navigateTo('Generative Moose')" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        My Bag 
+                    <button @click="navigateTo('Generative Moose')" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> My Bag </span>
                     </button>
                 </div>
             </div>
@@ -101,13 +100,13 @@
             <div class='text-3xl'>Sabertooth Savages </div>
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class='col-span-1 p-1'> 
-                    <router-link to="/friends/savages" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Market 
+                    <router-link to="/friends/savages" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-green-400 to-green-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> Market </span> 
                     </router-link>
                 </div>
                 <div class='col-span-1 p-1'> 
-                    <router-link to="/bags/savages" class=" text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        My Bag 
+                    <router-link to="/bags/savages" class=" w-full text-lg xl:text-2xl inline-flex items-center px-6 py-3  text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-indigo-400 to-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class='mx-auto'> My Bag </span>
                     </router-link>
                 </div>
             </div>

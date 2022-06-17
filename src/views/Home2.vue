@@ -1,9 +1,30 @@
 <template>
     <div>
         <Menu />
-        <!-- <announcement-banner /> -->
+        <announcement-banner />
         <home-hero />
+        <div class="bg-white">
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="bg-indigo-700 rounded-lg shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4">
+                <div class="pt-10 pb-12 px-6 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
+                <div class="lg:self-center text-left">
+                    <h2 class=" md:text-left text-3xl font-extrabold text-white sm:text-4xl">
+                    <span class="block">Friends With  Benefits </span>
+                    <!-- <span class="block">With Ranks &amp; Rarity</span> -->
+                    </h2>
+                    <p class="mt-4 text-lg leading-6 text-indigo-200 md:text-left">The only place to see Run NFTs with rank &amp; rarity, and buy your favorite NFTs with a single click. </p>
+                    <router-link to="/friends" class="mt-8 bg-white border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center text-base font-medium text-indigo-600 hover:bg-indigo-50">Check Out Our Friends</router-link>
+                </div>
+                </div>
+                <div class="-mt-12 aspect-w-5 aspect-h-3 md:aspect-w-2 md:aspect-h-1">
+                <img class="transform rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/2268.png" alt="App screenshot" />
+                </div>
+            </div>
+            </div>
+        </div>
+        <bingo-announcement></bingo-announcement>
          <Poo />
+         
          <div class="bg-black">
             <div class="mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
                 <div class="text-left">
@@ -19,27 +40,7 @@
                 </div>
             </div>
         </div>
-          <div class="bg-white">
-            <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-            <div class="bg-indigo-700 rounded-lg shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4">
-                <div class="pt-10 pb-12 px-6 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
-                <div class="lg:self-center text-left">
-                    <h2 class=" md:text-left text-3xl font-extrabold text-white sm:text-4xl">
-                    <span class="block">Friends Of <span class='text-pink-600'> $POO</span></span>
-                    <span class="block">With Ranks &amp; Rarity</span>
-                    </h2>
-                    <p class="mt-4 text-lg leading-6 text-indigo-200 md:text-left">Search our favorite collections by rank &amp; rarity. </p>
-                    <router-link to="/friends" class="mt-8 bg-white border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center text-base font-medium text-indigo-600 hover:bg-indigo-50">Check Out Our Friends</router-link>
-                </div>
-                </div>
-                <div class="-mt-6 aspect-w-5 aspect-h-3 md:aspect-w-2 md:aspect-h-1">
-                <img class="transform rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/2268.png" alt="App screenshot" />
-                </div>
-            </div>
-            </div>
-        </div>
-       
-        <Claimable></Claimable>
+        <!-- <Claimable></Claimable> -->
         <Footer />
     </div>
 </template>
@@ -48,14 +49,16 @@
 import { reactive, toRefs } from 'vue'
 import Menu from "./../components/Menu.vue"
 import HomeHero from "./../components/HomeHero.vue";
-//import AnnouncementBanner from "./../components/AnnouncementBanner.vue";
+import AnnouncementBanner from "./../components/AnnouncementBanner.vue";
 import Poo from "./../components/Poo.vue"
 import Footer from "./../components/Footer.vue"
-import Claimable from "./../components/Claimable.vue"
+//import Claimable from "./../components/Claimable.vue"
+import BingoAnnouncement from "./../components/BingoAnnouncement.vue"
 export default {
     components:{Menu, HomeHero, 
-    Claimable,
-    //AnnouncementBanner, 
+    //Claimable,
+    AnnouncementBanner, 
+    BingoAnnouncement,
     Poo, Footer},
     setup () {
         const state = reactive({

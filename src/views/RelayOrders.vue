@@ -12,12 +12,13 @@
                     
                 </div>
                 <div class="">
-                         <div class='text-4xl pt-2' :class='rankTextClass(order)'>{{rankText(order)}} </div>
+                    <div class='text-4xl pt-2' :class='rankTextClass(order)'>{{rankText(order)}} </div>
                     </div>
                     <div class="m-4"> {{order.seller}} </div>
                 <div class="m-4"> 
-                    <button @click="buy(order)" > Buy Now </button>
-                    <a noopener norel target="_blank" class="bg-blue-500 rounded-xl text-white p-2 m-2" :href="`https://www.relayx.com/market/PSC/${order.location}`"> BUY ON RELAY </a>
+                    <div class="m-4"> 
+                        <button class="bg-blue-500 rounded-xl text-white p-2 m-2" @click="buy(order)">{{buyButtonText(order)}}</button>
+                    </div>
                 </div>
            </div>
        </div>
@@ -43,7 +44,9 @@ export default {
             return a1- b1
            });
         const state = reactive({
-            count: 0,
+            count: 0, 
+            selectedOrderTxid: "",
+            error: "",
         })
     
         return {
@@ -53,6 +56,8 @@ export default {
     },
     methods:{
         async buy(order){
+            try{
+            this.selectedOrderTxid = order.txid
              let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
                     address: this.$store.state.user_address,
                     location: "PSC",
@@ -61,6 +66,11 @@ export default {
                 console.log(response)
                 let sendResponse = await window.relayone.send(response.data.data.rawtx)
                 console.log(sendResponse)
+                window.location.reload();
+                }catch(err){
+                    this.error = err
+                    alert(err);
+                }
         },
         getBerryUrl(order){
             let suffix = order.berry.txid
@@ -103,6 +113,15 @@ export default {
             else if(currentRank <= 400) {return "Uncommon"}
             return "Common"
         },
+        buyButtonText(order){
+            if(this.error !== ""){
+                return this.error
+            }
+            if(order.txid  === this.selectedOrderTxid){
+                return "Buying... "
+            }
+            return "BUY NOW"
+        }
     }
 }
 </script>

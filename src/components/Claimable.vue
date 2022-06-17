@@ -58,7 +58,7 @@ export default {
     computed:{
         userHasAction(){
             console.log(this.userActions['userActions'].value.length)
-            if(this.userActions['userActions'].value.length >  0){
+            if(this.userActions['userActions'].value.length >  1){
                 return true;
             }
             return false;
