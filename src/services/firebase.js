@@ -149,6 +149,17 @@ export function useOrders() {
 
     }
 
+    const findReserved = () => {
+        const orders = ref([])
+        ordersCollection.onSnapshot(snapshot => {
+            orders.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.isMinted === false)
+         })
+         return { orders }
+
+    }
+
     const markMinted = (order) => {
         ordersCollection.doc(order.id).update({
             isMinted: true
@@ -160,5 +171,5 @@ export function useOrders() {
         ordersCollection.doc(order.id).delete();
      }
 
-    return { allOrders, sendOrder, findOrders, deleteOrder, markMinted }
+    return { allOrders, sendOrder, findOrders, deleteOrder, markMinted, findReserved }
 }

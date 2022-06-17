@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="buy" class='text-white'> SPEND </button>
+        <button @click="spendWeb2" class='text-white'> SPEND </button>
     </div>
 </template>
 
@@ -58,8 +58,8 @@ export default {
             // console.log("POST RESPONSE:", response.text());
             let response = await axios.post('https://staging-backend.relayx.com/api/run/send', {
                     "amount": "100",
-                    "location": "4e60549cbd7527283e5c792d0a456a673f150701e07bd1355c8b8cf814858dd6_o1",
-                    "owner": "1BBuB7Lz3g5ceH11j3bK3U5twrwZPu3HHn",
+                    "location": "d0f84d202d91468f9bbdcf6a028e7223abab5a2c935fb347a65bc3ec6d85ddd8_o2",
+                    "owner": "13gqSLMuaW19vCWWgRXC8iMUdmcneYiUh9",
                     "to": "1CedJmG5WCCKVieFT9tjuHDUvEqvAnCTUJ",
                 })
             console.log("Gets a raw transaction:", response.data)

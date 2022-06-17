@@ -1,4 +1,5 @@
 <template>
+<div class="flex">
     <div class="text-white">
         <button class='text-white' @click="getNoOrders">Get No Orders</button>
         {{noOrders?.length}}
@@ -15,11 +16,20 @@
             "{{handle}}"
         </div>
     </div>
+    <div> 
+        Orders
+        <button class='text-white' @click="getFirebaseOrders">Get Firebase Orders</button>
+        <div class="text-white" v-for="order in allOrders" :key="order.id">
+            "{{order}}"
+            <button @click="markSent(order)" > Mark Sent </button>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
 import { reactive, ref, toRefs } from 'vue'
-import { userProfiles } from '../services/firebase.js'
+import { userProfiles, useOrders } from '../services/firebase.js'
 import axios from "axios"
 export default {
     async setup () {
@@ -28,6 +38,7 @@ export default {
         console.log(noOrders.value)
         let { allActions} = userProfiles();
         console.log(allActions)
+        let {allOrders} = useOrders();
         const state = reactive({
             count: 0,
         })
@@ -36,7 +47,8 @@ export default {
             ...toRefs(state),
             noOrders,
             owners,
-            allActions
+            allActions,
+            allOrders
         }
     },
     methods: {
@@ -58,13 +70,18 @@ export default {
 
             this.noOrders.sort((a,b) => a.amount > b.amount ? -1 : 1)
         },
+        markSent(order){
+            console.log(order.id)
+            let {markMinted} = useOrders();
+            let toDelete = this.allOrders.find(o => o.id === "XCpniENMEyM5oQajarmC")
+            markMinted(toDelete)
+        }
     },
     computed:{
         uniqe(){
             let uniqHandles = [];
             this.allActions.forEach((c) =>{
                 if(uniqHandles.indexOf(c.relay_handle) === -1 ){ 
-                    console.log(c); 
                     uniqHandles.push(c.relay_handle)
                 }
             })

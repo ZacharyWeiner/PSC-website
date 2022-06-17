@@ -130,9 +130,11 @@ export default {
         nextPage(){
             this.page = this.page + 1
             console.log(this.page)
+            window.scrollTo(0,0);
         },
         lastPage(){
-            if(this.page >= 2){this.page = this.page - 1}
+            if(this.page >= 1){this.page = this.page - 1}
+            window.scrollTo(0,0);
         },
          buyButtonText(order){
             if(this.error !== ""){
