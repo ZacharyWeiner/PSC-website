@@ -12,6 +12,8 @@ import Treasury from '../views/Treasury.vue'
 import RelayOrders from '../views/RelayOrders.vue'
 import Votes from '../views/Votes.vue'
 import BingoAdmin from '../views/BingoAdmin.vue'
+import BingoCard from '../views/BingoCard.vue'
+import BingoCardList from '../views/BingoCardList.vue'
 
 
 const routes = [
@@ -79,7 +81,18 @@ const routes = [
     path: '/bingoAdmin',
     name: 'BingoAdmin',
     component: BingoAdmin
+  },
+  {
+    path: '/bingoCard',
+    name: 'BingoCard',
+    component: BingoCard
+  },
+  {
+    path: '/bingoCardList',
+    name: 'BingoCardList',
+    component: BingoCardList
   }
+  
 ]
 
 const router = createRouter({
