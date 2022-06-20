@@ -73,7 +73,7 @@ export default {
         markSent(order){
             console.log(order.id)
             let {markMinted} = useOrders();
-            let toDelete = this.allOrders.find(o => o.id === "XCpniENMEyM5oQajarmC")
+            let toDelete = this.allOrders.find(o => o.id === order.id)
             markMinted(toDelete)
         }
     },

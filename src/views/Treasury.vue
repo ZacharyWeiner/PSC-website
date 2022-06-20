@@ -233,7 +233,7 @@ export default {
         },
         async buyWithPoo(nft){
             console.log(nft.props.metadata.no);
-            let price = (this.setPricePoo(nft) * 100)
+            let price = (this.setPricePoo(nft))
             console.log("SENDING POO:", price);
             let response = await this.sendPoo(price)
             console.log(response);
