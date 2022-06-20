@@ -67,7 +67,7 @@
                         <button class="mt-1 block w-full py-3 px-5 text-center bg-red-500 border border-transparent rounded-md shadow-md text-base font-medium text-white hover:bg-gray-50 sm:inline-block sm:w-auto"> Reserved For 1{{reservedFor(nft)}} </button>
                     </div>
                     <div v-else>
-                        <button class="mt-1 block w-full py-3 px-5 text-center bg-green-500 border border-transparent rounded-md shadow-md text-base font-medium text-white hover:bg-gray-50 sm:inline-block sm:w-auto" @click="buyWithPoo(nft)" > Buy With $POO </button>
+                        <button class="mt-1 block w-full py-3 px-5 text-center bg-green-500 border border-transparent rounded-md shadow-md text-base font-medium text-white hover:bg-gray-50 hover:text-green-400 sm:inline-block sm:w-auto" @click="buyWithPoo(nft)" > {{getButtonText(nft)}} </button>
                     </div>
                 </div>
             </div>
@@ -101,7 +101,9 @@ export default {
             count: 0,
             page: 0,
             basePricePoo: 5000,
-            basePriceBSV: 0.4
+            basePriceBSV: 0.4,
+            loading: false,
+            selectedEdition: 0,
         })
     
         return {
@@ -232,6 +234,8 @@ export default {
             return multiplier;
         },
         async buyWithPoo(nft){
+            this.loading = true
+            this.selectedEdition = nft.location;
             console.log(nft.props.metadata.no);
             let price = (this.setPricePoo(nft))
             console.log("SENDING POO:", price);
@@ -242,6 +246,7 @@ export default {
                 let orderSaved = sendOrder("xxxyyyzzz", this.$store.state.relayx_handle, this.$store.state.user_address, nft.props.metadata.no, false)
                 console.log("Order Saved:", orderSaved)
             }
+            this.loading = false;
         },
         async sendPoo(amount){
             try{
@@ -269,6 +274,12 @@ export default {
             let filter = this.reserved.orders.value.filter(i => nft.props.metadata.no === i.edition);
             console.log("Match", filter.length, filter[0].relayHandle)
             return filter[0].relayHandle
+        },
+        getButtonText(nft){
+            if(this.loading && this.selectedEdition === nft.location){
+                return "working ..." 
+            }
+            return `Buy for $${this.setPricePoo(nft)} $POO`
         }
 
     },

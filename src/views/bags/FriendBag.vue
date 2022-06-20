@@ -174,7 +174,7 @@ export default {
     computed:{
         
         orderedNFTs(){
-           return [... this.selected].sort((a, b) => a.props.metadata.no - b.props.metadata.no > 0 ? a : b);
+           return [... this.selected].sort((a, b) => this.rankNFT(a) - this.rankNFT(b) > 0 ? 1 : -1);
         },
         ...mapState(["isLogin"])
     }

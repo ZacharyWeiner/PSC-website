@@ -24,6 +24,8 @@ import Spend from '../views/Spend.vue'
 import Claims from '../views/Claims.vue'
 import Friends from '../views/FriendsOfPew.vue'
 import Snipers from '../views/secret/Sniper.vue'
+import BingoCardsRelay from '../views/bingo/cards/BuyFromRelay.vue'
+import BingoCardsPoo from '../views/bingo/cards/BuyWithPoo.vue'
 
 
 const routes = [
@@ -146,6 +148,16 @@ const routes = [
     path: '/tools',
     name: 'Tools',
     component: Tools
+  },
+  {
+    path: '/bingo/cards/buy-from-relay',
+    name: 'Relay X Bingo Cards',
+    component: BingoCardsRelay
+  },
+  {
+    path: '/bingo/cards/buy-with-poo',
+    name: 'Buy Bingo Cards',
+    component: BingoCardsPoo
   },
   {
     path: '/secret/snipers',

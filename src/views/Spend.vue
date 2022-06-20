@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="spendWeb2" class='text-white'> SPEND </button>
+        <button @click="sendNFT" class='text-white'> SPEND </button>
     </div>
 </template>
 
@@ -86,6 +86,23 @@ export default {
                 let sendResponse = await window.relayone.send(response.data.data.rawtx)
                 console.log(sendResponse)
         },
+        async sendNFT(){
+            // asset_location	"7a662090cff0b5920bc6f25956ab0a3a60253ab4de4149dec673be4a648a2d33_o3"
+            // location	"7a662090cff0b5920bc6f25956ab0a3a60253ab4de4149dec673be4a648a2d33_o3"
+            // owner	"1wnxDQAqvjuFAuMB24sdTm2HF39ugwEuM"
+            // to	"1BBuB7Lz3g5ceH11j3bK3U5twrwZPu3HHn"
+
+            let response = await axios.post('https://staging-backend.relayx.com/api/run/send_nft', {
+                    "location": "805a4d05828ef5734edaf84ddb20c14007cae204fe4a6df8044607e0656a2363_o132",
+                    "asset_location": "805a4d05828ef5734edaf84ddb20c14007cae204fe4a6df8044607e0656a2363_o132",
+                    "owner": this.$store.state.user_address,
+                    "to": "1KL2dwxpeETh4QuHHchkk536d3YchGHX92",
+                })
+            console.log("Gets a raw transaction:", response.data)
+            let sendResponse = await window.relayone.send(response.data.data.rawtx)
+            console.log("recieves response from send:",  sendResponse)
+            console.log("txid for send",  sendResponse.txid)
+        }
     }
 }
 </script>

@@ -21,6 +21,7 @@ const ordersCollection = firestore.collection('orders');
 const countersCollection = firestore.collection('counters')
 const userProfilesCollection = firestore.collection('userProfiles')
 const userActionsCollection = firestore.collection('userActions')
+const redemptionsCollection = firestore.collection('redemptions');
 
 export function userProfiles() {
 
@@ -172,4 +173,28 @@ export function useOrders() {
      }
 
     return { allOrders, sendOrder, findOrders, deleteOrder, markMinted, findReserved }
+}
+
+export function useRedemptions(){
+    const allRedemptions = ref([])
+    const unsubscribe =  redemptionsCollection.onSnapshot(snapshot => {
+        allRedemptions.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
+    const sendRedemption = (_txid, _paymail, _owner, _edition, _amount) => {
+        redemptionsCollection.add({
+            txid: _txid,
+            relayHandle: _paymail,
+            runAddress: _owner,
+            edition: _edition,
+            amount: _amount,
+            isRedeemed: false,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        console.log('added Redemption')
+    }
+
+    return {allRedemptions, sendRedemption}
 }

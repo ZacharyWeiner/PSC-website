@@ -24,12 +24,20 @@
             <button @click="markSent(order)" > Mark Sent </button>
         </div>
     </div>
+    <div> 
+        Redemptions
+        <button class='text-white' @click="getFirebaseOrders">Get Firebase Redemptions</button>
+        <div class="text-white" v-for="order in allRedemptions" :key="order.id">
+            "{{order}}"
+            <button @click="markRedeemed(order)" > Mark Sent </button>
+        </div>
+    </div>
 </div>
 </template>
 
 <script>
 import { reactive, ref, toRefs } from 'vue'
-import { userProfiles, useOrders } from '../services/firebase.js'
+import { userProfiles, useOrders, useRedemptions } from '../services/firebase.js'
 import axios from "axios"
 export default {
     async setup () {
@@ -39,6 +47,7 @@ export default {
         let { allActions} = userProfiles();
         console.log(allActions)
         let {allOrders} = useOrders();
+        let {allRedemptions} = useRedemptions()
         const state = reactive({
             count: 0,
         })
@@ -48,7 +57,8 @@ export default {
             noOrders,
             owners,
             allActions,
-            allOrders
+            allOrders,
+            allRedemptions
         }
     },
     methods: {
@@ -75,7 +85,8 @@ export default {
             let {markMinted} = useOrders();
             let toDelete = this.allOrders.find(o => o.id === order.id)
             markMinted(toDelete)
-        }
+        },
+        markRedeemed(){},
     },
     computed:{
         uniqe(){
