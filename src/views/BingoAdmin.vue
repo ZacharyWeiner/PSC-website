@@ -171,7 +171,7 @@ export default {
                 const setcompare = set.length
                 // console.log(set)
                 if (setcompare > 0 || sqaure === 'Free Space')
-                return 'ring-green-300 http://192.168.1.233:8080/#/bingoCard'
+                return 'bg-green-300 text-black font-bold'
 
             }catch(err){
                 console.log(err)
