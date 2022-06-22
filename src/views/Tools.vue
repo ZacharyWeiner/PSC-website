@@ -16,20 +16,36 @@
             "{{handle}}"
         </div>
     </div>
-    <div> 
+    <div class="w-96"> 
         Orders
         <button class='text-white' @click="getFirebaseOrders">Get Firebase Orders</button>
-        <div class="text-white" v-for="order in allOrders" :key="order.id">
-            "{{order}}"
-            <button @click="markSent(order)" > Mark Sent </button>
+        <div class="text-white bg-gray-800 rounded-xl " v-for="order in allOrders" :key="order.id">
+            <div class="w-full p-1 m-1 flex " v-if="order.isMinted !== true">
+                <div class="w-full">
+                    <div> 
+                    {{order.edition}}
+                    </div>
+                    <div> {{order.relayHandle}} - {{order.isMinted}}</div>
+                </div>
+                <div class="mx-4 text-right w-full">
+                    <button @click="markSent(order)" > Mark Sent </button>
+                </div>
+            </div>
         </div>
     </div>
-    <div> 
+    <div class='w-full'> 
         Redemptions
-        <button class='text-white' @click="getFirebaseOrders">Get Firebase Redemptions</button>
-        <div class="text-white" v-for="order in allRedemptions" :key="order.id">
-            "{{order}}"
-            <button @click="markRedeemed(order)" > Mark Sent </button>
+        <button class='text-white' @click="getFirebaseRedemptions">Get Firebase Redemptions</button>
+        <div v-for="redemption in allRedemptions" :key="redemption.id" >
+            <div v-if="redemption.isRedeemed !== true" class="w-full text-white bg-gray-800 rounded-xl p-1 m-1">
+                    <div> 
+                    PRD #{{redemption.edition}} was redeemed for {{redemption.amount}} by {{redemption.relayHandle}}
+                    </div>
+                    <div> <button @click="markRedeemed(redemption)" > Mark Redemed </button></div>
+                </div>
+                <div class="mx-4 text-right w-full">
+                    
+                </div>
         </div>
     </div>
 </div>
@@ -48,6 +64,7 @@ export default {
         console.log(allActions)
         let {allOrders} = useOrders();
         let {allRedemptions} = useRedemptions()
+        console.log(allRedemptions)
         const state = reactive({
             count: 0,
         })
@@ -86,7 +103,12 @@ export default {
             let toDelete = this.allOrders.find(o => o.id === order.id)
             markMinted(toDelete)
         },
-        markRedeemed(){},
+        markRedeemed(redemption){
+            console.log(redemption.id)
+            let {markRedeemed} = useRedemptions();
+            let toDelete = this.allRedemptions.find(o => o.id === redemption.id)
+            markRedeemed(toDelete)
+        },
     },
     computed:{
         uniqe(){

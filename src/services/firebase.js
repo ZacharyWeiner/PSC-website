@@ -196,5 +196,12 @@ export function useRedemptions(){
         console.log('added Redemption')
     }
 
-    return {allRedemptions, sendRedemption}
+    const markRedeemed = (redemption) => {
+        redemptionsCollection.doc(redemption.id).update({
+            isRedeemed: true
+        })
+
+    }
+
+    return {allRedemptions, sendRedemption, markRedeemed}
 }

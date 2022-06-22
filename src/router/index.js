@@ -19,6 +19,7 @@ import SavagesBag from '../views/bags/Savages.vue'
 import StickDoodz from '../views/friends/StickDoodz.vue'
 import FriendsBag from '../views/bags/FriendBag.vue'
 import Moose from '../views/friends/Moose.vue'
+import MerchBag from '../views/bags/Merch.vue'
 import Tools from '../views/Tools.vue'
 import Spend from '../views/Spend.vue'
 import Claims from '../views/Claims.vue'
@@ -143,6 +144,11 @@ const routes = [
     path: '/bags/savages',
     name: 'Sabertooth Savages Bag',
     component: SavagesBag
+  },
+  {
+    path: '/bags/merch',
+    name: 'Merch Bag',
+    component: MerchBag
   },
   {
     path: '/tools',

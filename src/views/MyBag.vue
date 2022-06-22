@@ -255,7 +255,7 @@ export default {
             if(this.loading && this.selectedEdition === nft.location){
                 return "working ..." 
             }
-            return `Redeem for ${parseInt(this.setPricePoo(nft) * 0.90, 10)} $POO`
+            return `Exchange for ${parseInt(this.setPricePoo(nft) * 0.90, 10)} $POO`
         }
     },
     computed:{
