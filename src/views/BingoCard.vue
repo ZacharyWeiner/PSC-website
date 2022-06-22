@@ -8,36 +8,38 @@
             </div>
                
 
-        <div v-for="{id, winningNumbers} in currentGame" 
-                    :key="id"
+        <div v-for="game in currentGame" 
+                    :key="game.id"
                     class="container m-auto m-1 p-2">
-            <div>
+
+            <div v-if="!game.gameComplete && (game.id === store.state.bingoCurrenGame)">
                 <div class="text-left mb-5">
+                    
                     Name: {{meta.name}} <br>
                     Description: {{meta.description}} <br>
                     Edition: {{meta.edition}} <br>
-                    Numbers Called: {{winningNumbers}}
+                    Numbers Called: {{game.winningNumbers.sort((a,b) => a-b > 1 ? 1 :-1)}}
+                    
                     <img class="h-80" :src="'https://berry.relayx.com/' + store.state.selectedBingoCard.berry.txid " alt="">
                 </div>
                 <div class="text-right">
                     Players who called Bingo:
-                    <div v-for="player in userBingos"
+                    <div v-for="player in playerBingos"
                             :key="player.id"
-                            class="">
+                            :class="`${ (store.state.relayx_handle === player.relayHandle) ? 'text-bold text-green-500' : ''}`">
                         {{player.relayHandle}}
                     </div>
-                    
                 </div>
                 <div class="mb-10">
                     <button class="p-4 m-4 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl " 
-                            @click="userCallBingo(bingo, meta.edition)"
+                            @click="userCallBingo(bingo, meta.edition, game.id)"
                             >
                             BINGO!
                             
                     </button> 
                 </div>    
                 
-                <div class="flex grid grid-cols-5 bg-indigo-500 ">
+                <div class="flex grid grid-cols-5 ring bg-indigo-500 ">
                     <div v-for="letter in ['B','I','N','G','O'] "
                             :key="letter"
                             class="h-10 m-5 text-2xl font-bold">
@@ -51,8 +53,8 @@
                     <div v-for="attr in meta.attributes" 
                         :key="attr"
                         :id="attr.trait_type"
-                        class="ring h-28 p-10"
-                        :class="compareSquare(attr.value, winningNumbers)">
+                        class="ring h-20 p-5"
+                        :class="compareSquare(attr.value, game.winningNumbers)">
                         {{attr.value}}   
                     </div>    
                 
@@ -61,6 +63,27 @@
                 
                 
             </div>
+            <div v-else>
+                <div v-if="(game.id !== store.state.bingoCurrenGame)">
+                    <div class="text-3xl">
+                        A new game has started, come join us...
+                    </div>
+                    <button v-if="(game.id !== store.state.bingoCurrenGame)" class="p-3 m-2 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl " 
+                            @click="playNextGame(game.id)">
+                            Play Again
+                    </button>  
+                </div>
+                <div v-else>
+                    <div class="text-3xl">
+                        Please wait while a new game is starting soon...
+                    </div>
+                </div>
+
+                
+
+                
+            </div>
+            
         </div>
         
         
@@ -78,9 +101,13 @@ import { useStore } from 'vuex'
 export default {
     async setup() {
         const store = useStore()
-        const { getCurrentGame , userBingos, userCallBingo} = useBingo()
-        const currentGame = getCurrentGame();
-        console.log("CurrentGame.CurrentGame", currentGame.currentGame)
+        const { getCurrentGame , getCurrentGameBingos, userCallBingo} = useBingo()
+
+        const currentGame = getCurrentGame()
+        const playerBingos = getCurrentGameBingos(store.state.bingoCurrenGame)
+
+        // console.log(currentGame.value)
+        
         let meta = ref([])
         const getData = async (_meta) => {
             import(`@/assets/metadata/${store.state.selectedBingoCard.props.no}`).then((module) => {
@@ -97,7 +124,7 @@ export default {
             card:      store.state.selectedBingoCard.location
         }
 
-        return { currentGame, store, meta, bingo, userBingos, userCallBingo }
+        return { currentGame, store, meta, bingo, playerBingos, userCallBingo }
     },
     methods: {
         goBack() {
@@ -107,9 +134,9 @@ export default {
             try{
                 const set = winSet.filter(w => w.toString() === sqaure)
                 const setcompare = set.length
-                console.log(set)
+                // console.log(set)
                 if (setcompare > 0 || sqaure === 'Free Space')
-                return 'ring-green-300'
+                return 'bg-green-300 text-black font-bold'
 
             }catch(err){
                 console.log(err)
@@ -117,11 +144,10 @@ export default {
             }
             
         },
-        showBingo() {
-            
-
-            return 'test'
-        }   
+        playNextGame(gameId) {
+            this.$store.commit("setBingoCurrenGame", gameId)
+            window.location.reload()
+        }
     
     },
     computed:{

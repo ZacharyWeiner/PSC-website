@@ -27,7 +27,8 @@ export default createStore({
     paidForMint: false,
     hasAction: false,
     bingoCards: '',
-    selectedBingoCard: []
+    selectedBingoCard: [],
+    bingoCurrenGame: 0
 
   },
   mutations: {
@@ -85,6 +86,9 @@ export default createStore({
     },
     setSelectedCard(state, _selectedBingoCard) {
       state.selectedBingoCard = _selectedBingoCard
+    },
+    setBingoCurrenGame(state, _bingoCurrenGame) {
+      state.bingoCurrenGame = _bingoCurrenGame
     }
   },
   actions: {

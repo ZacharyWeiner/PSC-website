@@ -160,8 +160,6 @@ export function useBingo() {
     const activeBingoGame = bingoGamesCollection.orderBy('gameStart').limitToLast(1)
     const usersBingoCollection = firestore.collection('callBingo')
 
-
-
     const getCurrentGame = () => {
         const currentGame = ref()
         activeBingoGame.onSnapshot(snapshot => {
@@ -171,24 +169,19 @@ export function useBingo() {
         return currentGame
     }
 
-    
-    const userBingos = ref()
-    const getUserBingo = usersBingoCollection.onSnapshot(snapshot => {
-        userBingos.value = snapshot.docs    
-            .map(doc => ({ id: doc.id, ...doc.data() }))
-    })
-    onUnmounted(getCurrentGame, getUserBingo)
-
-
     const getCurrentGameBingos = (gameId) => {
         const currentGameBingos = ref()
         usersBingoCollection.onSnapshot(snapshot => {
-            userBingos.value = snapshot.docs    
+            currentGameBingos.value = snapshot.docs    
                 .map(doc => ({ id: doc.id, ...doc.data() }))
-                .filter(b => b.id === gameId)
+                .filter(g => g.gameId === gameId)
+                // console.log(gameId)
+                // console.log(currentGameBingos)
         })
-        return { currentGameBingos }
+        return currentGameBingos 
     }
+
+    onUnmounted(getCurrentGame, getCurrentGameBingos)
 
     const newGame = () => {
         bingoGamesCollection.add({
@@ -210,7 +203,7 @@ export function useBingo() {
         })
     }
 
-    const setWinningNumbers = (id, number) => {
+    const setWinningNumber = (id, number) => {
         bingoGamesCollection.doc(id).update({
             winningNumbers: firebase.firestore.FieldValue.arrayUnion(number)
         })
@@ -218,32 +211,34 @@ export function useBingo() {
     }
 
     const setWinner = (id, _handle, _owner, _loc) => {
-        const newWinner = {
+        const winner = {
             relayHandle: _handle,
             ownerAddress: _owner,
             cardLocation: _loc
         }
         
         bingoGamesCollection.doc(id).update({
-            winners: firebase.firestore.FieldValue.arrayUnion({newWinner})
+            winners: firebase.firestore.FieldValue.arrayUnion({winner})
         })
-        console.log('added winner', newWinner)
+        console.log('added winner', winner)
     }
 
-    const userCallBingo = (bingo, id) => {
+    const userCallBingo = (bingo, cardId, gameId) => {
         usersBingoCollection.add({
             created: firebase.firestore.FieldValue.serverTimestamp(),
-                relayHandle: bingo.handle,
-                ownerAddress: bingo.owner,
-                cardLocation: bingo.card,
-                edition: id
+            relayHandle: bingo.handle,
+            ownerAddress: bingo.owner,
+            cardLocation: bingo.card,
+            edition: cardId,
+            gameId: gameId
         })
-        console.log('User Called Bingo!')
+        console.log('User Called Bingo!', gameId )
     }
 
-    const deleteBingoList = (id) => {
+    const deleteUserBingo = (id) => {
+        // console.log(id)
         usersBingoCollection.doc(id).delete()
     }
 
-    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumbers, userBingos, userCallBingo, deleteBingoList, getCurrentGameBingos}
+    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
 }
