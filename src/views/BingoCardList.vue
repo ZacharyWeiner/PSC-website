@@ -1,15 +1,15 @@
 <template>
-    <div class="w-full m-1 text-white">
+    <div class="w-full m-1 text-white text-left grid grid-cols-5 ">
         <div v-for="card in store.state.bingoCards" 
             :key="card">
             <!-- {{card}} -->
             
 
-            <div class="m-1 flex cursor-pointer"
+            <div class="m-1  cursor-pointer"
                 @click="setCard(card)"
                 :class="`${ (card.location) === store.state.selectedBingoCard ? 'ring' : '' }`">
-                <img class="h-80" :src="'https://berry.relayx.com/' + card.berry.txid  " alt="">    
                 <span>{{card.name}}</span>
+                <img class="h-80" :src="'https://berry.relayx.com/' + card.berry.txid  " alt="">    
             </div>
         </div>
     </div>
