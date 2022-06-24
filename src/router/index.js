@@ -27,6 +27,11 @@ import Friends from '../views/FriendsOfPew.vue'
 import Snipers from '../views/secret/Sniper.vue'
 import BingoCardsRelay from '../views/bingo/cards/BuyFromRelay.vue'
 import BingoCardsPoo from '../views/bingo/cards/BuyWithPoo.vue'
+import MyBingoCards from '../views/bingo/cards/MyCards.vue'
+import PlayBingo from '../views/bingo/Play.vue'
+import BingoAdmin from '../views/BingoAdmin.vue'
+import BingoCard from '../views/BingoCard.vue'
+import BingoCardList from '../views/BingoCardList.vue'
 
 
 const routes = [
@@ -156,6 +161,11 @@ const routes = [
     component: Tools
   },
   {
+    path: '/bingo/play',
+    name: 'Play Bingo',
+    component: PlayBingo
+  },
+  {
     path: '/bingo/cards/buy-from-relay',
     name: 'Relay X Bingo Cards',
     component: BingoCardsRelay
@@ -166,10 +176,30 @@ const routes = [
     component: BingoCardsPoo
   },
   {
+    path: '/bingo/cards/my-cards',
+    name: 'My Bingo Cards',
+    component: MyBingoCards
+  },
+  {
     path: '/secret/snipers',
     name: 'Snipers',
     component: Snipers
   },
+  {
+    path: '/bingoAdmin',
+    name: 'BingoAdmin',
+    component: BingoAdmin
+  },
+  {
+    path: '/bingoCard',
+    name: 'BingoCard',
+    component: BingoCard
+  },
+  {
+    path: '/bingoCardList',
+    name: 'BingoCardList',
+    component: BingoCardList
+  }
 ]
 
 const router = createRouter({

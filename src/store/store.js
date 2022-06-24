@@ -26,7 +26,10 @@ export default createStore({
     purchased_moves: 0,
     paidForMint: false,
     hasAction: false,
-    selectedFriendCollection:""
+    selectedFriendCollection:"",
+    bingoCards: '',
+    selectedBingoCard: [],
+    bingoCurrenGame: 0
 
   },
   mutations: {
@@ -81,6 +84,15 @@ export default createStore({
     },
     setSelectedFriendCollection(state, collectionName){
       state.selectedFriendCollection = collectionName;
+    },
+    setBingoCards(state, _bingoCards) {
+      state.bingoCards = _bingoCards
+    },
+    setSelectedCard(state, _selectedBingoCard) {
+      state.selectedBingoCard = _selectedBingoCard
+    },
+    setBingoCurrenGame(state, _bingoCurrenGame) {
+      state.bingoCurrenGame = _bingoCurrenGame
     }
   },
   actions: {
