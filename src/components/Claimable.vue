@@ -11,7 +11,7 @@
         <div v-else-if="userJigs.length > 0"> {{successMessage}} </div>
         <div v-else>You must own a Pewnicorn PRD NFT to Claim </div>
     </div>
-    <div v-else>You must be logged in & own a Pewnicorn PRD NFT to Claim </div>
+    <div v-else>You must be logged in to Claim </div>
 </template>
 
 <script>

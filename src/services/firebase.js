@@ -19,6 +19,7 @@ const firestore = firebase.firestore()
 
 export function userProfiles() {
     const userProfilesCollection = firestore.collection('userProfiles')
+    const userActionsCollection = firestore.collection('userActions')
     const findUserProfile = (_owner) => {
         const userProfile = ref([])
         userProfilesCollection.onSnapshot(snapshot => {
@@ -47,7 +48,7 @@ export function userProfiles() {
     onUnmounted(unsubscribe)
 
 
-    const userActionsCollection = firestore.collection('userActions')
+    
     const setUserAction = (_handle, _address, _action) => {
         userActionsCollection.add({
             relay_handle: _handle,
