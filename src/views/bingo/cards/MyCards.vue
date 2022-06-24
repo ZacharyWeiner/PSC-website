@@ -20,8 +20,8 @@
                     :class="`${ (card.location) === store?.state.selectedBingoCard ? 'ring' : '' }`">
                     <img class="h-80 mx-auto" :src="'https://berry.relayx.com/' + card.berry.txid  " alt="">   
                     <div class="pt-1 text-lg">{{card.name}}</div> 
-                    <button type="button" class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                       <span class="text-xl text-center font-bold -mb-1 pb-1 block bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent" > CHECK CARD </span>
+                    <button type="button" class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-white hover:bg-indigo-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                       <span class="text-xl text-center font-bold -mb-1 pb-1 block bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent hover:text-white" > CHECK CARD </span>
                     </button>
                 </div>
                 </div>

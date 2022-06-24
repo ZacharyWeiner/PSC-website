@@ -52,7 +52,7 @@ Create New Game
                         :key="bingo.id"
                         >
                         <div>
-                            {{bingo.relayHandle}}
+                            {{bingo.relayHandle}} - {{bingo.edition}}
                             <button @click="getMetaData(bingo.edition)"
                                 class="p-1 m-1 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl">
                                 Verify

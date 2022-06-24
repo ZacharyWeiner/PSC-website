@@ -210,7 +210,8 @@ export function useBingo() {
     const bingoGamesCollection = firestore.collection('bingoGames')
     const activeBingoGame = bingoGamesCollection.orderBy('gameStart').limitToLast(1)
     const usersBingoCollection = firestore.collection('callBingo')
-
+    const currentGameBingos = ref([])
+    
     const getCurrentGame = () => {
         const currentGame = ref()
         activeBingoGame.onSnapshot(snapshot => {
@@ -221,7 +222,7 @@ export function useBingo() {
     }
 
     const getCurrentGameBingos = (gameId) => {
-        const currentGameBingos = ref()
+        
         usersBingoCollection.onSnapshot(snapshot => {
             currentGameBingos.value = snapshot.docs    
                 .map(doc => ({ id: doc.id, ...doc.data() }))
