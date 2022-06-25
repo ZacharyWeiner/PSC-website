@@ -110,7 +110,7 @@ Requires JS
           </Popover>
         </PopoverGroup>
         <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-          <div v-if="isLogin">
+          <div v-if="!relayUser">
               <button @click="login" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Sign In </button>
             </div>
             <div v-else>
@@ -311,6 +311,9 @@ export default {
       handle(){
           if(this.isLogin){return this.$store.state.relayx_handle}
           return ""
+      },
+      relayUser(){
+        return this.$store.state.relayx_handle
       }
   },
 }
