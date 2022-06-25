@@ -45,7 +45,7 @@
               <span class=" w-full text-indigo-600 xl:inline">Social Club</span>
             </h1>
             <p class="mt-3 text-base text-gray-200 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                If BTC were the real Bitcoin, #NFTs on Bitcoin would still be a mythical legend. Instead, the Pewnicorn Social Club is a thriving DAO &amp; ecosystem of talent and excitement, built on BSV. 
+                The Pewnicorn Social Club is a premiuim NFT Community on the OG $Bitcoin. Buy, Sell, Trade, List, Mint, Play, and so much more with the best community in Blockchain.  
             </p>
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-md shadow">

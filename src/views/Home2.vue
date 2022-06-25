@@ -47,7 +47,7 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
-import Menu from "./../components/Menu.vue"
+import Menu from "./../components/MenuComponent2.vue"
 import HomeHero from "./../components/HomeHero.vue";
 import AnnouncementBanner from "./../components/AnnouncementBanner.vue";
 import Poo from "./../components/Poo.vue"
