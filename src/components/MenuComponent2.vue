@@ -53,10 +53,10 @@ Requires JS
                   </div>
                   <div class="px-5 py-5 bg-gray-50 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
                     <div v-for="item in callsToAction" :key="item.name" class="flow-root">
-                      <a :href="item.href" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+                      <router-link :to="item.href" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
                         <component :is="item.icon" class="flex-shrink-0 h-6 w-6 text-gray-400" aria-hidden="true" />
                         <span class="ml-3">{{ item.name }}</span>
-                      </a>
+                      </router-link>
                     </div>
                   </div>
                 </div>
@@ -137,12 +137,12 @@ Requires JS
             </div>
             <div class="mt-6">
               <nav class="grid gap-y-8">
-                <a v-for="item in exchange" :key="item.name" :href="item.href" class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
+                <router-link v-for="item in exchange" :key="item.name" :to="item.href" class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
                   <component :is="item.icon" class="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
                   <span class="ml-3 text-base font-medium text-gray-900">
                     {{ item.name }}
                   </span>
-                </a>
+                </router-link>
               </nav>
             </div>
           </div>
