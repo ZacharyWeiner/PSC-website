@@ -292,3 +292,29 @@ export function useBingo() {
 
     return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
 }
+
+
+export function useAdvertisements() {
+    const advertisementCollection = firestore.collection('advertisements')
+    const allAdvertisement= ref([])
+    const unsubscribe =  advertisementCollection.onSnapshot(snapshot => {
+        allAdvertisement.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
+
+    const newAdvertisment = () => {
+        advertisementCollection.add({
+            created: firebase.firestore.FieldValue.serverTimestamp(),
+            title: '',
+            description: '',
+            linkURL: '',
+            photoURL: '',
+            orderId: 0
+        })
+    }
+
+
+    return {allAdvertisement, newAdvertisment}
+}
