@@ -1,18 +1,17 @@
 <template>
-<!-- <button @click="newGame()"
-    class="p-2 m-2 text-white text-xl bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl"
->
-Create New Game
-</button> -->
     <div class="container m-auto my-20 text-white">
         <div v-for="game in currentGame"
             :key="game.id">
 
             <!-- {{game}} -->
-            
+            <button v-if="game.gameComplete" @click="newGameSession(game.gameSession)"
+                class="p-2 m-2 text-white text-xl bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl"
+            >
+                Create New Game Session
+            </button>            
             
             <div v-if="game.gameComplete">
-                <button @click="newGame()"
+                <button @click="newGame(gameSession)"
                         class="p-2 m-2 text-white text-xl bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl"
                 >
                     Create New Game
@@ -22,6 +21,8 @@ Create New Game
             <div v-else>
                 <div class="text-left">
                     Game ID: {{game.id}}
+                    <br><br>
+                    Game Session : {{game.gameSession}}
                     <br><br>
                     Winner: {{game.winners}}
 
@@ -135,7 +136,8 @@ export default {
 
         
         let meta = ref([])
-        return { newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, playerBingos, currentGame, meta}
+        let gameSession = ref(0)
+        return { newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, playerBingos, currentGame, meta, gameSession}
 
     },
     methods: {
@@ -176,6 +178,15 @@ export default {
             }catch(err){
                 console.log(err)
                 return ""
+            }
+            
+        },
+        newGameSession(currentSession) {
+            let confirmSession = confirm("The current session is " + currentSession + ", would you like to create a new session?")
+            if (confirmSession) {
+                this.gameSession = ++currentSession
+                alert("Session " + this.gameSession + " has been created, Have Fun!")
+                this.newGame(this.gameSession)
             }
             
         }

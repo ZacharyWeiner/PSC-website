@@ -233,14 +233,15 @@ export function useBingo() {
 
     onUnmounted(getCurrentGame, getCurrentGameBingos)
 
-    const newGame = () => {
+    const newGame = (_gamesession) => {
         bingoGamesCollection.add({
             gameStart: firebase.firestore.FieldValue.serverTimestamp(),
             gameEnd: '',
             gameComplete: false,
             winningNumbers: [],
             calledBingo: [],
-            winners: []
+            winners: [],
+            gameSession: _gamesession
 
         })
         console.log('new game started')
