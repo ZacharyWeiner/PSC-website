@@ -118,7 +118,7 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
-import Menu from "./../components/Menu.vue"
+import Menu from "./../components/MenuComponent2.vue"
 const friendsDetails = [
     {
         name: "Gopniks", 

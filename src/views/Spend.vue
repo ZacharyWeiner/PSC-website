@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="sendNFT" class='text-white'> SPEND </button>
+        <button @click="true" class='text-white'> SPEND </button>
     </div>
 </template>
 
@@ -67,7 +67,7 @@ export default {
             console.log("recieves response from send:",  sendResponse)
         },
         async buy(){
-             let { data } = await axios.get("https://staging-backend.relayx.com/api/market/6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o2/orders");
+             let { data } = await axios.get("https://staging-backend.relayx.com/api/market/e20c044e8a09b548860bb71d0ef475721fec042f6b6041bc51d9f0e6cf690a97_o2/orders");
              let orders = data.data.orders;
              console.log(orders[0])
               orders.sort((a, b) =>{ 
@@ -77,14 +77,22 @@ export default {
                 });
              console.log(orders[0].satoshis)
              console.log(orders[0].txid, orders[0].location, this.$store.state.user_address, orders[0])
-             let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
-                    address: this.$store.state.user_address,
-                    location: "6d589398a0b4e83c3100c9b28afa2239be2d21b9080a4c4bcf05767805d637f5_o2",
-                    txid: orders[0].txid,
-                })
-                console.log(response)
-                let sendResponse = await window.relayone.send(response.data.data.rawtx)
-                console.log(sendResponse)
+             let tobuy = ["68", "430", "555", "219", "128", "96", "43", "1102", "334", "952", "1201",  "530", "104", "303", "865", "941"]
+             let purchasble = []
+             orders.forEach(element => {
+                let index = tobuy.indexOf(element.no)
+                if(index > -1){purchasble.push(element)}
+                console.log(element.no)
+             });
+           
+            //  let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
+            //         address: this.$store.state.user_address,
+            //         location: "e20c044e8a09b548860bb71d0ef475721fec042f6b6041bc51d9f0e6cf690a97_o2",
+            //         txid: purchasble[0].txid,
+            //     })
+            //     console.log(response)
+            //     let sendResponse = await window.relayone.send(response.data.data.rawtx)
+            //     console.log(sendResponse)
         },
         async sendNFT(){
             // asset_location	"7a662090cff0b5920bc6f25956ab0a3a60253ab4de4149dec673be4a648a2d33_o3"

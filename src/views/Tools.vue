@@ -1,4 +1,5 @@
 <template>
+<button @click="printEligible" class="text-white"> Print Timestamp </button>
 <div class="flex">
     <div class="text-white">
         <button class='text-white' @click="getNoOrders">Get No Orders</button>
@@ -12,8 +13,8 @@
     <div> 
         Claims
         <button class='text-white' @click="findAllClaims">Find Claims</button>
-        <div class="text-white" v-for="handle in uniqe" :key="handle">
-            "{{handle}}"
+        <div class="text-white" v-for="handle in unique" :key="handle">
+           {{handle}}
         </div>
     </div>
     <div class="w-96"> 
@@ -65,21 +66,31 @@ export default {
         let {allOrders} = useOrders();
         let {allRedemptions} = useRedemptions()
         console.log(allRedemptions)
+        const weeklyActions = ref([])
         const state = reactive({
             count: 0,
         })
-    
         return {
             ...toRefs(state),
             noOrders,
             owners,
             allActions,
             allOrders,
-            allRedemptions
+            allRedemptions,
+            weeklyActions
         }
     },
+    // mounted() {
+    //     window.setInterval(() => {
+    //         this.getNoOrders()
+    //     }, 30000)
+    // },
+    // unmounted(){
+    //      clearInterval(this.timer);
+    // },
     methods: {
         async getNoOrders(){
+            alert('getting no orders');
             let { data } = await axios.get("https://staging-backend.relayx.com/api/market/3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1/orders");
             let orders = data.data.orders;
             let ownersResponse = await axios.get("https://staging-backend.relayx.com/api/token/3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1/owners");
@@ -109,16 +120,38 @@ export default {
             let toDelete = this.allRedemptions.find(o => o.id === redemption.id)
             markRedeemed(toDelete)
         },
+        printEligible(){
+            var sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() -10);
+            console.log(sevenDaysAgo)
+            let s = this.allActions;
+            s.sort((a,b) => a.seconds - b.seconds > 0 ? -1 : 1)
+            s.forEach(d => {
+                let compareDate = new Date(d.timestamp.seconds * 1000);
+                if(compareDate >= sevenDaysAgo){
+                    this.weeklyActions.push(d)
+                }
+            })
+        }
     },
     computed:{
-        uniqe(){
+        unique(){
+            let uniqHandles = [];
+            this.weeklyActions.forEach((c) =>{
+                if(uniqHandles.indexOf(c.relay_handle) === -1 ){ 
+                    uniqHandles.push(c.relay_handle)
+                }
+            })
+            return uniqHandles
+        },
+        actionsThisWeek(){
             let uniqHandles = [];
             this.allActions.forEach((c) =>{
                 if(uniqHandles.indexOf(c.relay_handle) === -1 ){ 
                     uniqHandles.push(c.relay_handle)
                 }
             })
-            return uniqHandles
+            return "";
         }
     }
 }

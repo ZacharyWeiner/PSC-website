@@ -97,7 +97,7 @@
 import { reactive, toRefs } from 'vue'
 import {useRun} from './../services/wallet.js'
 import {mapState, useStore} from 'vuex'
-import Menu from "./../components/Menu.vue"
+import Menu from "./../components/MenuComponent2.vue"
 import Footer from "./../components/Footer.vue"
 import axios from "axios";
 import {useRedemptions} from "./../services/firebase.js"
@@ -150,12 +150,12 @@ export default {
         },
         rankClass(nft){
              let currentRank = this.rankNFT(nft)
-             if(currentRank <= 8) {return "bg-teal-200 text-teal-800"}
-            if(currentRank <= 40) {return "bg-yellow-800 text-yellow-200"}
-            if(currentRank <= 120) {return "bg-red-600 text-red-200"}
-            if(currentRank <= 240) {return "bg-green-600 text-green-100"}
-            if(currentRank <= 400) {return "bg-blue-600 text-blue-200"}
-            return "bg-gray-700 text-gray-100"
+             if(currentRank <= 8) {return "bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 text-teal-800 rounded-t-xl"}
+            if(currentRank <= 40) {return "bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 text-gray-100 rounded-t-xl"}
+            if(currentRank <= 120) {return "bg-gradient-to-r from-red-500 via-red-600 to-red-700 text-gray-100 rounded-t-xl"}
+            if(currentRank <= 240) {return "bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-gray-100 shadow-xl rounded-t-xl"}
+            if(currentRank <= 400) {return "bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-gray-100 shadow-xl rounded-t-xl"}
+            return "bg-gradient-to-b from-gray-400 via-gray-500 to-gray-600 text-gray-100 rounded-t-xl"
         },
         rankTextClass(nft){
              let currentRank = this.rankNFT(nft)

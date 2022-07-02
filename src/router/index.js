@@ -25,6 +25,7 @@ import Spend from '../views/Spend.vue'
 import Claims from '../views/Claims.vue'
 import Friends from '../views/FriendsOfPew.vue'
 import Snipers from '../views/secret/Sniper.vue'
+import ClaimDrop from '../views/secret/ClaimDrop.vue'
 import BingoCardsRelay from '../views/bingo/cards/BuyFromRelay.vue'
 import BingoCardsPoo from '../views/bingo/cards/BuyWithPoo.vue'
 import MyBingoCards from '../views/bingo/cards/MyCards.vue'
@@ -109,6 +110,11 @@ const routes = [
     path: '/claims',
     name: 'Claims',
     component: Claims
+  },
+  {
+    path: '/secret/claim-drop',
+    name: 'Claim Drop',
+    component: ClaimDrop
   },
   {
     path: '/spend',

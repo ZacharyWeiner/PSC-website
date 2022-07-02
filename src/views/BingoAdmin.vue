@@ -2,12 +2,14 @@
  <Menu />
     <div class="bg-gray-100 w-full text-gray-900">
         Game: <span v-if="currentGame && currentGame[0]">{{currentGame[0].id}}</span>
+        <div> <button @click="startAutoPick"> start auto pick {{counter}}</button></div>
+        <div> <button @click="stopAutoPick"> stop autopick</button></div>
     </div>
     <div class="container m-auto my-20 text-white">
         <div v-for="game in currentGame"
             :key="game.id">
             <div v-if="game.gameComplete">
-                <button @click="newGame()"
+                <button @click="startGame"
                         class="p-2 m-2 text-white text-xl bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl"
                 >
                     Create New Game
@@ -121,7 +123,7 @@ export default {
     setup() {
 
         const store = useStore()
-
+        let timerInterval = null;
         const { 
             getCurrentGame, 
             getCurrentGameBingos,
@@ -143,13 +145,18 @@ export default {
 
         
         let meta = ref([])
-        return { newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, playerBingos, currentGame, meta}
-
+        const counter = ref(0);
+        return { newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, playerBingos, currentGame, meta, counter, timerInterval}
     },
     methods: {
+        startGame(){
+            this.newGame()
+            this.startAutoPick();
+        },
         endCurrentGame(gameId) {
             this.endGame(gameId)
             this.$store.commit("setBingoCurrenGame", 0)
+            this.stopAutoPick();
         },
         callNumber(gameId, nums) {
             const newNum = this.getRandom(nums)
@@ -159,14 +166,15 @@ export default {
             }
             this.setWinningNumber(gameId, newNum)
             this.$store.commit("setBingoCurrenGame", gameId)
+            console.log("saved new number")
         },
         getRandom(nums){
             let dup = false; 
-            let newNum = Math.floor(Math.random() * 90) + 1
+            let newNum = Math.floor(Math.random() * 75) + 1
             if(nums.includes(newNum)){dup = true}
             while(dup){
                 dup = false;
-                newNum = Math.floor(Math.random() * 90) + 1
+                newNum = Math.floor(Math.random() * 75) + 1
                 if(nums.includes(newNum)){dup = true}
             }
             return newNum;
@@ -176,8 +184,6 @@ export default {
             const metaData = await  import(`@/assets/metadata/${edition}`)
             this.meta = metaData
             console.log('here', metaData)
-
-            
         },
         compareSquare(sqaure, winSet) {
             try{
@@ -193,6 +199,26 @@ export default {
             }
             
         },
+        startAutoPick(){
+            
+           
+            // console.log("starting the autopick", gId, numbs.winningNumbers);
+            this.timerInterval = setInterval(() => 
+            {
+                 let gId = this.currentGame[0].id;
+                let numbs = []
+                console.log("winning Numbers", this.currentGame[0].winningNumbers)
+                if(this.currentGame[0].winningNumbers){
+                    numbs = this.currentGame[0].winningNumbers;
+                }
+                console.log("calling new number ", gId, numbs);
+                this.counter = this.counter + 1;
+                this.callNumber(gId, numbs)
+            }, 10000)
+        },
+        stopAutoPick(){
+             clearInterval(this.timerInterval);
+        }
     }, 
     computed:{
             winningNumbers(){

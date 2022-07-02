@@ -71,8 +71,27 @@ export function userProfiles() {
          console.log(userActions)
          return {userActions}
     }
+    const unclaimed = ref([])
+    const findUnclaimed = () => {
+       
+        userActionsCollection.onSnapshot(snapshot => {
+            unclaimed.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.claimed !== true)
+                
+         })
+         console.log(unclaimed)
+         return unclaimed
+    }
 
-    return { findUserProfile, setUserProfile, allActions, setUserAction, findUserActions }
+    const markClaimed = (claim) => {
+        userActionsCollection.doc(claim.id).update({
+            claimed: true
+        })
+
+    }
+
+    return { findUserProfile, setUserProfile, allActions, setUserAction, findUserActions, findUnclaimed, markClaimed }
 }
 
 export function useCounters(){

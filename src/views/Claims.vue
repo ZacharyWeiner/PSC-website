@@ -46,7 +46,7 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
-import Menu from "./../components/Menu.vue"
+import Menu from "./../components/MenuComponent2.vue"
 import Footer from "./../components/Footer.vue"
 import Claimable from "./../components/Claimable.vue"
 export default {
