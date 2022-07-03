@@ -107,6 +107,7 @@
 
         </div>
     </div>
+    <div>  <BingoModal /></div>
 </template>
 
 <style>
@@ -118,8 +119,11 @@ import { ref } from 'vue'
 import { useBingo } from '../services/firebase'
 import { useStore } from 'vuex'
 import Menu from "./../components/Menu.vue"
+import BingoModal from "./../components/BingoModal.vue"
 export default {
-    components:{ Menu },
+    components:{ Menu, 
+    BingoModal, 
+    },
     setup() {
 
         const store = useStore()

@@ -34,7 +34,7 @@ import PlayBingo from '../views/bingo/Play.vue'
 import BingoAdmin from '../views/BingoAdmin.vue'
 import BingoCard from '../views/BingoCard.vue'
 import BingoCardList from '../views/BingoCardList.vue'
-import BingoAd from '../views/BingoAd.vue'
+//import BingoAd from '../views/BingoAd.vue'
 
 
 const routes = [
@@ -213,11 +213,11 @@ const routes = [
     name: 'BingoCardList',
     component: BingoCardList
   },
-  {
-    path: '/bingoAd',
-    name: 'BingoAd',
-    component: BingoAd
-  }
+  // {
+  //   path: '/bingoAd',
+  //   name: 'BingoAd',
+  //   component: BingoAd
+  // }
   
 ]
 
