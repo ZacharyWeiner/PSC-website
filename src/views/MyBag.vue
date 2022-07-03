@@ -28,19 +28,19 @@
         </div>
         <div  class="h-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 ">
             
-            <div v-for="nft in orderedNFTs" :key="nft.location"  class='col-span-1'>
-                <div class="mx-2 my-8 py-4 rounded-b-xl bg-gray-900"> 
-                    <div calss='h-64'> <img :src="getBerryUrl(nft)" /></div>
+            <div v-for="nft in orderedNFTs" :key="nft.location"  class='col-span-1 pt-4'>
+                <div class="mx-2  rounded-b-xl bg-gray-900"> 
                     <div class='grid grid-cols-2'  :class='rankClass(nft)'>
                         <div class='w-full col-span-1'> <div class='mx-auto'> Edition {{nft.props.metadata.no}}</div>  </div>
                         <div class='w-full col-span-1'> <div class='mx-auto'> Rank # {{rankNFT(nft)}}</div>  </div>
                         <div class='w-full col-span-1'> <div class='mx-auto'> Trade in for</div>  </div>
                         <div class='w-full col-span-1'> <div class='mx-auto'> {{setPricePoo(nft) * 0.9}} $POO</div>  </div>
                     </div>
-                    <div class=' rounded-xl mx-4'>
+                    <div > <img class='w-full' :src="getBerryUrl(nft)" /></div>
+                    <div class='pt-2 rounded-xl mx-4 '>
                         <div class='text-4xl pt-2' :class='rankTextClass(nft)'>{{rankText(nft)}} </div>
                         <div class='border-b-1'></div>
-                        <div class="grid grid-cols-1"> 
+                        <div class="grid grid-cols-1 h-48 overflow-y-scroll"> 
                             <div class='col-span-1'> 
                                 <div class="grid grid-cols-2"> 
                                     <div class='col-span-1'> Wings: </div>
@@ -81,10 +81,10 @@
                         <div class="grid grid-cols-2"> 
                            
                         </div>
-                         <button @click="redeem(nft)" class="mt-1 block w-full py-3 px-5 text-center bg-green-500 border border-transparent rounded-md shadow-md text-base font-medium text-white hover:bg-gray-50 sm:inline-block sm:w-auto"> 
+                </div> 
+                 <button @click="redeem(nft)" class="w-full text-white bg-gradient-to-r from-teal-400 via-blue-500 to-purple-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-bold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"> 
                             {{getButtonText(nft)}}
                         </button>
-                </div> 
             </div>
         </div>
         </div>
@@ -97,7 +97,7 @@
 import { reactive, toRefs } from 'vue'
 import {useRun} from './../services/wallet.js'
 import {mapState, useStore} from 'vuex'
-import Menu from "./../components/Menu.vue"
+import Menu from "./../components/MenuComponent2.vue"
 import Footer from "./../components/Footer.vue"
 import axios from "axios";
 import {useRedemptions} from "./../services/firebase.js"
@@ -150,12 +150,12 @@ export default {
         },
         rankClass(nft){
              let currentRank = this.rankNFT(nft)
-             if(currentRank <= 8) {return "bg-teal-200 text-teal-800"}
-            if(currentRank <= 40) {return "bg-yellow-800 text-yellow-200"}
-            if(currentRank <= 120) {return "bg-red-600 text-red-200"}
-            if(currentRank <= 240) {return "bg-green-600 text-green-100"}
-            if(currentRank <= 400) {return "bg-blue-600 text-blue-200"}
-            return "bg-gray-700 text-gray-100"
+             if(currentRank <= 8) {return "bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 text-teal-800 rounded-t-xl"}
+            if(currentRank <= 40) {return "bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 text-gray-100 rounded-t-xl"}
+            if(currentRank <= 120) {return "bg-gradient-to-r from-red-500 via-red-600 to-red-700 text-gray-100 rounded-t-xl"}
+            if(currentRank <= 240) {return "bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-gray-100 shadow-xl rounded-t-xl"}
+            if(currentRank <= 400) {return "bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-gray-100 shadow-xl rounded-t-xl"}
+            return "bg-gradient-to-b from-gray-400 via-gray-500 to-gray-600 text-gray-100 rounded-t-xl"
         },
         rankTextClass(nft){
              let currentRank = this.rankNFT(nft)

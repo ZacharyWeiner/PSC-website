@@ -25,6 +25,8 @@ import Spend from '../views/Spend.vue'
 import Claims from '../views/Claims.vue'
 import Friends from '../views/FriendsOfPew.vue'
 import Snipers from '../views/secret/Sniper.vue'
+import ClaimDrop from '../views/secret/ClaimDrop.vue'
+import Airdrop from '../views/secret/Airdrop.vue'
 import BingoCardsRelay from '../views/bingo/cards/BuyFromRelay.vue'
 import BingoCardsPoo from '../views/bingo/cards/BuyWithPoo.vue'
 import MyBingoCards from '../views/bingo/cards/MyCards.vue'
@@ -32,6 +34,7 @@ import PlayBingo from '../views/bingo/Play.vue'
 import BingoAdmin from '../views/BingoAdmin.vue'
 import BingoCard from '../views/BingoCard.vue'
 import BingoCardList from '../views/BingoCardList.vue'
+//import BingoAd from '../views/BingoAd.vue'
 
 
 const routes = [
@@ -109,6 +112,16 @@ const routes = [
     path: '/claims',
     name: 'Claims',
     component: Claims
+  },
+  {
+    path: '/secret/claim-drop',
+    name: 'Claim Drop',
+    component: ClaimDrop
+  },
+  {
+    path: '/secret/airdrop',
+    name: 'Air Drop',
+    component: Airdrop
   },
   {
     path: '/spend',
@@ -199,7 +212,13 @@ const routes = [
     path: '/bingoCardList',
     name: 'BingoCardList',
     component: BingoCardList
-  }
+  },
+  // {
+  //   path: '/bingoAd',
+  //   name: 'BingoAd',
+  //   component: BingoAd
+  // }
+  
 ]
 
 const router = createRouter({

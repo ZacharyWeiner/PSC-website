@@ -1,0 +1,122 @@
+{
+  "name": "Pewnicorn Bingo #114",
+  "description": "Who doesn't like BINGO?",
+  "dna": "0a08b4cbff3802de0cfed463ed4022041a1e3f3a",
+  "edition": 114,
+  "date": 1652748867815,
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "BG3"
+    },
+    {
+      "trait_type": "B1",
+      "value": "11"
+    },
+    {
+      "trait_type": "B2",
+      "value": "12"
+    },
+    {
+      "trait_type": "B3",
+      "value": "8"
+    },
+    {
+      "trait_type": "B4",
+      "value": "2"
+    },
+    {
+      "trait_type": "B5",
+      "value": "5"
+    },
+    {
+      "trait_type": "I1",
+      "value": "29"
+    },
+    {
+      "trait_type": "I2",
+      "value": "21"
+    },
+    {
+      "trait_type": "I3",
+      "value": "23"
+    },
+    {
+      "trait_type": "I4",
+      "value": "28"
+    },
+    {
+      "trait_type": "I5",
+      "value": "27"
+    },
+    {
+      "trait_type": "N1",
+      "value": "37"
+    },
+    {
+      "trait_type": "N2",
+      "value": "36"
+    },
+    {
+      "trait_type": "N3",
+      "value": "Free Space"
+    },
+    {
+      "trait_type": "N4",
+      "value": "43"
+    },
+    {
+      "trait_type": "N5",
+      "value": "41"
+    },
+    {
+      "trait_type": "G1",
+      "value": "54"
+    },
+    {
+      "trait_type": "G2",
+      "value": "56"
+    },
+    {
+      "trait_type": "G3",
+      "value": "46"
+    },
+    {
+      "trait_type": "G4",
+      "value": "47"
+    },
+    {
+      "trait_type": "G5",
+      "value": "48"
+    },
+    {
+      "trait_type": "O1",
+      "value": "73"
+    },
+    {
+      "trait_type": "O2",
+      "value": "68"
+    },
+    {
+      "trait_type": "O3",
+      "value": "70"
+    },
+    {
+      "trait_type": "O4",
+      "value": "66"
+    },
+    {
+      "trait_type": "O5",
+      "value": "72"
+    },
+    {
+      "trait_type": "Bonus",
+      "value": "b12"
+    },
+    {
+      "trait_type": "Sponsor",
+      "value": "Stick D00dz"
+    }
+  ],
+  "compiler": "HM Magic Engine"
+}

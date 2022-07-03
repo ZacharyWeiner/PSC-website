@@ -29,7 +29,8 @@ export default createStore({
     selectedFriendCollection:"",
     bingoCards: '',
     selectedBingoCard: [],
-    bingoCurrenGame: 0
+    bingoCurrenGame: 0,
+    lastAirdroppedList:[]
 
   },
   mutations: {
@@ -93,6 +94,14 @@ export default createStore({
     },
     setBingoCurrenGame(state, _bingoCurrenGame) {
       state.bingoCurrenGame = _bingoCurrenGame
+    },
+    addToLastAirdroppedList(state, _addition){
+      state.lastAirdroppedList.push(_addition)
+    },
+    clearLastAirdroppedList(state){
+      while (state.lastAirdroppedList.length > 0) {
+        state.lastAirdroppedList.pop()
+      }
     }
   },
   actions: {

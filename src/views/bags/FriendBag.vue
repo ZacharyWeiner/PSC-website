@@ -41,7 +41,7 @@
 import { reactive, toRefs } from 'vue'
 import {useRun} from './../../services/wallet.js'
 import {mapState, useStore} from 'vuex'
-import Menu from "./../../components/Menu.vue"
+import Menu from "./../../components/MenuComponent2.vue"
 import Footer from "./../../components/Footer.vue"
 
 export default {

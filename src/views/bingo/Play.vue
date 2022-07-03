@@ -37,8 +37,9 @@
                 </div>
                 <div class="col-span-2 lg:col-span-1 bg-gray-100 rounded-xl shadow p-2 m-2">
                      <!-- Bingo Button --> 
+                     {{hasBingoRecord}}
                     <div class="mb-10 w-full">
-                        <button v-if="isWinner" class="w-full p-4 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl " 
+                        <button v-if="isWinner && !hasBingoRecord" class="w-full p-4 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl " 
                                 @click="userCallBingo(bingo, meta.edition, game.id)"
                                 >
                                 BINGO!
@@ -71,7 +72,7 @@
         <div v-else>
             <div v-if="(game.id !== store.state.bingoCurrenGame)">
                 <div class="text-3xl">
-                    A new game has started, come join us...
+                    <join-game @playGameClicked="joinGame"/>
                 </div>
                 <button v-if="(game.id !== store.state.bingoCurrenGame)" class="p-3 m-2 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl " 
                         @click="playNextGame(game.id)">
@@ -80,7 +81,7 @@
             </div>
             <div v-else>
                 <div class="text-3xl">
-                    Please wait while a new game is starting soon...
+                    <no-game />
                 </div>
             </div>
 
@@ -107,13 +108,15 @@
 
 <script>
 import Footer from "./../../components/Footer.vue"
-import Menu from "./../../components/Menu.vue"
+import Menu from "./../../components/MenuComponent2.vue"
 import { ref } from 'vue';
 import { useBingo } from './../../services/firebase.js';
 import { useStore } from 'vuex'
+import JoinGame from '../../components/JoinGame.vue';
+import NoGame from '../../components/NoGame.vue';
 
 export default {
-    components:{Menu, Footer},
+    components:{Menu, Footer, JoinGame, NoGame},
     async setup() {
         const store = useStore()
         const { getCurrentGame , getCurrentGameBingos, userCallBingo} = useBingo()
@@ -166,7 +169,11 @@ export default {
         playNextGame(gameId) {
             this.$store.commit("setBingoCurrenGame", gameId)
             this.hasBingo = false;
-            window.location.reload()
+            //window.location.reload()
+        },
+        joinGame(){
+            console.log("Current Game ID", this.currentGame[0].id)
+            this.playNextGame(this.currentGame[0].id)
         },
         checkWinner(){
             let b1 = parseInt(this.meta.attributes.filter(a => a.trait_type === "B1")[0].value, 10)
@@ -288,6 +295,19 @@ export default {
             let hasWin =  this.checkWinner();
             console.log(hasWin);
             return hasWin;
+        },
+        hasBingoRecord(){
+            let records = this.playerBingos; 
+            let matches = []
+            console.log("GameId", this.currentGame[0].id)
+            records.forEach((r)=> {
+                console.log(r);
+                if(r.gameId === this.currentGame[0].id && r.edition === this.$store.state.selectedBingoCard.props.no){
+                    matches.push(r)
+                }
+            })
+            console.log(matches)
+            return matches.length > 0
         },
         cardNumbers(){
             let b1 = this.meta.attributes.filter(a => a.trait_type === "B1")[0].value

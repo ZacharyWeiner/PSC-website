@@ -19,6 +19,7 @@ const firestore = firebase.firestore()
 
 export function userProfiles() {
     const userProfilesCollection = firestore.collection('userProfiles')
+    const userActionsCollection = firestore.collection('userActions')
     const findUserProfile = (_owner) => {
         const userProfile = ref([])
         userProfilesCollection.onSnapshot(snapshot => {
@@ -47,7 +48,7 @@ export function userProfiles() {
     onUnmounted(unsubscribe)
 
 
-    const userActionsCollection = firestore.collection('userActions')
+    
     const setUserAction = (_handle, _address, _action) => {
         userActionsCollection.add({
             relay_handle: _handle,
@@ -70,8 +71,27 @@ export function userProfiles() {
          console.log(userActions)
          return {userActions}
     }
+    const unclaimed = ref([])
+    const findUnclaimed = () => {
+       
+        userActionsCollection.onSnapshot(snapshot => {
+            unclaimed.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.claimed !== true)
+                
+         })
+         console.log(unclaimed)
+         return unclaimed
+    }
 
-    return { findUserProfile, setUserProfile, allActions, setUserAction, findUserActions }
+    const markClaimed = (claim) => {
+        userActionsCollection.doc(claim.id).update({
+            claimed: true
+        })
+
+    }
+
+    return { findUserProfile, setUserProfile, allActions, setUserAction, findUserActions, findUnclaimed, markClaimed }
 }
 
 export function useCounters(){
@@ -209,7 +229,8 @@ export function useBingo() {
     const bingoGamesCollection = firestore.collection('bingoGames')
     const activeBingoGame = bingoGamesCollection.orderBy('gameStart').limitToLast(1)
     const usersBingoCollection = firestore.collection('callBingo')
-
+    const currentGameBingos = ref([])
+    
     const getCurrentGame = () => {
         const currentGame = ref()
         activeBingoGame.onSnapshot(snapshot => {
@@ -220,7 +241,7 @@ export function useBingo() {
     }
 
     const getCurrentGameBingos = (gameId) => {
-        const currentGameBingos = ref()
+        
         usersBingoCollection.onSnapshot(snapshot => {
             currentGameBingos.value = snapshot.docs    
                 .map(doc => ({ id: doc.id, ...doc.data() }))
@@ -292,4 +313,48 @@ export function useBingo() {
     }
 
     return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
+}
+
+
+export function useAdvertisements() {
+    const advertisementCollection = firestore.collection('advertisements')
+    const allAdvertisements = ref([])
+    const unsubscribe =  advertisementCollection.onSnapshot(snapshot => {
+        allAdvertisements.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
+
+    const newAdvertisment = () => {
+        advertisementCollection.add({
+            created: firebase.firestore.FieldValue.serverTimestamp(),
+            title: '',
+            description: '',
+            linkURL: '',
+            photoURL: '',
+            orderId: 0,
+            viewCount: 0,
+            clickCount: 0
+        })
+        console.log('new advertisement')
+    }
+
+    const updateCount = (id, count) => {
+        advertisementCollection.doc(id).update({
+            clickCount: ++count
+        })
+        console.log('updated count')
+    }
+
+    const updateView = (id, _viewCount) => {
+        advertisementCollection.doc(id).update({
+            viewCount: ++_viewCount
+        })
+        console.log('updated view')
+    }
+
+
+
+    return {allAdvertisements, newAdvertisment, updateCount, updateView}
 }

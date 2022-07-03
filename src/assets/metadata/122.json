@@ -1,0 +1,122 @@
+{
+  "name": "Pewnicorn Bingo #122",
+  "description": "Who doesn't like BINGO?",
+  "dna": "c4af190e3b8a1c87051a496ce6ce4feda88b8517",
+  "edition": 122,
+  "date": 1652748876050,
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "BG3"
+    },
+    {
+      "trait_type": "B1",
+      "value": "12"
+    },
+    {
+      "trait_type": "B2",
+      "value": "15"
+    },
+    {
+      "trait_type": "B3",
+      "value": "10"
+    },
+    {
+      "trait_type": "B4",
+      "value": "3"
+    },
+    {
+      "trait_type": "B5",
+      "value": "1"
+    },
+    {
+      "trait_type": "I1",
+      "value": "17"
+    },
+    {
+      "trait_type": "I2",
+      "value": "18"
+    },
+    {
+      "trait_type": "I3",
+      "value": "20"
+    },
+    {
+      "trait_type": "I4",
+      "value": "16"
+    },
+    {
+      "trait_type": "I5",
+      "value": "30"
+    },
+    {
+      "trait_type": "N1",
+      "value": "43"
+    },
+    {
+      "trait_type": "N2",
+      "value": "33"
+    },
+    {
+      "trait_type": "N3",
+      "value": "Free Space"
+    },
+    {
+      "trait_type": "N4",
+      "value": "39 "
+    },
+    {
+      "trait_type": "N5",
+      "value": "32"
+    },
+    {
+      "trait_type": "G1",
+      "value": "51"
+    },
+    {
+      "trait_type": "G2",
+      "value": "50"
+    },
+    {
+      "trait_type": "G3",
+      "value": "56"
+    },
+    {
+      "trait_type": "G4",
+      "value": "48"
+    },
+    {
+      "trait_type": "G5",
+      "value": "58"
+    },
+    {
+      "trait_type": "O1",
+      "value": "64"
+    },
+    {
+      "trait_type": "O2",
+      "value": "67"
+    },
+    {
+      "trait_type": "O3",
+      "value": "73"
+    },
+    {
+      "trait_type": "O4",
+      "value": "65"
+    },
+    {
+      "trait_type": "O5",
+      "value": "66"
+    },
+    {
+      "trait_type": "Bonus",
+      "value": "b10"
+    },
+    {
+      "trait_type": "Sponsor",
+      "value": "Stick D00dz"
+    }
+  ],
+  "compiler": "HM Magic Engine"
+}

@@ -1,0 +1,122 @@
+{
+  "name": "Pewnicorn Bingo #84",
+  "description": "Who doesn't like BINGO?",
+  "dna": "167a5fb25bb94afc77ca6f491f334a3403d8cddd",
+  "edition": 84,
+  "date": 1652748837344,
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "BG1"
+    },
+    {
+      "trait_type": "B1",
+      "value": "2"
+    },
+    {
+      "trait_type": "B2",
+      "value": "6"
+    },
+    {
+      "trait_type": "B3",
+      "value": "7"
+    },
+    {
+      "trait_type": "B4",
+      "value": "8"
+    },
+    {
+      "trait_type": "B5",
+      "value": "15"
+    },
+    {
+      "trait_type": "I1",
+      "value": "30"
+    },
+    {
+      "trait_type": "I2",
+      "value": "28"
+    },
+    {
+      "trait_type": "I3",
+      "value": "24"
+    },
+    {
+      "trait_type": "I4",
+      "value": "27"
+    },
+    {
+      "trait_type": "I5",
+      "value": "23"
+    },
+    {
+      "trait_type": "N1",
+      "value": "35"
+    },
+    {
+      "trait_type": "N2",
+      "value": "38"
+    },
+    {
+      "trait_type": "N3",
+      "value": "Free Space"
+    },
+    {
+      "trait_type": "N4",
+      "value": "44"
+    },
+    {
+      "trait_type": "N5",
+      "value": "34"
+    },
+    {
+      "trait_type": "G1",
+      "value": "55"
+    },
+    {
+      "trait_type": "G2",
+      "value": "50"
+    },
+    {
+      "trait_type": "G3",
+      "value": "60"
+    },
+    {
+      "trait_type": "G4",
+      "value": "54"
+    },
+    {
+      "trait_type": "G5",
+      "value": "59"
+    },
+    {
+      "trait_type": "O1",
+      "value": "70"
+    },
+    {
+      "trait_type": "O2",
+      "value": "65"
+    },
+    {
+      "trait_type": "O3",
+      "value": "68"
+    },
+    {
+      "trait_type": "O4",
+      "value": "67"
+    },
+    {
+      "trait_type": "O5",
+      "value": "75"
+    },
+    {
+      "trait_type": "Bonus",
+      "value": "b1"
+    },
+    {
+      "trait_type": "Sponsor",
+      "value": "Stick D00dz"
+    }
+  ],
+  "compiler": "HM Magic Engine"
+}
