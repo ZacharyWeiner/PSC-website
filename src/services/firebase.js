@@ -313,3 +313,47 @@ export function useBingo() {
 
     return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
 }
+
+
+export function useAdvertisements() {
+    const advertisementCollection = firestore.collection('advertisements')
+    const allAdvertisements = ref([])
+    const unsubscribe =  advertisementCollection.onSnapshot(snapshot => {
+        allAdvertisements.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
+
+    const newAdvertisment = () => {
+        advertisementCollection.add({
+            created: firebase.firestore.FieldValue.serverTimestamp(),
+            title: '',
+            description: '',
+            linkURL: '',
+            photoURL: '',
+            orderId: 0,
+            viewCount: 0,
+            clickCount: 0
+        })
+        console.log('new advertisement')
+    }
+
+    const updateCount = (id, count) => {
+        advertisementCollection.doc(id).update({
+            clickCount: ++count
+        })
+        console.log('updated count')
+    }
+
+    const updateView = (id, _viewCount) => {
+        advertisementCollection.doc(id).update({
+            viewCount: ++_viewCount
+        })
+        console.log('updated view')
+    }
+
+
+
+    return {allAdvertisements, newAdvertisment, updateCount, updateView}
+}
