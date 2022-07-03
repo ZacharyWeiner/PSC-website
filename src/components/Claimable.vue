@@ -64,11 +64,20 @@ export default {
             return false;
         },
         canClaim() {
-            console.log(this.isLogin,  this.userActions['userActions'].value.length >  0,  this.$store.state.user_jigs.length > 0)
-            if(this.isLogin  && !this.userHasAction && this.$store.state.user_jigs){
-                return true;
+            let _canClaim = false;
+            if(this.isLogin  && this.$store.state.user_jigs.length > 0){
+                _canClaim = true;
             } 
-            return false;
+            let compareDate = new Date('2022-07-02');
+            this.userActions['userActions'].value.forEach((ua)=> {
+                if(new Date(ua.timestamp.seconds * 1000) > compareDate){
+                    console.log("newer")
+                    _canClaim = false;
+                }
+            })
+            console.log(compareDate, this.isLogin,  this.userActions['userActions'].value.length >  0,  this.$store.state.user_jigs.length > 0)
+            
+            return _canClaim;
         },
          userJigs(){
             return this.$store.state.user_jigs;

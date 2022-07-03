@@ -110,7 +110,8 @@ Requires JS
           </Popover>
         </PopoverGroup>
         <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-          <div v-if="!relayUser">
+          <div v-if="isLogin" class="flex-shrink-0 text-gray-700 px-1"> <span class='text-xs'>$</span> {{relayUser}}</div>
+          <div v-if="!isLogin">
               <button @click="login" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Sign In </button>
             </div>
             <div v-else>
@@ -156,7 +157,8 @@ Requires JS
                 {{ item.name }}
               </router-link>
             </div>
-            <div v-if="isLogin">
+            <div v-if="isLogin" class="flex-shrink-0 text-gray-700 px-1"> <span class='text-xs'>$</span> {{relayUser}}</div>
+            <div v-if="!isLogin">
               <button @click="login" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Sign In </button>
             </div>
             <div v-else>

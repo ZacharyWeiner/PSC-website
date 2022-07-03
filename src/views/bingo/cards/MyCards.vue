@@ -33,7 +33,7 @@
 <script>
 import { useStore } from 'vuex'
 import { useRun } from "./../../../services/wallet.js";
-import Menu from "./../../../components/Menu.vue"
+import Menu from "./../../../components/MenuComponent2.vue"
 export default {
     components: {Menu},
     async setup() {

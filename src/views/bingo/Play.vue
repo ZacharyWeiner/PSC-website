@@ -108,7 +108,7 @@
 
 <script>
 import Footer from "./../../components/Footer.vue"
-import Menu from "./../../components/Menu.vue"
+import Menu from "./../../components/MenuComponent2.vue"
 import { ref } from 'vue';
 import { useBingo } from './../../services/firebase.js';
 import { useStore } from 'vuex'

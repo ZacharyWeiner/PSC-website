@@ -13,7 +13,7 @@
             </div>
             </div>
             <div class="-mt-12 aspect-w-5 aspect-h-3 md:aspect-w-2 md:aspect-h-1">
-            <img class="transform rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/2268.png" alt="App screenshot" />
+            <img class="transform rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20" src="https://berry2.relayx.com/1cb775fbe97e85d62daa8cbc813e890c64784ae2922c79fb514c4ed3a82373c8_o1" alt="App screenshot" />
             </div>
         </div>
         </div>
