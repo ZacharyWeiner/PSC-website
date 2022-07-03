@@ -24,10 +24,10 @@
                         <div class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
                         <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                             <span class="block">Last Number Pulled:</span>
-                            <span v-if="currentGame && currentGame[0].winningNumbers && currentGame[0].winningNumbers.length > 1" class="block">{{currentGame[0].winningNumbers[currentGame[0].winningNumbers.length -1]}}</span>
+                            <span v-if="currentGame && currentGame[0].winningNumbers && currentGame[0].winningNumbers.length > 0" class="block">{{currentGame[0].winningNumbers[currentGame[0].winningNumbers.length -1]}}</span>
                         </h2>
                         <div class="mt-8 max-w-96 justify-center text-indigo-800 font-bold text-xl">
-                            <div v-if="currentGame && currentGame[0].winningNumbers && currentGame[0].winningNumbers.length > 1" class="max-w-96 break-all">
+                            <div v-if="currentGame && currentGame[0].winningNumbers && currentGame[0].winningNumbers.length > 0" class="max-w-96 break-all">
                                 <!-- <span v-for="number in currentGame[0].winningNumbers.sort((a,b)=> { parseInt(a, 10) - parseInt(b, 10) ?  1 : -1})" :key="number" class='px-1 '>{{number}} </span> -->
                                 {{winningNumbers}}
                             </div>
@@ -51,7 +51,10 @@
                         </div>
                         </div>
                         <div class="text-gray-900 text-lg container break-normal">
-                            Winner: {{game.winners.toString()}}
+                           Winners: 
+                            <div v-for="winner in game.winners" :key="winner.id">
+                                {{winner.winner.relayHandle}}
+                            </div>
                         </div> 
                          <div class="container bg-gray-600 w-full p-4 rounded">
                             Players called Bingo:
@@ -145,7 +148,6 @@ export default {
         console.log(store.state.bingoCurrenGame)
 
         const currentGame = getCurrentGame()
-        
         let playerBingos = ref([])
         playerBingos = getCurrentGameBingos(store.state.bingoCurrenGame)
 
