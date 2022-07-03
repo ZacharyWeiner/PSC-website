@@ -296,9 +296,9 @@ export function useBingo() {
 
 export function useAdvertisements() {
     const advertisementCollection = firestore.collection('advertisements')
-    const allAdvertisement= ref([])
+    const allAdvertisements = ref([])
     const unsubscribe =  advertisementCollection.onSnapshot(snapshot => {
-        allAdvertisement.value = snapshot.docs
+        allAdvertisements.value = snapshot.docs
             .map(doc => ({ id: doc.id, ...doc.data() }))
     })
     onUnmounted(unsubscribe)
@@ -311,10 +311,28 @@ export function useAdvertisements() {
             description: '',
             linkURL: '',
             photoURL: '',
-            orderId: 0
+            orderId: 0,
+            viewCount: 0,
+            clickCount: 0
         })
+        console.log('new advertisement')
+    }
+
+    const updateCount = (id, count) => {
+        advertisementCollection.doc(id).update({
+            clickCount: ++count
+        })
+        console.log('updated count')
+    }
+
+    const updateView = (id, _viewCount) => {
+        advertisementCollection.doc(id).update({
+            viewCount: ++_viewCount
+        })
+        console.log('updated view')
     }
 
 
-    return {allAdvertisement, newAdvertisment}
+
+    return {allAdvertisements, newAdvertisment, updateCount, updateView}
 }
