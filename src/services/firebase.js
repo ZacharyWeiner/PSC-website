@@ -274,13 +274,13 @@ export function useBingo() {
     }
 
     const getCurrentGameBingos = (gameId) => {
-        
+        console.log()
         usersBingoCollection.onSnapshot(snapshot => {
             currentGameBingos.value = snapshot.docs    
                 .map(doc => ({ id: doc.id, ...doc.data() }))
                 .filter(g => g.gameId === gameId)
-                // console.log(gameId)
-                // console.log(currentGameBingos)
+                console.log("finding bingos for game ", gameId)
+                console.log(currentGameBingos)
         })
         return currentGameBingos 
     }
@@ -345,7 +345,7 @@ export function useBingo() {
         usersBingoCollection.doc(id).delete()
     }
 
-    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
+    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos, currentGameBingos}
 }
 
 
