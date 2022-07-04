@@ -8,6 +8,7 @@ import Check from '../views/Check.vue'
 import JSONPage from '../views/JSONPage.vue'
 import MintTest from '../views/MintTest.vue'
 import MyBag from '../views/MyBag.vue'
+import Profile from '../views/Profile.vue'
 import Treasury from '../views/Treasury.vue'
 import RelayOrders from '../views/RelayOrders.vue'
 import Votes from '../views/Votes.vue'
@@ -112,6 +113,11 @@ const routes = [
     path: '/claims',
     name: 'Claims',
     component: Claims
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
   },
   {
     path: '/secret/claim-drop',

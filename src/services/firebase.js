@@ -20,6 +20,8 @@ const firestore = firebase.firestore()
 export function userProfiles() {
     const userProfilesCollection = firestore.collection('userProfiles')
     const userActionsCollection = firestore.collection('userActions')
+    const profile = ref()
+
     const findUserProfile = (_owner) => {
         const userProfile = ref([])
         userProfilesCollection.onSnapshot(snapshot => {
@@ -31,13 +33,44 @@ export function userProfiles() {
          return { userProfile }
     }
 
-    const setUserProfile = (_handle, _address) => {
+    const addUserProfile = (_handle, _address, _handcash, _twitter, _email, _phone) => {
         userProfilesCollection.add({
             relay_handle: _handle,
             ownerAddress: _address,
+            handcashHandle: _handcash,
+            twitterHandle: _twitter,
+            email: _email,
+            phone: _phone,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
         console.log('profile-updated')
+
+    }
+    const findProfile = (id) => {
+        userProfilesCollection.onSnapshot(snapshot => {
+            profile.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.id === id)
+         })
+         return { profile }
+    }
+    const findProfileByHandle = (_relayHandle) => {
+        userProfilesCollection.onSnapshot(snapshot => {
+            profile.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(o => o.relay_handle === _relayHandle)
+         })
+         return profile
+    }
+    const updateUserProfile = (profileId, _handle, _address, _handcash, _twitter, _email, _phone) => {
+        userProfilesCollection.doc(profileId).update({
+            relay_handle: _handle,
+            ownerAddress: _address,
+            handcashHandle: _handcash,
+            twitterHandle: _twitter,
+            email: _email,
+            phone: _phone,
+        })
 
     }
     const allActions = ref([])
@@ -91,7 +124,7 @@ export function userProfiles() {
 
     }
 
-    return { findUserProfile, setUserProfile, allActions, setUserAction, findUserActions, findUnclaimed, markClaimed }
+    return { findUserProfile, findProfile, findProfileByHandle, addUserProfile, updateUserProfile,  allActions, setUserAction, findUserActions, findUnclaimed, markClaimed }
 }
 
 export function useCounters(){
@@ -249,19 +282,19 @@ export function useBingo() {
                 // console.log(gameId)
                 // console.log(currentGameBingos)
         })
+        return currentGameBingos 
     }
 
     onUnmounted(getCurrentGame, getCurrentGameBingos)
 
-    const newGame = (_gamesession) => {
+    const newGame = () => {
         bingoGamesCollection.add({
             gameStart: firebase.firestore.FieldValue.serverTimestamp(),
             gameEnd: '',
             gameComplete: false,
             winningNumbers: [],
             calledBingo: [],
-            winners: [],
-            gameSession: _gamesession
+            winners: []
 
         })
         console.log('new game started')
@@ -311,7 +344,7 @@ export function useBingo() {
         usersBingoCollection.doc(id).delete()
     }
 
-    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos, currentGameBingos}
+    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
 }
 
 
