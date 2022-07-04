@@ -160,7 +160,7 @@ export default {
         console.log(store.state.bingoCurrenGame)
 
         const currentGame = getCurrentGame()
-        console.log("CurrentGame from state admin setup", store.state.bingoCurrenGame)
+        console.log("CurrentGame from state admin setup", currentGame)
         getCurrentGameBingos(store.state.bingoCurrenGame)
         let meta = ref([])
         const gameSession = ref(0)
@@ -171,17 +171,23 @@ export default {
     },
     methods: {
         startGame(){
-            console.log("currentgameid before call to start game ", this.currentGame[0].id)
-            console.log("store currentgameid before call to start game ", this.$store.state.bingoCurrenGame)
+            console.log("currenGamwe1", this.currentGame)
+            this.getCurrentGame()
+            console.log("currentgame2", this.currentGame)
+            console.log("store currentgameid before call to start game ", this.$store.state.bingoCurrenGame, this.currentGame[0].id)
+            if(this.$store.state.bingoCurrenGame === 0){
+                this.$store.commit("setBingoCurrenGame", this.currentGame[0].id)
+            }
             this.loading = true;
-            console.log(this.gameSession)
-            this.newGame(this.gameSession)
-            
+            console.log(this.currentGame[0].session)
+            this.newGame(this.currentGame[0].session)
+            this.getCurrentGame()
             console.log(this.currentGame[0].id)
             this.$store.commit("setBingoCurrenGame", this.currentGame[0].id)
             this.loading = false;
             console.log("store currentgameid after call to start game ", this.$store.state.bingoCurrenGame)
             console.log("currentgameid after call to start game ", this.currentGame[0].id)
+            console.log("currentgame after call to start game ", this.currentGame[0])
             
             //this.startAutoPick();
         },
@@ -256,12 +262,20 @@ export default {
              clearInterval(this.timerInterval);
         },
         newGameSession(currentGame) {
-            console.log(currentGame[0]);
-            let confirmSession = confirm("The current session is " + currentGame[0].gameSession + ", would you like to create a new session?")
-            if (confirmSession) {
-                this.gameSession = ++currentGame[0].gameSession
-                alert("Session " + this.gameSession + " has been created, Have Fun!")
-                this.newGame(this.gameSession)
+            console.log(currentGame[0].session);            
+            if(currentGame[0].session){
+                let confirmSession = confirm("The current session is " + currentGame[0].session + ", would you like to create a new session?")
+                if (confirmSession) {
+                    this.session = ++currentGame[0].session
+                    alert("Session " + this.session + " has been created, Have Fun!")
+                    this.newGame(this.session)
+                }
+            }else{
+                this.getCurrentGame()
+                console.log("starting new game session should be  ", this.currentGame)
+                this.newGame(11)
+                this.getCurrentGame()
+                console.log(this.currentGame)
             }
         }
     },
