@@ -302,12 +302,14 @@ export default {
         },
         hasBingoRecord(){
             let matches = []
-            this.currentGameBingos.forEach((r)=> {
-                console.log(r);
-                if(r.gameId === this.currentGame[0].id && r.edition === this.$store.state.selectedBingoCard.props.no){
-                    matches.push(r)
-                }
-            })
+            if(this.currentGameBingos?.length > 0){
+                this.currentGameBingos.forEach((r)=> {
+                    console.log(r);
+                    if(r.gameId === this.currentGame[0].id && r.edition === this.$store.state.selectedBingoCard.props.no){
+                        matches.push(r)
+                    }
+                })
+            }
             console.log(matches)
             return matches.length > 0
         },
