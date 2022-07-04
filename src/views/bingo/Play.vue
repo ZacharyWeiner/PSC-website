@@ -54,7 +54,7 @@
                     <!-- Bingo List --> 
                     <div class="">
                         Bingos:
-                        <div v-for="player in playerBingos"
+                        <div v-for="player in currentGameBingos"
                                 :key="player.id"
                                 :class="`${ (store.state.relayx_handle === player.relayHandle) ? 'text-bold text-green-500' : ''}`">
                             {{player.relayHandle}}
@@ -119,12 +119,12 @@ export default {
     components:{Menu, Footer, JoinGame, NoGame},
     async setup() {
         const store = useStore()
-        const { getCurrentGame , getCurrentGameBingos, userCallBingo} = useBingo()
+        const { getCurrentGame , getCurrentGameBingos, userCallBingo, currentGameBingos} = useBingo()
 
         const currentGame = getCurrentGame()
-        const playerBingos = getCurrentGameBingos(store.state.bingoCurrenGame)
+        getCurrentGameBingos(store.state.bingoCurrenGame)
 
-        // console.log(currentGame.value)
+        console.log(currentGame)
         let matches = ref([])
         let meta = ref([])
         console.log("Slected Card Number", store.state.selectedBingoCard.props.no);
@@ -145,7 +145,7 @@ export default {
         }
         const hasBingo = ref(false);
 
-        return { currentGame, store, meta, bingo, playerBingos, userCallBingo, matches, hasBingo }
+        return { currentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos }
     },
     methods: {
         goBack() {
@@ -169,7 +169,7 @@ export default {
         playNextGame(gameId) {
             this.$store.commit("setBingoCurrenGame", gameId)
             this.hasBingo = false;
-            //window.location.reload()
+            window.location.reload()
         },
         joinGame(){
             console.log("Current Game ID", this.currentGame[0].id)
@@ -297,10 +297,8 @@ export default {
             return hasWin;
         },
         hasBingoRecord(){
-            let records = this.playerBingos; 
             let matches = []
-            console.log("GameId", this.currentGame[0].id)
-            records.forEach((r)=> {
+            this.currentGameBingos.forEach((r)=> {
                 console.log(r);
                 if(r.gameId === this.currentGame[0].id && r.edition === this.$store.state.selectedBingoCard.props.no){
                     matches.push(r)

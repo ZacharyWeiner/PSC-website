@@ -249,19 +249,19 @@ export function useBingo() {
                 // console.log(gameId)
                 // console.log(currentGameBingos)
         })
-        return currentGameBingos 
     }
 
     onUnmounted(getCurrentGame, getCurrentGameBingos)
 
-    const newGame = () => {
+    const newGame = (_gamesession) => {
         bingoGamesCollection.add({
             gameStart: firebase.firestore.FieldValue.serverTimestamp(),
             gameEnd: '',
             gameComplete: false,
             winningNumbers: [],
             calledBingo: [],
-            winners: []
+            winners: [],
+            gameSession: _gamesession
 
         })
         console.log('new game started')
@@ -311,7 +311,7 @@ export function useBingo() {
         usersBingoCollection.doc(id).delete()
     }
 
-    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
+    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos, currentGameBingos}
 }
 
 
