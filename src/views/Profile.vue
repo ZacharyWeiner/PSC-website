@@ -1,14 +1,5 @@
 <template>
 <Menu />
-    <div>
-        <button @click="saveUserProfile" class="text-white"> Add profile </button>
-        <div class='text-white'>{{selectedProfile.relay_handle}} </div>
-        <div class='text-white'>{{selectedProfile.ownerAddress}} </div>
-        <div class='text-white'>{{selectedProfile.handcashHandle}} </div>
-        <div class='text-white'>{{selectedProfile.twitterHandle}} </div>
-        <div class='text-white'>{{selectedProfile.email}} </div>
-        <div class='text-white'>{{selectedProfile.phone}} </div>
-    </div>
     <div class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
@@ -160,17 +151,22 @@ export default {
     },
     methods:{
         edit(){
+            if(!this.profile[0]){
+                this.addProfile()
+                this.profile = this.findProfileByHandle(this.$store.state.relayx_handle)
+            }
             this.edit_handcash = this.profile[0].handcashHandle
             this.edit_twitter = this.profile[0].twitterHandle
             this.edit_email = this.profile[0].email
             this.edit_phone = this.profile[0].phone
             this.isEdit = true;
+
         },
         findProfile(){
             this.findProfileByHandle(this.$store.state.relayx_handle)
         },
         addProfile(){
-            this.addUserProfile(this.$store.state.relayx_handle, this.$store.state.user_address, "zack", "developingzack", "z@z.com", "xxx-yyy-zzzz")
+            this.addUserProfile(this.$store.state.relayx_handle, this.$store.state.user_address, "", "", "", "")
         },
         saveUserProfile(){
             this.updateUserProfile(this.profile[0].id, this.$store.state.relayx_handle, this.$store.state.user_address, this.edit_handcash, this.edit_twitter,this.edit_email, this.edit_phone)
@@ -183,7 +179,7 @@ export default {
                 console.log(this.profile[0].id)
                 return this.profile[0]
             }
-            return {relayx_handle: ""}
+            return {relay_handle: this.$store.state.relayx_handle, ownerAddress: this.$store.state.user_address}
         }
     }
 }
