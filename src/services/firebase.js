@@ -249,7 +249,6 @@ export function useBingo() {
                 // console.log(gameId)
                 // console.log(currentGameBingos)
         })
-        return currentGameBingos 
     }
 
     onUnmounted(getCurrentGame, getCurrentGameBingos)
@@ -312,7 +311,7 @@ export function useBingo() {
         usersBingoCollection.doc(id).delete()
     }
 
-    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
+    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos, currentGameBingos}
 }
 
 
