@@ -145,7 +145,7 @@ export default {
         }
         const hasBingo = ref(false);
 
-        return { currentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos }
+        return { currentGame, getCurrentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos, getCurrentGameBingos }
     },
     methods: {
         goBack() {
@@ -169,7 +169,11 @@ export default {
         playNextGame(gameId) {
             this.$store.commit("setBingoCurrenGame", gameId)
             this.hasBingo = false;
-            window.location.reload()
+            this.getCurrentGame()
+            console.log(this.currentGame[0].id);
+            this.getCurrentGameBingos(this.currentGame[0].id);
+            //window.location.reload()
+            
         },
         joinGame(){
             console.log("Current Game ID", this.currentGame[0].id)
