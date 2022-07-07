@@ -123,7 +123,7 @@
 
         </div>
     </div>
-    <div v-if="showModal">  <BingoModal /></div>
+    <div>  <BingoModal  :isOpen="shouldShowBingoModal" :isBingo="true" /></div>
 </template>
 
 <style>
@@ -289,11 +289,19 @@ export default {
             },
             calledBingo(){
                 console.log("Checking Called Bingo", this.playerBingos)
-                if(this.playerBingos.length > 0 ){
+                if(this.playerBingos?.length > 0 ){
                     return this.playerBingos;
                 }
                 return [];
+            },
+            shouldShowBingoModal(){
+                console.log("Checking Called Bingo", this.playerBingos)
+                if(this.playerBingos?.length > 0 ){
+                    return true
+                }
+                return false;
             }
+            
         }
 }
 </script>
