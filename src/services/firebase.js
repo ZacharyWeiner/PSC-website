@@ -348,7 +348,34 @@ export function useBingo() {
     return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos, currentGameBingos}
 }
 
+export function gameSessionCards(handle, session){
+    const userGameSessionCardsCollection = firestore.collection('userGameSessionCards')
+    const userGameSessionCards = ref([]);
 
+    const fetchUserGameSessionCards = () => { 
+        userGameSessionCardsCollection.onSnapshot(snapshot => {
+            userGameSessionCards.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                .filter(gc => gc.handle === handle && gc.session === session)
+        })
+        console.log("fetched cards");
+    }
+    onUnmounted(fetchUserGameSessionCards)
+
+    const addCardToSession = (session, handle, edition, user_address) => {
+        userGameSessionCardsCollection.add({
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            handle: handle,
+            edition: edition,
+            user_address: user_address,
+            session: session
+
+        })
+        console.log("card added")
+    }
+    return {addCardToSession, fetchUserGameSessionCards, userGameSessionCards}
+
+}
 export function useAdvertisements() {
     const advertisementCollection = firestore.collection('advertisements')
     const allAdvertisements = ref([])
