@@ -32,10 +32,12 @@ import BingoCardsRelay from '../views/bingo/cards/BuyFromRelay.vue'
 import BingoCardsPoo from '../views/bingo/cards/BuyWithPoo.vue'
 import MyBingoCards from '../views/bingo/cards/MyCards.vue'
 import PlayBingo from '../views/bingo/Play.vue'
+import PlayBingo2 from '../views/bingo/Play2.vue'
 import BingoAdmin from '../views/BingoAdmin.vue'
 import BingoCard from '../views/BingoCard.vue'
 import BingoCardList from '../views/BingoCardList.vue'
 //import BingoAd from '../views/BingoAd.vue'
+import CardsInSession from "../views/bingo/CardsInSession.vue"
 
 
 const routes = [
@@ -185,6 +187,11 @@ const routes = [
     component: PlayBingo
   },
   {
+    path: '/bingo/play2',
+    name: 'Play Bingo2',
+    component: PlayBingo2
+  },
+  {
     path: '/bingo/cards/buy-from-relay',
     name: 'Relay X Bingo Cards',
     component: BingoCardsRelay
@@ -198,6 +205,11 @@ const routes = [
     path: '/bingo/cards/my-cards',
     name: 'My Bingo Cards',
     component: MyBingoCards
+  },
+  {
+    path: '/bingo/cards-in-session',
+    name: 'My Bingo Cards in Session',
+    component: CardsInSession
   },
   {
     path: '/secret/snipers',

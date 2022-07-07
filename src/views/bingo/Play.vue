@@ -1,18 +1,18 @@
 <template>
     <Menu />
-    <div
-    class="h-36 bg-contain bg-center md:h-64"
-    style="
-        background-image: url('https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorns+header.png');
-    "
-    ></div>
     <div class="text-white pt-4">
     <div v-for="game in currentGame" 
                 :key="game.id"
                 class="container m-auto m-1 p-2">
         <div v-if="!game.gameComplete && (game.id === store.state.bingoCurrenGame)">    
-            <div class="grid grid-cols-2 lg:grid-cols-3">
-                <div class="col-span-2">
+            <div class="grid grid-cols-5 lg:grid-cols-7">
+                <div class="col-span-1">
+                        <div class="w-full rounded-xl">
+                            <div class="text-lg font-bold">Numbers Called: </div>
+                            <div class='w-full h-96 overflow-y-scroll bg-gray-900 rounded-xl shadow px-1'> <div v-for="number in winningNumbers" :key="number"> {{ number }} </div> </div>
+                        </div>
+                </div>
+                <div class="col-span-4 lg:col-span-4">
                     <!-- Card Header --> 
                     <div class="flex grid grid-cols-5 ring bg-indigo-500 ">
                         <div v-for="letter in ['B','I','N','G','O'] "
@@ -35,17 +35,18 @@
                     
                     </div>
                 </div>
-                <div class="col-span-2 lg:col-span-1 bg-gray-100 rounded-xl shadow p-2 m-2">
+                <div class="col-span-7 lg:col-span-2 bg-gray-100 rounded-xl shadow p-2 m-2">
                      <!-- Bingo Button --> 
-                     {{hasBingoRecord}}
+                      <div class="text-gray-900 text-lg font-black"> Card: {{meta.edition}}</div>
+                     {{hasBingoRecord ? "You have a BINGO" : ""}}
                     <div class="mb-10 w-full">
-                        <button v-if="isWinner && !hasBingoRecord" class="w-full p-4 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl " 
+                        <button v-if="isWinner && !hasBingoRecord" class="font-black w-full p-4 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl " 
                                 @click="userCallBingo(bingo, meta.edition, game.id)"
                                 >
                                 BINGO!
                                 
                         </button> 
-                        <button v-if="!isWinner" @click='checkWinner'>Check Bingo</button>
+                        <!-- <button v-if="!isWinner" @click='checkWinner'>Check Bingo</button> -->
                     </div> 
                     <!-- Current Card --> 
                     <div class="w-full"> 
@@ -55,6 +56,7 @@
                     <div class="">
                         Bingos:
                         <div v-for="player in currentGameBingos"
+                            class="text-gray-900"
                                 :key="player.id"
                                 :class="`${ (store.state.relayx_handle === player.relayHandle) ? 'text-bold text-green-500' : ''}`">
                             {{player.relayHandle}}
@@ -88,16 +90,8 @@
             
 
             
-        </div>
-        
+        </div> 
     </div>
-        <div class="flex pb-4 ">
-                <div class="w-full bg-green-100 rounded-xl">
-                    <div class="text-gray-900"> Card: {{meta.edition}} - Numbers Called: </div>
-                    <div class='w-full text-green-700'> <span v-for="number in winningNumbers" :key="number"> {{ number }}{{winningNumbers.indexOf(number) !== (winningNumbers.length -1) ? ", " : " "}}  </span> </div>
-                </div>
-            </div>
-    
         
     </div>
     <Footer />
@@ -276,14 +270,14 @@ export default {
 
             let diagonalLeftRight = [b1, i2, g4, o5]
             let diagonalCount = diagonalLeftRight.filter( r => {if(this.currentGame[0].winningNumbers.indexOf(r) > -1) {return r}})
-            if(diagonalCount === 4){
+            if(diagonalCount.length === 4){
                 this.hasBingo = true
                 return true;
             }
 
             let diagonalRightLeft = [b5, i4, g2, o1]
             diagonalCount = diagonalRightLeft.filter( r => {if(this.currentGame[0].winningNumbers.indexOf(r) > -1) {return r}})
-            if(diagonalCount === 4){
+            if(diagonalCount.length === 4){
                 this.hasBingo = true
                 return true;
             }
@@ -293,12 +287,17 @@ export default {
     computed:{
         winningNumbers(){
             if(!this.currentGame){return []}
-           return this.currentGame[0].winningNumbers
+            const reversed = new Set(Array.from(this.currentGame[0].winningNumbers).reverse());
+           return reversed// this.currentGame[0].winningNumbers
         },
         isWinner(){
             let hasWin =  this.checkWinner();
             console.log(hasWin);
             return hasWin;
+        },
+        showBingoModal(){
+            if(this.currentGameBingos?.length > 1) {return true}
+            return false;
         },
         hasBingoRecord(){
             let matches = []
