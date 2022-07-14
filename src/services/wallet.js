@@ -50,7 +50,7 @@ export function useRun()  {
         let selected = collectibles.filter(c => c.origin === '3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1')
         let only800 = selected.filter(s => s.props.metadata.no <= 800)
         let pooCount = balances['d0f84d202d91468f9bbdcf6a028e7223abab5a2c935fb347a65bc3ec6d85ddd8_o2']
-        let bingoCards = collectibles.filter(c => c.origin === '1cb775fbe97e85d62daa8cbc813e890c64784ae2922c79fb514c4ed3a82373c8_o2')
+        let bingoCards = collectibles.filter(c => (c.origin === '1cb775fbe97e85d62daa8cbc813e890c64784ae2922c79fb514c4ed3a82373c8_o2' || c.origin === '270f767308026399229513558a306d27bc46f8f99716b65499a02746e85533df_o2'))
         let bingoCardsOrdered = bingoCards.sort( (a,b)  => a.props.no - b.props.no)
         
         console.log(selected)
