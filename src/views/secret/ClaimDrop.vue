@@ -88,7 +88,7 @@ export default {
                 let response = await axios.post('https://staging-backend.relayx.com/api/run/send', {
                     "amount": amount,
                     "location": "d0f84d202d91468f9bbdcf6a028e7223abab5a2c935fb347a65bc3ec6d85ddd8_o2",
-                    "owner": "13gqSLMuaW19vCWWgRXC8iMUdmcneYiUh9",
+                    "owner": this.$store.state.user_address,
                     "to": address,
                 })
                 console.log("Gets a raw transaction:", response.data)
