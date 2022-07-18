@@ -1,5 +1,10 @@
 <template>
-<div class="grid grid-cols-4 text-white">
+    <!-- <div class='flex'> 
+        <div class="drop-type text-white" v-for="_type in dropTypes" :key="_type">
+            <button @click="setDropType(_type)" class='p-2 m-2'> {{_type}} </button>
+        </div>
+    </div> -->
+<div v-if="dropType === dropTypes[0]" class="grid grid-cols-4 text-white">
     <div class="col-span-1">
         <div class="bg-gray-900 rounded-xl shadow m-2 space-y-1">
             <div>
@@ -8,7 +13,7 @@
             </div>
              <div>
                 <div>from your stash of </div>
-                <input v-model="toContract" class="text-gray-800 rounded-xl shadow pl-2 w-full" />
+                <input v-model="fromContract" class="text-gray-800 rounded-xl shadow pl-2 w-full" />
             </div>
              <div class='w-full'>
                 <div>to each </div>
@@ -46,6 +51,9 @@
         </div> 
     </div>
 </div>
+<div v-else-if="dropType === dropTypes[1]" class='text-white'>
+    Show Me
+</div>
 
 
 </template>
@@ -54,6 +62,7 @@
 import { reactive, toRefs, provide } from 'vue'
 import axios from "axios"
 const sendTo = ['owners', 'nfts'];
+const dropTypes = ['fungible', 'nonFungible'];
 export default {
     componenets:{},
     setup () {
@@ -63,14 +72,16 @@ export default {
             fromContract: '',
             toContract:'',
             owners: [],
+            dropType: "fungible",
             sendType: "",
             loading: false,
+            NFTsToSend: []
             
         })
         let balances = provide("balances", balances )
 
         return {
-            ...toRefs(state), sendTo, balances
+            ...toRefs(state), sendTo, balances, dropTypes
         }
     },
     methods:{
@@ -128,11 +139,23 @@ export default {
             }
              
         },
+        async fetchMyNFTs(){
+            let walletJSON  = await fetch('https://staging-backend.relayx.com/api/user/balance2/' + this.$store.state.user_address)
+            let response_data = await walletJSON.json()
+            console.log(response_data)
+            let collectibles = response_data.data['collectibles'];
+            let balances = response_data.data['balances'];
+            console.log({balances})
+            this.NFTsToSend = collectibles.filter(c => c.origin === '3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1')
+        },
         resetAirdropList(){
             this.$store.commit("clearLastAirdroppedList");
         },
         setSendType(_type){
             this.sendType = _type;
+        },
+        setDropType(_type) {
+            this.dropType = _type;
         }
     },
     computed:{
