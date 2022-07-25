@@ -30,7 +30,8 @@ export default createStore({
     bingoCards: '',
     selectedBingoCard: [],
     bingoCurrenGame: 0,
-    lastAirdroppedList:[]
+    lastAirdroppedList:[],
+    viewedAdvertisement: 0
 
   },
   mutations: {
@@ -102,7 +103,10 @@ export default createStore({
       while (state.lastAirdroppedList.length > 0) {
         state.lastAirdroppedList.pop()
       }
-    }
+    },
+    setViewedAdvertisement(state, _viewedAd) {
+      state.viewedAdvertisement = _viewedAd
+    },
   },
   actions: {
     // call multiple mutation routines
