@@ -232,7 +232,7 @@ const routes = [
     component: BingoCardList
   },
   {
-    path: 'secret/flipbook',
+    path: '/secret/flipbook',
     name: 'Flipbook',
     component: FlipbookView
   },

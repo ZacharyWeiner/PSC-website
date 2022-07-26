@@ -8,7 +8,10 @@
                 </div>
             </div>
         </div>
-        <div v-else-if="userJigs.length > 0"> {{successMessage}} </div>
+        <div v-else-if="userJigs.length > 0" >
+            <img src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorn-claim-gif.gif" />
+             {{successMessage}} 
+        </div>
         <div v-else>You must own a Pewnicorn PRD NFT to Claim </div>
     </div>
     <div v-else>You must be logged in to Claim </div>
@@ -68,7 +71,7 @@ export default {
             if(this.isLogin  && this.$store.state.user_jigs.length > 0){
                 _canClaim = true;
             } 
-            let compareDate = new Date('2022-07-16');
+            let compareDate = new Date('2022-07-21');
             this.userActions['userActions'].value.forEach((ua)=> {
                 if(new Date(ua.timestamp.seconds * 1000) > compareDate){
                     console.log("newer")
