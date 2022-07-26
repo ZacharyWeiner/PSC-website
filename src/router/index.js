@@ -38,7 +38,7 @@ import BingoCard from '../views/BingoCard.vue'
 import BingoCardList from '../views/BingoCardList.vue'
 //import BingoAd from '../views/BingoAd.vue'
 import CardsInSession from "../views/bingo/CardsInSession.vue"
-
+import FlipbookView from "./../views/secret/Flipbook.vue";
 
 const routes = [
   {
@@ -230,6 +230,11 @@ const routes = [
     path: '/bingoCardList',
     name: 'BingoCardList',
     component: BingoCardList
+  },
+  {
+    path: 'secret/flipbook',
+    name: 'Flipbook',
+    component: FlipbookView
   },
   // {
   //   path: '/bingoAd',
