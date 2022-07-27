@@ -39,8 +39,8 @@
                         </div>
                         <div class="w-full flex place-items-center">
                             <div> 
-                                <button class="p-2 m-2 rounded font-medium text-md text-white bg-gradient-to-r from-purple-600 via-blue-500 to-teal-600"> Buy With $POO </button>
-                                <button class="p-2 m-2 rounded font-medium text-md text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600"> Buy With Bitcoin </button>
+                                <button @click="navigateTo('poo', '','')" class="p-2 m-2 rounded font-medium text-md text-white bg-gradient-to-r from-purple-600 via-blue-500 to-teal-600"> Buy With $POO </button>
+                                <button  @click="navigateTo('bsv', '','')" class="p-2 m-2 rounded font-medium text-md text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600"> Buy With Bitcoin </button>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,12 @@ export default {
             this.$store.commit("setMarketContractLocation", _location)
             this.$store.commit("setMarketContractImageUrl", _imgUrl)
             if(_currency === "bsv"){
-                this.$router.push('/collectables')
+                if(_location === ''){
+                    this.$router.push('/relay-orders')
+                }else{
+                    this.$router.push('/collectables')
+                }
+                
             } else {
                 this.$router.push('/treasury')
             }
