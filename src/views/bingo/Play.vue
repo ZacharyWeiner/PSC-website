@@ -284,7 +284,7 @@ export default {
             return false;
         },
         checkShowAdvertisement() {
-            if (this.winningNumbersCount === 45) {
+            if (this.winningNumbersCount % 5 === 0) {
                 this.store.commit("setViewedAdvertisement", true)
             }
             console.log("no modal", this.winningNumbersCount, this.store.state.viewedAdvertisement)

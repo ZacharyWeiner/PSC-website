@@ -39,10 +39,10 @@
         <button class='text-white' @click="getFirebaseRedemptions">Get Firebase Redemptions</button>
         <div v-for="redemption in allRedemptions" :key="redemption.id" >
             <div v-if="redemption.isRedeemed !== true" class="w-full text-white bg-gray-800 rounded-xl p-1 m-1">
-                    <div> 
-                    PRD #{{redemption.edition}} was redeemed for {{redemption.amount}} by {{redemption.relayHandle}}
-                    </div>
-                    <div> <button @click="markRedeemed(redemption)" > Mark Redemed </button></div>
+                <div> 
+                PRD #{{redemption.edition}} was redeemed for {{redemption.amount}} by {{redemption.relayHandle}}
+                </div>
+                <div> <button @click="markRedeemed(redemption)" > Mark Redemed </button></div>
                 </div>
                 <div class="mx-4 text-right w-full">
                     
