@@ -30,7 +30,9 @@ export default createStore({
     bingoCards: '',
     selectedBingoCard: [],
     bingoCurrenGame: 0,
-    lastAirdroppedList:[]
+    lastAirdroppedList:[],
+    marketContractLocation:"",
+    marketContractImageUrl:"",
 
   },
   mutations: {
@@ -102,6 +104,12 @@ export default createStore({
       while (state.lastAirdroppedList.length > 0) {
         state.lastAirdroppedList.pop()
       }
+    },
+    setMarketContractLocation(state, location){
+      state.marketContractLocation = location;
+    },
+    setMarketContractImageUrl(state, location){
+      state.marketContractImageUrl = location;
     }
   },
   actions: {

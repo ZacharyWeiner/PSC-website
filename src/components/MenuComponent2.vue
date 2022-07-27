@@ -222,7 +222,7 @@ import {
   //ShieldCheckIcon,
   ShoppingBagIcon,
   //SupportIcon,
-  //ViewGridIcon,
+  ViewGridIcon,
   XIcon,
   RefreshIcon,
   EmojiHappyIcon,
@@ -232,7 +232,12 @@ import {useRun} from "./../services/wallet.js"
 
 const exchange = [
 
-
+  {
+    name: 'All Collections',
+    description: 'See all the collections from the Pewnicorn Social Club.',
+    href: '/market-selection',
+    icon: ViewGridIcon,
+  },
   {
     name: 'Buy With BSV',
     description: 'See all the pewnicorns for sale on the BSV market.',

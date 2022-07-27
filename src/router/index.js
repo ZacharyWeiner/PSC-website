@@ -22,6 +22,8 @@ import FriendsBag from '../views/bags/FriendBag.vue'
 import Moose from '../views/friends/Moose.vue'
 import MerchBag from '../views/bags/Merch.vue'
 import Tools from '../views/Tools.vue'
+import MarketSelection from '../views/MarketSelection.vue'
+import Collectables from '../views/bags/Collectables.vue'
 import Spend from '../views/Spend.vue'
 import Claims from '../views/Claims.vue'
 import Friends from '../views/FriendsOfPew.vue'
@@ -95,6 +97,16 @@ const routes = [
     path: '/relay-orders',
     name: 'Orders',
     component: RelayOrders
+  },
+  {
+    path: '/market-selection',
+    name: 'Market Selection',
+    component: MarketSelection
+  },
+  {
+    path: '/collectables',
+    name: 'Collectables',
+    component: Collectables
   },
   {
     path: '/votes',
