@@ -31,9 +31,9 @@ export default createStore({
     selectedBingoCard: [],
     bingoCurrenGame: 0,
     lastAirdroppedList:[],
+    viewedAdvertisement: 0,
     marketContractLocation:"",
     marketContractImageUrl:"",
-
   },
   mutations: {
     // change state
@@ -105,12 +105,15 @@ export default createStore({
         state.lastAirdroppedList.pop()
       }
     },
+    setViewedAdvertisement(state, _viewedAd) {
+      state.viewedAdvertisement = _viewedAd
+    },
     setMarketContractLocation(state, location){
       state.marketContractLocation = location;
     },
     setMarketContractImageUrl(state, location){
       state.marketContractImageUrl = location;
-    }
+    },
   },
   actions: {
     // call multiple mutation routines

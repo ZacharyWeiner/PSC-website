@@ -69,12 +69,15 @@ export default {
     setup(props) {
         let _open = false; 
         let _showBingo = false
+        // let _gameCount = 0
         if(props.isOpen){_open = true}
         if(props.isBingo){_showBingo = true}
+
         console.log(props.isBingo, props.isOpen, _open, _showBingo)
+        console.log(props.gameCount)
         const state = reactive({ 
             open: _open,
-            showBingo: _showBingo 
+            showBingo: _showBingo
         })
         const { allAdvertisements, newAdvertisment, updateCount, updateView} = useAdvertisements()
         console.log(allAdvertisements)
@@ -82,7 +85,7 @@ export default {
 
     },
     methods: {
-
+        
     }, 
     computed:{
         lastAd(){
@@ -92,6 +95,7 @@ export default {
            return {id: "", headline: "" , photoURL: "", clickCount:0, description: "lets see what this decription looks like "}
         }
     },
-    props:["isBingo"]
+    props:["isBingo", "isOpen"],
+    emits: {}
 }
 </script>

@@ -4,12 +4,18 @@
     <div v-for="game in currentGame" 
                 :key="game.id"
                 class="container m-auto m-1 p-2">
-        <div v-if="!game.gameComplete && (game.id === store.state.bingoCurrenGame)">    
+            <!-- <GameTimer /> -->
+        <div v-if="!game.gameComplete && (game.id === store.state.bingoCurrenGame)"> 
+            <BingoModal v-if="showAdvertisementModal" :isOpen="true" :isBingo="false" /> 
+            <BingoModal v-if="hasBingoRecord" :isOpen="true" :isBingo="true" />  
             <div class="grid grid-cols-5 lg:grid-cols-7">
                 <div class="col-span-1">
                         <div class="w-full rounded-xl">
-                            <div class="text-lg font-bold">Numbers Called: </div>
-                            <div class='w-full h-96 overflow-y-scroll bg-gray-900 rounded-xl shadow px-1'> <div v-for="number in winningNumbers" :key="number"> {{ number }} </div> </div>
+                            <div class="text-lg font-bold">Numbers Called:{{winningNumbersCount}} </div>
+                            <div>  </div>
+                            <div class='w-full h-96 overflow-y-scroll bg-gray-900 rounded-xl shadow px-1'> 
+                                <div v-for="number in winningNumbers" :key="number"> {{ number }} </div> 
+                            </div>
                         </div>
                 </div>
                 <div class="col-span-4 lg:col-span-4">
@@ -73,23 +79,15 @@
         </div>
         <div v-else>
             <div v-if="(game.id !== store.state.bingoCurrenGame)">
-                <div class="text-3xl">
+                <div class="mb-20 text-3xl">
                     <join-game @playGameClicked="joinGame"/>
                 </div>
-                <button v-if="(game.id !== store.state.bingoCurrenGame)" class="p-3 m-2 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl " 
-                        @click="playNextGame(game.id)">
-                        Play Again
-                </button>  
             </div>
             <div v-else>
                 <div class="text-3xl">
                     <no-game />
                 </div>
             </div>
-
-            
-
-            
         </div> 
     </div>
         
@@ -108,20 +106,21 @@ import { useBingo } from './../../services/firebase.js';
 import { useStore } from 'vuex'
 import JoinGame from '../../components/JoinGame.vue';
 import NoGame from '../../components/NoGame.vue';
+import BingoModal from "../../components/BingoModal.vue"
 
 export default {
-    components:{Menu, Footer, JoinGame, NoGame},
+    components:{Menu, Footer, JoinGame, NoGame, BingoModal},
     async setup() {
         const store = useStore()
-        const { getCurrentGame , getCurrentGameBingos, userCallBingo, currentGameBingos} = useBingo()
+        const { getCurrentGame , getCurrentGameBingos, userCallBingo} = useBingo()
 
         const currentGame = getCurrentGame()
-        getCurrentGameBingos(store.state.bingoCurrenGame)
+        const currentGameBingos = getCurrentGameBingos(store.state.bingoCurrenGame)
 
         console.log(currentGame)
         let matches = ref([])
         let meta = ref([])
-        console.log("Slected Card Number", store.state.selectedBingoCard.props.no);
+        console.log("Selected Card Number", store.state.selectedBingoCard.props.no);
         const getData = async (_meta) => {
             import(`@/assets/metadata/${store.state.selectedBingoCard.props.no}`).then((module) => {
                 _meta.value = module.default 
@@ -138,8 +137,9 @@ export default {
             card:      store.state.selectedBingoCard.location
         }
         const hasBingo = ref(false);
+        store.commit("setViewedAdvertisement", false );
 
-        return { currentGame, getCurrentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos, getCurrentGameBingos }
+        return { currentGame, getCurrentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos }
     },
     methods: {
         goBack() {
@@ -283,11 +283,19 @@ export default {
             }
             return false;
         },
+        checkShowAdvertisement() {
+            if (this.winningNumbersCount % 5 === 0) {
+                this.store.commit("setViewedAdvertisement", true)
+            }
+            console.log("no modal", this.winningNumbersCount, this.store.state.viewedAdvertisement)
+            return this.store.state.viewedAdvertisement
+        },
     },
     computed:{
         winningNumbers(){
             if(!this.currentGame){return []}
-            const reversed = new Set(Array.from(this.currentGame[0].winningNumbers).reverse());
+            let asArray = Array.from(this.currentGame[0].winningNumbers).reverse()
+            const reversed = new Set(asArray);
            return reversed// this.currentGame[0].winningNumbers
         },
         isWinner(){
@@ -345,7 +353,25 @@ export default {
 
             console.log(b1);
             return [b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, n1, n2, n3, n4, n5, g1, g2, g3, g4, g5, o1, o2, o3, o4, o5,]
+        },
+        
+        winningNumbersCount(){
+            let count = Array.from(this.currentGame[0].winningNumbers).length;
+            //let mod = count % 15
+            // console.log("Modulo:", mod)
+            //  if (mod === 0) {
+            //     //this.setShowModal();
+            //     console.log("should be modal", this.showModal)
+                
+            // }
+            console.log("Number count called")
+            return count;
+        },
+        showAdvertisementModal() {
+            let check = this.checkShowAdvertisement()
+            return check
         }
-    }
+        
+    }   
 }
 </script>

@@ -1,16 +1,3 @@
-
-Tailwind UI
-Components
-Templates
-New
-Documentation
-Headers
-Marketing
-Elements
-Centered with bottom border
-
-Requires JS
-
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <Popover class="relative bg-white z-20">
