@@ -1,6 +1,6 @@
 <template>
 <div class="text-white">
-    <TransitionRoot as="template" :show="open">
+    <TransitionRoot as="template" :show="isOpen">
         <Dialog as="div" class="fixed z-10 inset-0 overflow-y-auto">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="space-y-2 pt-2">
                                     <div class="w-full "><button @click="viewAd(ad)" class="items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">Check It Out!</button></div>
-                                    <div class="w-full"><button @click="open = false" class="items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-red-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">Go Back </button></div>
+                                    <div class="w-full"><button @click="$emit('closeModal')" class="items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-red-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">Go Back </button></div>
                                 </div>
                             </div>
                         </div>
@@ -58,6 +58,7 @@
 import { reactive, toRefs } from 'vue'
 import { Dialog, DialogOverlay, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { useAdvertisements } from '../services/firebase'
+import { useStore } from 'vuex'
 
 export default {
     components: {
@@ -67,21 +68,21 @@ export default {
         TransitionRoot,
     },
     setup(props) {
-        let _open = false; 
+        // let _open = false; 
         let _showBingo = false
-        // let _gameCount = 0
-        if(props.isOpen){_open = true}
+        // // let _gameCount = 0
+        // if(props.isOpen){_open = true}
         if(props.isBingo){_showBingo = true}
 
-        console.log(props.isBingo, props.isOpen, _open, _showBingo)
-        console.log(props.gameCount)
+        const store = useStore()
         const state = reactive({ 
-            open: _open,
+            // open: _open,
             showBingo: _showBingo
         })
+
         const { allAdvertisements, newAdvertisment, updateCount, updateView} = useAdvertisements()
         console.log(allAdvertisements)
-        return { ...toRefs(state), allAdvertisements, newAdvertisment, updateCount, updateView}
+        return { ...toRefs(state), allAdvertisements, newAdvertisment, updateCount, updateView, store }
 
     },
     methods: {

@@ -29,7 +29,7 @@ export default createStore({
     selectedFriendCollection:"",
     bingoCards: '',
     selectedBingoCard: [],
-    bingoCurrenGame: 0,
+    bingoCurrenGame: 0, 
     lastAirdroppedList:[],
     viewedAdvertisement: 0,
     marketContractLocation:"",
@@ -105,8 +105,8 @@ export default createStore({
         state.lastAirdroppedList.pop()
       }
     },
-    setViewedAdvertisement(state, _viewedAd) {
-      state.viewedAdvertisement = _viewedAd
+    setViewedAdvertisement(state, _viewed) {
+      state.viewedAdvertisement = _viewed
     },
     setMarketContractLocation(state, location){
       state.marketContractLocation = location;

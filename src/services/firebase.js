@@ -296,7 +296,7 @@ export function useBingo() {
         return currentGameBingos 
     }
 
-    onUnmounted(getCurrentGame, getCurrentGameBingos)
+    // onUnmounted(getCurrentGame, getCurrentGameBingos)
 
     const newGame = (session) => {
         bingoGamesCollection.add({
