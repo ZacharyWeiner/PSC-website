@@ -152,7 +152,6 @@ export default {
             setWinner, 
             setWinningNumber,
             deleteUserBingo,
-            currentGameBingos
             
             
             } = useBingo()
@@ -161,7 +160,7 @@ export default {
 
         const currentGame = getCurrentGame()
         console.log("CurrentGame from state admin setup", currentGame)
-        getCurrentGameBingos(store.state.bingoCurrenGame)
+        const currentGameBingos = getCurrentGameBingos(store.state.bingoCurrenGame)
         let meta = ref([])
         const gameSession = ref(0)
         const showModal = false;

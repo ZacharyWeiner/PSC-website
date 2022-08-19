@@ -262,19 +262,30 @@ export function useBingo() {
     const bingoGamesCollection = firestore.collection('bingoGames')
     const activeBingoGame = bingoGamesCollection.orderBy('gameStart').limitToLast(1)
     const usersBingoCollection = firestore.collection('callBingo')
-    const currentGameBingos = ref([])
     
+    // const getCurrentGame = () => {
+    //     const currentGame = ref()
+    //     activeBingoGame.onSnapshot(snapshot => {
+    //         currentGame.value = snapshot.docs    
+    //             .map(doc => ({ id: doc.id, ...doc.data() }))
+    //     })
+    //     return currentGame
+    // }
+
     const getCurrentGame = () => {
-        const currentGame = ref()
-        activeBingoGame.onSnapshot(snapshot => {
-            currentGame.value = snapshot.docs    
+        const currentGame = ref([])
+        const unsubscribe =  activeBingoGame.onSnapshot(snapshot => {
+            currentGame.value = snapshot.docs
                 .map(doc => ({ id: doc.id, ...doc.data() }))
         })
+        onUnmounted(unsubscribe)
         return currentGame
     }
 
+   
+
     const getCurrentGameBingos = (gameId) => {
-        console.log()
+        const currentGameBingos = ref([])
         usersBingoCollection.onSnapshot(snapshot => {
             currentGameBingos.value = snapshot.docs    
                 .map(doc => ({ id: doc.id, ...doc.data() }))
@@ -345,7 +356,7 @@ export function useBingo() {
         usersBingoCollection.doc(id).delete()
     }
 
-    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos, currentGameBingos}
+    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
 }
 
 export function gameSessionCards(handle, session){
