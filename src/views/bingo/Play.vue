@@ -7,7 +7,7 @@
             <!-- <GameTimer /> -->
         <div v-if="!game.gameComplete && (game.id === store.state.bingoCurrenGame)"> 
             <BingoModal :isOpen="showAdvertisementModal" :isBingo="false" @closeModal="toggleModal" /> 
-            <BingoModal :isOpen="hasBingoRecord" :isBingo="true" />  
+            <BingoModal :isOpen="anyOneCallBingo" :isBingo="true" />  
             <div class="grid grid-cols-5 lg:grid-cols-7">
                 <div class="col-span-1">
                         <div class="w-full rounded-xl">
@@ -320,6 +320,14 @@ export default {
         showBingoModal(){
             if(this.currentGameBingos?.length > 1) {return true}
             return false;
+        },
+        anyOneCallBingo() {
+            if (this.currentGameBingos?.length > 0) {
+                return true
+            } else {
+                return false
+            }
+           
         },
         hasBingoRecord(){
             let matches = []

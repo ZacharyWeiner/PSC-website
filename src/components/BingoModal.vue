@@ -34,13 +34,9 @@
                                     <img
                                         class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" 
                                         src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" alt="">
-                                    <p class='text-xl font-black pt-1'> {{lastAd.headline ? lastAd.headline : "Someone Has Called Bingo"}} </p>
-                                    <p class='p-4'> {{lastAd.description ? lastAd.decription : "please wait while we confirm the winning card"}} </p>
+                                    <p class='text-xl font-black pt-1'> Someone Has Called Bingo</p>
+                                    <p class='p-4'>please wait while we confirm the winning card</p>
                                 </div>
-                                <!-- <div class="space-y-2 pt-2">
-                                    <div class="w-full "><button @click="viewAd(ad)" class="items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">Check It Out!</button></div>
-                                    <div class="w-full"><button @click="open = false" class="items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-red-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">Go Back </button></div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
