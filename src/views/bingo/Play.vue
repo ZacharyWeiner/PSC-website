@@ -6,8 +6,8 @@
                 class="container m-auto m-1 p-2">
             <!-- <GameTimer /> -->
         <div v-if="!game.gameComplete && (game.id === store.state.bingoCurrenGame)"> 
-            <BingoModal v-if="showAdvertisementModal" :isOpen="true" :isBingo="false" /> 
-            <BingoModal v-if="hasBingoRecord" :isOpen="true" :isBingo="true" />  
+            <BingoModal :isOpen="showAdvertisementModal" :isBingo="false" @closeModal="toggleModal" /> 
+            <BingoModal :isOpen="hasBingoRecord" :isBingo="true" />  
             <div class="grid grid-cols-5 lg:grid-cols-7">
                 <div class="col-span-1">
                         <div class="w-full rounded-xl">
@@ -137,9 +137,16 @@ export default {
             card:      store.state.selectedBingoCard.location
         }
         const hasBingo = ref(false);
-        store.commit("setViewedAdvertisement", false );
+        const adModalActive = ref(false)
 
-        return { currentGame, getCurrentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos }
+        const toggleModal = () => {
+            if (adModalActive.value) {
+                store.commit('setViewedAdvertisement', true)
+            }
+            adModalActive.value = !adModalActive.value
+        }
+        // store.state.viewedAdvertisement = false
+        return { currentGame, getCurrentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos, adModalActive, toggleModal }
     },
     methods: {
         goBack() {
@@ -284,11 +291,18 @@ export default {
             return false;
         },
         checkShowAdvertisement() {
-            if (this.winningNumbersCount % 5 === 0) {
-                this.store.commit("setViewedAdvertisement", true)
+            if(this.winningNumbersCount === 0){
+                return false;
             }
-            console.log("no modal", this.winningNumbersCount, this.store.state.viewedAdvertisement)
-            return this.store.state.viewedAdvertisement
+            if (this.winningNumbersCount % 10 === 0 && !this.store.state.viewedAdvertisement) {
+                this.toggleModal()
+            }
+
+            if (!this.winningNumbersCount % 10 === 0 ) {
+                this.store.commit('setViewedAdvertisement', false)
+            }
+
+           return this.adModalActive
         },
     },
     computed:{
@@ -300,7 +314,7 @@ export default {
         },
         isWinner(){
             let hasWin =  this.checkWinner();
-            console.log(hasWin);
+            // console.log(hasWin);
             return hasWin;
         },
         showBingoModal(){
@@ -317,7 +331,7 @@ export default {
                     }
                 })
             }
-            console.log(matches)
+            // console.log(matches)
             return matches.length > 0
         },
         cardNumbers(){
