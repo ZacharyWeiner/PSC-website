@@ -327,7 +327,6 @@ export default {
             } else {
                 return false
             }
-           
         },
         hasBingoRecord(){
             let matches = []
