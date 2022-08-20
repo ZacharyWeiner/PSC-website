@@ -14,14 +14,14 @@
                         <div>
                             <div class="text-center">
                                 <div class="">
-                                    <img @click="updateCount(lastAd.id, lastAd.clickCount)"
+                                    <img @click="openAd()"
                                         class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" 
                                         :src="lastAd.photoURL" alt="">
                                     <p class='text-xl font-black pt-1'> {{lastAd.headline ? lastAd.headline : "This is a headline"}} </p>
                                     <p class='p-4'> {{lastAd.description ? lastAd.decription : "lets see what this decription looks like "}} </p>
                                 </div>
                                 <div class="space-y-2 pt-2">
-                                    <div class="w-full "><button @click="viewAd(ad)" class="items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">Check It Out!</button></div>
+                                    <div class="w-full "><button @click="openAd()" class="items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">Check It Out!</button></div>
                                     <div class="w-full"><button @click="$emit('closeModal')" class="items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-red-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">Go Back </button></div>
                                 </div>
                             </div>
@@ -86,12 +86,16 @@ export default {
 
     },
     methods: {
-        
+        openAd() {
+            this.updateCount(this.lastAd.id, this.lastAd.clickCount)
+            window.open(this.lastAd.linkURL, '_blank')
+        }
     }, 
     computed:{
         lastAd(){
-           if(this.allAdvertisements[0]){
-            return this.allAdvertisements[0]
+        let newNum = Math.floor(Math.random() * this.allAdvertisements.length)
+           if(this.allAdvertisements[newNum]){
+            return this.allAdvertisements[newNum]
            }
            return {id: "", headline: "" , photoURL: "", clickCount:0, description: "lets see what this decription looks like "}
         }
