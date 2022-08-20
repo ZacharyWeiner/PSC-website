@@ -38,6 +38,7 @@ import PlayBingo2 from '../views/bingo/Play2.vue'
 import BingoAdmin from '../views/BingoAdmin.vue'
 import BingoCard from '../views/BingoCard.vue'
 import BingoCardList from '../views/BingoCardList.vue'
+import HowToBingo from '../views/bingo/HowTo.vue'
 //import BingoAd from '../views/BingoAd.vue'
 import CardsInSession from "../views/bingo/CardsInSession.vue"
 import FlipbookView from "./../views/secret/Flipbook.vue";
@@ -242,6 +243,11 @@ const routes = [
     path: '/bingoCardList',
     name: 'BingoCardList',
     component: BingoCardList
+  },
+  {
+    path: '/bingo/how-to',
+    name: 'How To Bingo',
+    component: HowToBingo
   },
   {
     path: '/secret/flipbook',
