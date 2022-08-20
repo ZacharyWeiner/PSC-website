@@ -291,11 +291,14 @@ export default {
             return false;
         },
         checkShowAdvertisement() {
-            if (this.winningNumbersCount % 5 === 0 && !this.store.state.viewedAdvertisement) {
+            if(this.winningNumbersCount === 0){
+                return false;
+            }
+            if (this.winningNumbersCount % 10 === 0 && !this.store.state.viewedAdvertisement) {
                 this.toggleModal()
             }
 
-            if (!this.winningNumbersCount % 5 === 0 ) {
+            if (!this.winningNumbersCount % 10 === 0 ) {
                 this.store.commit('setViewedAdvertisement', false)
             }
 
