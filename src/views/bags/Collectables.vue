@@ -2,7 +2,7 @@
     <div class="text-white">
         <announcement-banner />
          <Menu />
-       <div v-if="orders.length > 0" class="grid grid-cols-1 lg:grid-cols-4 ">
+       <div v-if="orders?.length > 0" class="grid grid-cols-1 lg:grid-cols-4 ">
            <div v-for="(order, index) in orders" :key="index" class="col-span-1 mb-4 mx-1 bg-gray-900 rounded p-1">
             <div class='grid grid-cols-4'  >
                     <!-- <div class='w-full col-span-2 text-left pt-1 pl-1  font-bold'> 
@@ -38,6 +38,7 @@
 </template>
 <script>
 import { reactive, toRefs } from 'vue'
+import { useRouter } from "vue-router"
 import  axios from "axios";
 import Menu from "./../../components/MenuComponent2.vue"
 import AnnouncementBanner from "./../../components/AnnouncementBanner.vue"
@@ -48,6 +49,11 @@ export default {
    components:{Menu, AnnouncementBanner, Footer},
      async setup () {
         let store = useStore();
+        if(store.state.marketContractLocation === ""){
+            let router = useRouter()
+            router.push('/market-selection');
+            return
+        }
         let { data } = await axios.get(`https://staging-backend.relayx.com/api/market/${store.state.marketContractLocation}/orders`);
         let orders = data.data.orders;
         console.log(orders);
@@ -73,7 +79,7 @@ export default {
             this.selectedOrderTxid = order.txid
              let response = await axios.post('https://staging-backend.relayx.com/api/dex/buy', {
                     address: this.$store.state.user_address,
-                    location: "PSC",
+                    location: this.$store.state.marketContractLocation,
                     txid: order.txid,
                 })
                 console.log(response)

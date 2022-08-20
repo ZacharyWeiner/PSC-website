@@ -36,7 +36,7 @@ export default {
             console.log(this.unclaimed)
             if(s.length > 0){
                 var sevenDaysAgo = new Date();
-                sevenDaysAgo.setDate(sevenDaysAgo.getDate() -10);
+                sevenDaysAgo.setDate(sevenDaysAgo.getDate() -21);
                 console.log(sevenDaysAgo)
                 
                 s.sort((a,b) => a.seconds - b.seconds > 0 ? -1 : 1)
