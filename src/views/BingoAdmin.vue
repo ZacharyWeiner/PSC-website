@@ -2,6 +2,7 @@
  <Menu />
  <div v-if="loading" >loading...</div>
     <div class="bg-gray-100 w-full text-gray-900">
+        Store:  {{this.$store.state.bingoCurrenGame}}
         Game: <span v-if="currentGame && currentGame[0]">{{currentGame[0].id}}</span>
         <div> <button @click="startAutoPick"> start auto pick {{counter}}</button></div>
         <div> <button @click="stopAutoPick"> stop autopick</button></div>
@@ -69,7 +70,7 @@
                         </div> 
                          <div class="container bg-gray-600 w-full p-4 rounded">
                             Players called Bingo:
-                            <div v-for="bingo in currentGameBingos"
+                            <div v-for="bingo in playerBingos"
                                 :key="bingo.id"
                                 >
                                 <div>
@@ -123,7 +124,6 @@
 
         </div>
     </div>
-    <div>  <BingoModal  :isOpen="shouldShowBingoModal" :isBingo="true" /></div>
 </template>
 
 <style>
@@ -135,10 +135,8 @@ import { ref } from 'vue'
 import { useBingo } from '../services/firebase'
 import { useStore } from 'vuex'
 import Menu from "./../components/Menu.vue"
-import BingoModal from "./../components/BingoModal.vue"
 export default {
-    components:{ Menu, 
-    BingoModal, 
+    components:{ Menu 
     },
     setup() {
         const loading = ref(false);
@@ -153,44 +151,24 @@ export default {
             setWinningNumber,
             deleteUserBingo,
             
-            
             } = useBingo()
-
         console.log(store.state.bingoCurrenGame)
-
         const currentGame = getCurrentGame()
-        console.log("CurrentGame from state admin setup", currentGame)
-        const currentGameBingos = getCurrentGameBingos(store.state.bingoCurrenGame)
+        const playerBingos = getCurrentGameBingos(store.state.bingoCurrenGame)
         let meta = ref([])
         const gameSession = ref(0)
         const showModal = false;
         const counter = ref(0);
-        return { loading, newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, getCurrentGame, currentGame, meta, counter, timerInterval, gameSession, showModal, currentGameBingos}
-
+        return { loading, newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, getCurrentGame, currentGame, playerBingos, meta, counter, timerInterval, gameSession, showModal}
     },
     methods: {
         startGame(){
-            console.log("currenGamwe1", this.currentGame)
-            this.getCurrentGame()
-            console.log("currentgame2", this.currentGame)
-            console.log("store currentgameid before call to start game ", this.$store.state.bingoCurrenGame, this.currentGame[0].id)
-            if(this.$store.state.bingoCurrenGame === 0){
-                this.$store.commit("setBingoCurrenGame", this.currentGame[0].id)
-            }
             this.loading = true;
-            console.log(this.currentGame[0].session)
             this.newGame(this.currentGame[0].session)
-            this.getCurrentGame()
-            console.log(this.currentGame[0].id)
-            this.$store.commit("setBingoCurrenGame", this.currentGame[0].id)
-            this.loading = false;
-            console.log("store currentgameid after call to start game ", this.$store.state.bingoCurrenGame)
-            console.log("currentgameid after call to start game ", this.currentGame[0].id)
-            console.log("currentgame after call to start game ", this.currentGame[0])
-            
             //this.startAutoPick();
         },
         endCurrentGame(gameId) {
+            this.clearAllBingos()
             this.endGame(gameId)
             this.$store.commit("setBingoCurrenGame", 0)
             this.stopAutoPick();
@@ -205,7 +183,8 @@ export default {
             this.setWinningNumber(gameId, newNum)
             this.$store.commit("setBingoCurrenGame", gameId)
             console.log("saved new number for game", gameId)
-            this.getCurrentGameBingos(gameId);
+            this.playerBingos = this.getCurrentGameBingos(gameId);
+            console.log(this.playerBingos)  
             this.loading = false;
         },
         getRandom(nums){
@@ -232,14 +211,21 @@ export default {
                 // console.log(set)
                 if (setcompare > 0 || sqaure === 'Free Space')
                 return 'bg-green-300 text-black font-bold'
-
             }catch(err){
                 console.log(err)
                 return ""
             }
             
         },
-
+        clearAllBingos() {
+            if(this.playerBingos.length) {
+                console.log(this.playerBingos)
+                this.playerBingos.forEach( bingo => {
+                    // console.log(bingo.id)
+                    this.deleteUserBingo(bingo.id)
+                });
+            }
+        },
         startAutoPick(){
             
            
@@ -272,7 +258,7 @@ export default {
             }else{
                 this.getCurrentGame()
                 console.log("starting new game session should be  ", this.currentGame)
-                this.newGame(11)
+                this.newGame(1)
                 this.getCurrentGame()
                 console.log(this.currentGame)
             }
@@ -293,13 +279,6 @@ export default {
                 }
                 return [];
             },
-            shouldShowBingoModal(){
-                console.log("Checking Called Bingo", this.playerBingos)
-                if(this.playerBingos?.length > 0 ){
-                    return true
-                }
-                return false;
-            }
             
         }
 }

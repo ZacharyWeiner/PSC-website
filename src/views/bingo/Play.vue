@@ -6,7 +6,7 @@
                 class="container m-auto m-1 p-2">
             <!-- <GameTimer /> -->
         <div v-if="!game.gameComplete && (game.id === store.state.bingoCurrenGame)"> 
-            <BingoModal :isOpen="showAdvertisementModal" :isBingo="false" @closeModal="toggleModal" /> 
+            <BingoModal :isOpen="showAdvertisementModal && !hasBingo" :isBingo="false" @closeModal="toggleModal" /> 
             <BingoModal :isOpen="anyOneCallBingo" :isBingo="true" />  
             <div class="grid grid-cols-5 lg:grid-cols-7">
                 <div class="col-span-1">
@@ -60,13 +60,13 @@
                     </div> 
                     <!-- Bingo List --> 
                     <div class="">
-                        Bingos:
-                        <div v-for="player in currentGameBingos"
+                        <br>
+                        <!-- <div v-for="player in currentGameBingos"
                             class="text-gray-900"
                                 :key="player.id"
                                 :class="`${ (store.state.relayx_handle === player.relayHandle) ? 'text-bold text-green-500' : ''}`">
                             {{player.relayHandle}}
-                        </div>
+                        </div> -->
                     </div>
                     <div > 
                         <button class="w-full p-4 text-white text-sm bg-gradient-to-r from-pink-500 to-red-500 rounded-xl " 
@@ -146,7 +146,7 @@ export default {
             adModalActive.value = !adModalActive.value
         }
         // store.state.viewedAdvertisement = false
-        return { currentGame, getCurrentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos, adModalActive, toggleModal }
+        return { currentGame, getCurrentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos, getCurrentGameBingos, adModalActive, toggleModal }
     },
     methods: {
         goBack() {
@@ -170,14 +170,15 @@ export default {
         playNextGame(gameId) {
             this.$store.commit("setBingoCurrenGame", gameId)
             this.hasBingo = false;
-            this.getCurrentGame()
+            // this.getCurrentGame()
             console.log(this.currentGame[0].id);
-            this.getCurrentGameBingos(this.currentGame[0].id);
+            // this.currentGameBingos = this.getCurrentGameBingos(this.store.state.bingoCurrenGame);
             //window.location.reload()
             
         },
         joinGame(){
-            console.log("Current Game ID", this.currentGame[0].id)
+            console.log("Current Game ID", this.currentGame[0].id, this.store.state.bingoCurrenGame )
+            this.currentGameBingos = this.getCurrentGameBingos(this.currentGame[0].id);
             this.playNextGame(this.currentGame[0].id)
         },
         checkWinner(){
@@ -317,11 +318,12 @@ export default {
             // console.log(hasWin);
             return hasWin;
         },
-        showBingoModal(){
-            if(this.currentGameBingos?.length > 1) {return true}
-            return false;
-        },
+        // showBingoModal(){
+        //     if(this.currentGameBingos?.length > 1) {return true}
+        //     return false;
+        // },
         anyOneCallBingo() {
+            console.log(this.currentGameBingos)
             if (this.currentGameBingos?.length > 0) {
                 return true
             } else {
