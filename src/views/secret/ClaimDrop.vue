@@ -58,7 +58,7 @@ export default {
             // console.log(data.data, claim.id)
             let nftCount = data.data.owners.filter(o => o.address === claim.ownerAddress)
             if(nftCount.length > 0){                
-                let sendAmount = nftCount[0].amount * 100 
+                let sendAmount = nftCount[0].amount * 300 
                 console.log(nftCount[0].amount, sendAmount)
                 try{
                     let response = await this.sendPoo(sendAmount, claim.ownerAddress)

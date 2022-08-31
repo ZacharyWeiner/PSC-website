@@ -18,6 +18,8 @@ export default createStore({
     last_offers: [],
     last_offers_last_checked: '',
     coins: "",
+    balances: [],
+    collectibles: [],
     selected_item: {},
     selected_option: '',
     user_rugs: [],
@@ -114,6 +116,12 @@ export default createStore({
     setMarketContractImageUrl(state, location){
       state.marketContractImageUrl = location;
     },
+    setBalances(state, _balances){
+      state.balances = _balances;
+    },
+    setCollectibles(state, collectibles){
+      state.collectibles = collectibles;
+    }
   },
   actions: {
     // call multiple mutation routines
