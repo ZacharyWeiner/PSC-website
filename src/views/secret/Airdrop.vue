@@ -55,8 +55,8 @@
     <div v-if="loading" > Loading ... </div> 
     <div v-for="collectible in collectibles" :key="collectible.location">
         <div class='flex'> 
-            <div class='w-full'> Name:{{collectible.props.metadata.name}} </div> 
-            <div class='w-full'> Edition:{{collectible.props.metadata.no}} </div> 
+            <div class='w-full'> Name:{{collectible.props.metadata?.name ? collectible.props.metadata.name : ""}} </div> 
+            <div class='w-full'> Edition:{{collectible.props.metadata?.no ? collectible.props.metadata.no : ""}} </div> 
             <div class='w-full'> Location: {{collectible.location}} </div> 
             <div class='w-full'> <input v-model="reciever" class="w-full bg-white text-black" /> </div> 
             <div class='w-full'> <button @click="airdropNFT(collectible.location)"> Airdrop </button> </div> 
