@@ -286,17 +286,16 @@ export function useBingo() {
 
     const getCurrentGameBingos = (gameId) => {
         const currentGameBingos = ref([])
-        usersBingoCollection.onSnapshot(snapshot => {
+        const unsbscribe = usersBingoCollection.onSnapshot(snapshot => {
             currentGameBingos.value = snapshot.docs    
                 .map(doc => ({ id: doc.id, ...doc.data() }))
                 .filter(g => g.gameId === gameId)
                 console.log("finding bingos for game ", gameId)
                 console.log(currentGameBingos)
         })
+        onUnmounted(unsbscribe)
         return currentGameBingos 
     }
-
-    // onUnmounted(getCurrentGame, getCurrentGameBingos)
 
     const newGame = (session) => {
         bingoGamesCollection.add({
