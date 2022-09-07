@@ -12,13 +12,18 @@ import { reactive, toRefs } from 'vue'
 import Footer from "./../../components/Footer.vue"
 import Menu from "./../../components/MenuComponent2.vue"
 import { ref } from 'vue';
-//import {useBingo} from "./../../services/bingoGame.js";
+// import { useBingo } from "./../../services/bingoGame.js";
+// import { useStore } from "vuex";
+
 
 export default {
     components:{Menu, Footer},
     setup () {
         const sessionId = ref('')
-        //let {currentGame} = useBingo();
+        // const store = useStore();
+        // const getCurrentGame = useBingo(store);
+        // getCurrentGame();
+        // console.log(store.state.currentBingoGame)
         const state = reactive({
             count: 0,
         })
@@ -26,7 +31,6 @@ export default {
         return {
             ...toRefs(state),
             sessionId,
-            //currentGame
         }
     }
 }

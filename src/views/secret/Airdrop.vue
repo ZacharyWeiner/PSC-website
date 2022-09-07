@@ -18,8 +18,12 @@
              <div class='w-full'>
                 <div>to each </div>
                 <div class="flex space-x-1 w-full">
-                    <div class="w-full"> <button class='rounded w-full p-2'  :class="[sendType === 'owners' ? 'bg-green-500' : 'bg-red-500']" @click="setSendType('owners')"> Owner </button> </div>
-                    <div class="w-full"> <button class='rounded w-full p-2' :class="[sendType === 'nfts' ? 'bg-green-500' : 'bg-red-500']" @click="setSendType('nfts')"> NFT</button></div>
+                    <div class="w-full"> 
+                        <button class='rounded w-full p-2'  :class="[sendType === 'owners' ? 'bg-green-500' : 'bg-red-500']" @click="setSendType('owners')"> Owner </button> 
+                    </div>
+                    <div class="w-full"> 
+                        <button class='rounded w-full p-2' :class="[sendType === 'nfts' ? 'bg-green-500' : 'bg-red-500']" @click="setSendType('nfts')"> NFT </button>
+                    </div>
                 </div>
             </div>
             <div>
