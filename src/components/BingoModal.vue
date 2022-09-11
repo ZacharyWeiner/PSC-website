@@ -31,9 +31,6 @@
                         <div>
                             <div class="text-center">
                                 <div class="">
-                                    <img
-                                        class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" 
-                                        src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" alt="">
                                     <slot />
                                 </div>
                             </div>

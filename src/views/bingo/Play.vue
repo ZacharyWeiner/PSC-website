@@ -7,15 +7,26 @@
             <!-- <GameTimer /> -->
         <div v-if="!game.gameComplete && (game.id === store.state.bingoCurrenGame)"> 
             <BingoModal :isOpen="showAdvertisementModal && !hasBingo" :isBingo="false" @closeModal="toggleModal" /> 
-            <BingoModal :isOpen="anyOneCallBingo" :isBingo="true" >
-                <div v-if="!isGameWinner">
+            <BingoModal :isOpen="anyOneCallBingo && !hasGameWinner" :isBingo="true" >
+                <div>
+                    <img
+                        class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" 
+                        src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" alt="">
                     <p class='text-xl font-black pt-1'> {{bingoMessage}} Called Bingo</p>
                     <p class='p-4'>please wait while we confirm the winning card</p>
-                </div>
-                <div v-else>
-                    <p class='text-xl font-black pt-1'>Congratulations, you won!</p>
-                    <p class='p-4'> Please wait while we make payment to your account</p>
-                </div>                
+                </div> 
+            </BingoModal>
+            <BingoModal :isOpen="hasGameWinner" :isBingo="true">
+                <div>
+                    <img
+                        class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" 
+                        src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorn-claim-gif.gif" alt="">
+                    <p class='text-xl font-black pt-1'>We have a Winner!</p>
+                    <p class='p-4'>please wait while we make payment and a new game will start soon.</p>
+                    <p v-for="winners in game.winners" :key="winners" class='p-4 font-bold'>
+                        {{winners.winner.relayHandle}}
+                    </p>
+                </div> 
             </BingoModal>
             <div class="grid grid-cols-5 lg:grid-cols-7">
                 <div class="col-span-1">
@@ -413,6 +424,12 @@ export default {
             console.log(win)
         
             return win
+        },
+        hasGameWinner() {
+            if (this.currentGame[0].winners.length) {
+                return true
+            }
+            return false
         }
         
     }   
