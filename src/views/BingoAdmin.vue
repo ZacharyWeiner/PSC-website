@@ -241,7 +241,7 @@ export default {
                 console.log("calling new number ", gId, numbs);
                 this.counter = this.counter + 1;
                 this.callNumber(gId, numbs)
-            }, 10000)
+            }, 20000)
         },
         stopAutoPick(){
              clearInterval(this.timerInterval);

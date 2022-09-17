@@ -71,7 +71,7 @@ export default {
             if(this.isLogin  && this.$store.state.user_jigs.length > 0){
                 _canClaim = true;
             } 
-            let compareDate = new Date('2022-08-19');
+            let compareDate = new Date('2022-09-17');
             this.userActions['userActions'].value.forEach((ua)=> {
                 if(new Date(ua.timestamp.seconds * 1000) > compareDate){
                     console.log("newer")
