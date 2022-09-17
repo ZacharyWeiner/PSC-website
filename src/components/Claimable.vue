@@ -53,6 +53,8 @@ export default {
                 }
             }
             console.log(this.$store.state.relayx_handle, this.$store.state.user_address, "Claim")
+            this.getUserActions();
+            this.userActions = this.findUserActions(this.$store.state.relayx_handle);
         },
         getUserActions(){
             return this.userActions
@@ -71,9 +73,10 @@ export default {
             if(this.isLogin  && this.$store.state.user_jigs.length > 0){
                 _canClaim = true;
             } 
-            let compareDate = new Date('2022-09-17');
+            let compareDate = new Date('2022-09-18');
             this.userActions['userActions'].value.forEach((ua)=> {
-                if(new Date(ua.timestamp.seconds * 1000) > compareDate){
+                let actionDate = new Date(ua.timestamp.seconds * 1000);
+                if( actionDate > compareDate){
                     console.log("newer")
                     _canClaim = false;
                 }
