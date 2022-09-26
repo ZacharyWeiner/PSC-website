@@ -221,14 +221,11 @@ export default {
             if(this.playerBingos.length) {
                 console.log(this.playerBingos)
                 this.playerBingos.forEach( bingo => {
-                    // console.log(bingo.id)
                     this.deleteUserBingo(bingo.id)
                 });
             }
         },
         startAutoPick(){
-            
-           
             // console.log("starting the autopick", gId, numbs.winningNumbers);
             this.timerInterval = setInterval(() => 
             {

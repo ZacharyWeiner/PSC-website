@@ -6,6 +6,7 @@
         <div class='col-span-1'> {{claim.relay_handle}} </div>
         <div class='col-span-1'>{{claim.ownerAddress}} </div>
         <div class='col-span-1 pl-12'><button @click="getCount(claim)"> Get Count</button>  </div>
+        <div class='col-span-1 pl-12'><button @click="calculateSendAmount()"> Get Order Count</button>  </div>
     </div>
 </template>
 
@@ -22,6 +23,10 @@ export default {
         let { markClaimed } = userProfiles()
         const state = reactive({
             count: 0,
+            baseAward: 100,
+            multiplier: 5,
+            propertyName: 'hair',
+            propertyValue: 'mowhawk green',
         })
     
         return {
@@ -57,12 +62,15 @@ export default {
             let { data } = await axios.get("https://staging-backend.relayx.com/api/token/3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1/owners");
             // console.log(data.data, claim.id)
             let nftCount = data.data.owners.filter(o => o.address === claim.ownerAddress)
-            if(nftCount.length > 0){                
-                let sendAmount = nftCount[0].amount * 300 
+            console.log(nftCount);
+            if(nftCount.length > 0){       
+                let orderCount = await this.getOrderCount(claim.ownerAddress)  
+                console.log("OrderCount before send:", orderCount);       
+                let sendAmount = await this.calculateSendAmount(claim.ownerAddress)
                 console.log(nftCount[0].amount, sendAmount)
                 try{
                     let response = await this.sendPoo(sendAmount, claim.ownerAddress)
-                    if(response !== null){
+                    if(response){
                         console.log("No error on send poo", response)
                         let allUnclaimed = this.unclaimed.filter(ua => ua.relay_handle === claim.relay_handle)
                         console.log("All Uncliamed", allUnclaimed)
@@ -76,7 +84,8 @@ export default {
                 }catch(err){
                     console.log("There was an error sending POO", nftCount, err)
                 }
-            } else { console.log("User Has no NFTs")
+            } 
+            else { console.log("User Has no NFTs")
                 let allUnclaimed = this.unclaimed.filter(ua => ua.relay_handle === claim.relay_handle)
                 allUnclaimed.forEach(c => {
                     this.markClaimed(c)
@@ -84,6 +93,48 @@ export default {
             }
             this.unclaimed = this.findUnclaimed();
             this.loading = false;
+        },
+        async getOrderCount(address){
+            let orderCount = 0;
+            let { data } = await axios.get("https://staging-backend.relayx.com/api/market/3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1/orders");
+            console.log(data.data)
+            if(data.data.orders.length > 0){
+                orderCount = data.data.orders.filter(o => o.seller === address)
+            }
+            console.log(orderCount);
+            return orderCount;
+        },
+        async calculateSendAmount(address){
+            let walletJSON  = await fetch('https://staging-backend.relayx.com/api/user/balance2/' + address)
+            let response_data = await walletJSON.json()
+            console.log(response_data)
+            let collectibles = response_data.data['collectibles'];
+            let balances = response_data.data['balances'];
+            console.log({balances})
+            let selected = collectibles.filter(c => c.origin === '3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1')
+            let totalPayment = 0; 
+            let { data } = await axios.get("https://staging-backend.relayx.com/api/market/3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1/orders");
+            let orders = data.data.orders;
+            console.log(orders)
+            for(let x =0; x < selected.length; x++ ){
+                let hasOrder = orders.filter(o => o.name === selected[x].location)
+                if(hasOrder){
+                    console.log("Has Order for ", selected[x].location, " ", hasOrder)
+                }
+                let addToPayment = 0; 
+                addToPayment = this.calculatePOOPayment(selected[x]);
+                totalPayment = totalPayment + addToPayment;
+            }
+            console.log("Total Payment: ", totalPayment)
+            return totalPayment;
+        },
+        calculatePOOPayment(nft){
+            let sendAmount = this.baseAward; 
+            if(nft.props.metadata[this.propertyName] === this.propertyValue){
+                sendAmount = this.baseAward * this.multiplier;
+            }
+            console.log("Send Amount For ", nft, " Is ", sendAmount)
+            return sendAmount
         },
         async sendPoo(amount, address){
             try{
