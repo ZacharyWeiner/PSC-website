@@ -2,14 +2,36 @@
     <div v-if="isLogin">
         <div v-if='canClaim' > 
             <!-- <div class='text-center'> Claim </div> -->
-            <div class='text-center'> 
+            <div class='text-center pb-4'> 
                 <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                    <button @click="saveUserAction" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"> CLAIM NOW!</button>
+                    <button @click="saveUserAction" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"> CLAIM {{esitmatedPoo}} NOW!</button>
+                    
                 </div>
-                <div class="pt-4"> 
-                Last Claimed: {{lastAction}}
-                </div>  
+               
             </div>
+            <div> <b>This Weeks Bonus: {{propertyName}} - {{propertyValue}}</b> </div>  
+            <div class="w-full" v-for="jig in eligibleNFTs" :key="jig.location"> 
+                <div class="flex space-x-6 w-full"> 
+                    <div class="w-16 h-16">  <img class="rounded-full w-full" :src="getBerryUrl(jig)" /></div> 
+                    <div class="my-auto w-full text-left"> 
+                        <div class="flex w-full">
+                            <div class="text-gray-100 font-bold px-4">{{jig.name}}</div>
+                            <div class="text-yellow-400 w-full my-auto">
+                                <div> Will Claim </div>
+                                <div v-if="hasBonus(jig)" class="text-green-400">  BONUS!</div> 
+                            </div> 
+                            <div class="text-right font-bold text-green-400 my-auto">  {{this.calculatePOOPayment(jig)}} </div>
+                        </div> 
+                    </div>
+                </div>    
+            </div>
+            <div class="pt-4"> 
+                Last Claimed: {{lastAction}}
+            </div>  
+            <div class="text-left space-y-4 pt-4">
+                <p> From time to time every Pewnicorns in a wallet is eligible to $POO. Any Studs you have for sale, will not be able to claim, because they are not in your stable, they are at the exchange. </p>
+                <p> Final numbers are calculated at the moment claims are paid out. This is to prevent people from claiming POO in more than one wallet for the same Stud in any given week</p>
+            </div>      
         </div>
         <div v-else-if="userJigs.length > 0" >
             <img src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorn-claim-gif.gif" />
@@ -24,25 +46,35 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, ref } from 'vue'
 import {useStore} from "vuex"
 ;import { userProfiles} from "./../services/firebase.js"
 import { useRun } from "./../services/wallet.js"
+import axios from "axios"
 
 export default {
     setup () {
         let {setUserAction, findUserActions} = userProfiles()
         let {isLogin} = useRun()
         let store = useStore();
+        let eligibleNFTs = ref([])
         const state = reactive({
             count: 0,
-            successMessage: "Your $POO has been claimed and will be sent SOON"
+            baseAward: 100,
+            multiplier: 5,
+            propertyName: 'hair',
+            propertyValue: 'mowhawk green',
+            successMessage: "Your $POO has been claimed and will be sent SOON",
+            esitmatedPoo: 0,
         })
         console.log(store.state.relayx_handle);
         let userActions = findUserActions(store.state.relayx_handle);
         return {
-            ...toRefs(state), setUserAction, findUserActions, isLogin, userActions
+            ...toRefs(state), setUserAction, findUserActions, isLogin, userActions, eligibleNFTs
         }
+    },
+    async mounted(){
+       await this.getEligible(this.$store.state.user_address);
     },
     methods:{
         saveUserAction(){
@@ -64,6 +96,59 @@ export default {
         },
         getUserActions(){
             return this.userActions
+        },
+        calculatePOOPayment(nft){
+            let sendAmount = this.baseAward; 
+            if(nft.props.metadata[this.propertyName] === this.propertyValue){
+                sendAmount = this.baseAward * this.multiplier;
+            }
+            console.log("Send Amount For ", nft, " Is ", sendAmount)
+            return sendAmount
+        },
+        getBerryUrl(nft){
+            let suffix = nft.berry.txid
+            if(suffix){
+                return 'https://berry.relayx.com/'+ suffix
+            }
+            return ''
+            
+        },
+        async getEligible(address){
+            let walletJSON  = await fetch('https://staging-backend.relayx.com/api/user/balance2/' + address)
+            let response_data = await walletJSON.json()
+            console.log(response_data)
+            let collectibles = response_data.data['collectibles'];
+            let balances = response_data.data['balances'];
+            console.log({balances})
+            let selected = collectibles.filter(c => c.origin === '3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1')
+            //let totalPayment = 0; 
+            let { data } = await axios.get("https://staging-backend.relayx.com/api/market/3ad82590d5d215a5ae04d5c2ed66e7ad711a769ffab42201d77902305a0f3f13_o1/orders");
+            let orders = data.data.orders;
+            let eligable = [];
+            for(let x =0; x < selected.length; x++ ){
+                let hasOrder = orders.filter(o => o.name === selected[x].location)
+                if(hasOrder.length === 0){
+                    eligable.push(selected[x])
+                }
+            }
+            this.eligibleNFTs = eligable
+            this.esitmatedPoo =  await this.calculateSendAmount();
+        },
+        async calculateSendAmount(){
+            let totalPayment = 0;
+            for(let x =0; x < this.eligibleNFTs.length; x++ ){
+                let addToPayment = 0; 
+                addToPayment = this.calculatePOOPayment(this.eligibleNFTs[x]);
+                totalPayment = totalPayment + addToPayment;
+            }
+            console.log("Total Payment: ", totalPayment)
+            return totalPayment;
+        },
+        hasBonus(nft){
+            if(nft.props.metadata[this.propertyName] === this.propertyValue){
+                return true
+            }
+            return false;
         }
     },
     computed:{
