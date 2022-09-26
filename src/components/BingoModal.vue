@@ -34,8 +34,7 @@
                                     <img
                                         class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" 
                                         src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" alt="">
-                                    <p class='text-xl font-black pt-1'> Someone Has Called Bingo</p>
-                                    <p class='p-4'>please wait while we confirm the winning card</p>
+                                    <slot />
                                 </div>
                             </div>
                         </div>
@@ -76,9 +75,10 @@ export default {
             showBingo: _showBingo
         })
 
-        const { allAdvertisements, newAdvertisment, updateCount, updateView} = useAdvertisements()
-        console.log(allAdvertisements)
-        return { ...toRefs(state), allAdvertisements, newAdvertisment, updateCount, updateView, store }
+        const { allAdvertisements, updateCount, updateView} = useAdvertisements()
+        // console.log(allAdvertisements)
+
+        return { ...toRefs(state), allAdvertisements, updateCount, updateView, store }
 
     },
     methods: {

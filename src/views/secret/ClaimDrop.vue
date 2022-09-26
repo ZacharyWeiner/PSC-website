@@ -62,15 +62,17 @@ export default {
                 console.log(nftCount[0].amount, sendAmount)
                 try{
                     let response = await this.sendPoo(sendAmount, claim.ownerAddress)
-                    console.log("No error on send poo", response)
-                    let allUnclaimed = this.unclaimed.filter(ua => ua.relay_handle === claim.relay_handle)
-                    console.log("All Uncliamed", allUnclaimed)
-                    allUnclaimed.forEach(c => {
-                        this.markClaimed(c)
-                        console.log("Marked Cliamed", c);
-                    })
-
-
+                    if(response !== null){
+                        console.log("No error on send poo", response)
+                        let allUnclaimed = this.unclaimed.filter(ua => ua.relay_handle === claim.relay_handle)
+                        console.log("All Uncliamed", allUnclaimed)
+                        allUnclaimed.forEach(c => {
+                            this.markClaimed(c)
+                            console.log("Marked Cliamed", c);
+                        })
+                    } else {
+                        alert("The response was null indicating an error occurred");
+                    }
                 }catch(err){
                     console.log("There was an error sending POO", nftCount, err)
                 }

@@ -7,7 +7,16 @@
             <!-- <GameTimer /> -->
         <div v-if="!game.gameComplete && (game.id === store.state.bingoCurrenGame)"> 
             <BingoModal :isOpen="showAdvertisementModal && !hasBingo" :isBingo="false" @closeModal="toggleModal" /> 
-            <BingoModal :isOpen="anyOneCallBingo" :isBingo="true" />  
+            <BingoModal :isOpen="anyOneCallBingo" :isBingo="true" >
+                <div v-if="!isGameWinner">
+                    <p class='text-xl font-black pt-1'> {{bingoMessage}} Called Bingo</p>
+                    <p class='p-4'>please wait while we confirm the winning card</p>
+                </div>
+                <div v-else>
+                    <p class='text-xl font-black pt-1'>Congratulations, you won!</p>
+                    <p class='p-4'> Please wait while we make payment to your account</p>
+                </div>                
+            </BingoModal>
             <div class="grid grid-cols-5 lg:grid-cols-7">
                 <div class="col-span-1">
                         <div class="w-full rounded-xl">
@@ -318,10 +327,6 @@ export default {
             // console.log(hasWin);
             return hasWin;
         },
-        // showBingoModal(){
-        //     if(this.currentGameBingos?.length > 1) {return true}
-        //     return false;
-        // },
         anyOneCallBingo() {
             console.log(this.currentGameBingos)
             if (this.currentGameBingos?.length > 0) {
@@ -340,7 +345,7 @@ export default {
                     }
                 })
             }
-            // console.log(matches)
+            console.log(matches)
             return matches.length > 0
         },
         cardNumbers(){
@@ -393,6 +398,21 @@ export default {
         showAdvertisementModal() {
             let check = this.checkShowAdvertisement()
             return check
+        },
+        bingoMessage() {
+            if (this.currentGameBingos.filter(b => b.relayHandle === this.$store.state.relayx_handle).length) {
+                return 'You have'
+            }
+            else {
+                return 'Someone has'
+            }
+        },
+        isGameWinner() {
+            let win = this.currentGame[0].winners.filter(w => w.winner.relayHandle === this.$store.state.relayx_handle).length
+            // console.log(this.currentGame[0].winners.filter(w => w.winner.relayHandle === this.$store.state.relayx_handle))
+            console.log(win)
+        
+            return win
         }
         
     }   
