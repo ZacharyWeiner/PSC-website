@@ -9,10 +9,14 @@
                 </div>
                
             </div>
-            <div class="text-md"> <b>This Weeks Bonus: <span class="text-green-700">{{propertyName}} - {{propertyValue}}</span></b> </div>  
-            <div class="w-full" v-for="jig in eligibleNFTs" :key="jig.location"> 
+            <div class="text-md"> <b>This Weeks Bonus: </b> </div>
+             <div class="text-xl"><span class="text-green-700">{{propertyName.toUpperCase()}} - {{propertyValue.toUpperCase()}}</span> </div>
+             <div class="pt-4"> 
+                <div class="text-xl">  Claiming This Week:</div>    
+             </div>
+            <div class="w-full bg-gray-900 rounded-xl m-2 px-2" v-for="jig in eligibleNFTs" :key="jig.location"> 
                 <div class="flex space-x-6 w-full"> 
-                    <div class="w-16 h-16">  <img class="rounded-full w-full" :src="getBerryUrl(jig)" /></div> 
+                    <div class="w-16 h-16 flex items-center">  <img class="rounded-full w-full" :src="getBerryUrl(jig)" /></div> 
                     <div class="my-auto w-full text-left"> 
                         <div class="flex w-full">
                             <div class="text-gray-100 font-bold px-4">{{jig.name}}</div>
@@ -43,10 +47,9 @@
                 <div class="text-xl">  Claiming This Week:</div>    
                 
              </div>
-              
-            <div class="w-full" v-for="jig in eligibleNFTs" :key="jig.location"> 
+             <div class="w-full bg-gray-900 rounded-xl m-2 px-2" v-for="jig in eligibleNFTs" :key="jig.location"> 
                 <div class="flex space-x-6 w-full"> 
-                    <div class="w-16 h-16">  <img class="rounded-full w-full" :src="getBerryUrl(jig)" /></div> 
+                    <div class="w-16 h-16 flex items-center">  <img class="rounded-full w-full" :src="getBerryUrl(jig)" /></div> 
                     <div class="my-auto w-full text-left"> 
                         <div class="flex w-full">
                             <div class="text-gray-100 font-bold px-4">{{jig.name}}</div>
@@ -82,8 +85,8 @@ export default {
             count: 0,
             baseAward: 100,
             multiplier: 5,
-            propertyName: 'hair',
-            propertyValue: 'mowhawk green',
+            propertyName: 'clothes',
+            propertyValue: 'diamond hoodie',
             successMessage: "Your $POO has been claimed and will be sent SOON",
             esitmatedPoo: 0,
         })
@@ -184,7 +187,7 @@ export default {
             if(this.isLogin  && this.$store.state.user_jigs.length > 0){
                 _canClaim = true;
             } 
-            let compareDate = new Date('2022-09-26');
+            let compareDate = new Date('2022-10-01');
             this.userActions['userActions'].value.forEach((ua)=> {
                 let actionDate = new Date(ua.timestamp.seconds * 1000);
                 if( actionDate > compareDate){
