@@ -9,7 +9,7 @@
                 </div>
                
             </div>
-            <div> <b>This Weeks Bonus: {{propertyName}} - {{propertyValue}}</b> </div>  
+            <div class="text-md"> <b>This Weeks Bonus: <span class="text-green-700">{{propertyName}} - {{propertyValue}}</span></b> </div>  
             <div class="w-full" v-for="jig in eligibleNFTs" :key="jig.location"> 
                 <div class="flex space-x-6 w-full"> 
                     <div class="w-16 h-16">  <img class="rounded-full w-full" :src="getBerryUrl(jig)" /></div> 
@@ -34,11 +34,31 @@
             </div>      
         </div>
         <div v-else-if="userJigs.length > 0" >
+            <div class="">  {{successMessage}}</div>   
             <img src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorn-claim-gif.gif" />
-             {{successMessage}} 
+            <div class="text-md"> <b>This Weeks Bonus: </b> </div>
+             <div class="text-xl"><span class="text-green-700">{{propertyName.toUpperCase()}} - {{propertyValue.toUpperCase()}}</span> </div>
              <div class="pt-4"> 
-                Last Claimed: {{lastAction}}
-             </div>  
+                 
+                <div class="text-xl">  Claiming This Week:</div>    
+                
+             </div>
+              
+            <div class="w-full" v-for="jig in eligibleNFTs" :key="jig.location"> 
+                <div class="flex space-x-6 w-full"> 
+                    <div class="w-16 h-16">  <img class="rounded-full w-full" :src="getBerryUrl(jig)" /></div> 
+                    <div class="my-auto w-full text-left"> 
+                        <div class="flex w-full">
+                            <div class="text-gray-100 font-bold px-4">{{jig.name}}</div>
+                            <div class="text-yellow-400 w-full my-auto">
+                                <div> Will Claim </div>
+                                <div v-if="hasBonus(jig)" class="text-green-400">  BONUS!</div> 
+                            </div> 
+                            <div class="text-right font-bold text-green-400 my-auto">  {{this.calculatePOOPayment(jig)}} </div>
+                        </div> 
+                    </div>
+                </div>    
+            </div>  
         </div>
         <div v-else>You must own a Pewnicorn PRD NFT to Claim </div>
     </div>
