@@ -6,7 +6,7 @@
         <div class='col-span-1'> {{claim.relay_handle}} </div>
         <div class='col-span-1'>{{claim.ownerAddress}} </div>
         <div class='col-span-1 pl-12'><button @click="getCount(claim)"> Get Count</button>  </div>
-        <div class='col-span-1 pl-12'><button @click="calculateSendAmount()"> Get Order Count</button>  </div>
+        <div class='col-span-1 pl-12'><button @click="calculateSendAmount(claim.ownerAddress)"> Get Order Count</button>  </div>
     </div>
 </template>
 
@@ -105,6 +105,7 @@ export default {
             return orderCount;
         },
         async calculateSendAmount(address){
+            console.log("Calculating Send amount for ", address)
             let walletJSON  = await fetch('https://staging-backend.relayx.com/api/user/balance2/' + address)
             let response_data = await walletJSON.json()
             console.log(response_data)

@@ -19,7 +19,7 @@
           <!-- Buy & Sell --> 
           <Popover class="relative" v-slot="{ open }">
             <PopoverButton :class="[open ? 'text-gray-900' : 'text-gray-500', 'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
-              <span>Buy &amp; Sell</span>
+              <span>Get A Pewnicorn</span>
               <ChevronDownIcon :class="[open ? 'text-gray-600' : 'text-gray-400', 'ml-2 h-5 w-5 group-hover:text-gray-500']" aria-hidden="true" />
             </PopoverButton>
 
@@ -218,13 +218,6 @@ import { ChevronDownIcon } from '@heroicons/vue/solid'
 import {useRun} from "./../services/wallet.js"
 
 const exchange = [
-
-  {
-    name: 'All Collections',
-    description: 'See all the collections from the Pewnicorn Social Club.',
-    href: '/market-selection',
-    icon: ViewGridIcon,
-  },
   {
     name: 'Buy With BSV',
     description: 'See all the pewnicorns for sale on the BSV market.',
@@ -249,12 +242,12 @@ const exchange = [
     href: '#',
     icon: PuzzleIcon,
   },
-//   {
-//     name: 'Automations',
-//     description: 'Build strategic funnels that will drive your customers to convert',
-//     href: '#',
-//     icon: RefreshIcon,
-//   },
+  {
+    name: 'All Collections',
+    description: 'See all the collections from the Pewnicorn Social Club.',
+    href: '/market-selection',
+    icon: ViewGridIcon,
+  },
 ]
 const membersOnly = [
 
