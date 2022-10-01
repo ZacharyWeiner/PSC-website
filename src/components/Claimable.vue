@@ -184,7 +184,7 @@ export default {
             if(this.isLogin  && this.$store.state.user_jigs.length > 0){
                 _canClaim = true;
             } 
-            let compareDate = new Date('2022-09-26');
+            let compareDate = new Date('2022-10-01');
             this.userActions['userActions'].value.forEach((ua)=> {
                 let actionDate = new Date(ua.timestamp.seconds * 1000);
                 if( actionDate > compareDate){
