@@ -25,8 +25,8 @@ export default {
             count: 0,
             baseAward: 100,
             multiplier: 5,
-            propertyName: 'hair',
-            propertyValue: 'mowhawk green',
+            propertyName: 'clothes',
+            propertyValue: 'diamond hoodie',
         })
     
         return {
