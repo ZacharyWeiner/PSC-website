@@ -36,6 +36,7 @@ export default createStore({
     viewedAdvertisement: 0,
     marketContractLocation:"",
     marketContractImageUrl:"",
+    marketContractName:"",
   },
   mutations: {
     // change state
@@ -115,6 +116,9 @@ export default createStore({
     },
     setMarketContractImageUrl(state, location){
       state.marketContractImageUrl = location;
+    },
+    setMarketContractName(state, name){
+      state.marketContractName = name;
     },
     setBalances(state, _balances){
       state.balances = _balances;
