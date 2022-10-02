@@ -42,6 +42,7 @@ import HowToBingo from '../views/bingo/HowTo.vue'
 //import BingoAd from '../views/BingoAd.vue'
 import CardsInSession from "../views/bingo/CardsInSession.vue"
 import FlipbookView from "./../views/secret/Flipbook.vue";
+import RelayWrapperHome from "./../views/secret/relay-wrapper/HomeView.vue"
 
 const routes = [
   {
@@ -254,11 +255,11 @@ const routes = [
     name: 'Flipbook',
     component: FlipbookView
   },
-  // {
-  //   path: '/bingoAd',
-  //   name: 'BingoAd',
-  //   component: BingoAd
-  // }
+  {
+    path: '/secret/relay-wrapper/home',
+    name: 'Relay Wrapper Home',
+    component: RelayWrapperHome
+  }
   
 ]
 
