@@ -2,7 +2,7 @@
     <div class="text-white">
         <announcement-banner />
          <Menu />
-         <div v-if="isLoading" class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+         <div v-if="!hasLoaded" class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
                 <span class='text-3xl'> 👀</span>
                 <h2 class="text-3xl font-extrabold tracking-tight pl-3 text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent sm:text-4xl">
                     <span class="block">Loading </span>
@@ -12,8 +12,8 @@
             <h2 class="text-3xl font-extrabold tracking-tight pl-3 pt-12 text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-blue-200 via-teal-400 to-purple-700 bg-clip-text text-transparent sm:text-4xl">
                     <span class="block">Buy A {{store.state.marketContractName}} </span>
                 </h2>
-       <div v-if="orders?.length > 0" class="grid grid-cols-1 lg:grid-cols-4 p-12">
-           <div v-for="(order, index) in orders" :key="index" class="col-span-1 mb-4 mx-1 bg-gray-900 rounded p-1">
+       <div v-if="store.state.marketOrders?.length > 0" class="grid grid-cols-1 lg:grid-cols-4 p-12">
+           <div v-for="(order, index) in store.state.marketOrders.slice(0, 100)" :key="index" class="col-span-1 mb-4 mx-1 bg-gray-900 rounded p-1">
             <!-- <div class='grid grid-cols-4'  >
                     
                     <div class='col-span-1'>   </div>
@@ -21,9 +21,9 @@
                 </div> -->
                <img :src="getBerryUrl(order)" class="w-full rounded-xl" />
                
-                <!-- <div class="bg-black">
-                    <div class='text-4xl pt-2' :class='rankTextClass(order)'>{{rankText(order)}} </div>
-                    </div> -->
+                <div class="bg-black text-gray-100">
+                    <div class='pt-2' > {{store.state.marketContractName}} #{{order.props.no ? order.props.no : ""}} </div>
+                    </div>
                 <div class="m-4 rounded"> 
                     
                         <button class="w-full text-white bg-gradient-to-r from-teal-400 via-blue-500 to-purple-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-bold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" @click="buy(order)">{{buyButtonText(order)}} ₿ {{order.satoshis / 100000000}}</button>
@@ -50,7 +50,7 @@ import  axios from "axios";
 import Menu from "./../../components/MenuComponent2.vue"
 import AnnouncementBanner from "./../../components/AnnouncementBanner.vue"
 import Footer from "./../../components/Footer.vue";
-import { useStore } from "vuex";
+import { useStore, mapState } from "vuex";
 
 export default {
    components:{Menu, AnnouncementBanner, Footer},
@@ -63,18 +63,8 @@ export default {
             return
         }
         let orders = ref([]);
-        let queryData = async () => {
-            let { data } = await axios.get(`https://staging-backend.relayx.com/api/market/${store.state.marketContractLocation}/orders`);
-            let orders = data.data.orders;
-            console.log(orders);
-            orders.sort((a, b) =>{ 
-                let a1 =  parseInt(a.satoshis, 10)
-                let b1 =  parseInt(b.satoshis, 10)
-                return a1- b1
-            });
-            return orders
-        }
-        orders.value = await queryData();
+        
+        
         const state = reactive({
             count: 0, 
             selectedOrderTxid: "",
@@ -87,6 +77,22 @@ export default {
             hasLoaded,
             store,
         }
+    },
+    async mounted(){
+        let queryData = async () => {
+            let { data } = await axios.get(`https://staging-backend.relayx.com/api/market/${this.$store.state.marketContractLocation}/orders`);
+            let orders = data.data.orders;
+            console.log(orders);
+            orders.sort((a, b) =>{ 
+                let a1 =  parseInt(a.satoshis, 10)
+                let b1 =  parseInt(b.satoshis, 10)
+                return a1- b1
+            });
+            return orders
+        }
+        let _orders = await queryData(); 
+        this.$store.commit("setMarketOrders", _orders)
+        this.hasLoaded = true;
     },
     methods:{
         async buy(order){
@@ -159,19 +165,20 @@ export default {
             }
             return "BUY NOW"
         },
-        computed:{
-            isLoading(){
-                if(!this.hasLoaded){return false}
-                return false;
-            },
-            ordersToShow(){
-                console.log("Orders at call to show", this.orders);
-                return this.orders
-            },
-            contractName(){
-                return this.$store.state.marketContractName;
-            }
-        }
+    },
+    computed:{
+        isLoading(){
+            if(!this.hasLoaded){return false}
+            return false;
+        },
+        ordersToShow(){
+            console.log("Orders at call to show", this.orders);
+            return this.orders
+        },
+        contractName(){
+            return this.$store.state.marketContractName;
+        },
+        ...mapState(["marketOrders"])
     }
 }
 </script>
