@@ -2,17 +2,24 @@
     <div class="text-white">
         <announcement-banner />
          <Menu />
-       <div v-if="orders?.length > 0" class="grid grid-cols-1 lg:grid-cols-4 ">
+         <div v-if="isLoading" class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+                <span class='text-3xl'> 👀</span>
+                <h2 class="text-3xl font-extrabold tracking-tight pl-3 text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent sm:text-4xl">
+                    <span class="block">Loading </span>
+                    <span class="block"> ¯\_(ツ)_/¯</span>
+                </h2>
+            </div>
+            <h2 class="text-3xl font-extrabold tracking-tight pl-3 pt-12 text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-blue-200 via-teal-400 to-purple-700 bg-clip-text text-transparent sm:text-4xl">
+                    <span class="block">Buy A {{store.state.marketContractName}} </span>
+                </h2>
+       <div v-if="orders?.length > 0" class="grid grid-cols-1 lg:grid-cols-4 p-12">
            <div v-for="(order, index) in orders" :key="index" class="col-span-1 mb-4 mx-1 bg-gray-900 rounded p-1">
-            <div class='grid grid-cols-4'  >
-                    <!-- <div class='w-full col-span-2 text-left pt-1 pl-1  font-bold'> 
-                        <div class=''> Edition {{order.name}}</div>  
-                        <div class=''> Rank # {{rankNFT(order)}}</div>
-                    </div> -->
+            <!-- <div class='grid grid-cols-4'  >
+                    
                     <div class='col-span-1'>   </div>
                     <div class='col-span-1 text-right pr-1 font-bold '><div>Price: </div> <div class='mx-auto'> ₿ {{order.satoshis / 100000000}}</div>  </div>
-                </div>
-               <img :src="getBerryUrl(order)" class="w-full" />
+                </div> -->
+               <img :src="getBerryUrl(order)" class="w-full rounded-xl" />
                
                 <!-- <div class="bg-black">
                     <div class='text-4xl pt-2' :class='rankTextClass(order)'>{{rankText(order)}} </div>
@@ -37,7 +44,7 @@
     </div>
 </template>
 <script>
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, ref } from 'vue'
 import { useRouter } from "vue-router"
 import  axios from "axios";
 import Menu from "./../../components/MenuComponent2.vue"
@@ -48,29 +55,37 @@ import { useStore } from "vuex";
 export default {
    components:{Menu, AnnouncementBanner, Footer},
      async setup () {
+        let hasLoaded = ref(false);
         let store = useStore();
         if(store.state.marketContractLocation === ""){
             let router = useRouter()
             router.push('/market-selection');
             return
         }
-        let { data } = await axios.get(`https://staging-backend.relayx.com/api/market/${store.state.marketContractLocation}/orders`);
-        let orders = data.data.orders;
-        console.log(orders);
-         orders.sort((a, b) =>{ 
-            let a1 =  parseInt(a.satoshis, 10)
-            let b1 =  parseInt(b.satoshis, 10)
-            return a1- b1
-           });
+        let orders = ref([]);
+        let queryData = async () => {
+            let { data } = await axios.get(`https://staging-backend.relayx.com/api/market/${store.state.marketContractLocation}/orders`);
+            let orders = data.data.orders;
+            console.log(orders);
+            orders.sort((a, b) =>{ 
+                let a1 =  parseInt(a.satoshis, 10)
+                let b1 =  parseInt(b.satoshis, 10)
+                return a1- b1
+            });
+            return orders
+        }
+        orders.value = await queryData();
         const state = reactive({
             count: 0, 
             selectedOrderTxid: "",
             error: "",
         })
-    
+        hasLoaded = true;
         return {
             ...toRefs(state),
             orders,
+            hasLoaded,
+            store,
         }
     },
     methods:{
@@ -143,6 +158,19 @@ export default {
                 return "Buying... "
             }
             return "BUY NOW"
+        },
+        computed:{
+            isLoading(){
+                if(!this.hasLoaded){return false}
+                return false;
+            },
+            ordersToShow(){
+                console.log("Orders at call to show", this.orders);
+                return this.orders
+            },
+            contractName(){
+                return this.$store.state.marketContractName;
+            }
         }
     }
 }
