@@ -9,22 +9,18 @@
             <BingoModal :isOpen="showAdvertisementModal && !hasBingo" :isBingo="false" @closeModal="toggleModal" /> 
             <BingoModal :isOpen="anyOneCallBingo && !hasGameWinner" :isBingo="true" >
                 <div>
-                    <img
-                        class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" 
-                        src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" alt="">
+                    <img src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/corns-gif-2.gif" alt="">
                     <p class='text-xl font-black pt-1'> {{bingoMessage}} Called Bingo</p>
                     <p class='p-4'>please wait while we confirm the winning card</p>
                 </div> 
             </BingoModal>
             <BingoModal :isOpen="hasGameWinner" :isBingo="true">
                 <div>
-                    <img
-                        class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" 
-                        src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorn-claim-gif.gif" alt="">
+                    <img src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorn-claim-gif.gif" alt="">
                     <p class='text-xl font-black pt-1'>We have a Winner!</p>
                     <p class='p-4'>please wait while we make payment and a new game will start soon.</p>
                     <p v-for="winners in game.winners" :key="winners" class='p-4 font-bold'>
-                        {{winners.winner.relayHandle}}
+                        Winner<br>{{winners.winner.relayHandle}}
                     </p>
                 </div> 
             </BingoModal>
