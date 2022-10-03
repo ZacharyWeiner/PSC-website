@@ -223,6 +223,7 @@ export default {
     topCollections.value = await getTop();
     console.log("Gettting Coins");
     topCoins.value = await getTop("FT");
+
     const state = reactive({
       count: 0,
     });
