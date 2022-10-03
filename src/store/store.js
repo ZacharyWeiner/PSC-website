@@ -38,6 +38,7 @@ export default createStore({
     marketContractImageUrl:"",
     marketContractName:"",
     marketOrders: [],
+    rareCandies: [],
   },
   mutations: {
     // change state
@@ -129,6 +130,12 @@ export default createStore({
     },
     setCollectibles(state, collectibles){
       state.collectibles = collectibles;
+    },
+    setRareCandies(state, items){
+      state.rareCandies = items;
+    },
+    addRareCandies(state, items){
+      state.rareCandies = [...state.rareCandies, items]
     }
   },
   actions: {
