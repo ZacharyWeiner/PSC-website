@@ -242,7 +242,11 @@ export default {
         console.log("Clicked with collection:", collection)
         this.$store.commit("setMarketContractLocation", collection.origin);
         this.$store.commit("setMarketContractName", collection.name);
+        this.$store.commit("setMarketContractSevenDayVol", collection.stats.vol_7d);
+        this.$store.commit("setMarketContractThirtyDayVol", collection.stats.vol_30d);
+        this.$store.commit("setMarketContractFloor", collection.stats.floor);
         this.$store.commit("setMarketOrders", []);
+        this.$store.commit("setMarketContractImageUrl", this.imageForCollection(collection))
         this.$router.push("/collectables");
     },
   },

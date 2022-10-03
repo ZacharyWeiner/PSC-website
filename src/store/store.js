@@ -37,7 +37,10 @@ export default createStore({
     marketContractLocation:"",
     marketContractImageUrl:"",
     marketContractName:"",
+    marketContractFloor: 0,
     marketOrders: [],
+    sevenDayVol: 0, 
+    thirtyDayVol: 0,
   },
   mutations: {
     // change state
@@ -123,6 +126,15 @@ export default createStore({
     },
     setMarketOrders(state, orders){
       state.marketOrders = orders;
+    },
+    setMarketContractSevenDayVol(state, vol){
+      state.sevenDayVol = vol;
+    },
+    setMarketContractThirtyDayVol(state, vol){
+      state.thirtyDayVol = vol;
+    },
+    setMarketContractFloor(state, floor){
+      state.marketContractFloor = floor;
     },
     setBalances(state, _balances){
       state.balances = _balances;
