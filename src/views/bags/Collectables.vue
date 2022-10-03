@@ -106,6 +106,7 @@ export default {
                 console.log(response)
                 let sendResponse = await window.relayone.send(response.data.data.rawtx)
                 console.log(sendResponse)
+                alert("You Bought A " + this.$store.state.marketContractName)
                 window.location.reload();
                 }catch(err){
                     this.error = err
