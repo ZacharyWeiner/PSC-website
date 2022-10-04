@@ -271,6 +271,12 @@ const more = [
     href: '/friends',
     icon: EmojiHappyIcon,
   },
+  {
+    name: 'Relay Dashboard',
+    description: 'Check out whats hot on Relay',
+    href: '/secret/relay-wrapper/home',
+    icon: CurrencyDollarIcon,
+  },
 //   {
 //     name: 'Events',
 //     description: 'See what meet-ups and other events we might be planning near you.',
