@@ -11,7 +11,7 @@
         A New Look For The Relay Orderbook
       </p>
     </div>
-  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 pt-12">
+  <div class="grid grid-cols-1 lg:grid-cols-4 lg:grid-cols-4 pt-12">
     <div class="col-span-0 md:col-span-1 xl:col-span-1">
       <div
         class="pt-4 mt-4 text-3xl font-black w-full xl:inline bg-gradient-to-r from-purple-400 via-blue-400 to-blue-700 bg-clip-text text-transparent"

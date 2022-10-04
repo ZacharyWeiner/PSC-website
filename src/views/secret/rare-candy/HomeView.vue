@@ -13,14 +13,16 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 pt-12 text-white space-x-1  mx-2 md:mx-6 lg:mx-12">
         <div class="col-span-1 border-2 border-solid rounded-xl mb-2" :class="getRarityBorderClasses(candy)" v-for="candy in sortedCandies" :key="candy.outpoint">
-            <div> <img class="w-100% rounded-lg" :src="imageForItem(candy)" /></div>
-            <div class="" :class="getRarityClasses(candy)"> {{candy.metadata? candy.metadata.title : ""}} </div>    
+            <div class="rounded-t-xl" :class="getRarityClasses(candy)"> {{candy.metadata? candy.metadata.title : ""}} </div>    
+            <div> <img class="w-100% " :src="imageForItem(candy)" /></div>
+            
             <div> {{candy.seller_paymail}} </div>    
             <div> ₿ {{(candy.satoshis_price / 100000000).toPrecision(3) }}</div>    
-            <div class="w-full"> <a class="w-full rounded-b-xl bg-gradient-to-r from-purple-400 via-blue-400 to-blue-700" :href="`https://www.rarecandy.io/item/${candy.collection}`" target="_blank"> VIEW </a> </div>
+            <!-- <div class="w-full flex "> <a class="w-full rounded-b-xl bg-gradient-to-r from-purple-400 via-blue-400 to-blue-700 font-black" :href="`https://www.rarecandy.io/item/${candy.collection}`" target="_blank"> VIEW </a> </div>
+             -->
+             <div class="w-full flex "> <a class="w-full rounded-b-xl bg-gradient-to-r from-purple-400 via-blue-400 to-blue-700 font-black" :href="`https://www.rarecandy.io/`" target="_blank"> VIEW </a> </div>
         </div>
     </div>
-
   </template>
   
   <script>
@@ -153,7 +155,7 @@
           });
           data = await response.json();
           console.log("Gets a list of something:", data);
-          newData = [...this.$store.state.rareCandies, ...data]
+          let newData = [...this.$store.state.rareCandies, ...data]
           console.log(newData);
           this.$store.commit("setRareCandies", newData);
 
@@ -174,7 +176,28 @@
           });
           data = await response.json();
           console.log("Gets a list of something:", data);
-          let newData = [...this.$store.state.rareCandies, ...data]
+          newData = [...this.$store.state.rareCandies, ...data]
+          console.log(newData);
+          this.$store.commit("setRareCandies", newData);
+
+          response = await fetch("https://api.rarecandy.io/collections/e84e2fd140fa80e5fab149a972ec1d85c100fb4de229daaeab4e20fa54da04db/listings?page=1&limit=32", {
+              "credentials": "omit",
+              "headers": {
+                  "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:105.0) Gecko/20100101 Firefox/105.0",
+                  "Accept": "application/json, text/plain, */*",
+                  "Accept-Language": "en-US,en;q=0.5",
+                  "Content-Type": "application/json",
+                  "Sec-Fetch-Dest": "empty",
+                  "Sec-Fetch-Mode": "cors",
+                  "Sec-Fetch-Site": "same-site"
+              },
+              "body": "{\"order\":\"DESC\",\"order_by\":\"created\",\"min\":\"0\",\"max\":\"1.7976931348623157e+308\",\"status\":\"listed\"}",
+              "method": "POST",
+              "mode": "cors"
+          });
+          data = await response.json();
+          console.log("Gets a list of something:", data);
+          newData = [...this.$store.state.rareCandies, ...data]
           console.log(newData);
           this.$store.commit("setRareCandies", newData);
 
