@@ -2,17 +2,44 @@
     <div class="text-white">
         <announcement-banner />
          <Menu />
-         <div v-if="!hasLoaded" class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-                <span class='text-3xl'> 👀</span>
-                <h2 class="text-3xl font-extrabold tracking-tight pl-3 text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent sm:text-4xl">
-                    <span class="block">Loading </span>
-                    <span class="block"> ¯\_(ツ)_/¯</span>
-                </h2>
+         <div class="grid justify-items-center w-full pt-2" > 
+            <div class=""> 
+                <img class="h-32 w-32 rounded-full" :src="marketContractImageUrl" />
+            </div> 
+            <div>  <span class="block text-4xl font-semibold ">{{store.state.marketContractName.toUpperCase()}} </span> </div> 
+            <div class="flex space-x-3 pt-2 ">
+                <div class="">
+                  
+                  <div
+                    class="bg-purple-500 text-white rounded-full px-3 py-1 font-bold"
+                  >
+                  ₿ {{ (sevenDayVol / 100000000).toPrecision(3) }}
+                  </div>
+                  <div class="text-gray-100 text-xs font-bold">
+                    7 Day Volume
+                  </div>
+                </div>
+                <div class="">
+                  <div
+                    class="bg-pink-500 text-white rounded-full px-3 py-1 font-bold"
+                  >
+                  ₿ {{ (thirtyDayVol/ 100000000).toPrecision(3) }}
+                  </div>
+                  <div class="text-gray-100 text-xs font-bold">
+                    30 Day Volume
+                  </div>
+                </div>
             </div>
-            <h2 class="text-3xl font-extrabold tracking-tight pl-3 pt-12 text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-blue-200 via-teal-400 to-purple-700 bg-clip-text text-transparent sm:text-4xl">
-                    <span class="block">Buy A {{store.state.marketContractName}} </span>
-                </h2>
-       <div v-if="store.state.marketOrders?.length > 0" class="grid grid-cols-1 lg:grid-cols-4 p-12">
+            <div class="text-gray-100 text-xs font-bold">
+                    Floor Price:
+                    {{ (marketContractFloor / 100000000).toPrecision(3) }}
+                  </div>
+                  <div
+                    class="bg-green-500 text-white rounded-full px-3 py-1 font-bold w-full"
+                  ></div>
+            <!-- class="text-3xl font-extrabold tracking-tight text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-blue-200 via-teal-400 to-purple-700 bg-clip-text text-transparent sm:text-4xl" -->
+        </div>  
+       <div v-if="store.state.marketOrders?.length > 0" class="grid grid-cols-1 lg:grid-cols-4 p-12 bg-gray-900">
            <div v-for="(order, index) in store.state.marketOrders.slice(0, 100)" :key="index" class="col-span-1 mb-4 mx-1 bg-gray-900 rounded p-1">
             <!-- <div class='grid grid-cols-4'  >
                     
@@ -35,7 +62,7 @@
         <div class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
                 <span class='text-3xl'> 👀</span>
                 <h2 class="text-3xl font-extrabold tracking-tight pl-3 text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent sm:text-4xl">
-                    <span class="block">There Arent Any Available </span>
+                    <span class="block">Loading ... </span>
                     <span class="block"> ¯\_(ツ)_/¯</span>
                 </h2>
             </div>
@@ -106,6 +133,7 @@ export default {
                 console.log(response)
                 let sendResponse = await window.relayone.send(response.data.data.rawtx)
                 console.log(sendResponse)
+                alert("You Bought A " + this.$store.state.marketContractName)
                 window.location.reload();
                 }catch(err){
                     this.error = err
@@ -178,7 +206,7 @@ export default {
         contractName(){
             return this.$store.state.marketContractName;
         },
-        ...mapState(["marketOrders"])
+        ...mapState(["marketOrders", "marketContractImageUrl", "sevenDayVol", "thirtyDayVol", "marketContractFloor"])
     }
 }
 </script>

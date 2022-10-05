@@ -37,7 +37,11 @@ export default createStore({
     marketContractLocation:"",
     marketContractImageUrl:"",
     marketContractName:"",
+    marketContractFloor: 0,
     marketOrders: [],
+    sevenDayVol: 0, 
+    thirtyDayVol: 0,
+    rareCandies: [],
   },
   mutations: {
     // change state
@@ -124,11 +128,26 @@ export default createStore({
     setMarketOrders(state, orders){
       state.marketOrders = orders;
     },
+    setMarketContractSevenDayVol(state, vol){
+      state.sevenDayVol = vol;
+    },
+    setMarketContractThirtyDayVol(state, vol){
+      state.thirtyDayVol = vol;
+    },
+    setMarketContractFloor(state, floor){
+      state.marketContractFloor = floor;
+    },
     setBalances(state, _balances){
       state.balances = _balances;
     },
     setCollectibles(state, collectibles){
       state.collectibles = collectibles;
+    },
+    setRareCandies(state, items){
+      state.rareCandies = items;
+    },
+    addRareCandies(state, items){
+      state.rareCandies = [...state.rareCandies, items]
     }
   },
   actions: {
