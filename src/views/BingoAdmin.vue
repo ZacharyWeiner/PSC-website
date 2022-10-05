@@ -176,6 +176,11 @@ export default {
             this.stopAutoPick();
         },
         callNumber(gameId, nums) {
+
+            if (this.playerBingos.length) {
+                this.stopAutoPick()
+                return
+            }
             this.loading = true;
             const newNum = this.getRandom(nums)
             if ( nums.includes(newNum) ) {
@@ -262,6 +267,11 @@ export default {
                 this.getCurrentGame()
                 console.log(this.currentGame)
             }
+        },
+        callBonus() {
+            let bonus = Math.floor(Math.random() * 75) + 1
+
+            return bonus
         }
     },
     computed:{
