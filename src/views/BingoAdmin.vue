@@ -6,6 +6,7 @@
         Game: <span v-if="currentGame && currentGame[0]">{{currentGame[0].id}}</span>
         <div> <button @click="startAutoPick"> start auto pick {{counter}}</button></div>
         <div> <button @click="stopAutoPick"> stop autopick</button></div>
+        {{isCounter}}
     </div>
     <div class="container m-auto my-20 text-white">
         <div v-for="game in currentGame"
@@ -83,7 +84,7 @@
                                         class="p-1 m-1 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl">
                                         Clear
                                     </button>
-                                    <button @click="setWinner(game.id, bingo.relayHandle, bingo.ownerAddress, bingo.cardLocation)"
+                                    <button @click="setWinner(game.id, bingo.relayHandle, bingo.ownerAddress, bingo.cardLocation, bingo.edition, bingo.txid)"
                                         class="p-1 m-1 text-white text-sm bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl">
                                         Confirm Bingo
                                     </button>
@@ -159,7 +160,8 @@ export default {
         const gameSession = ref(0)
         const showModal = false;
         const counter = ref(0);
-        return { loading, newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, getCurrentGame, currentGame, playerBingos, meta, counter, timerInterval, gameSession, showModal}
+        const isCounter = ref(false)
+        return { loading, newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, getCurrentGame, currentGame, playerBingos, meta, counter, timerInterval, gameSession, showModal, isCounter}
     },
     methods: {
         startGame(){
@@ -199,7 +201,6 @@ export default {
             return newNum;
         },
         async getMetaData(edition) {
-            
             const metaData = await  import(`@/assets/metadata/${edition}`)
             this.meta = metaData
             console.log('here', metaData)
@@ -227,6 +228,7 @@ export default {
         },
         startAutoPick(){
             // console.log("starting the autopick", gId, numbs.winningNumbers);
+            this.isCounter = true
             this.timerInterval = setInterval(() => 
             {
                  let gId = this.currentGame[0].id;
@@ -241,7 +243,8 @@ export default {
             }, 20000)
         },
         stopAutoPick(){
-             clearInterval(this.timerInterval);
+            this.isCounter = false
+            clearInterval(this.timerInterval);
         },
         newGameSession(currentGame) {
             console.log(currentGame[0].session);            
@@ -276,7 +279,8 @@ export default {
                 }
                 return [];
             },
+        
             
-        }
+    }
 }
 </script>

@@ -325,11 +325,13 @@ export function useBingo() {
 
     }
 
-    const setWinner = (id, _handle, _owner, _loc) => {
+    const setWinner = (id, _handle, _owner, _loc, _edition, _txid) => {
         const winner = {
             relayHandle: _handle,
             ownerAddress: _owner,
-            cardLocation: _loc
+            cardLocation: _loc,
+            edition: _edition,
+            txid: _txid
         }
         
         bingoGamesCollection.doc(id).update({
@@ -344,6 +346,7 @@ export function useBingo() {
             relayHandle: bingo.handle,
             ownerAddress: bingo.owner,
             cardLocation: bingo.card,
+            txid: bingo.txid,
             edition: cardId,
             gameId: gameId
         })

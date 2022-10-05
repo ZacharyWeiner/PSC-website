@@ -15,12 +15,13 @@
                 </div> 
             </BingoModal>
             <BingoModal :isOpen="hasGameWinner" :isBingo="true">
-                <div>
+                <div class="">
                     <img src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/pewnicorn-claim-gif.gif" alt="">
                     <p class='text-xl font-black pt-1'>We have a Winner!</p>
                     <p class='p-4'>please wait while we make payment and a new game will start soon.</p>
                     <p v-for="winners in game.winners" :key="winners" class='p-4 font-bold'>
-                        Winner<br>{{winners.winner.relayHandle}}
+                       {{winners.winner.relayHandle}}
+                        <img class="h-64 mx-auto" :src="'https://berry.relayx.com/' + winners.winner.txid  " alt=""> 
                     </p>
                 </div> 
             </BingoModal>
@@ -150,7 +151,8 @@ export default {
         const bingo = {
             handle:    store.state.relayx_handle,
             owner:     store.state.user_address,
-            card:      store.state.selectedBingoCard.location
+            card:      store.state.selectedBingoCard.location,
+            txid:      store.state.selectedBingoCard.berry.txid
         }
         const hasBingo = ref(false);
         const adModalActive = ref(false)
