@@ -38,6 +38,8 @@ export default createStore({
     marketContractImageUrl:"",
     marketContractName:"",
     marketContractFloor: 0,
+    relayTopCoins: [],
+    relayTopNFTS: [],
     marketOrders: [],
     sevenDayVol: 0, 
     thirtyDayVol: 0,
@@ -148,7 +150,7 @@ export default createStore({
     },
     addRareCandies(state, items){
       state.rareCandies = [...state.rareCandies, items]
-    }
+    },
   },
   actions: {
     // call multiple mutation routines
