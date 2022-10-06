@@ -1,5 +1,5 @@
 <template>
-    <ul role="list" class="divide-y divide-teal-200 text-left rounded-xl">
+    <ul role="list" class="divide-y divide-indigo-200 text-left rounded-xl">
             <li v-for="message in sorted" :key="message" class="flex py-4 m-2 bg-gray-800 rounded-xl">
             <img class="h-10 w-10 rounded-full" :src="getProfilePic(message)" alt="" />
             <div class="ml-3">
@@ -13,10 +13,10 @@
 <script>
 import { reactive, toRefs, ref } from 'vue'
 export default {
-    setup () {
+    setup (props) {
         const messages = ref([])
         const state = reactive({
-            count: 0,
+            count: props.count,
         })
         return {
             ...toRefs(state), messages
@@ -76,9 +76,12 @@ export default {
         sorted(){
             let s = this.messages; 
             s.sort((a,b) => a.timestamp - b.timestamp > 0 ? 1 : -1)
+            if(this.count >= s.length){return s}
+            if(this.count < s.length)return s.slice(s.length - this.count, s.length);
             return s;
         }   
-    }
+    },
+    props:["count"]
 }
 </script>
 
