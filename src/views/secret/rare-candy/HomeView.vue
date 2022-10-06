@@ -159,7 +159,7 @@
           console.log(newData);
           this.$store.commit("setRareCandies", newData);
 
-          response = await fetch("https://api.rarecandy.io/collections/7aaf5700968b4c5f78de43873f3450d6566d7f4463056090ad16ff51340f6509/listings?page=1&limit=16", {
+          response = await fetch("https://api.rarecandy.io/collections/7aaf5700968b4c5f78de43873f3450d6566d7f4463056090ad16ff51340f6509/listings?page=0&limit=16", {
               "credentials": "omit",
               "headers": {
                   "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:105.0) Gecko/20100101 Firefox/105.0",
