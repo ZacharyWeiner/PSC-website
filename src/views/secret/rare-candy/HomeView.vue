@@ -1,14 +1,14 @@
 <template>
     <Menu />
     <div class="text-center">
-        <h2 class="text-lg font-semibold text-indigo-600 pt-6">Whats Hot?</h2>
+        <h2 class="text-lg font-semibold text-indigo-600 pt-6">APE FLOOR</h2>
         <div
           class="text-7xl font-black w-full xl:inline bg-gradient-to-r from-blue-400 via-purple-400 to-purple-700 bg-clip-text text-transparent"
         >
           On RareCandy
         </div>
         <p class="mx-auto mt-4 max-w-xl text-xl text-gray-500">
-          A New Look For The RareCandy Orderbook
+          Floor Comparison Tool For Apes
         </p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 pt-12 text-white space-x-1  mx-2 md:mx-6 lg:mx-12">
