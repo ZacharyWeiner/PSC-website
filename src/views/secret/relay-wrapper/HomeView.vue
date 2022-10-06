@@ -18,6 +18,7 @@
       >
         Top Coins
       </div>
+      <div v-if="!hasLoaded" class="text-white">Loading...</div>
       <div class="text-white text-xs md:text-m">
         <div class="mx-auto md:mt-12 md:pr-4">
           <div
@@ -65,6 +66,7 @@
       >
         Top Collections
       </div>
+      <div v-if="!hasLoaded" class="text-white">Loading...</div>
       <div class="text-white">
         <div
           class="mx-auto md:mt-12 md:px-12 grid gap-5 lg:max-w-none sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3"
@@ -81,7 +83,7 @@
                 alt=""
               />
             </div>
-            <div class="flex flex-1 flex-col justify-between bg-white p-6">
+            <div class="flex flex-1 flex-col justify-between bg-gray-900 text-gray-100 p-6">
               <div class="flex-1">
                 <p class="text-sm font-medium text-indigo-600">
                   <a href="" class="underline"
@@ -89,7 +91,7 @@
                   >
                 </p>
                 <a href="post.href" class="mt-2 block">
-                  <p class="text-xl font-semibold text-gray-900">
+                  <p class="text-xl font-semibold text-gray-100">
                     {{ collection.name }}
                   </p>
                   <!-- <p class="mt-3 text-base text-gray-500">{{ post.description }}</p> -->
@@ -128,11 +130,11 @@
               </div>
               <div class="pt-6">
                 <button
-                  class="border-solid border-2 border-indigo-600 rounded-xl w-full font-bold"
+                  class="border-solid border-2 border-indigo-600 rounded-xl w-full font-bold bg-gradient-to-r from-blue-700 via-purple-600 to-purple-800"
                   @click="goToMarket(collection)"
                 >
                   <div
-                    class="font-black w-full xl:inline bg-gradient-to-b from-blue-700 via-purple-600 to-purple-800 bg-clip-text text-transparent"
+                    class="font-black w-full xl:inline text-gray-100"
                   >
                     BUY A {{ collection.name }}
                   </div>
@@ -154,8 +156,24 @@ const filterWords = ["Zatto", "BSV", "ZAT", "Spin The", "COST"];
 export default {
   components: { Menu },
   async setup() {
+    let hasLoaded = ref(false);
     let topCollections = ref([]);
     let topCoins = ref([]);
+
+
+    const state = reactive({
+      count: 0,
+    });
+
+    return {
+      ...toRefs(state),
+      topCollections,
+      topCoins,
+      filterWords,
+      hasLoaded
+    };
+  },
+  async mounted(){
     let getTop = async (_type) => {
       if (!_type) {
         _type = "COL";
@@ -220,20 +238,10 @@ export default {
       }
     };
     console.log("Gettting Collections");
-    topCollections.value = await getTop();
+    this.topCollections = await getTop();
     console.log("Gettting Coins");
-    topCoins.value = await getTop("FT");
-
-    const state = reactive({
-      count: 0,
-    });
-
-    return {
-      ...toRefs(state),
-      topCollections,
-      topCoins,
-      filterWords,
-    };
+    this.topCoins = await getTop("FT");
+    this.hasLoaded = true;
   },
   methods: {
     imageForCollection(collection) {

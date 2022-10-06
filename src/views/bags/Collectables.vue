@@ -39,6 +39,7 @@
                   ></div>
             <!-- class="text-3xl font-extrabold tracking-tight text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-blue-200 via-teal-400 to-purple-700 bg-clip-text text-transparent sm:text-4xl" -->
         </div>  
+        <div v-if="!hasLoaded" class="text-white"> Loading .... </div>
        <div v-if="store.state.marketOrders?.length > 0" class="grid grid-cols-1 lg:grid-cols-4 p-12 bg-gray-900">
            <div v-for="(order, index) in store.state.marketOrders.slice(0, 100)" :key="index" class="col-span-1 mb-4 mx-1 bg-gray-900 rounded p-1">
             <!-- <div class='grid grid-cols-4'  >
