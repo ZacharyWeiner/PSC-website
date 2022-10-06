@@ -3,6 +3,30 @@
         <Menu />
         <announcement-banner />
         <home-hero />
+        <div class="grid grid-cols-3 lg:grid-cols-5">
+            <div class="col-span-3 lg:col-span-3">
+                <!-- <div class="text-white font-black px-4 py-5 sm:px-6">
+                    <h3 class="text-xl font-medium leading-6  underline">Quick Links</h3>
+                </div>
+                <div class="">
+                    <a href="https://www.relayx.com/market/POO" class="w-full my-1 flex items-center justify-center border border-transparent text-base font-medium rounded-md text-indigo-900 bg-indigo-100 hover:bg-indigo-200 md:text-lg"> Whats Hot On Relay</a>
+                    <a href="https://www.relayx.com/market/POO" class="w-full my-1 flex items-center justify-center border border-transparent text-base font-medium rounded-md text-indigo-900 bg-indigo-100 hover:bg-indigo-200 md:text-lg"> APE FLOOR</a>
+                    <a href="https://www.relayx.com/market/POO" class="w-full my-1 flex items-center justify-center border border-transparent text-base font-medium rounded-md text-indigo-900 bg-indigo-100 hover:bg-indigo-200 md:text-lg"> FROG FLOOR</a>
+                </div> -->
+                <Poo />
+            </div>
+            <div class="col-span-3 lg:col-span-2 overflow-y-scroll">
+                <div class="grid grid-cols-1 m-2 text-3xl font-extrabold text-gray-200 bg-gray-800 rounded-xl pl-4 mb-2">
+                    <a class="flex" href="https://bitchatnitro.com/channels/pewnicorn-social-club">     
+                        <div class="underline"> 
+                            Latest From Bitchat Nitro
+                        </div>
+                        <div><ExternalLinkIcon class="-mr-1 ml-3 my-auto h-5 w-5 text-gray-400" aria-hidden="true" /></div>
+                    </a> 
+                    <BitChat count="7" />
+                </div>
+            </div>
+        </div>
         <div class="bg-white">
             <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
             <div class="bg-indigo-700 rounded-lg shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4">
@@ -23,7 +47,7 @@
             </div>
         </div>
         <bingo-announcement></bingo-announcement>
-         <Poo />
+         
          
          <div class="bg-black">
             <div class="mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
@@ -54,12 +78,12 @@ import Poo from "./../components/Poo.vue"
 import Footer from "./../components/Footer.vue"
 //import Claimable from "./../components/Claimable.vue"
 import BingoAnnouncement from "./../components/BingoAnnouncement.vue"
+import BitChat from '../components/controls/BitChat.vue';
+import { ExternalLinkIcon } from '@heroicons/vue/solid';
 export default {
-    components:{Menu, HomeHero, 
+    components:{ Menu, HomeHero, ExternalLinkIcon,
     //Claimable,
-    AnnouncementBanner, 
-    BingoAnnouncement,
-    Poo, Footer},
+    AnnouncementBanner, BingoAnnouncement, Poo, Footer, BitChat },
     setup () {
         const state = reactive({
             count: 0,
