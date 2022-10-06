@@ -46,6 +46,7 @@ import RelayWrapperHome from "./../views/secret/relay-wrapper/HomeView.vue"
 import RareCandyWrapperHome from "./../views/secret/rare-candy/HomeView.vue"
 import ApeFloor from "./../views/secret/rare-candy/ApeFloor.vue";
 import FrogFloor from "./../views/secret/rare-candy/FrogFloor.vue";
+import BitChat from "./../views/secret/BitChat.vue";
 
 const routes = [
   {
@@ -277,6 +278,11 @@ const routes = [
     path: '/secret/rare-candy/frog-floor',
     name: 'Frog Floor',
     component: FrogFloor
+  },
+  {
+    path: '/secret/bitchat',
+    name: 'BitChat',
+    component: BitChat
   }
   
 ]
