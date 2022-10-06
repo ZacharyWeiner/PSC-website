@@ -44,6 +44,8 @@ import CardsInSession from "../views/bingo/CardsInSession.vue"
 import FlipbookView from "./../views/secret/Flipbook.vue";
 import RelayWrapperHome from "./../views/secret/relay-wrapper/HomeView.vue"
 import RareCandyWrapperHome from "./../views/secret/rare-candy/HomeView.vue"
+import ApeFloor from "./../views/secret/rare-candy/ApeFloor.vue";
+import FrogFloor from "./../views/secret/rare-candy/FrogFloor.vue";
 
 const routes = [
   {
@@ -265,6 +267,16 @@ const routes = [
     path: '/secret/rare-candy/home',
     name: 'RareCandy Wrapper Home',
     component: RareCandyWrapperHome
+  },
+  {
+    path: '/secret/rare-candy/ape-floor',
+    name: 'Ape Floor',
+    component: ApeFloor
+  },
+  {
+    path: '/secret/rare-candy/frog-floor',
+    name: 'Frog Floor',
+    component: FrogFloor
   }
   
 ]
