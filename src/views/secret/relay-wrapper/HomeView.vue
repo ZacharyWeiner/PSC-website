@@ -119,7 +119,7 @@
                   </div>
                 </div>
                 <div class="w-full">
-                  <div class="text-gray-900 text-xs font-bold">
+                  <div class="text-gray-100 text-xs font-bold">
                     Floor Price:
                     {{ (collection.stats.floor / 100000000).toPrecision(3) }}
                   </div>

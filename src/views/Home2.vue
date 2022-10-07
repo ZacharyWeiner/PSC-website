@@ -17,13 +17,13 @@
             </div>
             <div class="col-span-3 lg:col-span-2 overflow-y-scroll">
                 <div class="grid grid-cols-1 m-2 text-3xl font-extrabold text-gray-200 bg-gray-800 rounded-xl pl-4 mb-2">
-                    <a class="flex" href="https://bitchatnitro.com/channels/pewnicorn-social-club">     
+                    <router-link class="flex" to="https://bitchatnitro.com/channels/pewnicorn-social-club">     
                         <div class="underline"> 
                             Latest From Bitchat Nitro
                         </div>
                         <div><ExternalLinkIcon class="-mr-1 ml-3 my-auto h-5 w-5 text-gray-400" aria-hidden="true" /></div>
-                    </a> 
-                    <BitChat count="7" />
+                    </router-link> 
+                    <BitChat count="6" />
                 </div>
             </div>
         </div>
