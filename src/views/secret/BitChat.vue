@@ -1,17 +1,18 @@
 <template>
-    <Menu></Menu>
-    <div class="mx-4 bg-gray-900">
+    <div class="h-screen mx-4 bg-gray-900 overscroll-none">
+        <Menu></Menu>
         <div class="grid grid-cols-7 p-10 bg-gray-700 my-2 rounded-xl max-h-32"> 
             <textarea v-model="message" placeholder="type your message here.." class="max-h-12 rounded-xl p-1 m-1 col-span-6 bg-gray-100" ></textarea>
             <div class="w-full col-span-1 pl-1 m-1 "><button @click="sendMessage" class="max-h-12 bg-gradient-to-r from-blue-500 to-purple-500 w-full rounded-xl"> <PaperAirplaneIcon class=" mx-auto max-h-12 text-gray-100" aria-hidden="true" /></button></div>
         </div>
-        <div class=" max-h-screen overflow-y-scroll">
+        <div class="h-screen overflow-y-scroll">
             <ul role="list" class="divide-y divide-teal-200 text-left rounded-xl">
                 <li v-for="message in sorted" :key="message" class="flex py-4 m-2 bg-gray-800 rounded-xl">
-                <img class="h-10 w-10 rounded-full" :src="getProfilePic(message)" alt="" />
-                <div class="ml-3">
-                    <p class="text-sm font-medium text-gray-100">{{ message.MAP.paymail }}</p>
-                    <p class="text-sm text-gray-200">{{message.B.content }}</p>
+                <img class="h-10 w-10 lg:h-12 lg:w-12 rounded-full" :src="getProfilePic(message)" alt="" />
+                <div class="mx-3 px-1 w-full bg-gray-700 rounded-xl">
+                    <p class="text-sm font-bold text-gray-100 underline pb-1">{{ message.MAP.paymail }}</p>
+                    <p class="text-sm text-gray-100  w-full rounded-xl">{{message.B.content }}</p>
+                    <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
                 </div>
                 </li>
             </ul>
