@@ -5,6 +5,7 @@
             <div class="ml-3">
                 <p class="text-sm font-medium text-gray-100">{{ message.MAP.paymail }}</p>
                 <p class="text-sm text-gray-200">{{message.B.content }}</p>
+                <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
             </div>
             </li>
         </ul>
@@ -27,11 +28,13 @@ export default {
             "v": 3,
             "q": {
                 "find": {
-                //"MAP.app": "bitchat",
                 "MAP.channel": "pewnicorn-social-club"
-                }
+                },
+                "sort":{
+                    "timestamp": -1
+                } 
             },
-            "limit": 10000
+            "limit": 100
         }
         let url = 'https://b.map.sv/q/'
 
