@@ -47,6 +47,7 @@ import RareCandyWrapperHome from "./../views/secret/rare-candy/HomeView.vue"
 import ApeFloor from "./../views/secret/rare-candy/ApeFloor.vue";
 import FrogFloor from "./../views/secret/rare-candy/FrogFloor.vue";
 import BitChat from "./../views/secret/BitChat.vue";
+import Social from "./../views/secret/SocialFeed.vue";
 
 const routes = [
   {
@@ -283,6 +284,11 @@ const routes = [
     path: '/secret/bitchat',
     name: 'BitChat',
     component: BitChat
+  },
+  {
+    path: '/secret/social',
+    name: 'Social',
+    component: Social
   }
   
 ]
