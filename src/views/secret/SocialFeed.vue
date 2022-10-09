@@ -8,7 +8,16 @@
                     <textarea v-model="message" placeholder="type your message here.." class="max-h-24 rounded-xl p-1 m-1 col-span-6 bg-gray-100" ></textarea>
                     <div class="w-full col-span-1 pl-1 m-1 pr-2 grid items-justify-center"><button @click="sendMessage" class="max-h-12 bg-gradient-to-r from-blue-500 to-purple-500 w-full rounded-xl lg:mt-4 "> <PaperAirplaneIcon class=" mx-auto max-h-12 text-gray-100" aria-hidden="true" /></button></div>
                 </div> 
-                <div class="hidden md:block text-gray-100 w-full">
+                <div class="w-full flex pt-2">
+                    <div class="w-full text-right pr-2 text-gray-100">Pewnicorn Only</div>   
+                    <div>  
+                        <Switch v-model="enabled" @click="queryPosts" :class="[enabled ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2']">
+                            <span class="sr-only">Global</span>
+                            <span aria-hidden="true" :class="[enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />
+                        </Switch>
+                    </div>  
+                </div>
+                <div class="hidden lg:block text-gray-100 w-full">
                     <div> Links: </div>
                     <div class="w-full text-left"> 
                         <div class="w-full p-2"><router-link to="/secret/airdrop" class="p-2 m-1 w-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl font-black ">Airdrop Tool</router-link> </div>
@@ -36,17 +45,17 @@
                                 </div>
                             </div>
                         </div> 
-                        <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
+                        <p class="text-xs text-gray-500"> {{formatDate(message.timestamp)}}</p>
                     </div>
                     <div v-else-if="message.MAP.app === 'pewnicornsocial.club'"   class="mx-3 p-1 w-full bg-gray-100 rounded-xl"> 
                             <p class="text-sm font-bold text-gray-900 underline pb-1">Posted from {{ message.MAP.app }} By {{message.MAP.paymail}}</p> 
                             <p class="text-sm text-gray-900  w-full rounded-xl">{{message.B.content }}</p>
-                            <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
+                            <p class="text-xs text-gray-500"> {{formatDate(message.timestamp)}}</p>
                     </div>
                     <div v-else > 
                             <p class="text-sm font-bold text-gray-100 underline pb-1">Posted from {{ message.MAP.app }}</p> 
                             <p class="text-sm text-gray-100  w-full rounded-xl">{{message.B.content }}</p>
-                            <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
+                            <p class="text-xs text-gray-500"> {{formatDate(message.timestamp)}}</p>
                     </div>
                         
                     </li>
@@ -63,9 +72,10 @@ import Menu from "./../../components/MenuComponent2.vue";
 import { PaperAirplaneIcon } from '@heroicons/vue/outline';
 import {useStore} from "vuex";
 import {useRouter} from "vue-router";
+import { Switch } from '@headlessui/vue'
 var socket;
 export default {
-    components: {Menu, PaperAirplaneIcon},
+    components: {Menu, PaperAirplaneIcon, Switch},
     setup () {
         const message = ref('');
         const messages = ref([])
@@ -77,6 +87,7 @@ export default {
         }
         const state = reactive({
             count: 0,
+            enabled: false
         })
 
         return {
@@ -84,19 +95,7 @@ export default {
         }
     },
     async mounted(){
-        let query = {
-            "v": 3,
-            "q": {
-                "find": {
-                //"MAP.app": "blockpost.network",
-                "MAP.type": "post"
-                },
-                "sort":{
-                    "timestamp": -1
-                },
-            "limit": 100
-            },
-        }
+        let query = this.bitQuery;
         // let url = 'https://b.map.sv/q/'
 
         // // Attach API KEY as header
@@ -140,6 +139,11 @@ export default {
         this.socket = null;
     },
     methods:{
+        formatDate(timestamp){
+            let _date = new Date(timestamp * 1000);
+            console.log(typeof(timestamp), _date);
+            return _date
+        },
         getMedia(post){
             let postJSON = JSON.parse(post.MAP.twdata_json)
             if(postJSON)
@@ -248,19 +252,7 @@ export default {
             }catch(err){alert(err)}
         },
         async queryPosts(){
-            let query = {
-                "v": 3,
-                "q": {
-                    "find": {
-                    //"MAP.app": "blockpost",
-                    "MAP.type": "post"
-                    },
-                    "sort":{
-                        "timestamp": -1
-                    },
-                "limit": 100
-                },
-            }
+            let query =this.bitQuery;
             let url = 'https://b.map.sv/q/'
 
             // Attach API KEY as header
@@ -283,6 +275,37 @@ export default {
             let s = this.messages; 
             s.sort((a,b) => a.timestamp - b.timestamp > 0 ? -1 : 1)
             return s;
+        },
+        bitQuery(){
+            let query = {
+                    "v": 3,
+                    "q": {
+                        "find": {
+                        //"MAP.app": "blockpost.network",
+                        "MAP.type": "post"
+                        },
+                        "sort":{
+                            "timestamp": -1
+                        },
+                    "limit": 100
+                    },
+                }
+            if(this.enabled){
+                 query = {
+                    "v": 3,
+                    "q": {
+                        "find": {
+                        "MAP.app": "pewnicornsocial.club",
+                        "MAP.type": "post"
+                        },
+                        "sort":{
+                            "timestamp": -1
+                        },
+                    "limit": 100
+                    },
+                }
+            }
+            return query
         }   
     }
 }
