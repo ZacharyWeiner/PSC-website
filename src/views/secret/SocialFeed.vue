@@ -1,58 +1,80 @@
 <template>
     <div class="h-screen mx-4 bg-gray-900 overscroll-none">
         <Menu></Menu>
-        <div class="grid grid-cols-7 p-10 bg-gray-700 my-2 rounded-xl max-h-32"> 
-            <textarea v-model="message" placeholder="type your message here.." class="max-h-12 rounded-xl p-1 m-1 col-span-6 bg-gray-100" ></textarea>
-            <div class="w-full col-span-1 pl-1 m-1 "><button @click="sendMessage" class="max-h-12 bg-gradient-to-r from-blue-500 to-purple-500 w-full rounded-xl"> <PaperAirplaneIcon class=" mx-auto max-h-12 text-gray-100" aria-hidden="true" /></button></div>
-        </div>
-        <div class="h-screen overflow-y-scroll">
-            <ul role="list" class="divide-y divide-teal-200 text-left rounded-xl">
-                <li v-for="message in sorted" :key="message" class="flex py-4 m-2 bg-gray-800 rounded-xl">
-                <img class="h-10 w-10 lg:h-12 lg:w-12 rounded-full" :src="getProfilePic(message)" alt="" />
-                <div v-if="message.MAP.app === 'twetch'" class="mx-3 px-1 w-full bg-gray-700 rounded-xl">
-                    <p class="text-sm font-bold text-gray-100 underline pb-1">Posted from {{ message.MAP.app }} by {{getTwetchProfileName(message)}}</p>
-                    <div  v-if="message.MAP.app === 'twetch'">    
-                        <p v-if="message.MAP.app === 'twetch'" class="text-sm text-gray-100  w-full rounded-xl"><a :href="message.B.content" >{{message.B.content }}</a></p>
-                        <!-- <p v-else class="text-sm text-gray-100  w-full rounded-xl">{{message.B.content }}</p> -->
-                        <div v-if="message.MAP.twdata_json?.length > 0">
-                            <p class="text-sm text-gray-100  w-full rounded-xl">{{getPostBody(message)}}</p>
-                            <div class="flex" v-for="image in getMedia(message)" :key="image">
-                                <div> 
-                                    <img class="max-w-48 max-h-48" :src="image" />
-                                </div>  
+        <div class="lg:grid lg:grid-cols-3"> 
+            <div class="cols-span-1 my-2 rounded-xl max-h-32 bg-gray-700 "> 
+                <div class="visible text-white">What would you like to share? </div>
+                <div class="grid grid-cols-7 h-full ">
+                    <textarea v-model="message" placeholder="type your message here.." class="max-h-24 rounded-xl p-1 m-1 col-span-6 bg-gray-100" ></textarea>
+                    <div class="w-full col-span-1 pl-1 m-1 pr-2 grid items-justify-center"><button @click="sendMessage" class="max-h-12 bg-gradient-to-r from-blue-500 to-purple-500 w-full rounded-xl lg:mt-4 "> <PaperAirplaneIcon class=" mx-auto max-h-12 text-gray-100" aria-hidden="true" /></button></div>
+                </div> 
+                <div class="hidden md:block text-gray-100 w-full">
+                    <div> Links: </div>
+                    <div class="w-full text-left"> 
+                        <div class="w-full p-2"><router-link to="/secret/airdrop" class="p-2 m-1 w-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl font-black ">Airdrop Tool</router-link> </div>
+                        <div class="w-full p-2"><router-link to="/secret/relay-wrapper/home" class="p-2 m-1 w-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl font-black ">Whats Hot On Relay</router-link> </div>
+                        <div class="w-full p-2"><router-link to="/secret/rare-candy/ape-floor" class="p-2 m-1 w-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl font-black ">APE Floor Tool</router-link> </div>
+                       <div class="w-full p-2"> <router-link to="/secret/rare-candy/frog-floor" class="p-2 m-1 w-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl font-black ">Frog Floor Tool</router-link> </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-span-2 h-screen overflow-y-scroll">
+                <ul role="list" class="divide-y divide-teal-200 text-left rounded-xl">
+                    <li v-for="message in sorted" :key="message" class="flex py-4 m-2 bg-gray-800 rounded-xl">
+                    <img class="h-10 w-10 lg:h-12 lg:w-12 rounded-full" :src="getProfilePic(message)" alt="" />
+                    <div v-if="message.MAP.app === 'twetch'" class="mx-3 px-1 w-full bg-gray-700 rounded-xl">
+                        <p class="text-sm font-bold text-gray-100 underline pb-1">Posted from {{ message.MAP.app }} by {{getTwetchProfileName(message)}}</p>
+                        <div  v-if="message.MAP.app === 'twetch'">    
+                            <p v-if="message.MAP.app === 'twetch'" class="text-sm text-gray-100  w-full rounded-xl"><a :href="message.B.content" >{{message.B.content }}</a></p>
+                            <!-- <p v-else class="text-sm text-gray-100  w-full rounded-xl">{{message.B.content }}</p> -->
+                            <div v-if="message.MAP.twdata_json?.length > 0">
+                                <p class="text-sm text-gray-100  w-full rounded-xl">{{getPostBody(message)}}</p>
+                                <div class="flex" v-for="image in getMedia(message)" :key="image">
+                                    <div> 
+                                        <img class="max-w-48 max-h-48" :src="image" />
+                                    </div>  
+                                </div>
                             </div>
-                        </div>
-                    </div> 
-                    <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
-                </div>
-                <div v-else-if="message.MAP.app === 'pewnicornsocial.club'"   class="mx-3 p-1 w-full bg-gray-100 rounded-xl"> 
-                        <p class="text-sm font-bold text-gray-900 underline pb-1">Posted from {{ message.MAP.app }} By {{message.MAP.paymail}}</p> 
-                        <p class="text-sm text-gray-900  w-full rounded-xl">{{message.B.content }}</p>
+                        </div> 
                         <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
-                </div>
-                <div v-else > 
-                        <p class="text-sm font-bold text-gray-100 underline pb-1">Posted from {{ message.MAP.app }}</p> 
-                        <p class="text-sm text-gray-100  w-full rounded-xl">{{message.B.content }}</p>
-                        <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
-                </div>
-                    
-                </li>
-            </ul>
-        </div>    
+                    </div>
+                    <div v-else-if="message.MAP.app === 'pewnicornsocial.club'"   class="mx-3 p-1 w-full bg-gray-100 rounded-xl"> 
+                            <p class="text-sm font-bold text-gray-900 underline pb-1">Posted from {{ message.MAP.app }} By {{message.MAP.paymail}}</p> 
+                            <p class="text-sm text-gray-900  w-full rounded-xl">{{message.B.content }}</p>
+                            <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
+                    </div>
+                    <div v-else > 
+                            <p class="text-sm font-bold text-gray-100 underline pb-1">Posted from {{ message.MAP.app }}</p> 
+                            <p class="text-sm text-gray-100  w-full rounded-xl">{{message.B.content }}</p>
+                            <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
+                    </div>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>      
     </div>
 </template>
 
 <script>
-import { reactive, toRefs, ref } from 'vue'
-import bops from "bops"
+import { reactive, toRefs, ref } from 'vue';
+import bops from 'bops';
 import Menu from "./../../components/MenuComponent2.vue";
-import { PaperAirplaneIcon } from '@heroicons/vue/outline'
+import { PaperAirplaneIcon } from '@heroicons/vue/outline';
+import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 var socket;
 export default {
     components: {Menu, PaperAirplaneIcon},
     setup () {
         const message = ref('');
         const messages = ref([])
+        let store = useStore();
+        let router = useRouter();
+        if(store.state.relayx_handle === "" || store.state.user_jigs.length ===0){
+            alert("You must be logged in and have a pewnicorn to see the social page");
+            router.push("/")
+        }
         const state = reactive({
             count: 0,
         })
