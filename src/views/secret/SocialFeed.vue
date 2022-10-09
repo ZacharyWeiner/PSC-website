@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                         </div> 
-                        <p class="text-xs text-gray-500"> {{new Date(message.timestamp).toString()}}</p>
+                        <p class="text-xs text-gray-500"> {{formatDate(message.timestamp)}}</p>
                     </div>
                     <div v-else-if="message.MAP.app === 'pewnicornsocial.club'"   class="mx-3 p-1 w-full bg-gray-100 rounded-xl"> 
                             <p class="text-sm font-bold text-gray-900 underline pb-1">Posted from {{ message.MAP.app }} By {{message.MAP.paymail}}</p> 
@@ -55,7 +55,7 @@
                     <div v-else > 
                             <p class="text-sm font-bold text-gray-100 underline pb-1">Posted from {{ message.MAP.app }}</p> 
                             <p class="text-sm text-gray-100  w-full rounded-xl">{{message.B.content }}</p>
-                            <p class="text-xs text-gray-500"> {{message.timestamp}}</p>
+                            <p class="text-xs text-gray-500"> {{formatDate(message.timestamp)}}</p>
                     </div>
                         
                     </li>
