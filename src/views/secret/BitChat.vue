@@ -25,12 +25,20 @@ import { reactive, toRefs, ref } from 'vue'
 import bops from "bops"
 import Menu from "./../../components/MenuComponent2.vue";
 import { PaperAirplaneIcon } from '@heroicons/vue/outline'
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 var socket;
 export default {
     components: {Menu, PaperAirplaneIcon},
     setup () {
         const message = ref('');
         const messages = ref([])
+        let store = useStore();
+        let router = useRouter();
+        if(store.state.relayx_handle === "" || store.state.user_jigs.length ===0){
+            alert("You must be logged in and have a pewnicorn to see the social page");
+            router.push("/")
+        }
         const state = reactive({
             count: 0,
         })

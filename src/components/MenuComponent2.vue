@@ -193,10 +193,11 @@
 <script>
 import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
 import {
-  BookmarkAltIcon,
+  //BookmarkAltIcon,
   //CalendarIcon,
   //ChartBarIcon,
   //CursorClickIcon,
+  ChatIcon,
   MenuIcon,
   //PhoneIcon,
   //PlayIcon,
@@ -253,7 +254,8 @@ const membersOnly = [
 
 
   { name: 'Claimables', href: '/claims', icon: ShoppingBagIcon },
-  { name: 'Member Exclusives', href: '#', icon: BookmarkAltIcon },
+  { name: 'Social Feed', href: '/secret/social', icon: EmojiHappyIcon },
+  { name: 'Pewnicorn Chat', href: '/secret/bitchat', icon: ChatIcon },
 ]
 
 const more = [
