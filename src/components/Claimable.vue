@@ -84,9 +84,9 @@ export default {
         const state = reactive({
             count: 0,
             baseAward: 100,
-            multiplier: 5,
+            multiplier: 10,
             propertyName: 'clothes',
-            propertyValue: 'diamond hoodie',
+            propertyValue: 'bams hoodie',
             successMessage: "Your $POO has been claimed and will be sent SOON",
             esitmatedPoo: 0,
         })
@@ -187,7 +187,7 @@ export default {
             if(this.isLogin  && this.$store.state.user_jigs.length > 0){
                 _canClaim = true;
             } 
-            let compareDate = new Date('2022-10-01');
+            let compareDate = new Date('2022-10-11');
             this.userActions['userActions'].value.forEach((ua)=> {
                 let actionDate = new Date(ua.timestamp.seconds * 1000);
                 if( actionDate > compareDate){
