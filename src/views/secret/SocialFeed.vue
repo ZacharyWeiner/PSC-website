@@ -258,7 +258,7 @@ export default {
             // Attach API KEY as header
             let header = {
                 // Replace with your API key
-                headers: { key: '1MS56ewiH7MZsDQ1oN2buDXD8SBdFipp9D' }
+                headers: { key: '1MS56ewiH7MZsDQ1oN2buDXD8SBdFipp9A' }
             }
             let b64 = btoa(JSON.stringify(query))
             let response = await fetch(url + b64, header);

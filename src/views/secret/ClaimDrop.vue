@@ -24,9 +24,9 @@ export default {
         const state = reactive({
             count: 0,
             baseAward: 100,
-            multiplier: 5,
+            multiplier: 10,
             propertyName: 'clothes',
-            propertyValue: 'diamond hoodie',
+            propertyValue: 'bams hoodie',
         })
     
         return {
