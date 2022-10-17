@@ -44,6 +44,7 @@ export default createStore({
     sevenDayVol: 0, 
     thirtyDayVol: 0,
     rareCandies: [],
+    weeklyClaimTotal:0,
   },
   mutations: {
     // change state
@@ -150,6 +151,12 @@ export default createStore({
     },
     addRareCandies(state, items){
       state.rareCandies = [...state.rareCandies, items]
+    },
+    addToWeeklyClaimTotal(state, update){
+      state.weeklyClaimTotal = state.weeklyClaimTotal + update
+    },
+    resetWeeklyClaimTotal(state){
+      state.weeklyClaimTotal = 0
     },
   },
   actions: {

@@ -1,5 +1,6 @@
 <template>
 <div class="text-white"> {{loading}} </div>
+<div class="text-white"> Sent This Week : {{weeklyClaimTotal}} <button @click="resetWeeklyTotal"> Reset </button></div>  
 <button @click="getWeeklyActions" class='text-white'> Get Actions </button>
     <div v-for="claim in unique" :key="claim.id" class='text-white text-left grid grid-cols-5 space-x-12'>
         <div class='col-span-1'> {{new Date(claim.timestamp.seconds * 1000).toLocaleDateString()}}</div>
@@ -14,6 +15,7 @@
 import { reactive, toRefs, ref } from 'vue'
 import { userProfiles } from './../../services/firebase.js'
 import axios from "axios"
+import { mapState } from "vuex";
 export default {
     setup () {
         const loading = ref(false);
@@ -148,9 +150,13 @@ export default {
                 console.log("Gets a raw transaction:", response.data)
                 let sendResponse = await window.relayone.send(response.data.data.rawtx)
                 console.log("recieves response from send:",  sendResponse)
+                this.$store.commit("addToWeeklyClaimTotal", amount);
                 return sendResponse;
             }catch(err){alert(err); return ;}
         },
+        resetWeeklyTotal(){
+            this.$store.commit("resetWeeklyClaimTotal");
+        }
     },
     computed:{
         unique(){
@@ -162,6 +168,7 @@ export default {
             })
             return uniqAccounts
         },
+        ...mapState(["weeklyClaimTotal"]),
     }
 }
 </script>

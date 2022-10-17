@@ -53,7 +53,7 @@
           </Popover>
           <!-- End Buy & Sell --> 
           <router-link to="/my-bag" class="text-base font-medium text-gray-500 hover:text-gray-900"> Holdings </router-link>
-          <router-link to="/claims" class="text-base font-medium text-gray-500 hover:text-gray-900"> Earn </router-link>
+          <router-link to="/claims" class="text-base font-medium text-gray-500 hover:text-gray-900"> Claims </router-link>
           <router-link to="/bingo/cards/my-cards" class="text-base font-medium text-gray-500 hover:text-gray-900"> Bingo </router-link>
           <!-- Begin Members Only Links --> 
           <Popover class="relative" v-slot="{ open }">
