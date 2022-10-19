@@ -21,9 +21,8 @@ export function userProfiles() {
     const userProfilesCollection = firestore.collection('userProfiles')
     const userActionsCollection = firestore.collection('userActions')
     const profile = ref()
-
+    const userProfile = ref()
     const findUserProfile = (_owner) => {
-        const userProfile = ref([])
         userProfilesCollection.onSnapshot(snapshot => {
             userProfile.value = snapshot.docs
                 .map(doc => ({ id: doc.id, ...doc.data() }))

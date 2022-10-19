@@ -122,7 +122,7 @@
 import Footer from "./../../components/Footer.vue"
 import Menu from "./../../components/MenuComponent2.vue"
 import { ref } from 'vue';
-import { useBingo } from './../../services/firebase.js';
+import { useBingo, userProfiles } from './../../services/firebase.js';
 import { useStore } from 'vuex'
 import JoinGame from '../../components/JoinGame.vue';
 import NoGame from '../../components/NoGame.vue';
@@ -134,13 +134,19 @@ export default {
     async setup() {
         const store = useStore()
         const { getCurrentGame , getCurrentGameBingos, userCallBingo} = useBingo()
+        const { findUserProfile }  = userProfiles();
+        let matches = ref([])
+        let meta = ref([])
+        const hasBingo = ref(false);
+        const adModalActive = ref(false)
+        const profiles = ref(null);
 
         const currentGame = getCurrentGame()
         const currentGameBingos = getCurrentGameBingos(store.state.bingoCurrenGame)
+        profiles.value = findUserProfile(store.state.user_address);
+        console.log({currentGame, profiles})
 
-        console.log(currentGame)
-        let matches = ref([])
-        let meta = ref([])
+
         console.log("Selected Card Number", store.state.selectedBingoCard.props.no);
         const getData = async (_meta) => {
             import(`@/assets/metadata/${store.state.selectedBingoCard.props.no}`).then((module) => {
@@ -149,26 +155,19 @@ export default {
         } 
         
         await getData(meta)
-        // console.log(meta);
-
-       
         const bingo = {
             handle:    store.state.relayx_handle,
             owner:     store.state.user_address,
             card:      store.state.selectedBingoCard.location,
             txid:      store.state.selectedBingoCard.berry.txid
         }
-        const hasBingo = ref(false);
-        const adModalActive = ref(false)
-
         const toggleModal = () => {
             if (adModalActive.value) {
                 store.commit('setViewedAdvertisement', true)
             }
             adModalActive.value = !adModalActive.value
         }
-        // store.state.viewedAdvertisement = false
-        return { currentGame, getCurrentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos, getCurrentGameBingos, adModalActive, toggleModal }
+        return { currentGame, getCurrentGame, store, meta, bingo, userCallBingo, matches, hasBingo, currentGameBingos, getCurrentGameBingos, adModalActive, toggleModal, profiles }
     },
     methods: {
         goBack() {
@@ -434,7 +433,11 @@ export default {
             return false
         },
         selectedProfile(){
-            return this.$store.state.selectedProfile;
+            if(this.profiles && this.profiles){
+                //console.log(this.profiles[0].id)
+                return this.profiles.userProfile[0]
+            }
+            return {relay_handle: this.$store.state.relayx_handle, ownerAddress: this.$store.state.user_address}
         }
         
     }   
