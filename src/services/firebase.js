@@ -62,7 +62,7 @@ export function userProfiles() {
          })
          return profile
     }
-    const updateUserProfile = (profileId, _handle, _address, _handcash, _twitter, _email, _phone) => {
+    const updateUserProfile = (profileId, _handle, _address, _handcash, _twitter, _email, _phone, _twetch) => {
         userProfilesCollection.doc(profileId).update({
             relay_handle: _handle,
             ownerAddress: _address,
@@ -70,6 +70,7 @@ export function userProfiles() {
             twitterHandle: _twitter,
             email: _email,
             phone: _phone,
+            twetchHandle: _twetch,
         })
 
     }

@@ -1,9 +1,9 @@
 <template>
 <Menu />
-    <div class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
+    <div class="shadow px-4 py-5 sm:rounded-lg sm:p-6">
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
-          <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
+          <h3 class="text-lg font-medium leading-6 text-gray-100">Profile</h3>
           <p class="mt-1 text-sm text-gray-500">This information will be displayed publicly so be careful what you share.</p>
         </div>
         <!-- Display --> 
@@ -14,42 +14,49 @@
                 <!-- <label for="company-website" class="block text-sm font-medium text-gray-700"> RelayX </label> -->
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> RelayX Handle </span>
-                  <input disabled :value="selectedProfile.relay_handle" type="text" name="company-website" id="company-website" class=" h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" />
+                  <input disabled :value="selectedProfile.relay_handle" type="text" name="company-website" id="company-website" class=" bg-gray-50 h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" />
                 </div>
               </div>
               <div class="col-span-3 sm:col-span-2">
                 <!-- <label for="company-website" class="block text-sm font-medium text-gray-700"> RelayX Address </label> -->
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> RelayX Address</span>
-                  <input disabled :value="selectedProfile.ownerAddress" type="text" name="company-website" id="company-website" class=" h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
+                  <input disabled :value="selectedProfile.ownerAddress" type="text" name="company-website" id="company-website" class=" bg-gray-50 h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
                 </div>
               </div>
               <div class="col-span-3 sm:col-span-2">
                 <!-- <label for="company-website" class="block text-sm font-medium text-gray-700"> Handcash Handle </label> -->
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> Handcash </span>
-                  <input disabled :value="selectedProfile.handcashHandle" type="text" name="company-website" id="company-website" class=" h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
+                  <input disabled :value="selectedProfile.handcashHandle" type="text" name="company-website" id="company-website" class=" bg-gray-50 h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
+                </div>
+              </div>
+              <div class="col-span-3 sm:col-span-2">
+                <!-- <label for="company-website" class="block text-sm font-medium text-gray-700"> Twitter Handle </label> -->
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> Twetch</span>
+                  <input disabled :value="selectedProfile.twetchHandle" type="text" name="company-website" id="company-website" class=" bg-gray-50 h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
                 </div>
               </div>
               <div class="col-span-3 sm:col-span-2">
                 <!-- <label for="company-website" class="block text-sm font-medium text-gray-700"> Twitter Handle </label> -->
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> Twitter</span>
-                  <input disabled :value="selectedProfile.twitterHandle" type="text" name="company-website" id="company-website" class=" h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
+                  <input disabled :value="selectedProfile.twitterHandle" type="text" name="company-website" id="company-website" class=" bg-gray-50 h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
                 </div>
               </div>
               <div class="col-span-3 sm:col-span-2">
                 <!-- <label for="company-website" class="block text-sm font-medium text-gray-700"> Email </label> -->
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> Email </span>
-                  <input disabled :value="selectedProfile.email" type="text" name="company-website" id="company-website" class=" h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
+                  <input disabled :value="selectedProfile.email" type="text" name="company-website" id="company-website" class=" bg-gray-50 h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
                 </div>
               </div>
               <div class="col-span-3 sm:col-span-2">
                 <!-- <label for="company-website" class="block text-sm font-medium text-gray-700"> Phone </label> -->
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> Phone </span>
-                  <input disabled :value="selectedProfile.phone" type="text" name="company-website" id="company-website" class="h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
+                  <input disabled :value="selectedProfile.phone" type="text" name="company-website" id="company-website" class="bg-gray-50 h-12 pl-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
                 </div>
               </div>
             </div>
@@ -70,7 +77,7 @@
                 <!-- <label for="company-website" class="block text-sm font-medium text-gray-700"> RelayX </label> -->
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm h-12 pl-2 "> RelayX Handle </span>
-                  <input disabled  v-model="selectedProfile.relay_handle" type="text" name="company-website" id="company-website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" />
+                  <input disabled  v-model="selectedProfile.relay_handle" type="text" name="company-website" id="company-website" class="bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" />
                 </div>
               </div>
               <div class="col-span-3 sm:col-span-2">
@@ -85,6 +92,13 @@
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm h-12 pl-2 "> Handcash </span>
                   <input v-model="edit_handcash" type="text" name="company-website" id="company-website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
+                </div>
+              </div>
+              <div class="col-span-3 sm:col-span-2">
+                <!-- <label for="company-website" class="block text-sm font-medium text-gray-700"> Phone </label> -->
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <span class="w-32 inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm h-12 pl-2 "> Twetch </span>
+                  <input v-model="edit_twetch" type="text" name="company-website" id="company-website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com" />
                 </div>
               </div>
               <div class="col-span-3 sm:col-span-2">
@@ -143,6 +157,7 @@ export default {
             edit_twitter:"",
             edit_email:"",
             edit_phone:"",
+            edit_twetch: "",
         })
     
         return {
@@ -159,6 +174,7 @@ export default {
             this.edit_twitter = this.profile[0].twitterHandle
             this.edit_email = this.profile[0].email
             this.edit_phone = this.profile[0].phone
+            this.edit_twetch = this.profile[0].twetchHandle
             this.isEdit = true;
 
         },
@@ -166,10 +182,10 @@ export default {
             this.findProfileByHandle(this.$store.state.relayx_handle)
         },
         addProfile(){
-            this.addUserProfile(this.$store.state.relayx_handle, this.$store.state.user_address, "", "", "", "")
+            this.addUserProfile(this.$store.state.relayx_handle, this.$store.state.user_address, "", "", "", "", "")
         },
         saveUserProfile(){
-            this.updateUserProfile(this.profile[0].id, this.$store.state.relayx_handle, this.$store.state.user_address, this.edit_handcash, this.edit_twitter,this.edit_email, this.edit_phone)
+            this.updateUserProfile(this.profile[0].id, this.$store.state.relayx_handle, this.$store.state.user_address, this.edit_handcash, this.edit_twitter,this.edit_email, this.edit_phone, this.edit_twetch)
             this.isEdit = false
         }
     },

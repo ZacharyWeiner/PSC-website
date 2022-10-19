@@ -1,6 +1,9 @@
 <template>
     <Menu />
     <div class="text-white pt-4">
+        <div class="" v-if="!selectedProfile?.twetchHandle || selectedProfile.twetchHandle === ''">
+            <profile-banner />
+        </div>
     <div v-for="game in currentGame" 
                 :key="game.id"
                 class="container m-auto m-1 p-2">
@@ -124,9 +127,10 @@ import { useStore } from 'vuex'
 import JoinGame from '../../components/JoinGame.vue';
 import NoGame from '../../components/NoGame.vue';
 import BingoModal from "../../components/BingoModal.vue"
+import ProfileBanner from "../../components/ProfileBanner.vue";
 
 export default {
-    components:{Menu, Footer, JoinGame, NoGame, BingoModal},
+    components:{Menu, Footer, JoinGame, NoGame, BingoModal, ProfileBanner},
     async setup() {
         const store = useStore()
         const { getCurrentGame , getCurrentGameBingos, userCallBingo} = useBingo()
@@ -428,6 +432,9 @@ export default {
                 return true
             }
             return false
+        },
+        selectedProfile(){
+            return this.$store.state.selectedProfile;
         }
         
     }   
