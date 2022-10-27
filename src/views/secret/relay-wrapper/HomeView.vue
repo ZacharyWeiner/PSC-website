@@ -152,7 +152,7 @@
 import { reactive, toRefs, ref } from "vue";
 // import axios from "axios";
 import Menu from "./../../../components/MenuComponent2.vue";
-const filterWords = ["Zatto", "BSV", "ZAT", "Spin The", "COST"];
+const filterWords = ["Zatto", "BSV", "ZAT", "Spin The", "COST", "METAMASTERS"];
 export default {
   components: { Menu },
   async setup() {
@@ -199,7 +199,17 @@ export default {
           });
           let data = await response.json();
           console.log("Gets a list of something:", data);
-          _top = data.data.ranks;
+          data.data.ranks.map((coin) => {
+            if (
+              !filterWords.every(
+                (bannedWord) => !coin.name.includes(bannedWord)
+              )
+            ) {
+              console.log("This title is banned;", coin.name);
+            } else {
+              _top.push(coin);
+            }
+          });
           return _top;
         } else {
           response = await fetch("https://staging-backend.relayx.com/graphql", {
