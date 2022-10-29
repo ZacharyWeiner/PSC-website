@@ -16,6 +16,7 @@ import { reactive, toRefs, ref } from 'vue'
 import { userProfiles } from './../../services/firebase.js'
 import axios from "axios"
 import { mapState } from "vuex";
+import {useNFTRankings} from "./../../data/nftRankings.js"
 export default {
     setup () {
         const loading = ref(false);
@@ -27,8 +28,8 @@ export default {
             count: 0,
             baseAward: 100,
             multiplier: 10,
-            propertyName: 'clothes',
-            propertyValue: 'bams hoodie',
+            propertyName: 'wings',
+            propertyValue: 'rainbow',
         })
     
         return {
@@ -133,11 +134,28 @@ export default {
         },
         calculatePOOPayment(nft){
             let sendAmount = this.baseAward; 
+            let bonus = this.bonusForRank(nft)
             if(nft.props.metadata[this.propertyName] === this.propertyValue){
                 sendAmount = this.baseAward * this.multiplier;
             }
+            sendAmount = sendAmount + bonus;
             console.log("Send Amount For ", nft, " Is ", sendAmount)
             return sendAmount
+        },
+        rankNFT(nft){
+            let { pewnicornRanks } = useNFTRankings();
+             const i = parseInt(nft.props.metadata.no, 10)
+             let rankSpot = pewnicornRanks.indexOf(i) 
+             return rankSpot + 1;
+        },
+        bonusForRank(nft){
+            let currentRank = this.rankNFT(nft)
+            if(currentRank <= 8) {return 500}
+            if(currentRank <= 40) {return 400}
+            if(currentRank <= 120) {return 300}
+            if(currentRank <= 240) {return 200}
+            if(currentRank <= 400) {return 100}
+            return 0
         },
         async sendPoo(amount, address){
             try{

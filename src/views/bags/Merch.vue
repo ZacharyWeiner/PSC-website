@@ -31,7 +31,7 @@
                         <div class='grid grid-cols-4 bg-gray-200 text-gray-900 rounded-b-xl' >
                             <div class='w-full col-span-4'> 
                                 <div class='mx-auto'> Edition {{nft.no > 0? nft.no : nft.props.no}}</div>  
-                                <div class='w-full col-span-4'> <button class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-bold rounded shadow-sm text-white bg-green-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> Redeem</button>  </div>
+                                <div class='w-full col-span-4'> <button @click="open = true" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-bold rounded shadow-sm text-white bg-green-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> Redeem</button>  </div>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <img :src="getBerryUrl(nft)" class="w-full rounded-t-xl" />
                         <div class='grid grid-cols-4 bg-gray-200 text-gray-900 rounded-b-xl' >
                             <div class='w-full col-span-4'> <div class='mx-auto'> Edition {{nft.no > 0? nft.no : nft.props.no}}</div>  </div>
-                            <div class='w-full col-span-4'> <button class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-bold rounded shadow-sm text-white bg-green-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> Redeem</button>  </div>
+                            <div class='w-full col-span-4'> <button @click="open = true"  class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-bold rounded shadow-sm text-white bg-green-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> Redeem</button>  </div>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                     </div>
                     </div>
                     <div class="mt-5 sm:mt-6">
-                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-indigo-600 to-pink-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm" @click="mint">REDEEM</button>
+                    <button @click="redeem" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-indigo-600 to-pink-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">REDEEM</button>
                     </div>
                 </div>
                 </TransitionChild>
@@ -137,9 +137,10 @@ export default {
 
         const state = reactive({
             loading: false,
-            open: true,
+            open: false,
             size: "Medium",
             edition: 0,
+            mailingAddress: "",
         })
         return {
             ...toRefs(state), signOut, signIn, isLogin, store, hoodies, sizes, bags
@@ -173,6 +174,9 @@ export default {
         },
         setEdition(jig){
             this.edition = jig.props.metadata.no;
+        },
+        redeem(){
+            console.log({"Size":this.size, "Address":this.mailingAddress, "Edition":this.edition})
         }
     },
     computed:{

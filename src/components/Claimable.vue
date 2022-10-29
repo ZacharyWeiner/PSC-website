@@ -85,8 +85,8 @@ export default {
             count: 0,
             baseAward: 100,
             multiplier: 5,
-            propertyName: 'eyes',
-            propertyValue: 'green visor',
+            propertyName: 'wings',
+            propertyValue: 'rainbow',
             successMessage: "Your $POO has been claimed and will be sent SOON",
             esitmatedPoo: 0,
         })
