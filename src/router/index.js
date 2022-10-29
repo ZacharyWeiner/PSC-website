@@ -48,6 +48,11 @@ import ApeFloor from "./../views/secret/rare-candy/ApeFloor.vue";
 import FrogFloor from "./../views/secret/rare-candy/FrogFloor.vue";
 import BitChat from "./../views/secret/BitChat.vue";
 import Social from "./../views/secret/SocialFeed.vue";
+import Tetris from "./../views/secret/games/TetrisView.vue";
+import Pong from "../views/secret/games/Pong.vue";
+import Rect from "../views/secret/games/RectView.vue";
+import Breakout from "../views/secret/games/BreakoutGame.vue";
+import Maze from "../views/secret/games/MazeView.vue";
 
 const routes = [
   {
@@ -289,8 +294,32 @@ const routes = [
     path: '/secret/social',
     name: 'Social',
     component: Social
+  },
+  {
+    path: '/secret/games/tetris',
+    name: 'Tetris',
+    component: Tetris
+  },
+  {
+    path: '/secret/games/pong',
+    name: 'Pong',
+    component: Pong
+  },
+  {
+    path: '/secret/games/rect',
+    name: 'Rect',
+    component: Rect
+  },
+  {
+    path: '/secret/games/breakout',
+    name: 'Breakout',
+    component: Breakout
+  },
+  {
+    path: '/secret/games/maze',
+    name: 'Maze',
+    component: Maze
   }
-  
 ]
 
 const router = createRouter({

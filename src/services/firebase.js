@@ -431,3 +431,26 @@ export function useAdvertisements() {
 
     return {allAdvertisements, newAdvertisment, updateCount, updateView}
 }
+
+export function useGameScores() {
+    const gameScoresCollection = firestore.collection('gameScores')
+    const allGameScores = ref([])
+    const unsubscribe =  gameScoresCollection.onSnapshot(snapshot => {
+        allGameScores.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
+    const addGameScore = (gameName, score, handle, user_address) => {
+        gameScoresCollection.add({
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            handle: handle,
+            score: score,
+            user_address: user_address,
+            game: gameName
+
+        })
+        console.log("score added")
+    }
+    return {allGameScores, addGameScore}
+}
