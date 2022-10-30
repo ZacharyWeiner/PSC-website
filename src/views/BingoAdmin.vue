@@ -2,10 +2,10 @@
  <Menu />
  <div v-if="loading" >loading...</div>
     <div class="bg-gray-100 w-full text-gray-900">
-        Store:  {{this.$store.state.bingoCurrenGame}}
         Game: <span v-if="currentGame && currentGame[0]">{{currentGame[0].id}}</span>
         <div> <button @click="startAutoPick"> start auto pick {{counter}}</button></div>
         <div> <button @click="stopAutoPick"> stop autopick</button></div>
+        Prize: {{currentGame[0].prize}}
     </div>
     <div class="container m-auto my-20 text-white">
         <div v-for="game in currentGame"
@@ -32,43 +32,55 @@
             <div v-else>
 
                 <div class="w-full">
-                      <div class="bg-white">
+                    <div class="bg-white">
                         <div class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-                        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                            <span class="block">Last Number Pulled:</span>
-                            <span v-if="currentGame && currentGame[0].winningNumbers && currentGame[0].winningNumbers.length > 0" class="block">{{currentGame[0].winningNumbers[currentGame[0].winningNumbers.length -1]}}</span>
-                        </h2>
+                            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                                <span class="block">Last Number Pulled:</span>
+                                <span v-if="currentGame && currentGame[0].winningNumbers && currentGame[0].winningNumbers.length > 0" class="block">{{currentGame[0].winningNumbers[currentGame[0].winningNumbers.length -1]}}</span>
+                            </h2>
                         <div class="mt-8 max-w-96 justify-center text-indigo-800 font-bold text-xl">
                             <div v-if="currentGame && currentGame[0].winningNumbers && currentGame[0].winningNumbers.length > 0" class="max-w-96 break-all">
                                 <!-- <span v-for="number in currentGame[0].winningNumbers.sort((a,b)=> { parseInt(a, 10) - parseInt(b, 10) ?  1 : -1})" :key="number" class='px-1 '>{{number}} </span> -->
                                 {{winningNumbers}}
                             </div>
                         </div>
-                        <div class="mt-8 flex justify-center">
-                            <div class="inline-flex rounded-md shadow">
-                                <button @click="callNumber(game.id, game.winningNumbers)"
-                                            class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                            <div class="mt-8 flex justify-center">
+                                <div class="inline-flex rounded-md shadow">
+                                    <button @click="callNumber(game.id, game.winningNumbers)"
+                                                class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                                        >
+                                            Roll Number
+                                    </button>
+                                
+                                </div>
+                                <div class="ml-3 inline-flex">
+                                    <button @click="endCurrentGame(game.id)"
+                                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
                                     >
-                                        Roll Number
-                                </button>
-                            
+                                        End Game
+                                    </button>
+                                </div>
                             </div>
-                            <div class="ml-3 inline-flex">
-                                <button @click="endCurrentGame(game.id)"
-                                    class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
-                                >
-                                    End Game
-                                </button>
+                             <div v-if="!game.prize.length" class="col-span-3 sm:col-span-2 mt-5">
+                                <label for="bingo-prize" class="block text-sm font-medium text-gray-700"> Bingo Prize:</label>
+                                <div class="mt-1 ">
+                                    <input v-model="bingoPrize" type="text" name="bingo-prize" id="bingo-prize" 
+                                        class=" h-12 pl-2 bg-gray-50 border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-1/2 m-auto text-black rounded-none rounded-r-md sm:text-sm border-gray-300" />
+                                    <button @click="submitPrize(game.id)"
+                                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div class="text-gray-900 text-lg container break-normal">
-                           Winners: 
+                            Winners: 
                             <div v-for="winner in game.winners" :key="winner.id">
                                 {{winner.winner.relayHandle}}
                             </div>
                         </div> 
-                         <div class="container bg-gray-600 w-full p-4 rounded">
+                        <div class="container bg-gray-600 w-full p-4 rounded">
                             Players called Bingo:
                             <div v-for="bingo in playerBingos"
                                 :key="bingo.id"
@@ -91,7 +103,7 @@
                             </div>
                         </div>  
                     </div> 
-                   
+                    
                 </div>
                 
 
@@ -150,6 +162,7 @@ export default {
             setWinner, 
             setWinningNumber,
             deleteUserBingo,
+            setGamePrize
             
             } = useBingo()
         console.log(store.state.bingoCurrenGame)
@@ -159,7 +172,8 @@ export default {
         const gameSession = ref(0)
         const showModal = false;
         const counter = ref(0);
-        return { loading, newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, getCurrentGame, currentGame, playerBingos, meta, counter, timerInterval, gameSession, showModal}
+        const bingoPrize = ref('')
+        return { loading, newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, getCurrentGame, setGamePrize, currentGame, playerBingos, meta, counter, timerInterval, gameSession, showModal, bingoPrize }
     },
     methods: {
         startGame(){
@@ -259,7 +273,12 @@ export default {
                 this.getCurrentGame()
                 console.log(this.currentGame)
             }
-        }
+        },
+        submitPrize(id) {
+            this.setGamePrize(id, this.bingoPrize)
+            console.log(this.bingoPrize)
+            this.bingoPrize = ''
+        },
     },
     computed:{
             winningNumbers(){

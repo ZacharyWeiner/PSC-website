@@ -19,13 +19,17 @@
             </BingoModal>
             <div class="grid grid-cols-5 lg:grid-cols-7">
                 <div class="col-span-1">
-                        <div class="w-full rounded-xl">
-                            <div class="text-lg font-bold">Numbers Called:{{winningNumbersCount}} </div>
-                            <div>  </div>
-                            <div class='w-full h-96 overflow-y-scroll bg-gray-900 rounded-xl shadow px-1'> 
-                                <div v-for="number in winningNumbers" :key="number"> {{ number }} </div> 
-                            </div>
+                    <div class="w-full rounded-xl">
+                        <div class="text-lg font-bold">Numbers Called:{{winningNumbersCount}} </div>
+                        <div>  </div>
+                        <div class='w-full h-96 overflow-y-scroll bg-gray-900 rounded-xl shadow px-1'> 
+                            <div v-for="number in winningNumbers" :key="number"> {{ number }} </div> 
                         </div>
+                    </div>
+                    <div class="p-2 flex font-bold text-lg break-words">
+                        Game Prize: 
+                        <br>{{game.prize}}
+                    </div>
                 </div>
                 <div class="col-span-4 lg:col-span-4">
                     <!-- Card Header --> 
