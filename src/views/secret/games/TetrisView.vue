@@ -5,6 +5,14 @@
     <div class="flex w-full">
         <div class="mx-auto" id="canvasTetris"></div>
     </div>
+    <div class="flex w-full  text-gray-900">
+        <div class="flex mx-auto">
+            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12"> <button @click="gameButtonClick(37)"> &lt; </Button> </div>
+            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12"> <button @click="gameButtonClick(38)"> ^ </Button> </div>
+            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12"> <button @click="gameButtonClick(40)"> V </Button> </div>
+            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12"> <button @click="gameButtonClick(39)"> &gt; </Button> </div>
+        </div>  
+    </div>
 	<div class="description text-white">
 		&#8592; &#8593; &#8594; &#8595; to move, P to pause
 		<br/> Speed increases every 1000 earned score points
@@ -36,6 +44,7 @@ export default {
         let {allGameScores, getHighScores} = useGameScores();
         let highScores = ref([]);
         let {scoresForGame} = getHighScores();
+        let currentGame = null;
         console.log(scoresForGame);
         highScores.value = scoresForGame
         console.log("HighScore", highScores)
@@ -47,6 +56,7 @@ export default {
             allGameScores,
             scoresForGame,
             highScores,
+            currentGame
         }
     },
     mounted(){
@@ -483,6 +493,7 @@ export default {
                 nextSide: 4
             };
             console.log(game);
+            this.currentGame = game;
             game.xStart = Math.floor((game.cols - game.nextSide) / 2);
             game.yStart = -game.nextSide;
             game.saveScore = function(score, handle, address){
@@ -668,22 +679,21 @@ export default {
                 game.paused = !game.paused;
             };
 
-            game.focus = function() {
-                if (game.paused) {
-                canvas.node.focus();
-                game.pause();
-                }
-            };
+            // game.focus = function() {
+            //     if (game.paused) {
+            //     canvas.node.focus();
+            //     game.pause();
+            //     }
+            // };
 
-            game.blur = function() {
-                if (!game.paused) {
-                game.pause();
-                }
-            };
+            // game.blur = function() {
+            //     if (!game.paused) {
+            //     game.pause();
+            //     }
+            // };
 
             game.keyPress = function(e) {
-                e.preventDefault();
-
+                e.preventDefault()
                 if (!game.paused) {
                 switch (e.keyCode) {
                     case 37: // Left
@@ -711,6 +721,10 @@ export default {
 
             game.setGame();
         },
+        gameButtonClick(_key){
+            let event = {keyCode: _key, preventDefault: function(){}}
+            this.currentGame.keyPress(event)
+        }
     }
 }
 </script>
