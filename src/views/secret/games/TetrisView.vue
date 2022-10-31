@@ -5,7 +5,7 @@
     <div class="flex w-full">
         <div class="mx-auto" id="canvasTetris"></div>
     </div>
-	<div class="description">
+	<div class="description text-white">
 		&#8592; &#8593; &#8594; &#8595; to move, P to pause
 		<br/> Speed increases every 1000 earned score points
 		<br/> Click to play
@@ -593,7 +593,7 @@ export default {
                 this.addScore(100);
             };
 
-            game.setScore = function(newScore) {
+            game.setScore = function(newScore)  {
                 this.score.amount = newScore;
                 this.score.halfWidth = Math.round(canvas.context.measureText(newScore).width / 2);
                 canvas.draw();
@@ -604,10 +604,16 @@ export default {
                 var newScore = oldScore + scoreToAdd;
                 this.setScore(newScore);
                 if (game.speed > 100 && (Math.floor(newScore / 1000) > Math.floor(oldScore / 1000))) {
+                game.speed -= 100;
+                clearInterval(this.timer);
+                game.timer = setInterval(game.move, game.speed);
+                
+                }else if (game.speed > 10 && (Math.floor(newScore / 1000) > Math.floor(oldScore / 1000))) {
                 game.speed -= 10;
                 clearInterval(this.timer);
                 game.timer = setInterval(game.move, game.speed);
                 }
+                console.log(game.timer, game.move, game.speed);
             };
 
             game.checkGameOver = function() {
