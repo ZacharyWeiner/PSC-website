@@ -45,6 +45,8 @@ export default createStore({
     thirtyDayVol: 0,
     rareCandies: [],
     weeklyClaimTotal:0,
+    isLoggingIn: false,
+    isLoggingInText: "Finding NFTs"
   },
   mutations: {
     // change state
@@ -157,6 +159,9 @@ export default createStore({
     },
     resetWeeklyClaimTotal(state){
       state.weeklyClaimTotal = 0
+    },
+    setIsLoggingIn(state, _bool){
+      state.isLoggingIn = _bool
     },
   },
   actions: {

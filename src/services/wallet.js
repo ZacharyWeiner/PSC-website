@@ -21,8 +21,9 @@ export function useRun()  {
         let _handle = data.paymail.split('@')[0]
         let _userAddress = res.data
         store.dispatch('login', { _handle, _userAddress } )
-        
+        store.commit('setIsLoggingIn', true)
         try{await setJigs()}catch(err){console.log(err)}
+        store.commit('setIsLoggingIn', false)
     }
     const signOut = (_store) => {
         _store.dispatch('logout')

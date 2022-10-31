@@ -1,45 +1,75 @@
 <template>
       <Menu />
-    <div class="container disable-dbl-tap-zoom">
-	<h1>Canvas Tetris</h1>
-    <div class="flex w-full">
-        <div class="mx-auto" id="canvasTetris"></div>
+      <div v-if="!isLoggedIn">
+        <div class="">
+            <div class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+                <h2 class="text-3xl font-extrabold tracking-tight pl-3 text-2xl lg:text-4xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent sm:text-4xl">
+                    <span class="block">You Must Be Logged In</span>
+                    <span class="block">To Play This Game</span>
+                </h2>
+                
+                </div>
+            </div>
+      </div>
+    <div v-if="isLoggedIn" class="container disable-dbl-tap-zoom">
+        <div class="grid grid-cols-3 xl:grid-cols-4 disable-dbl-tap-zoom">
+            <div class="col-span-3 disable-dbl-tap-zoom">
+                <h1>Canvas Tetris</h1>
+                <div class="flex w-full disable-dbl-tap-zoom ">
+                    <div class="mx-auto" id="canvasTetris"></div>
+                </div>
+                <div class="flex w-full  text-gray-900 disable-dbl-tap-zoom">
+                    <div class="flex mx-auto disable-dbl-tap-zoom">
+                        <div class="text-7xl m-2 bg-gray-200 rounded-xl disable-dbl-tap-zoom "> <button @click="gameButtonClick(37)"> ← </button> </div>
+                        <div class="text-7xl m-2 bg-gray-200 rounded-xl disable-dbl-tap-zoom "> <button @click="gameButtonClick(38)"> -↑- </button> </div>
+                        <div class="text-7xl m-2 bg-gray-200 rounded-xl disable-dbl-tap-zoom "> <button @click="gameButtonClick(40)"> -↓- </button> </div>
+                        <div class="text-7xl m-2 bg-gray-200 rounded-xl disable-dbl-tap-zoom "> <button @click="gameButtonClick(39)"> → </button> </div>
+                    </div>  
+                </div>
+                <div class="description text-white disable-dbl-tap-zoom">
+                    <div class="disable-dbl-tap-zoom">
+                        <div class="font-black text-sm text-gray-100 disable-dbl-tap-zoom">Speed increases every 1000 points</div>
+                    </div> 
+                    <div class="disable-dbl-tap-zoom">
+                        <div class="font-black text-lg text-gray-100 disable-dbl-tap-zoom">Desktop Players</div>
+                    </div> 
+                    <span class="font-black disable-dbl-tap-zoom">&#8592; &#8593; &#8594; &#8595; on your keyboard to move, P to pause </span>
+                    <div class="pt-2">
+                        <div class="font-black text-lg text-gray-100">Mobile Players</div>
+                        <div class="font-black text-gray-100">Use directional buttons</div>
+                    </div> 
+                    <br/> Click Game Board to start game
+                    <br/>
+                    <button class="p-2 m-2 bg-indigo-500 rounded-xl" @click="refresh"> Refresh </button>   
+                </div>
+            </div>  
+            <div class="col-span-3 xl:col-span-1"> 
+            <div class="w-auto mx-auto py-8">
+                <span
+                class="text-xl md:text-3xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
+                >
+                High Scores
+                </span>
+            </div>   
+            <!-- <div class='text-white'> {{scoresForGame}} </div>  -->
+            <div class='text-white grid grid-cols-7 max-w-xs mx-auto bg-gray-900 rounded-xl p-2 m-2 text-left'  v-for="(score, index) in scoresForGame" :key="score.id">
+                <div class="col-span-1">{{index + 1}}.</div>
+                <div class="col-span-3 text-green-400 font-black text-sm">{{score.score}}</div>
+                <div class="col-span-3 text-lg text-gray-100 font-black">{{score.handle}}</div> 
+            </div>
+        </div>
+        </div>
+        <img id="pewni" style="max-width:412" class="hidden" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/tetrisbackround.png" />
     </div>
-    <div class="flex w-full  text-gray-900 disable-dbl-tap-zoom">
-        <div class="flex mx-auto">
-            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12 disable-dbl-tap-zoom "> <button @click="gameButtonClick(37)"> &lt; </Button> </div>
-            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12 disable-dbl-tap-zoom "> <button @click="gameButtonClick(38)"> ^ </Button> </div>
-            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12 disable-dbl-tap-zoom "> <button @click="gameButtonClick(40)"> V </Button> </div>
-            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12 disable-dbl-tap-zoom "> <button @click="gameButtonClick(39)"> &gt; </Button> </div>
-        </div>  
-    </div>
-	<div class="description text-white">
-		&#8592; &#8593; &#8594; &#8595; on your keyboard to move, P to pause
-        <br/> Use directional buttons on mobile.
-		<br/> Speed increases every 1000 earned score points
-		<br/> Click to play
-	</div>
-    <div class="w-auto">
-        <span
-          class="text-5xl md:text-7xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
-        >
-          Scores
-        </span>
-      </div>   
-    <!-- <div class='text-white'> {{scoresForGame}} </div>  -->
-    <div class='text-white grid grid-cols-2 max-w-xl mx-auto'  v-for="score in scoresForGame" :key="score.id">
-        <div class="col-span-1">{{score.score}}</div>
-        <div class="col-span-1">{{score.handle}}</div> 
-    </div>
-    <!-- <img id="pewni" style="max-width:412" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" /> -->
-</div>
 </template>
 
 <script>
 import { reactive, toRefs, ref } from 'vue'
 import Menu from "./../../../components/MenuComponent2.vue";
 import { useGameScores } from "./../../../services/firebase.js";
+// import { ArrowDownIcon } from "@heroicons/vue/solid"
 export default {
+
     components: {Menu},
     setup () {
         let {allGameScores, getHighScores} = useGameScores();
@@ -57,7 +87,7 @@ export default {
             allGameScores,
             scoresForGame,
             highScores,
-            currentGame
+            currentGame,
         }
     },
     mounted(){
@@ -97,10 +127,12 @@ export default {
             };
 
             canvas.drawBlock = function(yNum, xNum) {
-                var gradient1 = this.context.createLinearGradient(50, 0, 350, 0);
+                var gradient1 = this.context.createLinearGradient(50, 0, 350, 1);
                 gradient1.addColorStop(0, 'Purple');
                 gradient1.addColorStop(1, 'Black');
-                this.context.fillStyle = gradient1;
+                var img1 = document.getElementById("pewni");
+                let pattern1= this.context.createPattern(img1,'repeat');
+                this.context.fillStyle = pattern1;
                 var xCord = xNum * (this.blockSide + 2) + 5;
                 var yCord = yNum * (this.blockSide + 2) + 5;
                 this.context.strokeRect(xCord, yCord, this.blockSide, this.blockSide);
@@ -135,17 +167,17 @@ export default {
             };
 
             canvas.drawPause = function(gameTextNum) {
-                this.context.fillStyle = "#f8f8ff";
-                this.context.strokeStyle = "#696969";
+                this.context.fillStyle = "#000";
+                this.context.strokeStyle = "#fff";
 
                 this.context.fillRect(50, 110, 158, 80);
                 this.context.strokeRect(50, 110, 158, 80);
                 this.context.strokeRect(53, 113, 152, 74);
 
-                this.context.fillStyle = "#696969";
+                this.context.fillStyle = "#fff";
                 this.context.fillText(game.pauseText[gameTextNum].text, 130 - game.pauseText[gameTextNum].halfWidth, 155);
 
-                this.context.strokeStyle = "#f8f8ff";
+                this.context.strokeStyle = "#000";
             };
 
             canvas.draw = function() {
@@ -725,12 +757,28 @@ export default {
         gameButtonClick(_key){
             let event = {keyCode: _key, preventDefault: function(){}}
             this.currentGame.keyPress(event)
+        },
+        refresh(){
+            // var node = document.getElementById("canvasTetris");
+            // // eslint-disable-next-line no-mixed-spaces-and-tabs
+            // this.canvasTetris(node);
+            window.location.reload();
+        }
+    },
+    computed:{
+        isLoggedIn(){
+            return this.$store.state.relayx_handle !== "";
         }
     }
 }
 </script>
 
 <style scoped>
+*, *:before, *:after {
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
 .disable-dbl-tap-zoom {
   touch-action: manipulation;
 }
