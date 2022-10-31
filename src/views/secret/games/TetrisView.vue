@@ -1,20 +1,21 @@
 <template>
       <Menu />
-    <div class="container">
+    <div class="container disable-dbl-tap-zoom">
 	<h1>Canvas Tetris</h1>
     <div class="flex w-full">
         <div class="mx-auto" id="canvasTetris"></div>
     </div>
-    <div class="flex w-full  text-gray-900">
+    <div class="flex w-full  text-gray-900 disable-dbl-tap-zoom">
         <div class="flex mx-auto">
-            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12"> <button @click="gameButtonClick(37)"> &lt; </Button> </div>
-            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12"> <button @click="gameButtonClick(38)"> ^ </Button> </div>
-            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12"> <button @click="gameButtonClick(40)"> V </Button> </div>
-            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12"> <button @click="gameButtonClick(39)"> &gt; </Button> </div>
+            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12 disable-dbl-tap-zoom "> <button @click="gameButtonClick(37)"> &lt; </Button> </div>
+            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12 disable-dbl-tap-zoom "> <button @click="gameButtonClick(38)"> ^ </Button> </div>
+            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12 disable-dbl-tap-zoom "> <button @click="gameButtonClick(40)"> V </Button> </div>
+            <div class="p-2 m-2 bg-gray-200 rounded-xl w-12 disable-dbl-tap-zoom "> <button @click="gameButtonClick(39)"> &gt; </Button> </div>
         </div>  
     </div>
 	<div class="description text-white">
-		&#8592; &#8593; &#8594; &#8595; to move, P to pause
+		&#8592; &#8593; &#8594; &#8595; on your keyboard to move, P to pause
+        <br/> Use directional buttons on mobile.
 		<br/> Speed increases every 1000 earned score points
 		<br/> Click to play
 	</div>
@@ -729,6 +730,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.disable-dbl-tap-zoom {
+  touch-action: manipulation;
+}
 </style>
