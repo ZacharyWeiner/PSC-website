@@ -10,29 +10,43 @@
 		<br/> Speed increases every 1000 earned score points
 		<br/> Click to play
 	</div>
-    <div class='text-white'>Scores </div>   
-    <div class='text-white'  v-for="score in allGameScores" :key="score">
-        {{score.handle}} - {{score.score}}
+    <div class="w-auto">
+        <span
+          class="text-5xl md:text-7xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
+        >
+          Scores
+        </span>
+      </div>   
+    <!-- <div class='text-white'> {{scoresForGame}} </div>  -->
+    <div class='text-white grid grid-cols-2 max-w-xl mx-auto'  v-for="score in scoresForGame" :key="score.id">
+        <div class="col-span-1">{{score.score}}</div>
+        <div class="col-span-1">{{score.handle}}</div> 
     </div>
     <!-- <img id="pewni" style="max-width:412" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" /> -->
 </div>
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, ref } from 'vue'
 import Menu from "./../../../components/MenuComponent2.vue";
 import { useGameScores } from "./../../../services/firebase.js";
 export default {
     components: {Menu},
     setup () {
-        let {allGameScores} = useGameScores();
+        let {allGameScores, getHighScores} = useGameScores();
+        let highScores = ref([]);
+        let {scoresForGame} = getHighScores();
+        console.log(scoresForGame);
+        highScores.value = scoresForGame
+        console.log("HighScore", highScores)
         const state = reactive({
             count: 0,
         })
-    
         return {
             ...toRefs(state),
-            allGameScores
+            allGameScores,
+            scoresForGame,
+            highScores,
         }
     },
     mounted(){
