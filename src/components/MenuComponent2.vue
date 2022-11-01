@@ -164,6 +164,16 @@
                 </router-link>
               </nav>
             </div>
+            <div class="mt-6">
+              <nav class="grid gap-y-8">
+                <router-link v-for="item in membersOnly" :key="item.name" :to="item.href" class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
+                  <component :is="item.icon" class="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                  <span class="ml-3 text-base font-medium text-gray-900">
+                    {{ item.name }}
+                  </span>
+                </router-link>
+              </nav>
+            </div>
           </div>
           <div class="py-6 px-5 space-y-6">
             <div class="grid grid-cols-2 gap-y-4 gap-x-8">
@@ -214,6 +224,7 @@ import {
   XIcon,
   RefreshIcon,
   EmojiHappyIcon,
+  CubeIcon,
 } from '@heroicons/vue/outline'
 import { ChevronDownIcon } from '@heroicons/vue/solid'
 import {useRun} from "./../services/wallet.js"
@@ -255,6 +266,7 @@ const membersOnly = [
 
 
   { name: 'Claimables', href: '/claims', icon: ShoppingBagIcon },
+  { name: 'Tetris', href: '/secret/games/tetris', icon: CubeIcon },
   { name: 'Social Feed', href: '/secret/social', icon: EmojiHappyIcon },
   { name: 'Pewnicorn Chat', href: '/secret/bitchat', icon: ChatIcon },
 ]
