@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="bg-white">
         <Menu />
         <announcement-banner />
         <home-hero />
-        <div class="grid grid-cols-3 lg:grid-cols-5">
-            <div class="col-span-3 lg:col-span-3">
+        <div class="grid grid-cols-2 lg:grid-cols-4">
+            <div class="col-span-2 lg:col-span-2">
                 <!-- <div class="text-white font-black px-4 py-5 sm:px-6">
                     <h3 class="text-xl font-medium leading-6  underline">Quick Links</h3>
                 </div>
@@ -15,18 +15,21 @@
                 </div> -->
                 <Poo />
             </div>
-            <div class="col-span-3 lg:col-span-2 overflow-y-scroll">
+            <div class="col-span-2 lg:col-span-2 overflow-y-scroll">
                 <div class="grid grid-cols-1 m-2 text-3xl font-extrabold text-gray-200 bg-gray-800 rounded-xl pl-4 mb-2">
                     <router-link class="flex" to="/secret/bitchat">     
                         <div class="underline"> 
                             Pewnicorn Chat
                         </div>
-                        <div><ExternalLinkIcon class="-mr-1 ml-3 my-auto h-5 w-5 text-gray-400" aria-hidden="true" /></div>
+                        <div>
+                            <ExternalLinkIcon class="-mr-1 ml-3 my-auto h-5 w-5 text-gray-400" aria-hidden="true" />
+                        </div>
                     </router-link> 
                     <BitChat count="6" />
                 </div>
             </div>
         </div>
+        <bingo-announcement></bingo-announcement>
         <div class="bg-white">
             <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
             <div class="bg-indigo-700 rounded-lg shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4">
@@ -46,9 +49,6 @@
             </div>
             </div>
         </div>
-        <bingo-announcement></bingo-announcement>
-         
-         
          <div class="bg-black">
             <div class="mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
                 <div class="text-left">

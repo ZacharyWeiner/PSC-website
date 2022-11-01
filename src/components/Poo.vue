@@ -31,7 +31,7 @@
               <rect width="404" height="384" fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)" />
             </svg>
           </div>
-          <div class="relative text-gray-100 max-w-md mx-auto py-12 px-4 space-y-6 sm:max-w-3xl sm:py-16 sm:px-6 lg:max-w-md lg:p-0 lg:col-start-3 lg:col-span-6">
+          <div class="relative text-gray-100 bg-gray-900 max-w-md mx-auto py-12 px-4 space-y-6 sm:max-w-3xl sm:py-16 sm:px-6 lg:max-w-md lg:p-0 lg:col-start-3 lg:col-span-6">
             <h2 class="text-3xl font-extrabold text-white" id="join-heading">What is $POO Coin?</h2>
             <p class="text-lg text-left">
             Like Horse Shit, But ✨

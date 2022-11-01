@@ -16,7 +16,7 @@
             <div class="col-span-3 disable-dbl-tap-zoom">
                 <h1>Canvas Tetris</h1>
                 <div class="flex w-full disable-dbl-tap-zoom ">
-                    <div class="mx-auto" id="canvasTetris"></div>
+                    <div class="mx-auto" id="canvasTetris" @click="playAudio"></div>
                 </div>
                 <div class="flex w-full  text-gray-900 disable-dbl-tap-zoom">
                     <div class="flex mx-auto disable-dbl-tap-zoom">
@@ -41,6 +41,7 @@
                     <br/> Click Game Board to start game
                     <br/>
                     <button class="p-2 m-2 bg-indigo-500 rounded-xl" @click="refresh"> Refresh </button>   
+                    <button class="p-2 m-2 bg-indigo-500 rounded-xl" @click="mute"> Mute </button>   
                 </div>
             </div>  
             <div class="col-span-3 xl:col-span-1"> 
@@ -74,26 +75,34 @@ export default {
     setup () {
         let {allGameScores, getHighScores} = useGameScores();
         let highScores = ref([]);
-        let {scoresForGame} = getHighScores();
+        let {scoresForGame} = getHighScores("Tetris");
         let currentGame = null;
         console.log(scoresForGame);
         highScores.value = scoresForGame
         console.log("HighScore", highScores)
+        var audio = new Audio('https://slavettes-layers.s3.amazonaws.com/pewnicorns/Video+Game.mp3');
         const state = reactive({
             count: 0,
         })
+         // path to file
         return {
             ...toRefs(state),
             allGameScores,
             scoresForGame,
             highScores,
             currentGame,
+            audio
         }
     },
     mounted(){
       var node = document.getElementById("canvasTetris");
 	// eslint-disable-next-line no-mixed-spaces-and-tabs
 	  this.canvasTetris(node);
+      try{
+        // var audio = new Audio('https://slavettes-layers.s3.amazonaws.com/pewnicorns/Video+Game.mp3');
+        // audio.play();
+      }catch(err){console.error(err)}
+      
     },
     methods: {
         canvasTetris(parentNode) {
@@ -104,6 +113,8 @@ export default {
                 height: 0,
                 blockSide: 0
             };
+            
+           
 
             canvas.drawBackground = function() {
                 this.context.fillStyle = "#fff";
@@ -501,7 +512,8 @@ export default {
             var game = {
                 score: {
                 amount: 0,
-                halfWidth: 0
+                halfWidth: 0,
+                lines: 0
                 },
                 player:{
                     handle: this.$store.state.relayx_handle,
@@ -648,14 +660,14 @@ export default {
                 var newScore = oldScore + scoreToAdd;
                 this.setScore(newScore);
                 if (game.speed > 100 && (Math.floor(newScore / 1000) > Math.floor(oldScore / 1000))) {
-                game.speed -= 100;
-                clearInterval(this.timer);
-                game.timer = setInterval(game.move, game.speed);
+                    game.speed -= 50;
+                    clearInterval(this.timer);
+                    game.timer = setInterval(game.move, game.speed);
                 
                 }else if (game.speed > 10 && (Math.floor(newScore / 1000) > Math.floor(oldScore / 1000))) {
-                game.speed -= 10;
-                clearInterval(this.timer);
-                game.timer = setInterval(game.move, game.speed);
+                    game.speed -= 10;
+                    clearInterval(this.timer);
+                    game.timer = setInterval(game.move, game.speed);
                 }
                 console.log(game.timer, game.move, game.speed);
             };
@@ -740,6 +752,7 @@ export default {
                     break;
                     case 40: // Down
                     tetromino.move(0, 1);
+                    game.addScore(1);
                     break;
                     case 80: // P
                     game.pause();
@@ -763,6 +776,12 @@ export default {
             // // eslint-disable-next-line no-mixed-spaces-and-tabs
             // this.canvasTetris(node);
             window.location.reload();
+        },
+        playAudio(){
+            this.audio.play();
+        },
+        mute(){
+            this.audio.pause();
         }
     },
     computed:{
