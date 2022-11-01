@@ -20,10 +20,10 @@
                 </div>
                 <div class="flex w-full  text-gray-900 disable-dbl-tap-zoom">
                     <div class="flex mx-auto disable-dbl-tap-zoom">
-                        <div class="text-7xl m-2 bg-gray-200 rounded-xl disable-dbl-tap-zoom "> <button @click="gameButtonClick(37)"> ← </button> </div>
-                        <div class="text-7xl m-2 bg-gray-200 rounded-xl disable-dbl-tap-zoom "> <button @click="gameButtonClick(38)"> -↑- </button> </div>
-                        <div class="text-7xl m-2 bg-gray-200 rounded-xl disable-dbl-tap-zoom "> <button @click="gameButtonClick(40)"> -↓- </button> </div>
-                        <div class="text-7xl m-2 bg-gray-200 rounded-xl disable-dbl-tap-zoom "> <button @click="gameButtonClick(39)"> → </button> </div>
+                        <div class="text-7xl m-2 bg-gradient-to-b from-teal-500 via-blue-600 to-purple-500 text-white rounded-xl disable-dbl-tap-zoom  pt-2"> <button @click="gameButtonClick(37)"> ← </button> </div>
+                        <div class="text-7xl m-2 bg-gradient-to-b from-teal-500 via-blue-600 to-purple-500  text-white rounded-xl disable-dbl-tap-zoom pt-2 "> <button @click="gameButtonClick(38)"> <RefreshIcon  class="m-3 h-16 w-16 text-white" aria-hidden="true"  /> </button> </div>
+                        <div class="text-7xl m-2 bg-gradient-to-b from-teal-500 via-blue-600 to-purple-500  text-white rounded-xl disable-dbl-tap-zoom pt-2"> <button @click="gameButtonClick(40)"> -↓- </button> </div>
+                        <div class="text-7xl m-2 bg-gradient-to-b from-teal-500 via-blue-600 to-purple-500  text-white rounded-xl disable-dbl-tap-zoom pt-2"> <button @click="gameButtonClick(39)"> → </button> </div>
                     </div>  
                 </div>
                 <div class="description text-white disable-dbl-tap-zoom">
@@ -67,10 +67,10 @@
 import { reactive, toRefs, ref } from 'vue'
 import Menu from "./../../../components/MenuComponent2.vue";
 import { useGameScores } from "./../../../services/firebase.js";
-// import { ArrowDownIcon } from "@heroicons/vue/solid"
+import { RefreshIcon } from "@heroicons/vue/solid"
 export default {
 
-    components: {Menu},
+    components: {Menu, RefreshIcon},
     setup () {
         let {allGameScores, getHighScores} = useGameScores();
         let highScores = ref([]);
