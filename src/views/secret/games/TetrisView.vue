@@ -91,7 +91,8 @@ export default {
             scoresForGame,
             highScores,
             currentGame,
-            audio
+            audio,
+            playSong: true,
         }
     },
     mounted(){
@@ -778,9 +779,12 @@ export default {
             window.location.reload();
         },
         playAudio(){
-            this.audio.play();
+            if(this.playSong){
+                this.audio.play();
+            }
         },
         mute(){
+            this.playSong = !this.playSong;
             this.audio.pause();
         }
     },
