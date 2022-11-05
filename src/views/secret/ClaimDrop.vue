@@ -37,8 +37,8 @@ export default {
             count: 0,
             baseAward: 100,
             multiplier: 5,
-            propertyName: 'wings',
-            propertyValue: 'rainbow',
+            propertyName: 'clothes',
+            propertyValue: 'jean jacket sv pocket',
         })
         return {
             ...toRefs(state), weeklyActions, loading, findUnclaimed, markClaimed, unclaimed

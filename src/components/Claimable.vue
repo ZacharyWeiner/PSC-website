@@ -85,7 +85,7 @@ export default {
             count: 0,
             baseAward: 100,
             multiplier: 5,
-            propertyName: 'body',
+            propertyName: 'clothes',
             propertyValue: 'jean jacket sv pocket',
             successMessage: "Your $POO has been claimed and will be sent SOON",
             esitmatedPoo: 0,
