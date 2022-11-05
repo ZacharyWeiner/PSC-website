@@ -85,8 +85,8 @@ export default {
             count: 0,
             baseAward: 100,
             multiplier: 5,
-            propertyName: 'wings',
-            propertyValue: 'rainbow',
+            propertyName: 'body',
+            propertyValue: 'jean jacket sv pocket',
             successMessage: "Your $POO has been claimed and will be sent SOON",
             esitmatedPoo: 0,
         })
@@ -204,7 +204,7 @@ export default {
             if(this.isLogin  && this.$store.state.user_jigs.length > 0){
                 _canClaim = true;
             } 
-            let compareDate = new Date('2022-10-28');
+            let compareDate = new Date('2022-11-04');
             this.userActions['userActions'].value.forEach((ua)=> {
                 let actionDate = new Date(ua.timestamp.seconds * 1000);
                 if( actionDate > compareDate){

@@ -786,6 +786,13 @@ export default {
         mute(){
             this.playSong = !this.playSong;
             this.audio.pause();
+        },
+        weeklyHighScores(){
+            let _weeklyHighs = [];
+            this.scoresForGame.forEach(element => {
+                console.log(element)
+            });
+            return _weeklyHighs
         }
     },
     computed:{

@@ -1,13 +1,20 @@
 <template>
-<div class="text-white"> {{loading}} </div>
-<div class="text-white"> Sent This Week : {{weeklyClaimTotal}} <button @click="resetWeeklyTotal"> Reset </button></div>  
-<button @click="getWeeklyActions" class='text-white'> Get Actions </button>
-    <div v-for="claim in unique" :key="claim.id" class='text-white text-left grid grid-cols-5 space-x-12'>
+    <div class="text-white"> {{loading}} </div>
+    <div class="text-white"> Sent This Week : {{weeklyClaimTotal}} <button @click="resetWeeklyTotal"> Reset </button></div>  
+    <button @click="getWeeklyActions" class='text-white'> Get Actions </button>
+    <div v-for="claim in unique" :key="claim.id" class='text-white text-left grid grid-cols-6 space-x-12'>
         <div class='col-span-1'> {{new Date(claim.timestamp.seconds * 1000).toLocaleDateString()}}</div>
         <div class='col-span-1'> {{claim.relay_handle}} </div>
-        <div class='col-span-1'>{{claim.ownerAddress}} </div>
-        <div class='col-span-1 pl-12'><button @click="getCount(claim)"> Get Count</button>  </div>
-        <div class='col-span-1 pl-12'><button @click="calculateSendAmount(claim.ownerAddress)"> Get Order Count</button>  </div>
+        <div class='col-span-2'>{{claim.ownerAddress}} </div>
+        <div class='col-span-1'><button @click="getCount(claim)"> Send POO</button>  </div>
+        <div class='col-span-1'><button @click="calculateSendAmount(claim.ownerAddress)"> Get Order Count</button>  </div>
+    </div>
+    <div class="flex grid grid-cols-6">
+    <div v-for="paid in weeklyClaimsPaid" :key="paid" class="text-white flex grid  col-span-3 grid-cols-3 rounded-xl p-1 m-1 bg-gray-900 max-w-sm mx-auto w-full">
+        <div class="col-span-1 text-left pt-1 font-bold">{{paid[0].slice(0, 12)}}{{paid[0].length > 12 ? "..." : ""}}</div> 
+        <div class="col-span-1 pt-1">{{paid[1]}}</div>
+        <div class="col-span-1"><CheckCircleIcon class="text-right text-green-500 h-8 w-8"/></div>
+    </div>
     </div>
 </template>
 
@@ -17,7 +24,9 @@ import { userProfiles } from './../../services/firebase.js'
 import axios from "axios"
 import { mapState } from "vuex";
 import {useNFTRankings} from "./../../data/nftRankings.js"
+import { CheckCircleIcon } from '@heroicons/vue/outline';
 export default {
+    components: {CheckCircleIcon},
     setup () {
         const loading = ref(false);
         const weeklyActions = ref([])
@@ -27,14 +36,18 @@ export default {
         const state = reactive({
             count: 0,
             baseAward: 100,
-            multiplier: 10,
+            multiplier: 5,
             propertyName: 'wings',
             propertyValue: 'rainbow',
         })
-    
         return {
             ...toRefs(state), weeklyActions, loading, findUnclaimed, markClaimed, unclaimed
         }
+    },
+    mounted(){
+        // this.$store.commit("resetWeeklyClaimsPaid");
+        // this.$store.commit("addToWeeklyClaimsPaid", ["kekbur", 1900]);
+        // this.$store.commit("addToWeeklyClaimsPaid", ["nomcrezack", 700]);
     },
     methods:{
         getWeeklyActions(){
@@ -73,6 +86,7 @@ export default {
                 console.log(nftCount[0].amount, sendAmount)
                 try{
                     let response = await this.sendPoo(sendAmount, claim.ownerAddress)
+                    this.$store.commit("addToWeeklyClaimsPaid", [claim.relay_handle, sendAmount]);
                     if(response){
                         console.log("No error on send poo", response)
                         let allUnclaimed = this.unclaimed.filter(ua => ua.relay_handle === claim.relay_handle)
@@ -108,6 +122,7 @@ export default {
             return orderCount;
         },
         async calculateSendAmount(address){
+            console.log(this.$store.state.weeklyClaimsPaid);
             console.log("Calculating Send amount for ", address)
             let walletJSON  = await fetch('https://staging-backend.relayx.com/api/user/balance2/' + address)
             let response_data = await walletJSON.json()
@@ -186,7 +201,7 @@ export default {
             })
             return uniqAccounts
         },
-        ...mapState(["weeklyClaimTotal"]),
+        ...mapState(["weeklyClaimTotal", "weeklyClaimsPaid"]),
     }
 }
 </script>

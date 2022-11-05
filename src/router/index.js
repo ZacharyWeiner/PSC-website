@@ -53,6 +53,7 @@ import Pong from "../views/secret/games/Pong.vue";
 import Rect from "../views/secret/games/RectView.vue";
 import Breakout from "../views/secret/games/BreakoutGame.vue";
 import Maze from "../views/secret/games/MazeView.vue";
+import LeaderboardPayout from "../views/secret/LeaderboardPayout.vue";
 
 const routes = [
   {
@@ -319,6 +320,11 @@ const routes = [
     path: '/secret/games/maze',
     name: 'Maze',
     component: Maze
+  },
+  {
+    path: '/secret/leaderboard-payout',
+    name: 'Leaderboard Payout',
+    component: LeaderboardPayout
   }
 ]
 

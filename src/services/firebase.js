@@ -467,5 +467,26 @@ export function useGameScores() {
         
         
     }
-    return {allGameScores, addGameScore, getHighScores}
+    function getStartOfWeek() {
+        const now = new Date("2022-10-16")
+        const timestamp = firebase.firestore.Timestamp.fromDate(now)
+        return timestamp // ex. 1631246400
+      }
+      
+    const getWeeklyScores = (gameName) => {
+        const gameScores = firestore.collection('gameScores').orderBy('createdAt', "desc");
+        let highScores = gameScores.where("createdAt", ">", getStartOfWeek())
+        console.log(gameName)
+        const scoresForGame = ref([])
+        highScores.onSnapshot(snapshot => {
+            scoresForGame.value = snapshot.docs
+                .map(doc => ({ id: doc.id, ...doc.data() }))
+                
+            })
+            console.log(scoresForGame)
+            return {scoresForGame}
+        
+        
+    }
+    return {allGameScores, addGameScore, getHighScores, getWeeklyScores}
 }

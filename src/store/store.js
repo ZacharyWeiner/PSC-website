@@ -45,6 +45,7 @@ export default createStore({
     thirtyDayVol: 0,
     rareCandies: [],
     weeklyClaimTotal:0,
+    weeklyClaimsPaid:[],
     isLoggingIn: false,
     isLoggingInText: "Finding NFTs"
   },
@@ -159,6 +160,12 @@ export default createStore({
     },
     resetWeeklyClaimTotal(state){
       state.weeklyClaimTotal = 0
+    },
+    addToWeeklyClaimsPaid(state, update){
+      state.weeklyClaimsPaid.push(update)
+    },
+    resetWeeklyClaimsPaid(state){
+      state.weeklyClaimsPaid = []
     },
     setIsLoggingIn(state, _bool){
       state.isLoggingIn = _bool
