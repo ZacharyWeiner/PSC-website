@@ -305,7 +305,8 @@ export function useBingo() {
             winningNumbers: [],
             calledBingo: [],
             winners: [],
-            session: session
+            session: session,
+            prize: '',
 
         })
         console.log('new game started')
@@ -358,7 +359,14 @@ export function useBingo() {
         usersBingoCollection.doc(id).delete()
     }
 
-    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos}
+    const setGamePrize = (id, text) => {
+        bingoGamesCollection.doc(id).update({
+            prize: text
+        })
+        console.log('added prize')
+    }
+
+    return { getCurrentGame , newGame, endGame, setWinner, setWinningNumber, userCallBingo, deleteUserBingo, getCurrentGameBingos, setGamePrize}
 }
 
 export function gameSessionCards(handle, session){

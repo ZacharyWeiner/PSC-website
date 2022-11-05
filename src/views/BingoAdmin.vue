@@ -7,6 +7,7 @@
         <div> <button @click="startAutoPick"> start auto pick {{counter}}</button></div>
         <div> <button @click="stopAutoPick"> stop autopick</button></div>
         {{isCounter}}
+        Prize: {{currentGame[0].prize}}
     </div>
     <div class="container m-auto my-20 text-white">
         <div v-for="game in currentGame"
@@ -62,6 +63,18 @@
                                 </button>
                             </div>
                         </div>
+                        <div v-if="!game.prize.length" class="col-span-3 sm:col-span-2 mt-5">
+                            <label for="bingo-prize" class="block text-sm font-medium text-gray-700"> Bingo Prize:</label>
+                            <div class="mt-1 ">
+                                <input v-model="bingoPrize" type="text" name="bingo-prize" id="bingo-prize" 
+                                    class=" h-12 pl-2 bg-gray-50 border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-1/2 m-auto text-black rounded-none rounded-r-md sm:text-sm border-gray-300" />
+                                <button @click="submitPrize(game.id)"
+                                    class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </div> 
                         </div>
                         <div class="text-gray-900 text-lg container break-normal">
                            Winners: 
@@ -151,6 +164,7 @@ export default {
             setWinner, 
             setWinningNumber,
             deleteUserBingo,
+            setGamePrize,
             
             } = useBingo()
         console.log(store.state.bingoCurrenGame)
@@ -161,7 +175,8 @@ export default {
         const showModal = false;
         const counter = ref(0);
         const isCounter = ref(false)
-        return { loading, newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, getCurrentGame, currentGame, playerBingos, meta, counter, timerInterval, gameSession, showModal, isCounter}
+        const bingoPrize = ref('')
+        return { loading, newGame, endGame, setWinner, setWinningNumber, deleteUserBingo, getCurrentGameBingos, getCurrentGame, setGamePrize, currentGame, playerBingos, meta, counter, timerInterval, gameSession, showModal, isCounter, bingoPrize}
     },
     methods: {
         startGame(){
@@ -272,7 +287,12 @@ export default {
             let bonus = Math.floor(Math.random() * 75) + 1
 
             return bonus
-        }
+        },
+        submitPrize(id) {
+            this.setGamePrize(id, this.bingoPrize)
+            console.log(this.bingoPrize)
+            this.bingoPrize = ''
+        },
     },
     computed:{
             winningNumbers(){
