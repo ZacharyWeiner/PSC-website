@@ -14,6 +14,9 @@
       <div class="front" :style="{ backgroundImage: 'url(' + card.image + ')' }"></div>
     </div>
   </div>
+  <div class="mx-auto">
+    <button class="p-2 m-2 bg-indigo-500 rounded-xl" @click="mute"> Mute </button>   
+  </div>
   <div class="text-white">
     <div class="text-md font-bold">How To Play</div>
     <div class="text-left max-w-lg mx-auto">
@@ -49,6 +52,9 @@
     </div>
   </div>
 </div>
+<audio id="soundtrack" class="hidden">
+            <source src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/File+A+2-17_331+-+8+Bit+(Full).mp3" type="audio/mp3" />
+        </audio>
 </template>
 
 <script>
@@ -86,6 +92,7 @@ export default {
             score: 0,
             indexer: 0,
             wrongMatches: 0,
+            playSong: true,
         })
         
     
@@ -183,6 +190,7 @@ export default {
 		},
 		
 		startGame() {
+            this.playAudio();
 			this.started = true;
 			this.startTime = moment();
 			
@@ -264,7 +272,26 @@ export default {
 		clearFlipBackTimer() {
 			clearTimeout(this.flipBackTimer);
 			this.flipBackTimer = null;
-		}
+		},
+        playAudio(){
+            if(this.playSong){
+                let audio = document.getElementById('soundtrack')
+                audio.play();
+                document.getElementById('soundtrack').addEventListener('ended', function(){
+                    this.play();
+                })
+            }
+        },
+        mute(){
+            this.playSong = !this.playSong;
+            let audio = document.getElementById('soundtrack')
+            if(this.playSong){
+                audio.play();
+            } else {
+                audio.pause();
+            }
+            
+        },
 	},
     computed:{
         sortedScores(){
