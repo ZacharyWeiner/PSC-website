@@ -61,6 +61,9 @@
         </div>
         </div>
         <img id="pewni" style="max-width:412" class="hidden" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/tetrisbackround.png" />
+        <audio id="soundtrack">
+            <source src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Video+Game.mp3" type="audio/mp3" />
+        </audio>
     </div>
 </template>
 
@@ -80,7 +83,6 @@ export default {
         console.log(scoresForGame);
         highScores.value = scoresForGame
         console.log("HighScore", highScores)
-        var audio = new Audio('https://slavettes-layers.s3.amazonaws.com/pewnicorns/Video+Game.mp3');
         const state = reactive({
             count: 0,
         })
@@ -90,7 +92,6 @@ export default {
             scoresForGame,
             highScores,
             currentGame,
-            audio,
             playSong: true,
         }
     },
@@ -779,12 +780,22 @@ export default {
         },
         playAudio(){
             if(this.playSong){
-                this.audio.play();
+                let audio = document.getElementById('soundtrack')
+                audio.play();
+                document.getElementById('soundtrack').addEventListener('ended', function(){
+                    this.play();
+                })
             }
         },
         mute(){
             this.playSong = !this.playSong;
-            this.audio.pause();
+            let audio = document.getElementById('soundtrack')
+            if(this.playSong){
+                audio.play();
+            } else {
+                audio.pause();
+            }
+            
         },
         weeklyHighScores(){
             let _weeklyHighs = [];
