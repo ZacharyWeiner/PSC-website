@@ -53,7 +53,7 @@
                 </span>
             </div>   
             <!-- <div class='text-white'> {{scoresForGame}} </div>  -->
-            <div class='text-white grid grid-cols-7 max-w-xs mx-auto bg-gray-900 rounded-xl p-2 m-2 text-left'  v-for="(score, index) in scoresForGame" :key="score.id">
+            <div class='text-white grid grid-cols-7 max-w-xs mx-auto bg-gray-900 rounded-xl p-2 m-2 text-left'  v-for="(score, index) in sortedScores" :key="score.id">
                 <div class="col-span-1">{{index + 1}}.</div>
                 <div class="col-span-3 text-green-400 font-black text-sm">{{score.score}}</div>
                 <div class="col-span-3 text-lg text-gray-100 font-black">{{score.handle}}</div> 
@@ -73,7 +73,7 @@ export default {
 
     components: {Menu, RefreshIcon},
     setup () {
-        let {allGameScores, getHighScores} = useGameScores();
+        let {getHighScores} = useGameScores();
         let highScores = ref([]);
         let {scoresForGame} = getHighScores("Tetris");
         let currentGame = null;
@@ -87,7 +87,6 @@ export default {
          // path to file
         return {
             ...toRefs(state),
-            allGameScores,
             scoresForGame,
             highScores,
             currentGame,
@@ -798,6 +797,17 @@ export default {
     computed:{
         isLoggedIn(){
             return this.$store.state.relayx_handle !== "";
+        },
+        sortedScores(){
+            let response = new Object(this.scoresForGame)
+            response.sort((a, b) => {
+                let r = -1;
+                console.log(a.score,b.score);
+               if(b.score > a.score){r = 1}
+               return r;
+            })
+            console.log(response.map((a) => a.score))
+            return response.slice(0,10)
         }
     }
 }

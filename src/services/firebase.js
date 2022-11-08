@@ -453,17 +453,17 @@ export function useGameScores() {
         console.log("score added")
     }
     const getHighScores = (gameName) => {
-        const gameScores = firestore.collection('gameScores').orderBy('score', "desc");
-        let highScores = gameScores.limit(10)
+        const gameScores = firestore.collection('gameScores').where("game", "==", gameName);
+        console.log("Game Scores before snapshot", gameScores)
+        let highScores = gameScores//.limit(10)
         console.log(gameName)
         const scoresForGame = ref([])
         highScores.onSnapshot(snapshot => {
             scoresForGame.value = snapshot.docs
                 .map(doc => ({ id: doc.id, ...doc.data() }))
                 
-            })
-            console.log(scoresForGame)
-            return {scoresForGame}
+        })
+        return {scoresForGame}
         
         
     }

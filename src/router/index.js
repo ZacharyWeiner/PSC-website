@@ -53,6 +53,8 @@ import Pong from "../views/secret/games/Pong.vue";
 import Rect from "../views/secret/games/RectView.vue";
 import Breakout from "../views/secret/games/BreakoutGame.vue";
 import Maze from "../views/secret/games/MazeView.vue";
+import Snake from "../views/secret/games/SnakeGame.vue";
+import MemoryGame from "../views/secret/games/MemoryGame.vue";
 import LeaderboardPayout from "../views/secret/LeaderboardPayout.vue";
 
 const routes = [
@@ -320,6 +322,16 @@ const routes = [
     path: '/secret/games/maze',
     name: 'Maze',
     component: Maze
+  },
+  {
+    path: '/secret/games/snake',
+    name: 'Snake',
+    component: Snake
+  },
+  {
+    path: '/secret/games/memory',
+    name: 'Memory Game ',
+    component: MemoryGame
   },
   {
     path: '/secret/leaderboard-payout',

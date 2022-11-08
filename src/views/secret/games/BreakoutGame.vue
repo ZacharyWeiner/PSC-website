@@ -1,9 +1,11 @@
 <template>
     <Menu />
     <div>
-        <canvas id="myCanvas" width="480" height="320"></canvas>
+        <canvas id="myCanvas" width="420" height="380"></canvas>
     </div>
-    <img id="pewni" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" />
+    <img id="pewni" class="hidden" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/BreakoutBackground.png" />
+    <img id="pooOnly" class="hidden" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/pooonly.png" />
+    
 </template>
 
 <script>
@@ -41,14 +43,16 @@ export default {
             var paddleX = (canvas.width - paddleWidth) / 2;
             var rightPressed = false;
             var leftPressed = false;
-            var brickRowCount = 3;
-            var brickColumnCount = 5;
-            var brickWidth = 75;
+            var brickRowCount = 4;
+            var brickColumnCount = 6;
+            var brickWidth = 50;
             var brickHeight = 20;
             var brickPadding = 10;
             var brickOffsetTop = 30;
             var brickOffsetLeft = 30;
             var lives = 3;
+            var resets = 1;
+            var previousCheckpoint = 24;
 
             var bricks = [];
             for (let c = 0; c < brickColumnCount; c++) {
@@ -82,6 +86,8 @@ export default {
             }
 
             let drawBricks = () =>  {
+            var img = document.getElementById("pewni")
+            var pat = ctx.createPattern(img, "no-repeat");
             for (let c = 0; c < brickColumnCount; c++) {
                 for (let r = 0; r < brickRowCount; r++) {
                 if (bricks[c][r].status === 1) {
@@ -91,20 +97,20 @@ export default {
                     bricks[c][r].y = brickY;
                     ctx.beginPath();
                     ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                    ctx.fillStyle = "#0095DD";
+                    ctx.fillStyle = pat; //"#0095DD";
                     ctx.fill();
                     ctx.closePath();
                 }
                 }
             }
             }
-
+            
             function drawBall() {
+            //     var img2 = document.getElementById("pooOnly")
+            // var ballPat = ctx.createPattern(img2, "repeat");
             ctx.beginPath();
             ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-            var img = document.getElementById("pewni")
-            var pat = ctx.createPattern(img, "no-repeat");
-            ctx.fillStyle = pat;
+            ctx.fillStyle = "#d4af37 "//ballPat;
             ctx.fill();
             ctx.closePath(); // ball is drawn
             }
@@ -126,10 +132,29 @@ export default {
                     dy = -dy;
                     b.status = 0;
                     score++;
-                    if (score === brickRowCount * brickColumnCount) {
+                    if (score === previousCheckpoint) {
                         // alert("YOU WIN!");
                         // document.location.reload();
+                        if(brickRowCount <10){
+                            resets = resets + 1
+                            brickRowCount = brickRowCount + 1
+                           
+                        }
+                        
+                        previousCheckpoint = previousCheckpoint + (brickRowCount * brickColumnCount)
+                        for (let c = 0; c < brickColumnCount; c++) {
+                        bricks[c] = [];
+                        for (let r = 0; r < brickRowCount; r++) {
+                            bricks[c][r] = {
+                            x: 0,
+                            y: 0,
+                            status: 1
+                            };
+                        }
+                        }
 
+
+                        
                     }
                     }
                 }
