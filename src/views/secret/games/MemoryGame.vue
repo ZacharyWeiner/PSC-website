@@ -1,11 +1,11 @@
 <template>
     <Menu />
    <div id="app">
-  <div class="info text-white">
-    <div><span class="label">Time:</span><span class="value">{{ time }} </span></div>
-    <div><span class="label">Turns:</span><span class="value">{{ turns }} </span></div>
-    <div><span class="label">Score:</span><span class="value">{{ score }} </span></div>
-    <div><span class="label">Trys Remaining:</span><span class="value">{{ 10 - wrongMatches }} </span></div>
+  <div class="flex grid grid-cols-4 text-white">
+    <div class="col-span-2 lg:col-span-1"><span class="label">Time:</span><span class="value">{{ time }} </span></div>
+    <div class="col-span-2 lg:col-span-1"><span class="label">Turns:</span><span class="value">{{ turns }} </span></div>
+    <div class="col-span-2 lg:col-span-1"><span class="label">Score:</span><span class="value">{{ score }} </span></div>
+    <div class="col-span-2 lg:col-span-1"><span class="label">Trys Remaining:</span><span class="value">{{ 10 - wrongMatches }} </span></div>
   </div>
   <div class="cards text-white max-w-xl mx-auto">
     <div class="card" v-for="card, index in cards" :key="card.index" :class="{ flipped: card.flipped, found: card.found }" @click="flipCard(card.index)">

@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Home2 from '../views/Home2.vue'
+import Home3 from '../views/Home3.vue'
 import PreorderCheck from '../views/PreorderCheck.vue'
 import MintManager from '../views/MintManager.vue'
 import Mint from '../views/Mint.vue'
@@ -55,6 +56,7 @@ import Breakout from "../views/secret/games/BreakoutGame.vue";
 import Maze from "../views/secret/games/MazeView.vue";
 import Snake from "../views/secret/games/SnakeGame.vue";
 import MemoryGame from "../views/secret/games/MemoryGame.vue";
+import ColorBlaster from "../views/secret/games/ColorBlaster.vue";
 import LeaderboardPayout from "../views/secret/LeaderboardPayout.vue";
 
 const routes = [
@@ -67,6 +69,11 @@ const routes = [
     path: '/',
     name: 'Home2',
     component: Home2
+  },
+  {
+    path: '/home-3',
+    name: 'Home3',
+    component: Home3
   },
   {
     path: '/preorder-check',
@@ -332,6 +339,11 @@ const routes = [
     path: '/secret/games/memory',
     name: 'Memory Game ',
     component: MemoryGame
+  },
+  {
+    path: '/secret/games/color-blaster',
+    name: 'Color Blaster',
+    component: ColorBlaster
   },
   {
     path: '/secret/leaderboard-payout',

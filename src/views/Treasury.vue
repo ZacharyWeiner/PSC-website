@@ -2,6 +2,15 @@
 <div class='text-white'> 
     <announcement-banner />
     <Menu />
+    <div v-if="loading" class="text-white">
+        <div class="w-auto mx-auto py-8">
+        <span
+        class="text-xl md:text-3xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
+        >
+         Searching for Pewnicorns ...
+        </span>
+    </div>
+    </div>
         <div  class="grid grid-cols-1 space-y-1 md:grid-cols-2 xl:grid-cols-3 ">
             <div v-for="nft in orderedNFTs" :key="nft.location"  class='col-span-1'>
                 <div class="mx-2 mt-2 rounded-b-xl bg-gray-900"> 
@@ -158,6 +167,7 @@ export default {
     },
     methods:{
         async fetchNFTs(){
+            this.loading = true
             let walletJSON  = await fetch('https://staging-backend.relayx.com/api/user/balance2/' + '13gqSLMuaW19vCWWgRXC8iMUdmcneYiUh9')
             let response_data = await walletJSON.json()
             console.log(response_data)
@@ -172,6 +182,7 @@ export default {
                  return b1 - a1
             })
             console.log(only800)
+            this.loading = false;
         },
         getBerryUrl(nft){
             let suffix = nft.berry.txid
