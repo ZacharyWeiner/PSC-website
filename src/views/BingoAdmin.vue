@@ -135,13 +135,20 @@
 import { ref } from 'vue'
 import { useBingo } from '../services/firebase'
 import { useStore } from 'vuex'
+import {useRouter} from "vue-router"
 import Menu from "./../components/Menu.vue"
+const whitelist = ["zackwins", "stevenk", "pewnicorn", "pscbank"]
 export default {
     components:{ Menu 
     },
     setup() {
         const loading = ref(false);
         const store = useStore()
+        if(whitelist.indexOf(store.state.relayx_handle) === -1){
+            let router = useRouter()
+            alert("You are not authorized");
+            router.push("/")
+        }
         let timerInterval = null;
         const { 
             getCurrentGame, 
