@@ -6,7 +6,20 @@
         <div class="flex justify-start lg:w-0 lg:flex-1">
           <a href="#">
             <span class="sr-only">Pewnicorn Social Club NFT Community</span>
-            <img class="h-8 w-auto sm:h-10 rounded-full" src="https://berry2.relayx.com/feca781862b91f4957fdf38bbce3f52c3f898e46d38c2c30785f79b893fa28d7" alt="" />
+            <img v-if="!isLoggedIn" class="h-8 w-auto sm:h-10 rounded-full" src="https://berry2.relayx.com/feca781862b91f4957fdf38bbce3f52c3f898e46d38c2c30785f79b893fa28d7" alt="" />
+            <div v-if="isLoggedIn" class="flex">
+              <!-- <div> <img class="h-8 w-auto sm:h-10 rounded-full" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" alt="" /> </div> -->
+              
+            </div>
+            <div v-if="isLoggedIn" class="flex">
+              <div> <img class="h-8 w-auto sm:h-10 rounded-full" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" alt="" /> </div>
+              <div class="my-auto font-bold pl-2"> 
+                <div> 
+                  <div class="font-bold pl-2 text-xs flex space-x-1"> <div> {{user_jigs.length}} </div><div> Pewnicorns </div></div>  
+                </div>
+                <div class="text-xs pl-2  text-green-500 "> ${{coins}} POO</div>  
+              </div>  
+            </div>
           </a>
         </div>
         <div class="-mr-2 -my-2 md:hidden">
@@ -128,12 +141,12 @@
           <!-- End More Links --> 
         </PopoverGroup>
         <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-          <div v-if="isLogin" class="flex-shrink-0 text-gray-700 px-1"> <span class='text-xs'>$</span> {{relayUser}}</div>
+          <div v-if="isLogin" class="flex-shrink-0 p-1 m-1 bg-purple-600 rounded-xl text-white"> <span class='text-xs '>$</span> {{relayUser}}</div>
           <div v-if="!isLogin">
               <button @click="login" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> {{isLoggingIn ? isLoggingInText : "Sign In"}} </button>
             </div>
             <div v-else>
-              <button @click="logout" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700"> Sign Out </button>
+              <button @click="logout" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700"> Logout </button>
             </div>
         </div>
       </div>
@@ -190,7 +203,7 @@
               <button @click="login" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Sign In </button>
             </div>
             <div v-else>
-              <button @click="logout" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700"> Sign Out </button>
+              <button @click="logout" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700"> Logout </button>
             </div>
           </div>
         </div>
@@ -358,7 +371,14 @@ export default {
       relayUser(){
         return this.$store.state.relayx_handle
       },
-      ...mapState(["isLoggingIn", "isLoggingInText"]),
+      isLoggedIn(){
+        if(this.$store.state.relayx_handle === ""){
+          return false;
+        }else{
+          return true;
+        }
+      },
+      ...mapState(["isLoggingIn", "isLoggingInText", "coins", "user_jigs"]),
   },
 }
 </script>

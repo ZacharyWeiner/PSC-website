@@ -7,15 +7,15 @@
               <span class="block text-indigo-600 text-xl ">ON RELAYX</span>
             </h1>
             <div v-if="!hasLoaded" class="text-white">Loading...</div>
-            <div class="mx-auto  max-w-lg md:max-w-full  text-white text-xs md:text-m  rounded-xl">
-                <div class="md:mt-4 md:pr-4 md:flex w-full">
+            <div class="mx-auto  max-w-lg md:max-w-full lg:max-w-full  text-white text-xs md:text-m  rounded-xl">
+                <div class="lg:flex w-full py-1 space-x-2">
                   <div
                       v-for="coin in top5"
                       :key="coin.origin"
                       class="mx-auto w-full bg-gray-800 p-2 m-2 overflow-hidden rounded-lg shadow-lg "
                   >
                   <div class="flex">
-                      <div class="h-12 w-12">
+                      <div class="h-12 w-12 overflow-hidden">
                           <img
                               class="w-full rounded-full"
                               :src="imageForCollection(coin)"
@@ -23,10 +23,10 @@
                           />
                       </div>
                       <div class="font-black text-left w-full">
-                          <div>{{ coin.name.slice(0, 16) }}</div>
+                          <div class="p-1 m-1 text-sm">{{ coin.name.slice(0, 16) }}</div>
                           <div class="flex">
                               <div class="text-green-600">
-                              <span class="text-gray-200 px-1"> RANK: </span>
+                              <span class="text-gray-200 p-1 m-1"> RANK: </span>
                               {{ coin.stats.rank }}
                               </div>
                           </div>
@@ -36,15 +36,17 @@
                       </div>
                     </div> 
                     <div class="flex space-x-0.5 text-xs">
+                      <div class="my-auto px-1 font-bold break-none" > 7Day </div>  
                       <div
-                        class="min-w-6 bg-purple-500 text-white rounded-full px-2 py-0.5 font-bold"
+                        class="w-full min-w-6 bg-purple-500 text-white rounded-lg px-2 my-auto font-bold"
                         >
-                        7D: ₿{{ (coin.stats.vol_7d / 100000000).toPrecision(2) }}
+                         ₿ {{ (coin.stats.vol_7d / 100000000).toPrecision(2) }}
                       </div>
+                      <div class="my-auto px-1 font-bold" > 30Day </div>  
                       <div
-                        class="min-w-6 bg-pink-500 text-white rounded-full px-2 py-0.5 font-bold"
+                        class="w-full min-w-6 bg-pink-500 text-white rounded-lg px-2 my-auto font-bold"
                         >
-                        30: ₿{{ (coin.stats.vol_30d / 100000000).toPrecision(2) }}
+                        ₿ {{ (coin.stats.vol_30d / 100000000).toPrecision(2) }}
                       </div>
                     </div> 
                   </div>

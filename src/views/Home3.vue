@@ -105,7 +105,7 @@
                 <router-link to="/bingo/cards/my-cards" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg">View Your Cards</router-link>
               </div>
               <div class="mt-3 sm:mt-0 sm:ml-3">
-                <a href="#" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg">Get Cards</a>
+                <a target="blank" href="https://www.twitter.com/iampewnicorn" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg">Get Cards</a>
               </div>
             </div>
           </div>
