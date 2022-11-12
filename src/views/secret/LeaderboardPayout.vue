@@ -1,17 +1,19 @@
 <template>
     <Menu />
-    <div class="w-auto mx-auto py-8">
+   <div class="flex grid grid-cols-2">
+    <div class="col-span-1">
+        <div class="w-auto mx-auto py-8">
                 <span
                 class="text-xl md:text-3xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
                 >
-                Tetris Leaderboard Payouts
+                Tetris Leaderboard Winners
                 </span>
             </div>  
             <div class="text-white font-bold">
-                Nov 5, 2021
+                Nov 12, 2021
             </div>
     <div class="w-full">
-    <div v-for="(entry, index) in leaderboard" :key="entry[1]" class="bg-gray-900 m-1 rounded-xl p-1 max-w-sm mx-auto">
+    <div v-for="(entry, index) in tetrisLeaderboard" :key="entry[1]" class="bg-gray-900 m-1 rounded-xl p-1 max-w-sm mx-auto">
         <div class="flex grid grid-cols-4">
             <div class="col-span-1 text-white font-bold"> {{index + 1}}. </div>
             <div class="col-span-1 text-white font-bold"> {{entry[0]}} </div>
@@ -19,22 +21,57 @@
         </div>
     </div>
     </div>
+    </div>
+    <div class="col-span-1">
+        <div class="w-auto mx-auto py-8">
+                <span
+                class="text-xl md:text-3xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
+                >
+                Memory Leaderboard Winners
+                </span>
+            </div>  
+            <div class="text-white font-bold">
+                Nov 12, 2021
+            </div>
+    <div class="w-full">
+    <div v-for="(entry, index) in memoryLeaderboard" :key="entry[1]" class="bg-gray-900 m-1 rounded-xl p-1 max-w-sm mx-auto">
+        <div class="flex grid grid-cols-4">
+            <div class="col-span-1 text-white font-bold"> {{index + 1}}. </div>
+            <div class="col-span-1 text-white font-bold"> {{entry[0]}} </div>
+            <div class="col-span-1 text-green-500 font-bold"> {{entry[1]}} </div>
+        </div>
+    </div>
+    </div>
+    </div>
+   </div>
 </template>
 
 <script>
 import { reactive, toRefs } from 'vue'
 import Menu from "./../../components/MenuComponent2.vue";
-let leaderboard = [
-    ["Geir", "1000"],
-    ["ZackWins", "900"],
-    ["Kumo", "800"],
-    ["Kumo", "700"],
-    ["Kumo", "600"],
-    ["Kumo", "500"],
-    ["Kumo", "400"],
-    ["Kumo", "300"],
-    ["BigC", "200"],
-    ["BigC", "100"],
+let tetrisLeaderboard = [
+    ["ielvis", "1000"],
+    ["ielvis", "900"],
+    ["bigcnftvault", "800"],
+    ["ielvis", "700"],
+    ["bigcnftvault", "600"],
+    ["geir", "500"],
+    ["geir", "400"],
+    ["mrkozak", "300"],
+    ["mrkozak", "200"],
+    ["bigc", "100"],
+]
+let memoryLeaderboard = [
+    ["bigc", "1000"],
+    ["pscbank", "900"],
+    ["hondamane", "800"],
+    ["hondamane", "700"],
+    ["pscbank", "600"],
+    ["pscbank", "500"],
+    ["senorbruce", "400"],
+    ["bigc", "300"],
+    ["hondamane", "200"],
+    ["hondamane", "100"],
 ]
 export default {
     components:{Menu},
@@ -44,7 +81,7 @@ export default {
         })
     
         return {
-            ...toRefs(state), leaderboard
+            ...toRefs(state), tetrisLeaderboard, memoryLeaderboard
         }
     }
 }

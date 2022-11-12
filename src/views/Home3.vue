@@ -56,8 +56,8 @@
         <div class="absolute inset-0 bg-gray-900 mix-blend-multiply" aria-hidden="true" />
       </div>
       <div class="relative mx-auto max-w-7xl py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl bg-gradient-to-r from-indigo-300 via-purple-500 to-teal-500 bg-clip-text text-transparent">PLAY TO EARN</h1>
-        <p class="mt-6 mx-auto max-w-3xl text-xl text-gray-100">Join us for Bingo Wednesdays 8PM NY Time </p>
+        <h1 class="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl bg-gradient-to-r from-indigo-300 via-purple-500 to-teal-500 bg-clip-text text-transparent">PLAY TO CLAIM</h1>
+        <p class="mt-6 mx-auto max-w-3xl text-xl text-gray-100">Join us for <span class="font-bold bg-gradient-to-r from-yellow-300 to-yellow-600  bg-clip-text text-transparent">Bingo Wednesdays 8PM </span> NY Time </p>
         <p class="mt-1 mx-auto max-w-3xl text-xl text-gray-100">Play arcade games for a leaderboard spot whenever you want.</p>
       </div>
     </div>
@@ -71,6 +71,7 @@
             <!-- <div class="top-0 inline-block -translate-y-1/2 transform rounded-xl bg-indigo-600 p-5 shadow-lg">
               <component :is="link.icon" class="h-6 w-6 text-white" aria-hidden="true" />
             </div> -->
+            <img :src="link.image" class="mx-auto h-16 w-12 md:h-32 md:w-20" />
             <h3 class="text-xl font-medium text-gray-900">{{ link.name }}</h3>
             <p class="mt-4 text-base text-gray-500">{{ link.description }}</p>
           </div>
@@ -82,17 +83,54 @@
     </section>
 </div>
   <!-- End Join the club -->
+  <!-- Ply Bingo With Us-->
+  <div class="relative overflow-hidden bg-white">
+    <div class="mx-auto max-w-7xl">
+      <div class="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+        <svg class="absolute inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform text-white lg:block" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="50,0 100,0 50,100 0,100" />
+        </svg>
+
+        <main class="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+          <div class="sm:text-center lg:text-left">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+              <span class="block xl:inline">Play Bingo</span>
+              {{ ' ' }}
+              <span class="block text-indigo-600 xl:inline">With Us</span>
+            </h1>
+            <p class="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">Play every wednesday to win $POO, Pewnicorns, and other NFTs from <a href="https://relayx.com" target="_blank">Relay X</a>  <a href="https://rarecandy.io" target="_blank">RareCandy</a> and <a href="https://twetch.com" target="_blank">Twetch</a></p>
+            <p class="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">To get a card just ask <a href="https://twitter.com/iampewnicorn" target="_blank" class="text-indigo-600"> @iampewnicorn </a> nicely on Twitter. </p>
+            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+              <div class="rounded-md shadow">
+                <router-link to="/bingo/cards/my-cards" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg">View Your Cards</router-link>
+              </div>
+              <div class="mt-3 sm:mt-0 sm:ml-3">
+                <a href="#" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg">Get Cards</a>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/BingoCard.png" alt="" />
+    </div>
+  </div>
+  <!-- End Play Bingo -->
+  <TopFiveRelayCoins></TopFiveRelayCoins>
 </template>
 
 <script>
 import { reactive, toRefs } from 'vue'
 import { ChevronRightIcon } from '@heroicons/vue/solid'
 import { PhoneMissedCallIcon, NewspaperIcon, PhoneIcon } from '@heroicons/vue/outline'
+import TopFiveRelayCoins from '../components/TopFiveRelayCoins.vue'
 
 const JoinSectionLinks = [
   {
     name: 'Bingo',
     href: '/bingo/cards/my-cards',
+    image: 'https://slavettes-layers.s3.amazonaws.com/pewnicorns/BingoCard.png',
     description:
       `Be the first to connect 5 blocks to win a prize. Every Wednesday at 8pm NYC Time. `,
     icon: PhoneIcon,
@@ -100,6 +138,7 @@ const JoinSectionLinks = [
   {
     name: 'BlockLines',
     href: '/secret/games/tetris',
+    image: 'https://slavettes-layers.s3.amazonaws.com/pewnicorns/tetris.png',
     description:
       'Shapes Fall. Use the shapes to complete a solid line of bloicks across the screen. Just Like Tetris.',
     icon: PhoneMissedCallIcon,
@@ -107,13 +146,14 @@ const JoinSectionLinks = [
   {
     name: 'Memzorizer',
     href: '/secret/games/memory',
+    image: 'https://slavettes-layers.s3.amazonaws.com/pewnicorns/memory.png',
     description:
       'Match 2 identical cards to win points. Match all the cards on screen to level up.',
     icon: NewspaperIcon,
   },
 ]
 export default {
-    components:{ ChevronRightIcon},
+    components:{ ChevronRightIcon, TopFiveRelayCoins},
     setup () {
         const state = reactive({
             count: 0,

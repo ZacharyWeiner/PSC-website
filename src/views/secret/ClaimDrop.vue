@@ -10,7 +10,7 @@
         <div class='col-span-1'><button @click="calculateSendAmount(claim.ownerAddress)"> Get Order Count</button>  </div>
     </div>
     <div class="flex grid grid-cols-6">
-    <div v-for="paid in weeklyClaimsPaid" :key="paid" class="text-white flex grid  col-span-3 grid-cols-3 rounded-xl p-1 m-1 bg-gray-900 max-w-sm mx-auto w-full">
+    <div v-for="paid in weeklyClaimsPaid" :key="paid" class="text-white flex grid  col-span-2 grid-cols-3 rounded-xl p-1 m-1 bg-gray-900 max-w-sm mx-auto w-full">
         <div class="col-span-1 text-left pt-1 font-bold">{{paid[0].slice(0, 12)}}{{paid[0].length > 12 ? "..." : ""}}</div> 
         <div class="col-span-1 pt-1">{{paid[1]}}</div>
         <div class="col-span-1"><CheckCircleIcon class="text-right text-green-500 h-8 w-8"/></div>
@@ -189,6 +189,7 @@ export default {
         },
         resetWeeklyTotal(){
             this.$store.commit("resetWeeklyClaimTotal");
+            this.$store.commit("resetWeeklyClaimsPaid");
         }
     },
     computed:{
