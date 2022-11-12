@@ -2,9 +2,9 @@
     <div>
         <div class="bg-gray-900">
           <h1 class="text-2xl pt-4 md:pt-8 font-bold tracking-tight text-gray-100 sm:text-3xl md:text-4xl">
-              <span class="block xl:inline">Relay's Top 5</span>
+              <span class="block ">TOP COINS</span>
               {{ ' ' }}
-              <span class="block text-indigo-600 text-xl xl:inline">coins today</span>
+              <span class="block text-indigo-600 text-xl ">ON RELAYX</span>
             </h1>
             <div v-if="!hasLoaded" class="text-white">Loading...</div>
             <div class="mx-auto  max-w-lg md:max-w-full  text-white text-xs md:text-m  rounded-xl">

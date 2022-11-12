@@ -490,3 +490,23 @@ export function useGameScores() {
     }
     return {allGameScores, addGameScore, getHighScores, getWeeklyScores}
 }
+
+export function useNotificationRequests() {
+    const notificationRequests = firestore.collection('notificationRequests')
+    const allRequests = ref([])
+    const unsubscribe =  notificationRequests.onSnapshot(snapshot => {
+        allRequests.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
+    const newNotificationRequest = (handcash_handle) => {
+        notificationRequests.add({
+            created: firebase.firestore.FieldValue.serverTimestamp(),
+            handcash_handle: handcash_handle,
+        })
+        console.log('new notification request')
+    }
+
+    return {allRequests, newNotificationRequest}
+}

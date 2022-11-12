@@ -18,18 +18,19 @@
                 </h1>
                 <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">The Best Damn Social Club On Bitcoin.</p>
                 <div class="mt-10 sm:mt-12">
-                  <form action="#" class="sm:mx-auto sm:max-w-xl lg:mx-0">
+                  <div action="#" class="sm:mx-auto sm:max-w-xl lg:mx-0">
                     <div class="sm:flex">
                       <div class="min-w-0 flex-1">
                         <label for="email" class="sr-only">Handcash Handle</label>
-                        <input id="email" type="email" placeholder="pewnicorn@handcash.io" class="block w-full rounded-md border-0 px-4 py-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900" />
+                        <input v-model="handcashHandle" id="email" type="email" placeholder="pewnicorn@handcash.io" class="block w-full rounded-md border-0 px-4 py-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900" />
                       </div>
                       <div class="mt-3 sm:mt-0 sm:ml-3">
-                        <button type="submit" class="block w-full rounded-md bg-gradient-to-r from-indigo-500 via-blue-500 to-teal-500 py-3 px-4 font-medium text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900">NOTIFY ME</button>
+                        <button @click="addHandcash" class="block w-full rounded-md bg-gradient-to-r from-indigo-500 via-blue-500 to-teal-500 py-3 px-4 font-medium text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-gray-900">NOTIFY ME</button>
                       </div>
                     </div>
                     <p class="mt-3 text-sm text-gray-300 sm:mt-4">Add your Handcash Handle to get announcement notifications. </p>
-                  </form>
+                    <p v-if="showThankYou" class="mt-3 text-sm text-yellow-300 sm:mt-4">You've been added to our notifications list. Thanks! </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -42,7 +43,6 @@
           </div>
         </div>
       </div>
-
       <!-- More main page content here... -->
     </main>
 </div>
@@ -84,22 +84,22 @@
 </div>
   <!-- End Join the club -->
   <!-- Ply Bingo With Us-->
-  <div class="relative overflow-hidden bg-white">
+  <div class="relative overflow-hidden bg-gradient-to-r from-purple-500 via-teal-500 to-blue-500">
     <div class="mx-auto max-w-7xl">
-      <div class="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+      <div class="relative z-10 bg-gray-800 pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
         <svg class="absolute inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform text-white lg:block" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <polygon points="50,0 100,0 50,100 0,100" />
         </svg>
 
         <main class="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-          <div class="sm:text-center lg:text-left">
-            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-              <span class="block xl:inline">Play Bingo</span>
+          <div class="sm:text-center lg:text-left pt-4">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-100 sm:text-5xl md:text-6xl">
+              <span class="block xl:inline ">Play Bingo</span>
               {{ ' ' }}
               <span class="block text-indigo-600 xl:inline">With Us</span>
             </h1>
-            <p class="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">Play every wednesday to win $POO, Pewnicorns, and other NFTs from <a href="https://relayx.com" target="_blank">Relay X</a>  <a href="https://rarecandy.io" target="_blank">RareCandy</a> and <a href="https://twetch.com" target="_blank">Twetch</a></p>
-            <p class="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">To get a card just ask <a href="https://twitter.com/iampewnicorn" target="_blank" class="text-indigo-600"> @iampewnicorn </a> nicely on Twitter. </p>
+            <p class="mt-3 text-base text-gray-100 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">Play every wednesday to win $POO, Pewnicorns, and other NFTs from <a href="https://relayx.com" target="_blank">Relay X</a>  <a href="https://rarecandy.io" target="_blank">RareCandy</a> and <a href="https://twetch.com" target="_blank">Twetch</a></p>
+            <p class="mt-3 text-base text-gray-100 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">To get a card just ask <a href="https://twitter.com/iampewnicorn" target="_blank" class="text-teal-500"> @iampewnicorn </a> nicely on Twitter. </p>
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-md shadow">
                 <router-link to="/bingo/cards/my-cards" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg">View Your Cards</router-link>
@@ -117,15 +117,147 @@
     </div>
   </div>
   <!-- End Play Bingo -->
+    <!-- Relayx Wrapper -->
+    <div class="relative overflow-hidden bg-white pt-16 pb-32">
+    <div class="mt-24">
+      <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
+        <div class="mx-auto max-w-xl px-4 sm:px-6 lg:col-start-2 lg:mx-0 lg:max-w-none lg:py-32 lg:px-0">
+          <div>
+            <div>
+            </div>
+            <div class="mt-6">
+              <h2 class="text-3xl font-bold tracking-tight text-gray-900 md:text-right">RELAYX DASHBOARD</h2>
+              <p class="mt-4 text-lg text-gray-500 md:text-right">THE BEST VIEW INTO WHATS HOT ON RELAYX </p>
+              <div class="mt-6 md:text-right">
+                <router-link to="/secret/relay-wrapper/home" class="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">CHECK IT OUT</router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
+          <div class="-ml-48 pr-4 sm:pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">
+            <img class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/relaydashboard.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Relayx Wrapper-->
+  <!-- Top 5 Relay Coins-->
   <TopFiveRelayCoins></TopFiveRelayCoins>
+  <!-- End Top % Relay Coins -->
+  <!-- Ape & Frog Floor -->
+  <div class="relative overflow-hidden bg-white pt-16 pb-32">
+    <div class="relative pb-8">
+      <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
+        <div class="mx-auto max-w-xl px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
+          <div>
+            <div class="mt-6">
+              <h2 class="text-3xl font-bold tracking-tight text-gray-900 md:text-left">Astro Apes Floor Tool</h2>
+              <p class="mt-4 text-lg text-gray-500 text-left">We scour all the candies for the floors of AstroApes, Slurp Juices, Lab Monkes & Special Forces</p>
+              <div class="mt-6 md:text-left">
+                <router-link to="/secret/rare-candy/ape-floor" class="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">SEE THE APES</router-link>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 border-t border-gray-200 pt-6">
+            <blockquote>
+              <!-- <div>
+                <p class="text-base text-gray-500">&ldquo;Cras velit quis eros eget rhoncus lacus ultrices sed diam. Sit orci risus aenean curabitur donec aliquet. Mi venenatis in euismod ut.&rdquo;</p>
+              </div> -->
+              <footer class="mt-3">
+                <!-- <div class="flex items-center space-x-3">
+                  <div class="flex-shrink-0">
+                    <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1509783236416-c9ad59bae472?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="" />
+                  </div>
+                  <div class="text-base font-medium text-gray-700">Marcia Hill, Digital Marketing Manager</div>
+                </div> -->
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+        <div class="mt-12 sm:mt-16 lg:mt-0">
+          <div class="-mr-48 pl-4 sm:pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
+            <img class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Apes+Floor.png" alt="Inbox user interface" />
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- POO CLIAMS-->
+    <div class="relative bg-gray-800">
+      <div class="h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
+        <img class="h-full w-full object-cover" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" alt="" />
+      </div>
+      <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div class="md:ml-auto md:w-1/2 md:pl-10">
+          <h2 class="text-lg font-semibold text-gray-300">WEEKLY POO CLAIMS</h2>
+          <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">CLAIM YOUR POO </p>
+          <p class="mt-3 text-lg text-gray-300">Every Pewnicorn in your stable is eligible for weekly cliams. The amount of $POO you'll recieve is based on the number of NFTs you have in your wallet (not for sale) and their rank.</p>
+          <p class="mt-3 text-lg text-gray-300">WEEKLY BONUSES FOR SPECIFIC TRAITS TOO!</p>
+          <div class="mt-8">
+            <div class="inline-flex rounded-md shadow">
+              <router-link to="/claims" class=" bg-gradient-to-r from-purple-600 via-red-500 to-red-500 inline-flex items-center justify-center rounded-md px-5 py-3 text-base font-medium text-gray-100 hover:bg-gray-50">
+                CLAIM NOW
+                <CurrencyDollarIcon class="-mr-1 ml-3 h-5 w-5 text-gray-100" aria-hidden="true" />
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- END POO CLAIMS-->
+
+    <div class="mt-24">
+      <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
+        <div class="mx-auto max-w-xl px-4 sm:px-6 lg:col-start-2 lg:mx-0 lg:max-w-none lg:py-32 lg:px-0">
+          <div>
+            <div>
+            </div>
+            <div class="mt-6">
+              <h2 class="text-3xl font-bold tracking-tight text-gray-900 md:text-right">Frog Cartel Floor Tool</h2>
+              <p class="mt-4 text-lg text-gray-500 md:text-right">We scour all the candies for the floors of Frog Cartel, Vaxx, Graveyard Frogs & APUs</p>
+              <div class="mt-6 md:text-right">
+                <router-link to="/secret/rare-candy/frog-floor" class="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">SEE THE FROGS</router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
+          <div class="-ml-48 pr-4 sm:pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">
+            <img class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/FrogCartelTool.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Ape & Frog Floor-->
+  <!-- Concert-->
+  <div class="bg-black">
+            <div class="mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
+                <div class="text-left">
+                    <h2 class="text-base font-semibold text-indigo-600 uppercase tracking-wide">Episode 1 Replay</h2>
+                    <p class="mt-2 text-3xl font-extrabold text-gray-200">Pewnicorn Concert Series</p>
+                    <p class="mt-2 text-lg text-gray-500">Replay: Live Event March 18th 2020.</p>
+                    <p class='mt-4 text-gray-300 uppercase'></p> 
+                    <h2 class="text-base font-semibold text-indigo-500 uppercase tracking-wide">Artists Contact Us On Twitter:</h2>
+                    <a class="text-base font-semibold text-indigo-300 uppercase tracking-wide" href="https://www.twitter.com/iampewnicorn" target="_blank" rerel noopener > @iAmPewnicorn </a>
+                </div>
+                <div class="lg:mt-0 lg:col-span-2">
+                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/R4ECXxyhX5M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+  <!-- End COncert -->
+  <Footer />
 </template>
 
 <script>
 import { reactive, toRefs } from 'vue'
 import { ChevronRightIcon } from '@heroicons/vue/solid'
-import { PhoneMissedCallIcon, NewspaperIcon, PhoneIcon } from '@heroicons/vue/outline'
+import { PhoneMissedCallIcon, NewspaperIcon, PhoneIcon, CurrencyDollarIcon } from '@heroicons/vue/outline'
 import TopFiveRelayCoins from '../components/TopFiveRelayCoins.vue'
-
+import { useNotificationRequests } from '../services/firebase.js';
+import Footer from "./../components/Footer.vue"
 const JoinSectionLinks = [
   {
     name: 'Bingo',
@@ -153,16 +285,35 @@ const JoinSectionLinks = [
   },
 ]
 export default {
-    components:{ ChevronRightIcon, TopFiveRelayCoins},
+    components:{Footer, ChevronRightIcon, TopFiveRelayCoins, CurrencyDollarIcon },
     setup () {
+      let {allRequests} = useNotificationRequests();
         const state = reactive({
             count: 0,
+            handcashHandle: "",
+            showThankYou: false,
         })
     
         return {
             ...toRefs(state),
-            JoinSectionLinks
+            JoinSectionLinks,
+            allRequests
         }
+    },
+    async mounted(){
+    },
+    methods:{
+      async addHandcash(){
+        try{
+        console.log("Adding", this.handcashHandle)
+        let {newNotificationRequest} = useNotificationRequests();
+        newNotificationRequest(this.handcashHandle)
+        this.showThankYou = true
+        }
+        catch(err){
+          alert(err)
+        }
+      }
     }
 }
 </script>
