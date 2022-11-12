@@ -103,6 +103,10 @@ export default {
         }
     },
     mounted(){
+        if(this.$store.state.relayx_handle === ""){
+          alert("you must be logged in to play");
+          this.$router.push("/");
+        }
         this.resetGame()
     },
     methods:{

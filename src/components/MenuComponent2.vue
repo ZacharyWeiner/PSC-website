@@ -214,7 +214,7 @@ import {
   CashIcon,
   CurrencyDollarIcon,
   HandIcon,
-  //LibraryIcon,
+  LightBulbIcon,
   PuzzleIcon,
   //RefreshIcon,
   //ShieldCheckIcon,
@@ -266,7 +266,8 @@ const membersOnly = [
 
 
   { name: 'Claimables', href: '/claims', icon: ShoppingBagIcon },
-  { name: 'Tetris', href: '/secret/games/tetris', icon: CubeIcon },
+  { name: 'Tetris Game', href: '/secret/games/tetris', icon: CubeIcon },
+  { name: 'Memory Game', href: '/secret/games/memory', icon: LightBulbIcon },
   { name: 'Social Feed', href: '/secret/social', icon: EmojiHappyIcon },
   { name: 'Pewnicorn Chat', href: '/secret/bitchat', icon: ChatIcon },
 ]
