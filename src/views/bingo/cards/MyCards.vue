@@ -9,7 +9,7 @@
     <div class="w-full m-1 text-white text-left bg-gray-900 rounded-xl">
         <div class="flex"> 
             <div class="w-full text-4xl text-center font-bold -mb-1 pb-1 block bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent" >My Cards</div>
-            <div class='pr-4'> <button type="button" @click="fetchCards()" class="w-32 inline-flex text-xs px-4 py-1 border border-transparent font-medium rounded-full shadow-sm text-gray-900 bg-white hover:bg-indigo-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 no-break"><div class='w-full mx-auto'>Find My Cards </div></button></div>
+            <div class='pr-4'><button type="button" @click="fetchCards()" class="w-32 inline-flex text-xs px-4 py-1 border border-transparent font-medium rounded-full shadow-sm text-gray-900 bg-white hover:bg-indigo-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 no-break"><div class='w-full mx-auto'>Find My Cards </div></button></div>
         </div>
         <div class="w-full grid grid-cols2 md:grid-cols-4 lg:grid-cols-5">
             <div v-for="card in store.state.bingoCards" 

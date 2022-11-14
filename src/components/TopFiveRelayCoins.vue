@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="bg-gray-900">
+        <div class="bg-gradient-to-r from-indigo-700 via-blue-700 to-purple-700">
           <h1 class="text-2xl pt-4 md:pt-8 font-bold tracking-tight text-gray-100 sm:text-3xl md:text-4xl">
               <span class="block ">TOP COINS</span>
               {{ ' ' }}
-              <span class="block text-indigo-600 text-xl ">ON RELAYX</span>
+              <span class="block text-gray-100 text-xl ">ON RELAYX</span>
             </h1>
             <div v-if="!hasLoaded" class="text-white">Loading...</div>
             <div class="mx-auto  max-w-lg md:max-w-full lg:max-w-full  text-white text-xs md:text-m  rounded-xl">

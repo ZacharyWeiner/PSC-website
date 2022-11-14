@@ -143,9 +143,33 @@
     </div>
   </div>
   <!-- Relayx Wrapper-->
+  
   <!-- Top 5 Relay Coins-->
   <TopFiveRelayCoins></TopFiveRelayCoins>
   <!-- End Top % Relay Coins -->
+    <!-- POO CLIAMS-->
+    <div class="relative py-6 pb-6 bg-gradient-to-r from-indigo-700 via-blue-700 to-purple-700">
+      <div class="h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
+        <img class="h-full w-full object-cover rounded" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" alt="" />
+      </div>
+      <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div class="md:ml-auto md:w-1/2 md:pl-10">
+          <h2 class="text-lg font-semibold text-gray-300">WEEKLY POO CLAIMS</h2>
+          <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">CLAIM YOUR POO </p>
+          <p class="mt-3 text-lg text-gray-300">Every Pewnicorn in your stable is eligible for weekly cliams. The amount of $POO you'll recieve is based on the number of NFTs you have in your wallet (not for sale) and their rank.</p>
+          <p class="mt-3 text-lg text-gray-300">WEEKLY BONUSES FOR SPECIFIC TRAITS TOO!</p>
+          <div class="mt-8">
+            <div class="inline-flex rounded-md shadow">
+              <router-link to="/claims" class=" bg-gradient-to-r from-purple-600 via-red-500 to-red-500 inline-flex items-center justify-center rounded-md px-5 py-3 text-base font-medium text-gray-100 hover:bg-gray-50">
+                CLAIM NOW
+                <CurrencyDollarIcon class="-mr-1 ml-3 h-5 w-5 text-gray-100" aria-hidden="true" />
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- END POO CLAIMS-->
   <!-- Ape & Frog Floor -->
   <div class="relative overflow-hidden bg-white pt-16 pb-32">
     <div class="relative pb-8">
@@ -183,30 +207,6 @@
         </div>
       </div>
     </div>
-<!-- POO CLIAMS-->
-    <div class="relative bg-gray-800">
-      <div class="h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
-        <img class="h-full w-full object-cover" src="https://slavettes-layers.s3.amazonaws.com/pewnicorns/Poo-transparent.png" alt="" />
-      </div>
-      <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div class="md:ml-auto md:w-1/2 md:pl-10">
-          <h2 class="text-lg font-semibold text-gray-300">WEEKLY POO CLAIMS</h2>
-          <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">CLAIM YOUR POO </p>
-          <p class="mt-3 text-lg text-gray-300">Every Pewnicorn in your stable is eligible for weekly cliams. The amount of $POO you'll recieve is based on the number of NFTs you have in your wallet (not for sale) and their rank.</p>
-          <p class="mt-3 text-lg text-gray-300">WEEKLY BONUSES FOR SPECIFIC TRAITS TOO!</p>
-          <div class="mt-8">
-            <div class="inline-flex rounded-md shadow">
-              <router-link to="/claims" class=" bg-gradient-to-r from-purple-600 via-red-500 to-red-500 inline-flex items-center justify-center rounded-md px-5 py-3 text-base font-medium text-gray-100 hover:bg-gray-50">
-                CLAIM NOW
-                <CurrencyDollarIcon class="-mr-1 ml-3 h-5 w-5 text-gray-100" aria-hidden="true" />
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-<!-- END POO CLAIMS-->
-
     <div class="mt-24">
       <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
         <div class="mx-auto max-w-xl px-4 sm:px-6 lg:col-start-2 lg:mx-0 lg:max-w-none lg:py-32 lg:px-0">
