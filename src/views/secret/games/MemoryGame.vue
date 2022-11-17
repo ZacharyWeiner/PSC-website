@@ -1,48 +1,54 @@
 <template>
     <Menu />
-   <div id="app">
-  <div class="flex grid grid-cols-4 text-white">
-    <div class="col-span-2 lg:col-span-1"><span class="label">Time:</span><span class="value">{{ time }} </span></div>
+   <div id="app ">
+  <div class="flex grid grid-cols-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600  text-white font-bold rounded-lg text-left pl-1">
+    <div class="col-span-2 lg:col-span-1"><span class="label pl-3">Time:</span><span class="value">{{ time }} </span></div>
     <div class="col-span-2 lg:col-span-1"><span class="label">Turns:</span><span class="value">{{ turns }} </span></div>
     <div class="col-span-2 lg:col-span-1"><span class="label">Score:</span><span class="value">{{ score }} </span></div>
-    <div class="col-span-2 lg:col-span-1"><span class="label">Trys Remaining:</span><span class="value">{{ 10 - wrongMatches }} </span></div>
+    <div class="col-span-2 lg:col-span-1"><span class="label">Lives:</span><span class="value">{{ 10 - wrongMatches }} </span></div>
   </div>
-  <div class="cards text-white max-w-xl mx-auto">
-    <div class="card" v-for="card, index in cards" :key="card.index" :class="{ flipped: card.flipped, found: card.found }" @click="flipCard(card.index)">
-      <div class="back"></div>
-      <div class="text-white">{{index}}</div>
-      <div class="front" :style="{ backgroundImage: 'url(' + card.image + ')' }"></div>
+  <div class="flex grid grid-cols-1 lg:grid-cols-3">
+    <div class="col-span-1 lg:col-span-2"> 
+      <div class="cards text-white max-w-xl mx-auto">
+        <div class="card max-h-16 md:max-h-24 lg:max-h-36" v-for="card, index in cards" :key="card.index" :class="{ flipped: card.flipped, found: card.found }" @click="flipCard(card.index)">
+          <div class="back"></div>
+          <div class="text-white">{{index}}</div>
+          <div class="front" :style="{ backgroundImage: 'url(' + card.image + ')' }"></div>
+        </div>
+      </div>
+      <div class="mx-auto">
+        <button class="p-2 m-2 bg-indigo-500 rounded-xl" @click="mute"> Mute </button>   
+      </div>
+      <div class="text-white">
+        <div class="text-md font-bold">How To Play</div>
+        <div class="text-left max-w-lg mx-auto">
+            <div class="text-md "><span class="font-bold">1.</span> Click a card to flip it & see the image underneath.</div>
+            <div class="text-md "><span class="font-bold">2.</span> Click a second card to flip it.</div>
+            <div class="text-md "><span class="font-bold">3.</span> If the images match you earn points, and the cards remain face up.</div>
+            <div class="text-md "><span class="font-bold">4.</span> If the images do not match both you will lose 1 try and the cards will flip so the backside is facing up. </div>
+            <div class="text-md "><span class="font-bold">5.</span> You have 10 trys. You can play until you fail to match a card 10 times.  Matches do not count against your Try count.</div>
+            <div class="text-md "><span class="font-bold">6.</span> Match all the images, and the cards will be shuffled, but your scre will continue to increase. </div>
+            <div class="text-md "><span class="font-bold">7.</span> The game is timed. Your score will be reduced by some factor of the time it took to play </div>
+            <div class="text-md "><span class="font-bold">8.</span> Leaderbard auto-cliams $POO weekly.  </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-1">
+      <div class="w-auto mx-auto py-8">
+            <span
+            class="text-xl md:text-3xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
+            >
+            High Scores
+            </span>
+      </div>   
+        <!-- <div class='text-white'> {{scoresForGame}} </div>  -->
+      <div class='text-white grid grid-cols-7 max-w-xs mx-auto bg-gray-900 rounded-xl p-2 m-2 text-left'  v-for="(score, index) in sortedScores" :key="score.id">
+          <div class="col-span-1">{{index + 1}}.</div>
+          <div class="col-span-3 text-green-400 font-black text-sm">{{score.score}}</div>
+          <div class="col-span-3 text-lg text-gray-100 font-black">{{score.handle}}</div> 
+      </div>
     </div>
   </div>
-  <div class="mx-auto">
-    <button class="p-2 m-2 bg-indigo-500 rounded-xl" @click="mute"> Mute </button>   
-  </div>
-  <div class="text-white">
-    <div class="text-md font-bold">How To Play</div>
-    <div class="text-left max-w-lg mx-auto">
-        <div class="text-md "><span class="font-bold">1.</span> Click a card to flip it & see the image underneath.</div>
-        <div class="text-md "><span class="font-bold">2.</span> Click a second card to flip it.</div>
-        <div class="text-md "><span class="font-bold">3.</span> If the images match you earn points, and the cards remain face up.</div>
-        <div class="text-md "><span class="font-bold">4.</span> If the images do not match both you will lose 1 try and the cards will flip so the backside is facing up. </div>
-        <div class="text-md "><span class="font-bold">5.</span> You have 10 trys. You can play until you fail to match a card 10 times.  Matches do not count against your Try count.</div>
-        <div class="text-md "><span class="font-bold">6.</span> Match all the images, and the cards will be shuffled, but your scre will continue to increase. </div>
-        <div class="text-md "><span class="font-bold">7.</span> The game is timed. Your score will be reduced by some factor of the time it took to play </div>
-        <div class="text-md "><span class="font-bold">8.</span> Leaderbard auto-cliams $POO weekly.  </div>
-    </div>
-  </div>
-  <div class="w-auto mx-auto py-8">
-        <span
-        class="text-xl md:text-3xl font-extrabold bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-700 bg-clip-text text-transparent"
-        >
-        High Scores
-        </span>
-    </div>   
-    <!-- <div class='text-white'> {{scoresForGame}} </div>  -->
-    <div class='text-white grid grid-cols-7 max-w-xs mx-auto bg-gray-900 rounded-xl p-2 m-2 text-left'  v-for="(score, index) in sortedScores" :key="score.id">
-        <div class="col-span-1">{{index + 1}}.</div>
-        <div class="col-span-3 text-green-400 font-black text-sm">{{score.score}}</div>
-        <div class="col-span-3 text-lg text-gray-100 font-black">{{score.handle}}</div> 
-    </div>
   <div class="splash" v-if="showSplash">
     <div class="overlay"></div>
     <div class="content">
@@ -250,7 +256,7 @@ export default {
 					// Wrong match
                     this.wrongMatches = this.wrongMatches + 1; 
                     console.log("wrong Matches:", this.wrongMatches);
-                    if(this.wrongMatches <=10){
+                    if(this.wrongMatches <10){
                         this.flipBackTimer = setTimeout( ()=> {
                             this.clearFlipBackTimer();
                             this.clearFlips();
@@ -353,6 +359,18 @@ html {
 }
 
 .cards .card {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 150px;
+  margin: 1em 1em;
+  -moz-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.cards-small .card-small {
   position: relative;
   display: inline-block;
   width: 100px;
