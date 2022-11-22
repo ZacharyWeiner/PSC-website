@@ -6,12 +6,14 @@ import PreorderCheck from '../views/PreorderCheck.vue'
 import MintManager from '../views/MintManager.vue'
 import Mint from '../views/Mint.vue'
 import Check from '../views/Check.vue'
+import Burn from '../views/BurnView.vue'
 import JSONPage from '../views/JSONPage.vue'
 import MintTest from '../views/MintTest.vue'
 import MyBag from '../views/MyBag.vue'
 import Profile from '../views/Profile.vue'
 import Treasury from '../views/Treasury.vue'
 import RelayOrders from '../views/RelayOrders.vue'
+import RelayWallet from '../views/RelayWallet.vue'
 import Votes from '../views/Votes.vue'
 import Gopniks from '../views/friends/Gopniks.vue'
 import Quokkas from '../views/friends/Quokkas.vue'
@@ -121,6 +123,11 @@ const routes = [
     component: RelayOrders
   },
   {
+    path: '/relay-wallet',
+    name: 'RelayWallet',
+    component: RelayWallet
+  },
+  {
     path: '/market-selection',
     name: 'Market Selection',
     component: MarketSelection
@@ -154,6 +161,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/burn',
+    name: 'Burn',
+    component: Burn
   },
   {
     path: '/secret/claim-drop',

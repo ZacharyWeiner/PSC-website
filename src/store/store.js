@@ -47,7 +47,10 @@ export default createStore({
     weeklyClaimTotal:0,
     weeklyClaimsPaid:[],
     isLoggingIn: false,
-    isLoggingInText: "Finding NFTs"
+    isLoggingInText: "Finding NFTs",
+    burnAddress: "",
+    burnPrivateKey: "",
+    originNames: {},
   },
   mutations: {
     // change state
@@ -170,6 +173,15 @@ export default createStore({
     setIsLoggingIn(state, _bool){
       state.isLoggingIn = _bool
     },
+    setBurnAddress(state, _burnAddress){
+      state.burnAddress = _burnAddress
+    },
+    setBurnPrivateKey(state, _pk){
+      state.burnPrivateKey = _pk;
+    },
+    addOriginName(state, {name, origin}){
+      state.originNames[origin] = name; 
+    }
   },
   actions: {
     // call multiple mutation routines
