@@ -85,8 +85,8 @@ export default {
             count: 0,
             baseAward: 200,
             multiplier: 5,
-            propertyName: 'hair',
-            propertyValue: 'mowhawk green',
+            propertyName: 'clothes',
+            propertyValue: 'sv hoodie',
             successMessage: "Your $POO has been claimed and will be sent SOON",
             esitmatedPoo: 0,
         })

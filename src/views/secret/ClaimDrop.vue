@@ -35,10 +35,10 @@ export default {
         let { markClaimed } = userProfiles()
         const state = reactive({
             count: 0,
-            baseAward: 200,
+            baseAward: 100,
             multiplier: 5,
-            propertyName: 'hair',
-            propertyValue: 'mowhawk green',
+            propertyName: 'clothes',
+            propertyValue: 'sv hoodie',
         })
         return {
             ...toRefs(state), weeklyActions, loading, findUnclaimed, markClaimed, unclaimed
