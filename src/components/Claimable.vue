@@ -83,7 +83,7 @@ export default {
         let eligibleNFTs = ref([])
         const state = reactive({
             count: 0,
-            baseAward: 100,
+            baseAward: 200,
             multiplier: 5,
             propertyName: 'hair',
             propertyValue: 'mowhawk green',
@@ -203,12 +203,13 @@ export default {
             let _canClaim = false;
             if(this.isLogin  && this.$store.state.user_jigs.length > 0){
                 _canClaim = true;
+                console.log("User Has Jigs")
             } 
-            let compareDate = new Date('2022-11-12');
+            let compareDate = new Date('Wed Nov 23 2022 20:00:00 GMT-0500');
             this.userActions['userActions'].value.forEach((ua)=> {
                 let actionDate = new Date(ua.timestamp.seconds * 1000);
-                if( actionDate >= compareDate){
-                    console.log("newer")
+                if( actionDate > compareDate){
+                    console.log("newer", actionDate, compareDate)
                     _canClaim = false;
                 }
             })

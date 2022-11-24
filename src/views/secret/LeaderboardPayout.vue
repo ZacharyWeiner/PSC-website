@@ -10,7 +10,7 @@
                 </span>
             </div>  
             <div class="text-white font-bold">
-                Nov 12, 2021
+                Nov 23, 2021
             </div>
     <div class="w-full">
     <div v-for="(entry, index) in tetrisLeaderboard" :key="entry[1]" class="bg-gray-900 m-1 rounded-xl p-1 max-w-sm mx-auto">
@@ -31,7 +31,7 @@
                 </span>
             </div>  
             <div class="text-white font-bold">
-                Nov 12, 2021
+                Nov 23, 2021
             </div>
     <div class="w-full">
     <div v-for="(entry, index) in memoryLeaderboard" :key="entry[1]" class="bg-gray-900 m-1 rounded-xl p-1 max-w-sm mx-auto">
@@ -62,16 +62,16 @@ let tetrisLeaderboard = [
     ["bigc", "100"],
 ]
 let memoryLeaderboard = [
-    ["bigc", "1000"],
-    ["pscbank", "900"],
-    ["hondamane", "800"],
-    ["hondamane", "700"],
-    ["pscbank", "600"],
-    ["pscbank", "500"],
-    ["senorbruce", "400"],
-    ["bigc", "300"],
-    ["hondamane", "200"],
-    ["hondamane", "100"],
+    ["ielvis", "1000"],
+    ["ielvis", "900"],
+    ["bigc", "800"],
+    ["ielvis", "700"],
+    ["chelz", "600"],
+    ["bigcnftvault", "500"],
+    ["geir", "400"],
+    ["geir", "300"],
+    ["gametight", "200"],
+    ["bigcnftvault", "100"],
 ]
 export default {
     components:{Menu},

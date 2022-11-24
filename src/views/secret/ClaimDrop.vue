@@ -35,7 +35,7 @@ export default {
         let { markClaimed } = userProfiles()
         const state = reactive({
             count: 0,
-            baseAward: 100,
+            baseAward: 200,
             multiplier: 5,
             propertyName: 'hair',
             propertyValue: 'mowhawk green',
