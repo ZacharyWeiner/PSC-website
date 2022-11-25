@@ -118,7 +118,7 @@
                   "Sec-Fetch-Mode": "cors",
                   "Sec-Fetch-Site": "same-site"
               },
-              "body": "{\"order\":\"ASC\",\"order_by\":\"created\",\"min\":\"0\",\"max\":\"1.7976931348623157e+308\",\"status\":\"listed\"}",
+              "body": "{\"order\":\"ASC\",\"order_by\":\"satoshis_price\",\"min\":\"0\",\"max\":\"1.7976931348623157e+308\",\"status\":\"listed\"}",
               "method": "POST",
               "mode": "cors"
           });
