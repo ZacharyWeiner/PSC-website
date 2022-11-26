@@ -3,10 +3,14 @@
         {{publicKey}} {{paymail}}
         <button @click="tip" class=" p-2 m-2 text-white bg-gradient-to-r from-blue-300 via-blue-600 to-purple-600 font-bold rounded-xl"> Tip From Twetch Wallet </button> 
     </div>
+    <div class="text-white" v-for="tip in allTips" :key="tip.id"> 
+        {{tip}}
+    </div>
 </template>
 
 <script>
 import { reactive, toRefs } from 'vue'
+import {useTips} from "./../services/firebase.js";
 let provider;
 export default {
     setup () {
@@ -15,9 +19,11 @@ export default {
             publicKey: "this", 
             paymail: "that",
         })
+        let {allTips} = useTips()
         return {
             ...toRefs(state),
             provider,
+            allTips
         }
     },
     mounted(){

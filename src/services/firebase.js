@@ -510,3 +510,27 @@ export function useNotificationRequests() {
 
     return {allRequests, newNotificationRequest}
 }
+
+export function useTips(){
+    const tipsCollection = firestore.collection('tips')
+    const allTips = ref([])
+
+    const unsubscribe =  tipsCollection.onSnapshot(snapshot => {
+        allTips.value = snapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+    })
+    onUnmounted(unsubscribe)
+
+    const addTip = (relayHandle, twetchPaymail, tipAmountSats) => {
+        tipsCollection.add({
+            created: firebase.firestore.FieldValue.serverTimestamp(),
+            relayHandle: relayHandle,
+            twetchPaymail: twetchPaymail, 
+            tipAmountSats: tipAmountSats
+        })
+        console.log('new notification request')
+    }
+
+    return {allTips, addTip}
+
+}
