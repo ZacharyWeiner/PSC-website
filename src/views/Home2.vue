@@ -65,6 +65,7 @@
             </div>
         </div>
         <!-- <Claimable></Claimable> -->
+        <tip-with-twetch-footer />
         <Footer />
     </div>
 </template>
@@ -80,10 +81,11 @@ import Footer from "./../components/Footer.vue"
 import BingoAnnouncement from "./../components/BingoAnnouncement.vue"
 import BitChat from '../components/controls/BitChat.vue';
 import { ExternalLinkIcon } from '@heroicons/vue/solid';
+import TipWithTwetchFooter from '../components/TipWithTwetchFooter.vue'
 export default {
     components:{ Menu, HomeHero, ExternalLinkIcon,
     //Claimable,
-    AnnouncementBanner, BingoAnnouncement, Poo, Footer, BitChat },
+    AnnouncementBanner, BingoAnnouncement, Poo, Footer, BitChat, TipWithTwetchFooter},
     setup () {
         const state = reactive({
             count: 0,

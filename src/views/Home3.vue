@@ -248,6 +248,7 @@
             </div>
         </div>
   <!-- End COncert -->
+  <tip-with-twetch-footer />
   <Footer />
 </template>
 
@@ -258,6 +259,7 @@ import { PhoneMissedCallIcon, NewspaperIcon, PhoneIcon, CurrencyDollarIcon } fro
 import TopFiveRelayCoins from '../components/TopFiveRelayCoins.vue'
 import { useNotificationRequests } from '../services/firebase.js';
 import Footer from "./../components/Footer.vue"
+import TipWithTwetchFooter from '../components/TipWithTwetchFooter.vue'
 const JoinSectionLinks = [
   {
     name: 'Bingo',
@@ -285,7 +287,7 @@ const JoinSectionLinks = [
   },
 ]
 export default {
-    components:{Footer, ChevronRightIcon, TopFiveRelayCoins, CurrencyDollarIcon },
+    components:{Footer, ChevronRightIcon, TopFiveRelayCoins, CurrencyDollarIcon, TipWithTwetchFooter },
     setup () {
       let {allRequests} = useNotificationRequests();
         const state = reactive({

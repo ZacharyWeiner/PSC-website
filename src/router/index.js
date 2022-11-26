@@ -60,6 +60,7 @@ import Snake from "../views/secret/games/SnakeGame.vue";
 import MemoryGame from "../views/secret/games/MemoryGame.vue";
 import ColorBlaster from "../views/secret/games/ColorBlaster.vue";
 import LeaderboardPayout from "../views/secret/LeaderboardPayout.vue";
+import TwetchWallet from "../views/TwetchWallet.vue";
 
 const routes = [
   {
@@ -226,6 +227,11 @@ const routes = [
     path: '/tools',
     name: 'Tools',
     component: Tools
+  },
+  {
+    path: '/twetch-wallet',
+    name: 'Twetch Wallet',
+    component: TwetchWallet
   },
   {
     path: '/bingo/play',
